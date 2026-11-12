@@ -4,14 +4,14 @@
 @php $firstDemo = $demos->first(); @endphp
 <div class="mx-auto max-w-6xl px-3 pt-3 sm:px-5 sm:pt-5">
     <header class="flex flex-wrap items-stretch rounded-2xl border border-line bg-white">
-        <a href="{{ route('landing') }}" class="flex items-center border-r border-line px-5 py-4"><x-logo /></a>
+        <a href="{{ route('landing') }}" class="flex items-center px-5 py-4 md:border-r md:border-line"><x-logo /></a>
         <nav class="order-3 flex w-full flex-wrap justify-center gap-x-1 border-t border-line px-3 py-2 text-sm md:order-none md:w-auto md:flex-1 md:border-t-0 md:py-0" aria-label="Main">
             <a href="#about" class="flex items-center px-3 py-2 text-ink-600 hover:text-ink-900 md:py-0">About</a>
             <a href="#features" class="flex items-center px-3 py-2 text-ink-600 hover:text-ink-900 md:py-0">Features</a>
             <a href="#how" class="flex items-center px-3 py-2 text-ink-600 hover:text-ink-900 md:py-0">How it works</a>
             <a href="#demos" class="flex items-center px-3 py-2 text-ink-600 hover:text-ink-900 md:py-0">Demos</a>
         </nav>
-        <div class="ml-auto flex items-center gap-2 border-l border-line px-4 py-3 md:ml-0">
+        <div class="ml-auto flex items-center gap-2 px-4 py-3 md:ml-0 md:border-l md:border-line">
             @auth
                 <a href="{{ route('dashboard.overview') }}" class="btn btn-primary btn-sm">Open dashboard</a>
             @else

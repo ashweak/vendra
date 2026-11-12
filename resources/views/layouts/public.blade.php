@@ -14,7 +14,7 @@
 <div class="min-h-full bg-white">
     <div class="mx-auto max-w-6xl px-3 pt-3 sm:px-5 sm:pt-5">
         <header class="flex flex-wrap items-stretch rounded-2xl border border-line bg-white">
-            <a href="{{ route('public.home', $business) }}" class="flex items-center gap-2.5 border-r border-line px-5 py-4">
+            <a href="{{ route('public.home', $business) }}" class="flex items-center gap-2.5 px-5 py-4 md:border-r md:border-line">
                 <span class="flex h-8 w-8 items-center justify-center rounded-lg text-sm font-semibold text-white" style="background: var(--accent)">{{ mb_substr($business->name, 0, 1) }}</span>
                 <span class="max-w-[12rem] truncate text-[15px] font-semibold tracking-tight sm:max-w-none">{{ $business->name }}</span>
             </a>
@@ -24,7 +24,7 @@
                 @endforeach
             </nav>
             @if ($business->phone)
-            <a href="tel:{{ preg_replace('/[^0-9+]/', '', $business->phone) }}" class="ml-auto flex items-center gap-3 border-l border-line px-5 py-3 md:ml-0">
+            <a href="tel:{{ preg_replace('/[^0-9+]/', '', $business->phone) }}" class="ml-auto hidden items-center gap-3 border-l border-line px-5 py-3 md:ml-0 md:flex">
                 <span class="flex h-9 w-9 items-center justify-center rounded-full bg-tile"><x-icon name="phone" class="h-4 w-4" /></span>
                 <span class="leading-tight"><span class="block text-[11px] text-ink-500">Call any time</span><span class="block text-sm font-semibold">{{ $business->phone }}</span></span>
             </a>

@@ -1,6 +1,6 @@
 <aside class="space-y-4 lg:sticky lg:top-6 lg:self-start">
     <div class="notch art-warm aspect-[4/3]" style="--nw: 46%; --nh: 46px; --nr: 18px">
-        <span class="notch-slot"><span class="eyebrow">{{ $business->name }}</span></span>
+        <span class="notch-slot"><span class="eyebrow">Need help?</span></span>
         <div class="absolute inset-x-4 bottom-4 z-[6] rounded-xl bg-white/90 p-4 backdrop-blur">
             <p class="text-xs text-ink-500">Prefer to ask first?</p>
             <button type="button" class="mt-1 inline-flex items-center gap-2 text-sm font-medium" data-open-chat><x-icon name="chat" class="h-4 w-4" /> Chat with our assistant</button>
