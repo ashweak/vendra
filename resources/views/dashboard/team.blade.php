@@ -8,8 +8,8 @@
         @foreach ($members as $m)
             <div class="card">
                 <div class="flex flex-wrap items-center gap-3">
-                    <span class="flex h-10 w-10 items-center justify-center rounded-full bg-indigo-100 font-semibold text-indigo-800">{{ mb_substr($m->user->name, 0, 1) }}</span>
-                    <span class="min-w-0 flex-1"><span class="block font-medium">{{ $m->user->name }}</span><span class="block text-xs text-gray-500">{{ $m->user->email }}</span></span>
+                    <span class="flex h-10 w-10 items-center justify-center rounded-full bg-ink-100 font-semibold text-ink-800">{{ mb_substr($m->user->name, 0, 1) }}</span>
+                    <span class="min-w-0 flex-1"><span class="block font-medium">{{ $m->user->name }}</span><span class="block text-xs text-ink-500">{{ $m->user->email }}</span></span>
                     <span class="badge badge-indigo">{{ ucfirst($m->role) }}</span>
                     @unless ($m->is_active)<span class="badge badge-gray">Disabled</span>@endunless
                 </div>
@@ -20,7 +20,7 @@
                         <button class="btn btn-secondary btn-sm">Save</button>
                     </form>
                 @endif
-                <details class="mt-3"><summary class="cursor-pointer text-sm font-medium text-indigo-700">Weekly schedule</summary>
+                <details class="mt-3"><summary class="cursor-pointer text-sm font-medium text-ink-700">Weekly schedule</summary>
                     @php $sched = ($schedules[$m->user_id] ?? collect())->keyBy('weekday'); @endphp
                     <form method="POST" action="{{ route('dashboard.team.schedule', $m->user_id) }}" class="mt-3 space-y-2">@csrf
                         @foreach ($days as $d => $label)

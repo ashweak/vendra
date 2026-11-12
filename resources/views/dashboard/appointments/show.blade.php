@@ -8,16 +8,16 @@
     <div class="space-y-4">
         <div class="card">
             <div class="flex flex-wrap items-center gap-3"><h1 class="h1 flex-1">{{ $a->service_name }}</h1><x-status :value="$a->status" :label="$a->statusLabel()" /></div>
-            <p class="font-mono text-sm text-gray-500">{{ $a->reference }}</p>
+            <p class="font-mono text-sm text-ink-500">{{ $a->reference }}</p>
             <dl class="mt-4 grid gap-3 text-sm sm:grid-cols-2">
-                <div><dt class="text-gray-500">When</dt><dd class="font-medium">{{ local_time($a->starts_at, $tz, 'l, F j, Y') }}<br>{{ local_time($a->starts_at, $tz, 'g:i A') }} – {{ local_time($a->ends_at, $tz, 'g:i A') }}</dd></div>
-                <div><dt class="text-gray-500">Customer</dt><dd class="font-medium">{{ $a->customer?->name }}<br><span class="font-normal text-gray-600">{{ $a->customer?->phone }} {{ $a->customer?->email }}</span></dd></div>
-                <div><dt class="text-gray-500">Staff</dt><dd>{{ $a->staff?->name ?? 'Any' }}</dd></div>
-                <div><dt class="text-gray-500">Agreed price</dt><dd>{{ peso($a->price_cents) }}</dd></div>
-                <div><dt class="text-gray-500">Source</dt><dd>{{ ucfirst(str_replace('_', '-', $a->source)) }} @if($a->creator) · by {{ $a->creator->name }} @endif</dd></div>
-                @if ($a->status === 'pending_approval')<div><dt class="text-gray-500">Approve by</dt><dd class="font-medium text-amber-800">{{ local_time($a->approval_deadline_at, $tz) }}</dd></div>@endif
-                @if ($a->notes)<div class="sm:col-span-2"><dt class="text-gray-500">Notes</dt><dd>{{ $a->notes }}</dd></div>@endif
-                @if ($a->status_reason)<div class="sm:col-span-2"><dt class="text-gray-500">Reason</dt><dd>{{ $a->status_reason }}</dd></div>@endif
+                <div><dt class="text-ink-500">When</dt><dd class="font-medium">{{ local_time($a->starts_at, $tz, 'l, F j, Y') }}<br>{{ local_time($a->starts_at, $tz, 'g:i A') }} – {{ local_time($a->ends_at, $tz, 'g:i A') }}</dd></div>
+                <div><dt class="text-ink-500">Customer</dt><dd class="font-medium">{{ $a->customer?->name }}<br><span class="font-normal text-ink-600">{{ $a->customer?->phone }} {{ $a->customer?->email }}</span></dd></div>
+                <div><dt class="text-ink-500">Staff</dt><dd>{{ $a->staff?->name ?? 'Any' }}</dd></div>
+                <div><dt class="text-ink-500">Agreed price</dt><dd>{{ peso($a->price_cents) }}</dd></div>
+                <div><dt class="text-ink-500">Source</dt><dd>{{ ucfirst(str_replace('_', '-', $a->source)) }} @if($a->creator) · by {{ $a->creator->name }} @endif</dd></div>
+                @if ($a->status === 'pending_approval')<div><dt class="text-ink-500">Approve by</dt><dd class="font-medium text-amber-800">{{ local_time($a->approval_deadline_at, $tz) }}</dd></div>@endif
+                @if ($a->notes)<div class="sm:col-span-2"><dt class="text-ink-500">Notes</dt><dd>{{ $a->notes }}</dd></div>@endif
+                @if ($a->status_reason)<div class="sm:col-span-2"><dt class="text-ink-500">Reason</dt><dd>{{ $a->status_reason }}</dd></div>@endif
             </dl>
         </div>
         @if ($a->isOpen())
@@ -39,7 +39,7 @@
                 </div>
             </form>
             @if ($canApprove)
-            <details class="mt-4"><summary class="cursor-pointer text-sm font-medium text-indigo-700">Reschedule</summary>
+            <details class="mt-4"><summary class="cursor-pointer text-sm font-medium text-ink-700">Reschedule</summary>
                 <form method="POST" action="{{ route('dashboard.appointments.reschedule', $a->id) }}" class="mt-3 grid gap-3 sm:grid-cols-3">
                     @csrf
                     <input type="date" name="date" class="input" required value="{{ local_time($a->starts_at, $tz, 'Y-m-d') }}">

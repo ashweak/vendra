@@ -1,17 +1,18 @@
 @extends('layouts.public')
 @section('title', 'Order · '.$business->name)
 @section('content')
-<h1 class="h1">Order products</h1>
-<p class="mt-1 text-sm text-gray-600">Set quantities, then review your order. Stock is reserved only after you submit.</p>
+<span class="eyebrow">Step 1 of 2 · Details</span>
+<h1 class="section-title mt-4">Order products</h1>
+<p class="mt-1 text-sm text-ink-600">Set quantities, then review your order. Stock is reserved only after you submit.</p>
 <form method="POST" action="{{ route('public.order.review', $business) }}" class="mt-6 max-w-3xl">
     @csrf
-    <div class="card divide-y divide-gray-100 p-0">
+    <div class="card divide-y divide-line p-0">
         @forelse ($products as $p)
             @php $avail = $p->availableStock(); $val = old('items.'.$p->id, $prefill['items'][$p->id] ?? 0); @endphp
             <div class="flex flex-wrap items-center gap-3 p-4">
                 <div class="min-w-0 flex-1">
                     <p class="font-medium">{{ $p->name }}</p>
-                    <p class="text-xs text-gray-500">{{ $p->category }} · {{ peso($p->price_cents) }} @if($avail !== null) · {{ $avail > 0 ? $avail.' available' : 'out of stock' }} @endif</p>
+                    <p class="text-xs text-ink-500">{{ $p->category }} · {{ peso($p->price_cents) }} @if($avail !== null) · {{ $avail > 0 ? $avail.' available' : 'out of stock' }} @endif</p>
                 </div>
                 <label class="sr-only" for="q{{ $p->id }}">Quantity of {{ $p->name }}</label>
                 <input id="q{{ $p->id }}" type="number" name="items[{{ $p->id }}]" min="0" max="{{ $avail ?? 99 }}" value="{{ (int) $val }}" class="input w-24" @disabled($avail === 0)>
@@ -31,6 +32,6 @@
         <div><label class="label" for="notes">Notes (optional)</label><textarea id="notes" name="notes" rows="2" maxlength="1000" class="input">{{ old('notes') }}</textarea></div>
     </fieldset>
     @include('public.partials.contact', ['data' => [], 'phoneRequired' => true])
-    <button class="btn btn-primary mt-6 w-full sm:w-auto" style="background: var(--accent)">Review order</button>
+    <button class="btn btn-primary mt-6 w-full sm:w-auto">Review order</button>
 </form>
 @endsection

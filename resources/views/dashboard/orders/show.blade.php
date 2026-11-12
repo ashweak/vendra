@@ -8,17 +8,17 @@
     <div class="space-y-4">
         <div class="card">
             <div class="flex flex-wrap items-center gap-3"><h1 class="h1 flex-1 font-mono">{{ $o->reference }}</h1><x-status :value="$o->status" :label="$o->statusLabel()" /></div>
-            <p class="text-sm text-gray-600">{{ $o->customer?->name }} · {{ $o->customer?->phone }} · {{ ucfirst($o->fulfillment_method) }} @if($o->delivery_address) to {{ $o->delivery_address }} @endif</p>
+            <p class="text-sm text-ink-600">{{ $o->customer?->name }} · {{ $o->customer?->phone }} · {{ ucfirst($o->fulfillment_method) }} @if($o->delivery_address) to {{ $o->delivery_address }} @endif</p>
             <table class="table mt-4">
                 <thead><tr><th>Item</th><th class="text-right">Qty</th><th class="text-right">Price</th><th class="text-right">Total</th></tr></thead>
                 <tbody>
                     @foreach ($o->items as $i)<tr><td>{{ $i->name }}</td><td class="text-right">{{ $i->quantity }}</td><td class="text-right">{{ peso($i->unit_price_cents) }}</td><td class="text-right">{{ peso($i->line_total_cents) }}</td></tr>@endforeach
-                    <tr><td colspan="3" class="text-right text-gray-500">Subtotal</td><td class="text-right">{{ peso($o->subtotal_cents) }}</td></tr>
-                    <tr><td colspan="3" class="text-right text-gray-500">Delivery fee</td><td class="text-right">{{ $o->fulfillment_method === 'delivery' ? peso($o->delivery_fee_cents) : '—' }}</td></tr>
+                    <tr><td colspan="3" class="text-right text-ink-500">Subtotal</td><td class="text-right">{{ peso($o->subtotal_cents) }}</td></tr>
+                    <tr><td colspan="3" class="text-right text-ink-500">Delivery fee</td><td class="text-right">{{ $o->fulfillment_method === 'delivery' ? peso($o->delivery_fee_cents) : '—' }}</td></tr>
                     <tr><td colspan="3" class="text-right font-semibold">Total</td><td class="text-right font-semibold">{{ peso($o->total_cents) }}</td></tr>
                 </tbody>
             </table>
-            <p class="mt-3 text-xs text-gray-500">Reservation {{ $o->stock_deducted ? 'converted to deduction at handover' : 'expires '.local_time($o->reservation_expires_at, $tz) }}.</p>
+            <p class="mt-3 text-xs text-ink-500">Reservation {{ $o->stock_deducted ? 'converted to deduction at handover' : 'expires '.local_time($o->reservation_expires_at, $tz) }}.</p>
         </div>
         @if ($next)
         <div class="card">
@@ -50,7 +50,7 @@
         <div class="card text-sm">
             <h2 class="font-semibold">Payment</h2>
             <p class="mt-2"><x-status :value="$o->payment_status" :label="$o->payment_status === 'verified' ? 'Verified' : 'Not verified'" /></p>
-            <p class="mt-2 text-xs text-gray-500">Verify only after checking your GCash/bank/cash records. Screenshots or chat messages alone are not proof. The AI can never mark payments.</p>
+            <p class="mt-2 text-xs text-ink-500">Verify only after checking your GCash/bank/cash records. Screenshots or chat messages alone are not proof. The AI can never mark payments.</p>
             @if ($o->payment_status !== 'verified' && $canVerify)
                 <form method="POST" action="{{ route('dashboard.orders.verify', $o->id) }}" class="mt-3 space-y-2">@csrf
                     <input name="reason" class="input" placeholder="e.g. GCash ref 1234 checked in app" required>

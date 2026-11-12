@@ -3,7 +3,7 @@
 @section('heading', 'Settings')
 @section('content')
 @include('dashboard.settings.nav')
-<p class="max-w-2xl text-sm text-gray-600">The AI only uses <strong>published</strong> entries. Drafts are never shown to customers. Live prices and schedules always override what is written here.</p>
+<p class="max-w-2xl text-sm text-ink-600">The AI only uses <strong>published</strong> entries. Drafts are never shown to customers. Live prices and schedules always override what is written here.</p>
 <form method="POST" action="{{ route('dashboard.settings.knowledge') }}" class="card mt-4 max-w-2xl space-y-3">
     @csrf
     <div class="grid gap-3 sm:grid-cols-[8rem_1fr]">

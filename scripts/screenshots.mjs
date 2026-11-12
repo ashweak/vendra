@@ -52,7 +52,7 @@ await page.goto(`${BASE}/b/lumina-studio`);
 await page.click('#vchat-open');
 for (const msg of ['Magkano po ang haircut?', `Pa-book po ng haircut sa ${['linggo','lunes','martes','miyerkules','huwebes','biyernes','sabado'][d.getDay()]} alas tres`]) {
     await page.fill('#vchat-input', msg);
-    await page.click('#vchat-form button:has-text("Send")');
+    await page.click('#vchat-form button[aria-label=Send]');
     await page.waitForTimeout(1500);
 }
 await shot(page, '06-chat', false);
@@ -64,7 +64,7 @@ page = await m.newPage();
 await page.goto(`${BASE}/b/ganda-beauty`); await shot(page, '07-mobile-shop');
 await page.click('#vchat-open');
 await page.fill('#vchat-input', 'I want to order 2 niacinamide toner for pickup');
-await page.click('#vchat-form button:has-text("Send")');
+await page.click('#vchat-form button[aria-label=Send]');
 await page.waitForTimeout(1500);
 await shot(page, '08-mobile-chat-order-draft', false);
 await login(page, 'owner@lumina.test');

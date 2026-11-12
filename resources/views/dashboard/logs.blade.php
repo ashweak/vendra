@@ -9,14 +9,14 @@
         <tbody>
         @forelse ($logs as $l)
             <tr>
-                <td class="text-xs whitespace-nowrap text-gray-500">{{ local_time($l->created_at, $currentBusiness->timezone) }}</td>
+                <td class="text-xs whitespace-nowrap text-ink-500">{{ local_time($l->created_at, $currentBusiness->timezone) }}</td>
                 <td class="text-sm">{{ $l->actor_type === 'user' ? ($l->actor?->name ?? 'User #'.$l->actor_id) : ucfirst($l->actor_type) }}</td>
                 <td class="font-mono text-xs">{{ $l->action }}</td>
                 <td class="text-xs">{{ $l->subject_type }} {{ $l->subject_id ? '#'.$l->subject_id : '' }}</td>
-                <td class="max-w-sm text-xs break-words text-gray-600">{{ $l->reason }} {{ $l->changes ? \Illuminate\Support\Str::limit(json_encode($l->changes, JSON_UNESCAPED_UNICODE), 160) : '' }}</td>
+                <td class="max-w-sm text-xs break-words text-ink-600">{{ $l->reason }} {{ $l->changes ? \Illuminate\Support\Str::limit(json_encode($l->changes, JSON_UNESCAPED_UNICODE), 160) : '' }}</td>
             </tr>
         @empty
-            <tr><td colspan="5" class="py-8 text-center text-gray-500">No activity yet.</td></tr>
+            <tr><td colspan="5" class="py-8 text-center text-ink-500">No activity yet.</td></tr>
         @endforelse
         </tbody>
     </table>

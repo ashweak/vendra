@@ -7,13 +7,13 @@
     <div class="space-y-4">
         <div class="card">
             <div class="flex flex-wrap items-center gap-3"><h1 class="h1 flex-1 font-mono">{{ $sr->reference }}</h1><x-status :value="$sr->status" :label="$sr->statusLabel()" /></div>
-            <p class="text-sm text-gray-600">{{ $sr->customer?->name }} · {{ $sr->customer?->phone }} · {{ $sr->customer?->email }}</p>
+            <p class="text-sm text-ink-600">{{ $sr->customer?->name }} · {{ $sr->customer?->phone }} · {{ $sr->customer?->email }}</p>
             <p class="mt-4 whitespace-pre-line">{{ $sr->description }}</p>
             <dl class="mt-4 grid gap-2 text-sm sm:grid-cols-2">
-                <div><dt class="text-gray-500">Location</dt><dd>{{ $sr->location ?? '—' }}</dd></div>
-                <div><dt class="text-gray-500">Preferred date (not a booking)</dt><dd>{{ $sr->preferred_date?->toFormattedDateString() ?? '—' }}</dd></div>
-                @if ($sr->quotation)<div><dt class="text-gray-500">From quotation</dt><dd><a class="link" href="{{ route('dashboard.quotations.show', $sr->quotation->id) }}">{{ $sr->quotation->reference }}</a></dd></div>@endif
-                @if ($sr->status_reason)<div><dt class="text-gray-500">Note</dt><dd>{{ $sr->status_reason }}</dd></div>@endif
+                <div><dt class="text-ink-500">Location</dt><dd>{{ $sr->location ?? '—' }}</dd></div>
+                <div><dt class="text-ink-500">Preferred date (not a booking)</dt><dd>{{ $sr->preferred_date?->toFormattedDateString() ?? '—' }}</dd></div>
+                @if ($sr->quotation)<div><dt class="text-ink-500">From quotation</dt><dd><a class="link" href="{{ route('dashboard.quotations.show', $sr->quotation->id) }}">{{ $sr->quotation->reference }}</a></dd></div>@endif
+                @if ($sr->status_reason)<div><dt class="text-ink-500">Note</dt><dd>{{ $sr->status_reason }}</dd></div>@endif
             </dl>
         </div>
         @if ($transitions)

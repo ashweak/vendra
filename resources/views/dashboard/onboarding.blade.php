@@ -3,11 +3,11 @@
 @section('heading', 'Setup checklist')
 @section('content')
 <h1 class="h1">Finish setting up {{ $currentBusiness->name }}</h1>
-<p class="mt-1 text-sm text-gray-600">Progress is saved as you go. Required steps must be done before activation.</p>
+<p class="mt-1 text-sm text-ink-600">Progress is saved as you go. Required steps must be done before activation.</p>
 <ol class="mt-6 space-y-2">
     @foreach ($steps as $i => $s)
         <li class="card flex items-center gap-4 p-4">
-            <span @class(['flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-bold', 'bg-green-100 text-green-800' => $s['done'], 'bg-gray-100 text-gray-600' => ! $s['done']])>{{ $s['done'] ? '✓' : $i + 1 }}</span>
+            <span @class(['flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-bold', 'bg-green-100 text-green-800' => $s['done'], 'bg-ink-100 text-ink-600' => ! $s['done']])>{{ $s['done'] ? '✓' : $i + 1 }}</span>
             <span class="flex-1"><span class="font-medium">{{ $s['label'] }}</span> @unless($s['required'])<span class="badge badge-gray ml-1">Optional</span>@endunless</span>
             <a href="{{ $s['url'] }}" class="btn btn-secondary btn-sm">{{ $s['done'] ? 'Review' : 'Set up' }}</a>
         </li>

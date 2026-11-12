@@ -15,9 +15,9 @@
 </div>
 <div class="mt-4 space-y-2">
     @forelse ($requests as $r)
-        <a href="{{ route('dashboard.service-requests.show', $r->id) }}" class="card flex flex-wrap items-center gap-3 p-4 hover:border-indigo-300">
+        <a href="{{ route('dashboard.service-requests.show', $r->id) }}" class="card flex flex-wrap items-center gap-3 p-4 hover:border-ink-300">
             <span class="font-mono text-sm">{{ $r->reference }}</span>
-            <span class="min-w-0 flex-1"><span class="block truncate">{{ \Illuminate\Support\Str::limit($r->description, 90) }}</span><span class="block text-xs text-gray-500">{{ $r->customer?->name }} · {{ $r->location ?? 'no location' }} · {{ $r->assignee?->name ?? 'Unassigned' }}</span></span>
+            <span class="min-w-0 flex-1"><span class="block truncate">{{ \Illuminate\Support\Str::limit($r->description, 90) }}</span><span class="block text-xs text-ink-500">{{ $r->customer?->name }} · {{ $r->location ?? 'no location' }} · {{ $r->assignee?->name ?? 'Unassigned' }}</span></span>
             <x-status :value="$r->status" :label="$r->statusLabel()" />
         </a>
     @empty

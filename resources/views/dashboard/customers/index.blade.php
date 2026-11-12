@@ -10,13 +10,13 @@
         @forelse ($customers as $c)
             <tr>
                 <td><a class="link" href="{{ route('dashboard.customers.show', $c->id) }}">{{ $c->name }}</a></td>
-                <td class="text-gray-600">{{ $c->email }}<br>{{ $c->phone }}</td>
-                <td class="text-xs text-gray-600">{{ $c->appointments_count }} bookings · {{ $c->orders_count }} orders · {{ $c->quotations_count }} quotes · {{ $c->service_requests_count }} requests</td>
+                <td class="text-ink-600">{{ $c->email }}<br>{{ $c->phone }}</td>
+                <td class="text-xs text-ink-600">{{ $c->appointments_count }} bookings · {{ $c->orders_count }} orders · {{ $c->quotations_count }} quotes · {{ $c->service_requests_count }} requests</td>
                 <td>{{ $c->marketing_consent ? 'Opted in' : '—' }}</td>
-                <td class="text-xs text-gray-500">{{ $c->last_activity_at?->diffForHumans() }}</td>
+                <td class="text-xs text-ink-500">{{ $c->last_activity_at?->diffForHumans() }}</td>
             </tr>
         @empty
-            <tr><td colspan="5" class="py-8 text-center text-gray-500">No customers yet.</td></tr>
+            <tr><td colspan="5" class="py-8 text-center text-ink-500">No customers yet.</td></tr>
         @endforelse
         </tbody>
     </table>

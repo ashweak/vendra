@@ -6,9 +6,9 @@
 <h1 class="h1 mt-2">Record an order</h1>
 <form method="POST" action="{{ route('dashboard.orders.store') }}" class="mt-4 max-w-2xl space-y-4" onsubmit="this.querySelector('button').disabled=true">
     @csrf <input type="hidden" name="idempotency_key" value="{{ \Illuminate\Support\Str::uuid() }}">
-    <div class="card divide-y divide-gray-100 p-0">
+    <div class="card divide-y divide-line p-0">
         @foreach ($products as $p)
-            <div class="flex items-center gap-3 p-3"><span class="flex-1 text-sm">{{ $p->name }} · {{ peso($p->price_cents) }} @if($p->availableStock() !== null)<span class="text-xs text-gray-500">({{ $p->availableStock() }} available)</span>@endif</span>
+            <div class="flex items-center gap-3 p-3"><span class="flex-1 text-sm">{{ $p->name }} · {{ peso($p->price_cents) }} @if($p->availableStock() !== null)<span class="text-xs text-ink-500">({{ $p->availableStock() }} available)</span>@endif</span>
                 <input type="number" name="items[{{ $p->id }}]" min="0" value="0" class="input w-24" aria-label="Quantity of {{ $p->name }}"></div>
         @endforeach
     </div>

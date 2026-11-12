@@ -9,11 +9,11 @@
         <h2 class="h2">Plan</h2>
         @if ($subscription)
             <dl class="mt-3 grid grid-cols-2 gap-2 text-sm">
-                <dt class="text-gray-500">Plan</dt><dd>{{ $subscription->plan_name }} <x-status :value="$subscription->status" /></dd>
-                <dt class="text-gray-500">Monthly fee</dt><dd>{{ peso($subscription->monthly_fee_cents) }}</dd>
-                <dt class="text-gray-500">AI replies / month</dt><dd>{{ $subscription->ai_monthly_limit }}</dd>
-                <dt class="text-gray-500">Team members</dt><dd>{{ $subscription->staff_limit }} + owner</dd>
-                <dt class="text-gray-500">Renews</dt><dd>{{ $subscription->renews_on?->toFormattedDateString() ?? '—' }}</dd>
+                <dt class="text-ink-500">Plan</dt><dd>{{ $subscription->plan_name }} <x-status :value="$subscription->status" /></dd>
+                <dt class="text-ink-500">Monthly fee</dt><dd>{{ peso($subscription->monthly_fee_cents) }}</dd>
+                <dt class="text-ink-500">AI replies / month</dt><dd>{{ $subscription->ai_monthly_limit }}</dd>
+                <dt class="text-ink-500">Team members</dt><dd>{{ $subscription->staff_limit }} + owner</dd>
+                <dt class="text-ink-500">Renews</dt><dd>{{ $subscription->renews_on?->toFormattedDateString() ?? '—' }}</dd>
             </dl>
             <p class="hint mt-3">No unlimited usage and no surprise charges. Vendra fees are separate from your customers’ payments.</p>
         @endif
@@ -38,9 +38,9 @@
             <button class="btn btn-secondary btn-sm">Grant access</button>
         </form>
         @endif
-        <ul class="mt-4 divide-y divide-gray-100 text-sm">
+        <ul class="mt-4 divide-y divide-line text-sm">
             @foreach ($grants as $g)
-                <li class="flex items-center gap-2 py-2"><span class="flex-1">{{ $g->admin?->name }} · {{ $g->reason }}<span class="block text-xs text-gray-500">until {{ local_time($g->expires_at, $tz) }}</span></span>
+                <li class="flex items-center gap-2 py-2"><span class="flex-1">{{ $g->admin?->name }} · {{ $g->reason }}<span class="block text-xs text-ink-500">until {{ local_time($g->expires_at, $tz) }}</span></span>
                     @if ($g->isActive())<form method="POST" action="{{ route('dashboard.settings.support.revoke', $g->id) }}">@csrf<button class="btn btn-danger btn-sm">Revoke</button></form>@else<span class="badge badge-gray">{{ $g->revoked_at ? 'Revoked' : 'Expired' }}</span>@endif
                 </li>
             @endforeach
@@ -48,7 +48,7 @@
     </section>
     <section class="card border-red-200">
         <h2 class="h2 text-red-800">Close this business account</h2>
-        <p class="mt-1 text-sm text-gray-600">Stops new submissions immediately. Pending work is <strong>not</strong> completed automatically. You get 30 days to export or cancel; then personal data is removed.</p>
+        <p class="mt-1 text-sm text-ink-600">Stops new submissions immediately. Pending work is <strong>not</strong> completed automatically. You get 30 days to export or cancel; then personal data is removed.</p>
         <form method="POST" action="{{ route('dashboard.settings.close') }}" class="mt-3 space-y-2">@csrf
             <input name="confirm_name" class="input" placeholder="Type “{{ $b->name }}” to confirm" required>
             @if ($b->status === 'closing')<button name="cancel" value="1" class="btn btn-secondary btn-sm">Cancel closure</button>

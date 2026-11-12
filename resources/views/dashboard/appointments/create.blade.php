@@ -4,7 +4,7 @@
 @section('content')
 <a href="{{ route('dashboard.appointments.index') }}" class="link text-sm">← Appointments</a>
 <h1 class="h1 mt-2">Record a walk-in or phone booking</h1>
-<p class="text-sm text-gray-600">Goes into the same calendar, so online customers can’t take this time.</p>
+<p class="text-sm text-ink-600">Goes into the same calendar, so online customers can’t take this time.</p>
 <form method="POST" action="{{ route('dashboard.appointments.store') }}" class="card mt-4 max-w-2xl space-y-4" onsubmit="this.querySelector('button').disabled=true">
     @csrf <input type="hidden" name="idempotency_key" value="{{ \Illuminate\Support\Str::uuid() }}">
     <div class="grid gap-4 sm:grid-cols-2">

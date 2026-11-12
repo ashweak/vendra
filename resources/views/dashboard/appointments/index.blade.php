@@ -15,9 +15,9 @@
 <h1 class="h2 mt-5">{{ $status ? (\App\Models\Appointment::STATUSES[$status] ?? $status) : $date->format('l, F j, Y') }}</h1>
 <div class="mt-3 space-y-2">
     @forelse ($appointments as $a)
-        <a href="{{ route('dashboard.appointments.show', $a->id) }}" class="card flex flex-wrap items-center gap-3 p-4 hover:border-indigo-300">
-            <span class="w-28 shrink-0"><span class="block font-mono font-semibold">{{ local_time($a->starts_at, $tz, 'g:i A') }}</span><span class="block text-xs text-gray-500">{{ $status ? local_time($a->starts_at, $tz, 'D M j') : 'to '.local_time($a->ends_at, $tz, 'g:i A') }}</span></span>
-            <span class="min-w-0 flex-1"><span class="block font-medium">{{ $a->service_name }}</span><span class="block text-xs text-gray-500">{{ $a->customer?->name }} · {{ $a->staff?->name ?? 'Any staff' }} · {{ str_replace('_', '-', $a->source) }}</span></span>
+        <a href="{{ route('dashboard.appointments.show', $a->id) }}" class="card flex flex-wrap items-center gap-3 p-4 hover:border-ink-300">
+            <span class="w-28 shrink-0"><span class="block font-mono font-semibold">{{ local_time($a->starts_at, $tz, 'g:i A') }}</span><span class="block text-xs text-ink-500">{{ $status ? local_time($a->starts_at, $tz, 'D M j') : 'to '.local_time($a->ends_at, $tz, 'g:i A') }}</span></span>
+            <span class="min-w-0 flex-1"><span class="block font-medium">{{ $a->service_name }}</span><span class="block text-xs text-ink-500">{{ $a->customer?->name }} · {{ $a->staff?->name ?? 'Any staff' }} · {{ str_replace('_', '-', $a->source) }}</span></span>
             <x-status :value="$a->status" :label="$a->statusLabel()" />
         </a>
     @empty

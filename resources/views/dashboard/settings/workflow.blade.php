@@ -11,7 +11,7 @@
         <p class="hint">Turning a module off stops new submissions. Existing records stay available.</p>
         <div class="mt-3 grid gap-2 sm:grid-cols-2">
             @foreach ($modules as $k => $label)
-                <label class="flex items-center gap-2 rounded-lg border border-gray-200 p-3 text-sm"><input type="checkbox" name="modules[]" value="{{ $k }}" @checked($b->moduleEnabled($k))> {{ $label }}</label>
+                <label class="flex items-center gap-2 rounded-lg border border-line p-3 text-sm"><input type="checkbox" name="modules[]" value="{{ $k }}" @checked($b->moduleEnabled($k))> {{ $label }}</label>
             @endforeach
         </div>
     </fieldset>

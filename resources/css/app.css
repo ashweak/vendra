@@ -3,29 +3,169 @@
 @source '../views/**/*.blade.php';
 @source '../../app/helpers.php';
 
+@font-face {
+    font-family: 'Inter Tight';
+    font-style: normal;
+    font-display: swap;
+    font-weight: 100 900;
+    src: url('../fonts/inter-tight-latin-wght-normal.woff2') format('woff2-variations');
+}
+
+/*
+ * Vendra design language: monochrome, editorial.
+ * Near-black primary actions, white surfaces, soft-gray tiles, pill eyebrows,
+ * large tight headlines, notched-corner panels, thin hairline dividers.
+ */
 @theme {
-    --font-sans: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --font-sans: 'Inter Tight', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+    --color-ink-50: #f5f5f6;
+    --color-ink-100: #ececee;
+    --color-ink-200: #dcdcdf;
+    --color-ink-300: #c4c4c8;
+    --color-ink-400: #9a9aa0;
+    --color-ink-500: #6e6e74;
+    --color-ink-600: #4a4a50;
+    --color-ink-700: #2c2c30;
+    --color-ink-800: #1c1c1f;
+    --color-ink-900: #111113;
+    --color-ink-950: #08080a;
+    --color-tile: #f4f4f6;
+    --color-line: #e8e8ea;
+}
+
+@layer base {
+    html { -webkit-font-smoothing: antialiased; }
+    body { @apply bg-white text-ink-900; font-feature-settings: 'ss01', 'cv11'; }
+    ::selection { @apply bg-ink-900 text-white; }
+    h1, h2, h3 { letter-spacing: -0.025em; }
 }
 
 @layer components {
-    .btn { @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 min-h-[44px]; }
-    .btn-primary { @apply bg-indigo-600 text-white hover:bg-indigo-700; }
-    .btn-secondary { @apply border border-gray-300 bg-white text-gray-800 hover:bg-gray-50; }
+    /* Buttons */
+    .btn { @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded-md px-5 py-2.5 text-sm font-medium tracking-tight transition focus:outline-none focus-visible:ring-2 focus-visible:ring-ink-900 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50; }
+    .btn-primary { @apply bg-ink-900 text-white hover:bg-ink-700; }
+    .btn-secondary { @apply border border-line bg-white text-ink-900 hover:border-ink-300 hover:bg-tile; }
     .btn-danger { @apply border border-red-200 bg-white text-red-700 hover:bg-red-50; }
-    .btn-sm { @apply min-h-[36px] px-3 py-1.5 text-xs; }
-    .input { @apply block w-full rounded-lg border border-gray-300 bg-white px-3 py-2.5 text-sm text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 focus:outline-none; }
-    .label { @apply mb-1 block text-sm font-medium text-gray-700; }
-    .hint { @apply mt-1 text-xs text-gray-500; }
-    .card { @apply rounded-xl border border-gray-200 bg-white p-5 shadow-sm; }
-    .badge { @apply inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-medium whitespace-nowrap; }
-    .badge-green { @apply bg-green-50 text-green-800 ring-1 ring-green-200; }
-    .badge-amber { @apply bg-amber-50 text-amber-800 ring-1 ring-amber-200; }
-    .badge-indigo { @apply bg-indigo-50 text-indigo-800 ring-1 ring-indigo-200; }
-    .badge-gray { @apply bg-gray-100 text-gray-700 ring-1 ring-gray-200; }
+    .btn-sm { @apply min-h-[36px] px-3.5 py-1.5 text-xs; }
+    .btn-play { @apply inline-flex items-center gap-3 text-sm font-medium text-ink-900; }
+    .btn-play-icon { @apply flex h-11 w-11 items-center justify-center rounded-full border border-ink-900 transition; }
+    .btn-play:hover .btn-play-icon { @apply bg-ink-900 text-white; }
+
+    /* Forms */
+    .input { @apply block w-full rounded-md border border-line bg-white px-3.5 py-2.5 text-sm text-ink-900 placeholder:text-ink-400 focus:border-ink-900 focus:ring-2 focus:ring-ink-900/10 focus:outline-none; }
+    .label { @apply mb-1.5 block text-sm font-medium text-ink-700; }
+    .hint { @apply mt-1 text-xs text-ink-500; }
+
+    /* Surfaces */
+    .card { @apply rounded-2xl border border-line bg-white p-5; }
+    .tile { @apply rounded-2xl bg-tile p-5; }
+    .divider { @apply border-line; }
+
+    /* Typography */
+    .eyebrow { @apply inline-flex items-center gap-1.5 rounded-full bg-tile px-3 py-1 text-xs font-medium text-ink-700; }
+    .display { @apply text-4xl leading-[1.05] font-semibold tracking-tight text-ink-900 sm:text-5xl lg:text-[3.6rem]; }
+    .h1 { @apply text-2xl font-semibold tracking-tight text-ink-900 sm:text-3xl; }
+    .h2 { @apply text-lg font-semibold tracking-tight text-ink-900; }
+    .section-title { @apply text-3xl font-semibold tracking-tight text-ink-900 sm:text-4xl; }
+    .lead { @apply text-base leading-relaxed text-ink-500; }
+    .link { @apply font-medium text-ink-900 underline decoration-ink-300 underline-offset-4 hover:decoration-ink-900; }
+
+    /* Status pills */
+    .badge { @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-medium whitespace-nowrap; }
+    .badge-green { @apply bg-emerald-50 text-emerald-800; }
+    .badge-amber { @apply bg-amber-50 text-amber-800; }
+    .badge-indigo { @apply bg-ink-900 text-white; }
+    .badge-gray { @apply bg-tile text-ink-600; }
+
+    /* Tables */
     .table { @apply w-full text-left text-sm; }
-    .table th { @apply border-b border-gray-200 px-3 py-2 text-xs font-semibold uppercase tracking-wide text-gray-500; }
-    .table td { @apply border-b border-gray-100 px-3 py-3 align-top; }
-    .h1 { @apply text-2xl font-bold tracking-tight text-gray-900; }
-    .h2 { @apply text-lg font-semibold text-gray-900; }
-    .link { @apply font-medium text-indigo-700 underline-offset-2 hover:underline; }
+    .table th { @apply border-b border-line px-4 py-3 text-xs font-medium text-ink-500; }
+    .table td { @apply border-b border-line px-4 py-3.5 align-top; }
+    .table tr:last-child td { @apply border-b-0; }
+
+    /* Stat tile with outline icon (reference "200+" cards) */
+    .stat { @apply rounded-2xl bg-tile p-5; }
+    .stat-value { @apply text-3xl font-semibold tracking-tight text-ink-900; }
+    .stat-label { @apply mt-1 text-sm leading-snug text-ink-500; }
+    .stat-icon { @apply h-8 w-8 text-ink-900; }
+
+    /* Brand-logo style marquee strip */
+    .marquee { @apply relative overflow-hidden border-y border-line bg-white py-6; }
+    .marquee-track { @apply flex w-max items-center gap-10 text-lg font-semibold tracking-tight whitespace-nowrap text-ink-900; animation: vendra-marquee 40s linear infinite; }
+    .marquee:hover .marquee-track { animation-play-state: paused; }
+}
+
+@keyframes vendra-marquee { to { transform: translateX(-50%); } }
+
+@media (prefers-reduced-motion: reduce) {
+    .marquee-track { animation: none; }
+}
+
+/*
+ * Notched panel: a rounded panel with a "tab" cut from its top-right corner,
+ * with convex rounded corners at both junctions. Set --nbg to the page background.
+ */
+.notch {
+    --nw: 34%;
+    --nh: 46px;
+    --nr: 22px;
+    --nbg: #fff;
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--nr);
+    isolation: isolate;
+}
+.notch::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: var(--nw);
+    height: var(--nh);
+    background: var(--nbg);
+    border-bottom-left-radius: var(--nr);
+    z-index: 5;
+}
+.notch::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 5;
+    background:
+        radial-gradient(circle at 0 100%, transparent calc(var(--nr) - 0.5px), var(--nbg) var(--nr)) right var(--nw) top 0 / var(--nr) var(--nr) no-repeat,
+        radial-gradient(circle at 0 100%, transparent calc(var(--nr) - 0.5px), var(--nbg) var(--nr)) right 0 top var(--nh) / var(--nr) var(--nr) no-repeat;
+}
+.notch-bl::before { top: auto; bottom: 0; right: auto; left: 0; border-radius: 0 var(--nr) 0 0; }
+.notch-bl::after {
+    background:
+        radial-gradient(circle at 100% 0, transparent calc(var(--nr) - 0.5px), var(--nbg) var(--nr)) left var(--nw) bottom 0 / var(--nr) var(--nr) no-repeat,
+        radial-gradient(circle at 100% 0, transparent calc(var(--nr) - 0.5px), var(--nbg) var(--nr)) left 0 bottom var(--nh) / var(--nr) var(--nr) no-repeat;
+}
+.notch-slot { position: absolute; top: 0; right: 0; width: var(--nw, 34%); height: var(--nh, 46px); z-index: 6; display: flex; align-items: center; justify-content: flex-end; padding-left: 12px; }
+
+/* Warm abstract artwork used instead of photography */
+.art-warm {
+    background:
+        radial-gradient(60% 55% at 20% 25%, #ffb648 0%, transparent 60%),
+        radial-gradient(50% 50% at 75% 20%, #ff7a59 0%, transparent 60%),
+        radial-gradient(55% 60% at 30% 85%, #ff4f8b 0%, transparent 62%),
+        radial-gradient(45% 45% at 85% 80%, #ffd36e 0%, transparent 60%),
+        linear-gradient(135deg, #ffe8c7, #ffc7b0);
+}
+.art-cool {
+    background:
+        radial-gradient(60% 60% at 15% 20%, #3b3b45 0%, transparent 60%),
+        radial-gradient(60% 60% at 85% 85%, #2a2a33 0%, transparent 60%),
+        linear-gradient(160deg, #18181c, #0d0d10);
+}
+.grain { position: relative; }
+.grain::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.18;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    pointer-events: none;
 }

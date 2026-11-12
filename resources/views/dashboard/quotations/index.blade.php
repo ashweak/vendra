@@ -21,13 +21,13 @@
             <tr>
                 <td><a class="link font-mono" href="{{ route('dashboard.quotations.show', $q->id) }}">{{ $q->reference }}</a></td>
                 <td>{{ $q->customer?->name }}</td>
-                <td class="max-w-xs truncate text-gray-600">{{ \Illuminate\Support\Str::limit($q->requirements, 70) }}</td>
+                <td class="max-w-xs truncate text-ink-600">{{ \Illuminate\Support\Str::limit($q->requirements, 70) }}</td>
                 <td>{{ $q->currentVersion ? 'v'.$q->currentVersion->version.' · '.peso($q->currentVersion->total_cents) : '—' }}</td>
                 <td class="text-xs">{{ $q->assignee?->name ?? '—' }}</td>
                 <td><x-status :value="$q->status" :label="$q->statusLabel()" /></td>
             </tr>
         @empty
-            <tr><td colspan="6" class="py-8 text-center text-gray-500">No quotations.</td></tr>
+            <tr><td colspan="6" class="py-8 text-center text-ink-500">No quotations.</td></tr>
         @endforelse
         </tbody>
     </table>

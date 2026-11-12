@@ -8,7 +8,7 @@
     <div class="space-y-4">
         <div class="card">
             <div class="flex flex-wrap items-center gap-3"><h1 class="h1 flex-1 font-mono">{{ $q->reference }}</h1><x-status :value="$q->status" :label="$q->statusLabel()" /></div>
-            <p class="text-sm text-gray-600">{{ $q->customer?->name }} · {{ $q->customer?->phone }} · {{ $q->customer?->email }}</p>
+            <p class="text-sm text-ink-600">{{ $q->customer?->name }} · {{ $q->customer?->phone }} · {{ $q->customer?->email }}</p>
             <h2 class="mt-4 text-sm font-semibold">Customer requirements</h2>
             <p class="mt-1 text-sm whitespace-pre-line">{{ $q->requirements }}</p>
             @foreach ($q->attachments as $att)
@@ -20,7 +20,7 @@
         </div>
 
         @foreach ($q->versions->sortByDesc('version') as $v)
-            <div @class(['card', 'ring-2 ring-indigo-200' => (int) $v->id === (int) $q->current_version_id])>
+            <div @class(['card', 'ring-2 ring-ink-200' => (int) $v->id === (int) $q->current_version_id])>
                 <div class="flex flex-wrap items-center gap-2">
                     <h2 class="h2 flex-1">Version {{ $v->version }}</h2>
                     @if ((int) $v->id === (int) $q->accepted_version_id)<span class="badge badge-green">Accepted by customer</span>@endif
@@ -30,14 +30,14 @@
                     @foreach ($v->line_items as $l)<tr><td>{{ $l['quantity'] }} × {{ $l['description'] }}</td><td class="text-right">{{ peso($l['unit_price_cents']) }}</td><td class="text-right">{{ peso($l['line_total_cents']) }}</td></tr>@endforeach
                     <tr><td colspan="2" class="text-right font-semibold">Total</td><td class="text-right font-semibold">{{ peso($v->total_cents) }}</td></tr>
                 </tbody></table>
-                <p class="mt-2 text-xs text-gray-500">Valid until {{ $v->valid_until->toFormattedDateString() }} · drafted by {{ $v->drafter?->name }} @if($v->notes) · {{ $v->notes }} @endif</p>
+                <p class="mt-2 text-xs text-ink-500">Valid until {{ $v->valid_until->toFormattedDateString() }} · drafted by {{ $v->drafter?->name }} @if($v->notes) · {{ $v->notes }} @endif</p>
             </div>
         @endforeach
 
         @if ($canDraft)
         <form method="POST" action="{{ route('dashboard.quotations.draft', $q->id) }}" class="card space-y-3">@csrf
             <h2 class="h2">Draft {{ $q->versions->isEmpty() ? 'the quotation' : 'a new version' }}</h2>
-            <p class="text-xs text-gray-500">Each draft is a new version. Sent versions are never edited. The owner approves before sending.</p>
+            <p class="text-xs text-ink-500">Each draft is a new version. Sent versions are never edited. The owner approves before sending.</p>
             @for ($i = 0; $i < 4; $i++)
                 <div class="grid grid-cols-[1fr_5rem_8rem] gap-2">
                     <input name="lines[{{ $i }}][description]" class="input" placeholder="Line item" aria-label="Line {{ $i + 1 }} description" @if($i === 0) required @endif>

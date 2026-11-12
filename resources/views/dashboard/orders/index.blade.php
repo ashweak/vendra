@@ -19,10 +19,10 @@
                 <td>{{ ucfirst($o->fulfillment_method) }}</td>
                 <td><x-status :value="$o->payment_status" :label="$o->payment_status === 'verified' ? 'Verified' : 'Unpaid'" /></td>
                 <td><x-status :value="$o->status" :label="$o->statusLabel()" /></td>
-                <td class="text-xs text-gray-500">{{ local_time($o->created_at, $currentBusiness->timezone, 'M j g:i A') }}</td>
+                <td class="text-xs text-ink-500">{{ local_time($o->created_at, $currentBusiness->timezone, 'M j g:i A') }}</td>
             </tr>
         @empty
-            <tr><td colspan="7" class="py-8 text-center text-gray-500">No orders.</td></tr>
+            <tr><td colspan="7" class="py-8 text-center text-ink-500">No orders.</td></tr>
         @endforelse
         </tbody>
     </table>
