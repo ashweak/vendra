@@ -79,10 +79,11 @@ await login(page, 'owner@lumina.test');
 await page.goto(`${BASE}/app`); await shot(page, '10-dashboard-overview');
 await page.goto(`${BASE}/app/conversations`);
 await page.locator('main a.card').first().click(); await shot(page, '11-inbox-handoff');
-await page.goto(`${BASE}/app/appointments`); await shot(page, '12-appointments');
-await page.locator('main a.card').first().click(); await shot(page, '13-appointment-detail');
+const tmr = new Date(Date.now() + 86400000); if (tmr.getDay() === 0) tmr.setDate(tmr.getDate() + 1);
+await page.goto(`${BASE}/app/appointments?date=${tmr.toISOString().slice(0, 10)}`); await shot(page, '12-appointments');
+if (await page.locator('main a.card').count()) { await page.locator('main a.card').first().click(); await shot(page, '13-appointment-detail'); }
 await page.goto(`${BASE}/app/quotations`);
-await page.locator('main table a').first().click(); await shot(page, '14-quotation');
+if (await page.locator('main table a').count()) { await page.locator('main table a').first().click(); await shot(page, '14-quotation'); }
 await page.goto(`${BASE}/app/settings/assistant`);
 await page.fill('#tm', 'Can I get a discount for 3 people?'); await page.click('form:has(#tm) button'); await page.waitForLoadState('networkidle');
 await shot(page, '15-assistant-test');
@@ -93,7 +94,7 @@ await page.click('button:has-text("Sign out")');
 
 await login(page, 'owner@ganda.test');
 await page.goto(`${BASE}/app/orders`); await shot(page, '19-orders');
-await page.locator('main table a').first().click(); await shot(page, '20-order-detail');
+if (await page.locator('main table a').count()) { await page.locator('main table a').first().click(); await shot(page, '20-order-detail'); }
 await page.click('button:has-text("Sign out")');
 
 await login(page, 'manager@lumina.test');
