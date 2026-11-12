@@ -61,6 +61,7 @@ await ctx.close();
 // ---------- Mobile
 const m = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true, timezoneId: 'Asia/Manila' });
 page = await m.newPage();
+await page.goto(`${BASE}/b/ganda-beauty/track`); await shot(page, '07b-mobile-track', false);
 await page.goto(`${BASE}/b/ganda-beauty`); await shot(page, '07-mobile-shop');
 await page.click('#vchat-open');
 await page.fill('#vchat-input', 'I want to order 2 niacinamide toner for pickup');

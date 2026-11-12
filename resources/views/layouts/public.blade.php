@@ -11,7 +11,7 @@
     if ($business->moduleEnabled('service_requests')) $links[] = ['Request service', 'public.request', 'tool'];
     $links[] = ['Track request', 'public.track', 'search'];
 @endphp
-<div class="min-h-full bg-paper">
+<div class="flex min-h-dvh flex-col bg-paper">
     <div class="sticky top-0 z-30 px-3 pt-3 sm:px-5">
         <nav class="mx-auto flex max-w-6xl items-center gap-1 rounded-full border border-line bg-white/85 py-1.5 pr-1.5 pl-1.5 shadow-[0_8px_30px_-18px_rgba(23,22,18,.35)] backdrop-blur sm:gap-2 sm:py-2 sm:pr-2 sm:pl-2.5" aria-label="Business">
             <a href="{{ route('public.home', $business) }}" class="flex min-w-0 shrink-0 items-center gap-2.5" aria-label="{{ $business->name }} home">
@@ -35,12 +35,12 @@
     @if (! $business->isAcceptingSubmissions())
         <div class="mx-auto mt-3 max-w-6xl px-3 sm:px-5"><div class="rounded-xl bg-amber-50 px-4 py-2.5 text-center text-sm text-amber-900">{{ $business->status === 'closing' ? 'This business is no longer accepting online requests.' : 'This page is being set up and isn’t accepting requests yet.' }}</div></div>
     @endif
-    <main class="mx-auto max-w-6xl px-5 py-10 pb-28 sm:px-8">
+    <main class="mx-auto w-full max-w-6xl flex-1 px-5 py-10 pb-28 sm:px-8">
         <x-flash />
         @yield('content')
     </main>
     <footer class="border-t border-line bg-white">
-        <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-5 py-6 text-xs text-ink-500 sm:px-8">
+        <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 py-6 pr-24 pl-5 text-xs text-ink-500 sm:px-8">
             <span>© {{ now()->year }} {{ $business->name }}</span>
             <a href="{{ route('landing') }}" class="inline-flex items-center gap-2 hover:text-ink-900">Powered by <x-logo /></a>
         </div>
