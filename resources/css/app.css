@@ -72,7 +72,7 @@
     .divider { @apply border-line; }
 
     /* Typography */
-    .eyebrow { @apply inline-flex items-center gap-1.5 rounded-full bg-tile px-3 py-1 text-xs font-medium text-ink-700; }
+    .eyebrow { @apply inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-tile px-3 py-1 text-xs font-medium text-ink-700; }
     .display { @apply text-4xl leading-[1.05] font-semibold tracking-tight text-ink-900 sm:text-5xl lg:text-[3.6rem]; }
     .h1 { @apply text-2xl font-semibold tracking-tight text-ink-900 sm:text-3xl; }
     .h2 { @apply text-lg font-semibold tracking-tight text-ink-900; }
