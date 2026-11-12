@@ -3,8 +3,9 @@
 @section('content')
 <span class="eyebrow">Step 1 of 2 · Details</span>
 <h1 class="section-title mt-4">Request a service</h1>
-<p class="mt-1 text-sm text-ink-600">Describe the job. A preferred date is a preference, not a confirmed booking.</p>
-<form method="POST" action="{{ route('public.request.review', $business) }}" class="mt-6 max-w-2xl">
+<p class="lead mt-3 max-w-xl">Describe the job. A preferred date is a preference, not a confirmed booking.</p>
+<div class="mt-8 grid gap-10 lg:grid-cols-[1fr_20rem]">
+<form method="POST" action="{{ route('public.request.review', $business) }}" class="min-w-0">
     @csrf
     <div class="card space-y-4">
         <div><label class="label" for="desc">Describe what you need</label><textarea id="desc" name="description" rows="5" minlength="10" maxlength="3000" required class="input">{{ old('description', $prefill['description'] ?? '') }}</textarea><x-field-error name="description" /></div>
@@ -14,4 +15,6 @@
     @include('public.partials.contact', ['data' => [], 'phoneRequired' => true])
     <button class="btn btn-primary mt-6 w-full sm:w-auto">Review request</button>
 </form>
+@include('public.partials.aside')
+</div>
 @endsection

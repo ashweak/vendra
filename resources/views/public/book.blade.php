@@ -3,11 +3,12 @@
 @section('content')
 <span class="eyebrow">Step 1 of 2 · Details</span>
 <h1 class="section-title mt-4">Book an appointment</h1>
-<p class="mt-1 text-sm text-ink-600">Choose a service and an open time. You’ll review everything before submitting.</p>
+<p class="lead mt-3 max-w-xl">Choose a service and an open time. You’ll review everything before submitting.</p>
 @if ($services->isEmpty())
     <x-empty title="No services available yet">Please check back later or ask in the chat.</x-empty>
 @else
-<form method="POST" action="{{ route('public.book.review', $business) }}" class="mt-6 max-w-2xl" id="book-form">
+<div class="mt-8 grid gap-10 lg:grid-cols-[1fr_20rem]">
+<form method="POST" action="{{ route('public.book.review', $business) }}" class="min-w-0" id="book-form">
     @csrf
     <div class="card space-y-4">
         <div>
@@ -39,6 +40,8 @@
     @include('public.partials.contact', ['data' => []])
     <button class="btn btn-primary mt-6 w-full sm:w-auto">Review booking</button>
 </form>
+@include('public.partials.aside')
+</div>
 @push('scripts')
 <script>
 (() => {
@@ -60,7 +63,7 @@
                 const b = document.createElement('button');
                 b.type = 'button'; b.setAttribute('role', 'radio');
                 b.className = 'rounded-lg border border-ink-300 px-2 py-2 text-sm hover:border-ink-500 min-h-[44px]';
-                b.innerHTML = `<span class="block font-medium">${s.label}</span>` + (s.staff ? `<span class="block text-[11px] text-ink-500">${s.staff.replace(/[<>&]/g, '')}</span>` : '');
+                b.innerHTML = `<span class="block font-medium">${s.label}</span>` + (s.staff ? `<span class="block text-[11px] opacity-70">${s.staff.replace(/[<>&]/g, '')}</span>` : '');
                 const pick = () => { box.querySelectorAll('button').forEach(x => { x.style.background = ''; x.style.color = ''; x.setAttribute('aria-checked', 'false'); });
                     b.style.background = '#111113'; b.style.color = 'white'; b.style.borderColor = '#111113'; b.setAttribute('aria-checked', 'true'); time.value = s.time; staff.value = s.staff_id ?? ''; };
                 b.addEventListener('click', pick);

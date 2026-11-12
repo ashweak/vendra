@@ -3,8 +3,9 @@
 @section('content')
 <span class="eyebrow">Step 1 of 2 · Details</span>
 <h1 class="section-title mt-4">Order products</h1>
-<p class="mt-1 text-sm text-ink-600">Set quantities, then review your order. Stock is reserved only after you submit.</p>
-<form method="POST" action="{{ route('public.order.review', $business) }}" class="mt-6 max-w-3xl">
+<p class="lead mt-3 max-w-xl">Set quantities, then review your order. Stock is reserved only after you submit.</p>
+<div class="mt-8 grid gap-10 lg:grid-cols-[1fr_20rem]">
+<form method="POST" action="{{ route('public.order.review', $business) }}" class="min-w-0">
     @csrf
     <div class="card divide-y divide-line p-0">
         @forelse ($products as $p)
@@ -34,4 +35,6 @@
     @include('public.partials.contact', ['data' => [], 'phoneRequired' => true])
     <button class="btn btn-primary mt-6 w-full sm:w-auto">Review order</button>
 </form>
+@include('public.partials.aside')
+</div>
 @endsection
