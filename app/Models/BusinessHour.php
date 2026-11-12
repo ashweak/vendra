@@ -9,6 +9,8 @@ class BusinessHour extends Model
 {
     use BelongsToBusiness;
 
+    public $timestamps = false;
+
     protected $guarded = ['id'];
 
     protected function casts(): array
