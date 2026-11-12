@@ -45,7 +45,7 @@
 {{-- Scrolling strip (like the reference partner logos) --}}
 @if ($items->isNotEmpty())
 <section class="relative mt-16 mr-[calc(50%-50vw)] ml-[calc(50%-50vw)] w-screen" aria-label="Highlights">
-    <div class="absolute inset-x-0 top-0 flex -translate-y-1/2 justify-center"><span class="eyebrow border border-line bg-white">What we offer</span></div>
+    <div class="absolute inset-x-0 top-0 z-10 flex -translate-y-1/2 justify-center"><span class="eyebrow border border-line bg-white">What we offer</span></div>
     <div class="marquee">
         <div class="marquee-track">
             @foreach ([1, 2] as $_)
