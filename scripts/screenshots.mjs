@@ -99,7 +99,7 @@ await page.click('button:has-text("Sign out")');
 
 await login(page, 'manager@lumina.test');
 await page.goto(`${BASE}/app/settings/profile`); await shot(page, '21-manager-forbidden-settings');
-await page.click('button:has-text("Sign out")').catch(() => page.goto(`${BASE}/`));
+await page.context().clearCookies();
 
 await login(page, 'admin@vendra.test');
 await page.goto(`${BASE}/admin`); await shot(page, '22-admin');

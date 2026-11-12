@@ -200,7 +200,7 @@ class RuleBasedProvider implements ChatProvider
                 continue;
             }
             foreach ($keywords as $k) {
-                if (preg_match('/\b'.preg_quote(rtrim($k, 's'), '/').'/u', $t)) {
+                if (preg_match('/\b'.preg_quote(rtrim($k, 's'), '/').'s?\b/u', $t)) {
                     $found[$i->id] = $i;
                     break;
                 }

@@ -39,6 +39,16 @@ class AssistantTest extends TestCase
         $this->assertContains('search_catalog', array_column($r['tools'], 'name'));
     }
 
+    public function test_item_matching_uses_whole_words(): void
+    {
+        $b = $this->makeBusiness();
+        $this->service($b, ['name' => 'Haircut', 'price_cents' => 25000]);
+        $this->service($b, ['name' => 'Hair Color', 'price_cents' => 180000]);
+        $r = $this->ask($this->chat($b), 'Magkano po ang haircut?');
+        $this->assertStringContainsString('Haircut', $r['reply']);
+        $this->assertStringNotContainsString('Hair Color', $r['reply']);
+    }
+
     public function test_booking_produces_draft_but_never_books(): void
     {
         $b = $this->makeBusiness();

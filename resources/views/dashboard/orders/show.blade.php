@@ -37,8 +37,9 @@
                         @continue($to === 'expired')
                         @continue($to === 'ready_for_pickup' && $o->fulfillment_method !== 'pickup')
                         @continue($to === 'dispatched' && $o->fulfillment_method !== 'delivery')
+                        @continue($to === 'confirmed' && $o->delivery_fee_cents === null)
                         <button name="action" value="{{ $to }}" @class(['btn', 'btn-danger' => in_array($to, ['cancelled', 'declined'], true), 'btn-primary' => ! in_array($to, ['cancelled', 'declined'], true)])
-                            @if(in_array($to, ['cancelled', 'declined'], true)) onclick="return confirm('This releases reserved stock. Continue?')" @endif>{{ \App\Models\Order::STATUSES[$to] }}</button>
+                            @if(in_array($to, ['cancelled', 'declined'], true)) onclick="return confirm('This releases reserved stock. Continue?')" @endif>{{ ['confirmed' => 'Confirm order', 'declined' => 'Decline', 'preparing' => 'Start preparing', 'ready_for_pickup' => 'Ready for pickup', 'dispatched' => 'Mark dispatched', 'completed' => 'Mark completed', 'cancelled' => 'Cancel order'][$to] }}</button>
                     @endforeach
                 </div>
             </form>

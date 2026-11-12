@@ -24,7 +24,7 @@
                 @foreach ($transitions as $to)
                     @php $needsApproval = in_array($to, ['accepted', 'declined', 'under_review', 'awaiting_customer', 'cancelled'], true); @endphp
                     @continue($needsApproval && ! $canApprove)
-                    <button name="action" value="{{ $to }}" @class(['btn', 'btn-danger' => in_array($to, ['declined', 'cancelled'], true), 'btn-secondary' => ! in_array($to, ['declined', 'cancelled'], true)])>{{ \App\Models\ServiceRequest::STATUSES[$to] }}</button>
+                    <button name="action" value="{{ $to }}" @class(['btn', 'btn-danger' => in_array($to, ['declined', 'cancelled'], true), 'btn-secondary' => ! in_array($to, ['declined', 'cancelled'], true)])>{{ ['under_review' => 'Start review', 'awaiting_customer' => 'Ask customer for details', 'accepted' => 'Accept', 'in_progress' => 'Start work', 'completed' => 'Mark completed', 'declined' => 'Decline', 'cancelled' => 'Cancel'][$to] }}</button>
                 @endforeach
             </div>
             @if ($currentBusiness->moduleEnabled('appointments'))<p class="hint">Need a reserved time? Create a linked booking from <a class="link" href="{{ route('dashboard.appointments.create') }}">Appointments</a>.</p>@endif

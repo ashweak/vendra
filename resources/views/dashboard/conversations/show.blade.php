@@ -34,13 +34,13 @@
                     </div>
                 @else
                     <div @class(['flex', 'justify-end' => $msg->sender_type !== 'customer'])>
-                        <div @class(['max-w-[80%] rounded-2xl px-3 py-2 whitespace-pre-line',
+                        <div @class(['max-w-[80%] rounded-2xl px-3 py-2',
                             'bg-white shadow-sm' => $msg->sender_type === 'customer',
                             'bg-indigo-600 text-white' => $msg->sender_type === 'staff',
                             'bg-indigo-100 text-indigo-950' => $msg->sender_type === 'ai',
                             'bg-gray-200 text-gray-700 text-xs' => $msg->sender_type === 'system'])>
                             <span class="mb-0.5 block text-[11px] font-semibold opacity-75">{{ ['customer' => 'Customer', 'ai' => 'AI assistant', 'staff' => $msg->user?->name ?? 'Staff', 'system' => 'System'][$msg->sender_type] }}</span>
-                            {{ $msg->body }}
+                            <span class="whitespace-pre-line">{{ $msg->body }}</span>
                             @if (! empty($msg->meta['draft']))<span class="mt-1 block rounded bg-white/70 px-2 py-1 text-xs text-gray-700">Draft offered: {{ $msg->meta['draft']['title'] }}</span>@endif
                             <span class="mt-1 block text-[10px] opacity-60">{{ local_time($msg->created_at, $tz, 'M j g:i A') }}</span>
                         </div>
