@@ -1,18 +1,18 @@
 {{-- AI chat. Separate from page forms: typing in chat can never submit a booking/order (P8). --}}
 <div id="vchat" data-history="{{ route('public.chat.history', $business) }}" data-send="{{ route('public.chat.send', $business) }}" data-handoff="{{ route('public.chat.handoff', $business) }}" data-name="{{ $business->name }}">
     <button id="vchat-open" type="button" class="fixed right-5 bottom-5 z-40 flex items-center gap-2.5 rounded-full bg-ink-900 py-3 pr-5 pl-3 text-sm font-medium text-white shadow-[0_10px_30px_-10px_rgba(0,0,0,.5)] transition hover:bg-ink-700 focus:outline-none focus-visible:ring-4 focus-visible:ring-ink-300" aria-expanded="false" aria-controls="vchat-panel">
-        <span class="flex h-7 w-7 items-center justify-center rounded-full bg-white/15"><x-icon name="chat" class="h-4 w-4" /></span> Ask us anything
+        <span class="flex h-7 w-7 items-center justify-center rounded-full bg-sun text-ink-900"><x-icon name="chat" class="h-4 w-4" /></span> Ask us anything
     </button>
     <section id="vchat-panel" class="fixed inset-0 z-50 hidden flex-col overflow-hidden bg-white sm:inset-auto sm:right-5 sm:bottom-5 sm:h-[36rem] sm:w-[25rem] sm:rounded-2xl sm:border sm:border-line sm:shadow-[0_30px_80px_-20px_rgba(0,0,0,.35)]" role="dialog" aria-label="Chat with {{ $business->name }}">
         <header class="flex items-center gap-3 border-b border-line px-4 py-3.5">
-            <span class="flex h-10 w-10 items-center justify-center rounded-full bg-ink-900 text-white"><x-icon name="spark" class="h-5 w-5" /></span>
+            <span class="flex h-10 w-10 items-center justify-center rounded-full bg-ink-900 text-sun"><x-icon name="spark" class="h-5 w-5" /></span>
             <div class="min-w-0 flex-1">
                 <p class="truncate font-semibold">{{ $business->name }}</p>
                 <p id="vchat-state" class="text-xs text-ink-500">AI assistant · answers from the business’s published info</p>
             </div>
             <button id="vchat-min" type="button" class="flex h-9 w-9 items-center justify-center rounded-full text-ink-500 hover:bg-tile" aria-label="Minimize chat">—</button>
         </header>
-        <div id="vchat-log" class="flex-1 space-y-3 overflow-y-auto bg-tile p-4 text-sm" aria-live="polite">
+        <div id="vchat-log" class="dots flex-1 space-y-3 overflow-y-auto bg-tile p-4 text-sm" aria-live="polite">
             <div class="max-w-[85%] rounded-2xl rounded-tl-md bg-white px-3.5 py-2.5">
                 {{ $business->greeting ?: 'Hi! I’m '.$business->name.'’s AI assistant. Ask about prices, hours or open times — English, Tagalog or Taglish is fine.' }}
             </div>
@@ -20,8 +20,8 @@
         <form id="vchat-form" class="border-t border-line p-3">
             <div class="flex gap-2">
                 <label for="vchat-input" class="sr-only">Message</label>
-                <input id="vchat-input" name="message" maxlength="1000" autocomplete="off" class="input" placeholder="Type your message…">
-                <button class="btn btn-primary px-4" aria-label="Send"><x-icon name="arrow" class="h-4 w-4" /></button>
+                <input id="vchat-input" name="message" maxlength="1000" autocomplete="off" class="input rounded-full" placeholder="Type your message…">
+                <button class="btn btn-sun px-4" aria-label="Send"><x-icon name="arrow" class="h-4 w-4" /></button>
             </div>
             <div class="mt-2 flex items-center justify-between text-xs text-ink-500">
                 <button id="vchat-staff" type="button" class="link">Talk to staff</button>
@@ -55,7 +55,7 @@
         b.appendChild(document.createTextNode(m.body));
         if (m.draft) {
             const card = document.createElement('div');
-            card.className = 'mt-2.5 rounded-xl border border-line bg-tile p-3';
+            card.className = 'mt-2.5 rounded-xl bg-sun-soft p-3';
             const t = document.createElement('p'); t.className = 'font-semibold'; t.textContent = m.draft.title; card.appendChild(t);
             (m.draft.lines || []).forEach(l => { const p = document.createElement('p'); p.className = 'text-xs text-ink-600'; p.textContent = l; card.appendChild(p); });
             const a = document.createElement('a'); a.href = m.draft.url; a.className = 'btn btn-primary btn-sm mt-2.5 w-full'; a.textContent = 'Review & confirm';

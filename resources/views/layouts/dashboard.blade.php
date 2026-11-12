@@ -37,8 +37,8 @@
                     <noscript><button class="btn btn-secondary btn-sm mt-2">Switch</button></noscript>
                 </form>
             @else
-                <div class="flex items-center gap-3 rounded-xl bg-tile p-3">
-                    <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-sm font-semibold text-white" style="background: {{ $b->accent_color }}">{{ mb_substr($b->name, 0, 1) }}</span>
+                <div class="flex items-center gap-3 rounded-2xl bg-tile p-3">
+                    <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full font-display text-sm font-bold text-white" style="background: {{ $b->accent_color }}">{{ mb_substr($b->name, 0, 1) }}</span>
                     <span class="min-w-0"><span class="block truncate text-sm font-semibold">{{ $b->name }}</span><span class="block text-xs text-ink-500">{{ ucfirst($m->role) }}</span></span>
                 </div>
             @endif
@@ -48,7 +48,7 @@
             @foreach ($nav as [$label, $route, $icon, $show])
                 @continue(! $show)
                 @php $active = request()->routeIs(str_replace(['.index', '.profile'], '', $route).'*'); @endphp
-                <a href="{{ route($route) }}" @class(['flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm', 'bg-ink-900 font-medium text-white' => $active, 'text-ink-600 hover:bg-tile hover:text-ink-900' => ! $active]) @if($active) aria-current="page" @endif>
+                <a href="{{ route($route) }}" @class(['relative flex items-center gap-3 rounded-full px-4 py-2.5 text-sm', 'bg-sun-soft font-semibold text-ink-900 before:absolute before:top-1/2 before:-left-3 before:h-6 before:w-1 before:-translate-y-1/2 before:rounded-full before:bg-sun' => $active, 'text-ink-600 hover:bg-tile hover:text-ink-900' => ! $active]) @if($active) aria-current="page" @endif>
                     <x-icon :name="$icon" class="h-[18px] w-[18px] shrink-0" />
                     {{ $label }}
                 </a>
@@ -63,21 +63,21 @@
     </aside>
     <label for="nav-toggle" class="fixed inset-0 z-30 hidden bg-ink-900/40 [#nav-toggle:checked~div_&]:block lg:hidden" aria-hidden="true"></label>
 
-    <div class="flex min-w-0 flex-1 flex-col">
-        <header class="sticky top-0 z-20 flex h-16 items-center gap-3 border-b border-line bg-white/90 px-4 backdrop-blur sm:px-8">
+    <div class="flex min-w-0 flex-1 flex-col bg-paper">
+        <header class="sticky top-0 z-20 flex h-16 items-center gap-3 border-b border-line bg-paper/90 px-4 backdrop-blur sm:px-8">
             <label for="nav-toggle" class="cursor-pointer rounded-md border border-line px-3 py-2 text-sm lg:hidden" aria-label="Open menu">☰ Menu</label>
-            <div class="min-w-0 flex-1 truncate text-[15px] font-semibold tracking-tight">@yield('heading')</div>
-            <a href="{{ route('dashboard.overview') }}#notifications" class="relative flex h-10 w-10 items-center justify-center rounded-full bg-tile text-ink-700 hover:bg-ink-100" aria-label="Notifications">
-                <x-icon name="bell" class="h-[18px] w-[18px]" /> @if ($unreadNotifications)<span class="absolute -top-0.5 -right-0.5 rounded-full bg-ink-900 px-1.5 text-[10px] font-semibold text-white ring-2 ring-white">{{ $unreadNotifications }}</span>@endif
+            <div class="min-w-0 flex-1 truncate font-display text-base font-bold">@yield('heading')</div>
+            <a href="{{ route('dashboard.overview') }}#notifications" class="relative flex h-10 w-10 items-center justify-center rounded-full border border-line bg-white text-ink-700 hover:border-ink-300" aria-label="Notifications">
+                <x-icon name="bell" class="h-[18px] w-[18px]" /> @if ($unreadNotifications)<span class="absolute -top-0.5 -right-0.5 rounded-full bg-sun px-1.5 text-[10px] font-bold text-ink-900 ring-2 ring-white">{{ $unreadNotifications }}</span>@endif
             </a>
-            <span class="hidden items-center gap-2.5 border-l border-line pl-4 text-sm sm:flex"><span class="flex h-9 w-9 items-center justify-center rounded-full bg-ink-900 text-xs font-semibold text-white">{{ collect(explode(' ', auth()->user()->name))->map(fn ($p) => mb_substr($p, 0, 1))->take(2)->implode('') }}</span><span class="font-medium">{{ auth()->user()->name }}</span></span>
+            <span class="hidden items-center gap-2.5 border-l border-line pl-4 text-sm sm:flex"><span class="flex h-9 w-9 items-center justify-center rounded-full bg-ink-900 text-xs font-semibold text-sun">{{ collect(explode(' ', auth()->user()->name))->map(fn ($p) => mb_substr($p, 0, 1))->take(2)->implode('') }}</span><span class="font-medium">{{ auth()->user()->name }}</span></span>
             <form method="POST" action="{{ route('logout') }}">@csrf<button class="btn btn-secondary btn-sm">Sign out</button></form>
         </header>
         <main class="mx-auto w-full max-w-6xl flex-1 p-4 sm:p-8">
             @if ($b->status === 'closing')
                 <div class="mb-4 rounded-lg border border-amber-300 bg-amber-50 p-3 text-sm text-amber-900">This business is closing. New customer submissions are stopped. Export your data before {{ $b->closing_requested_at->addDays(30)->toFormattedDateString() }}.</div>
             @elseif (! $b->activated_at)
-                <div class="mb-5 flex flex-wrap items-center gap-2 rounded-xl bg-tile p-4 text-sm"><span class="badge badge-amber">Setup</span> Setup not finished — your customer page isn’t accepting requests yet. <a class="link" href="{{ route('dashboard.onboarding') }}">Continue setup</a></div>
+                <div class="mb-5 flex flex-wrap items-center gap-2 rounded-xl bg-tile p-4 text-sm"><span class="badge bg-sun font-semibold">Setup</span> Setup not finished — your customer page isn’t accepting requests yet. <a class="link" href="{{ route('dashboard.onboarding') }}">Continue setup</a></div>
             @endif
             <x-flash />
             @yield('content')

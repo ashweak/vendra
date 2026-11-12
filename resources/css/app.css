@@ -12,164 +12,112 @@
 }
 
 @font-face {
-    font-family: 'Inter Tight';
+    font-family: 'Bricolage Grotesque';
     font-style: normal;
     font-display: swap;
-    font-weight: 100 900;
-    src: url('../fonts/inter-tight-latin-wght-normal.woff2') format('woff2-variations');
+    font-weight: 200 800;
+    src: url('../fonts/bricolage-grotesque-latin-wght-normal.woff2') format('woff2-variations');
 }
 
 /*
- * Vendra design language: monochrome, editorial.
- * Near-black primary actions, white surfaces, soft-gray tiles, pill eyebrows,
- * large tight headlines, notched-corner panels, thin hairline dividers.
+ * Vendra design language ("Sari-sari modern"):
+ * warm paper surfaces, ink text, a single sun-yellow accent, pill-shaped controls,
+ * Bricolage Grotesque headlines, uppercase kickers, dotted paper panels,
+ * phone-frame mockups and a rotating sticker mark.
  */
 @theme {
-    --font-display: 'Inter Tight', 'Inter', ui-sans-serif, system-ui, sans-serif;
+    --font-display: 'Bricolage Grotesque', 'Inter', ui-sans-serif, system-ui, sans-serif;
     --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
-    --color-ink-50: #f5f5f6;
-    --color-ink-100: #ececee;
-    --color-ink-200: #dcdcdf;
-    --color-ink-300: #c4c4c8;
-    --color-ink-400: #9a9aa0;
-    --color-ink-500: #6e6e74;
-    --color-ink-600: #4a4a50;
-    --color-ink-700: #2c2c30;
-    --color-ink-800: #1c1c1f;
-    --color-ink-900: #111113;
-    --color-ink-950: #08080a;
-    --color-tile: #f4f4f6;
-    --color-line: #e8e8ea;
+    --color-ink-50: #f7f6f2;
+    --color-ink-100: #efede6;
+    --color-ink-200: #e2dfd5;
+    --color-ink-300: #c9c5b8;
+    --color-ink-400: #9c978a;
+    --color-ink-500: #706b60;
+    --color-ink-600: #4d4941;
+    --color-ink-700: #33302a;
+    --color-ink-800: #22201c;
+    --color-ink-900: #171612;
+    --color-ink-950: #0c0b09;
+    --color-paper: #fbfaf6;
+    --color-tile: #f3f1ea;
+    --color-line: #e6e2d8;
+    --color-sun: #ffc83d;
+    --color-sun-soft: #fff3cc;
+    --color-sun-deep: #e0a400;
+    --color-leaf: #1f7a4d;
 }
 
 @layer base {
     html { -webkit-font-smoothing: antialiased; }
-    body { @apply bg-white text-ink-900; font-feature-settings: 'ss01', 'cv11'; }
-    ::selection { @apply bg-ink-900 text-white; }
-    h1, h2, h3, .font-display { font-family: var(--font-display); letter-spacing: -0.03em; }
-    h3 { letter-spacing: -0.015em; }
+    body { @apply bg-paper text-ink-900; }
+    ::selection { @apply bg-sun text-ink-900; }
+    h1, h2, h3, .font-display { font-family: var(--font-display); letter-spacing: -0.02em; }
+    h3 { letter-spacing: -0.01em; }
 }
 
 @layer components {
-    /* Buttons */
-    .btn { @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded-md px-5 py-2.5 text-sm font-medium transition focus:outline-none focus-visible:ring-2 focus-visible:ring-ink-900 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50; }
+    /* Buttons: pill shaped */
+    .btn { @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-ink-900 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50; }
     .btn-primary { @apply bg-ink-900 text-white hover:bg-ink-700; }
-    .btn-secondary { @apply border border-line bg-white text-ink-900 hover:border-ink-300 hover:bg-tile; }
+    .btn-sun { @apply bg-sun text-ink-900 hover:bg-sun-deep; }
+    .btn-secondary { @apply border border-line bg-white text-ink-900 hover:border-ink-300; }
     .btn-danger { @apply border border-red-200 bg-white text-red-700 hover:bg-red-50; }
-    .btn-sm { @apply min-h-[36px] px-3.5 py-1.5 text-xs; }
-    .btn-play { @apply inline-flex items-center gap-3 text-sm font-medium text-ink-900; }
-    .btn-play-icon { @apply flex h-11 w-11 items-center justify-center rounded-full border border-ink-900 transition; }
-    .btn-play:hover .btn-play-icon { @apply bg-ink-900 text-white; }
+    .btn-sm { @apply min-h-[36px] px-4 py-1.5 text-xs; }
+    .btn-play { @apply inline-flex items-center gap-2 rounded-full bg-white py-1.5 pr-4 pl-1.5 text-sm font-semibold text-ink-900 ring-1 ring-line hover:ring-ink-300; }
+    .btn-play-icon { @apply flex h-8 w-8 items-center justify-center rounded-full bg-sun; }
 
     /* Forms */
-    .input { @apply block w-full rounded-md border border-line bg-white px-3.5 py-2.5 text-sm text-ink-900 placeholder:text-ink-400 focus:border-ink-900 focus:ring-2 focus:ring-ink-900/10 focus:outline-none; }
+    .input { @apply block w-full rounded-xl border border-line bg-white px-3.5 py-2.5 text-sm text-ink-900 placeholder:text-ink-400 focus:border-ink-900 focus:ring-4 focus:ring-sun/40 focus:outline-none; }
     .label { @apply mb-1.5 block text-sm font-medium text-ink-700; }
     .hint { @apply mt-1 text-xs text-ink-500; }
 
     /* Surfaces */
-    .card { @apply rounded-2xl border border-line bg-white p-5; }
-    .tile { @apply rounded-2xl bg-tile p-5; }
-    .divider { @apply border-line; }
+    .card { @apply rounded-[22px] border border-line bg-white p-5; }
+    .tile { @apply rounded-[22px] bg-tile p-5; }
+    .dots { background-image: radial-gradient(var(--color-ink-200) 1.2px, transparent 1.2px); background-size: 18px 18px; }
 
     /* Typography */
-    .eyebrow { @apply inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-tile px-3 py-1 text-xs font-medium text-ink-700; }
-    .display { @apply text-4xl leading-[1.05] font-semibold tracking-tight text-ink-900 sm:text-5xl lg:text-[3.6rem]; }
-    .h1 { @apply text-2xl font-semibold tracking-tight text-ink-900 sm:text-3xl; }
-    .h2 { @apply text-lg font-semibold tracking-tight text-ink-900; }
-    .section-title { @apply text-3xl font-semibold tracking-tight text-ink-900 sm:text-4xl; }
-    .lead { @apply text-base leading-relaxed text-ink-500; }
-    .link { @apply font-medium text-ink-900 underline decoration-ink-300 underline-offset-4 hover:decoration-ink-900; }
+    .eyebrow { @apply inline-flex items-center gap-2 text-[11px] font-semibold tracking-[0.14em] whitespace-nowrap text-ink-600 uppercase; }
+    .eyebrow::before { content: ''; @apply h-2 w-2 shrink-0 rounded-full bg-sun ring-2 ring-sun-soft; }
+    .display { @apply font-display text-[2.6rem] leading-[1.02] font-bold text-ink-900 sm:text-6xl lg:text-[4.2rem]; }
+    .h1 { @apply font-display text-2xl font-bold text-ink-900 sm:text-3xl; }
+    .h2 { @apply font-display text-lg font-semibold text-ink-900; }
+    .section-title { @apply font-display text-3xl font-bold text-ink-900 sm:text-[2.6rem] sm:leading-[1.08]; }
+    .lead { @apply text-base leading-relaxed text-ink-500 sm:text-[17px]; }
+    .link { @apply font-medium text-ink-900 underline decoration-sun decoration-2 underline-offset-4 hover:decoration-ink-900; }
+    .mark { background: linear-gradient(transparent 58%, var(--color-sun) 58%, var(--color-sun) 92%, transparent 92%); padding: 0 0.08em; }
 
     /* Status pills */
     .badge { @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-medium whitespace-nowrap; }
-    .badge-green { @apply bg-emerald-50 text-emerald-800; }
-    .badge-amber { @apply bg-amber-50 text-amber-800; }
+    .badge-green { @apply bg-emerald-50 text-leaf; }
+    .badge-amber { @apply bg-sun-soft text-ink-800; }
     .badge-indigo { @apply bg-ink-900 text-white; }
     .badge-gray { @apply bg-tile text-ink-600; }
 
     /* Tables */
     .table { @apply w-full text-left text-sm; }
-    .table th { @apply border-b border-line px-4 py-3 text-xs font-medium text-ink-500; }
+    .table th { @apply border-b border-line px-4 py-3 text-[11px] font-semibold tracking-wider text-ink-500 uppercase; }
     .table td { @apply border-b border-line px-4 py-3.5 align-top; }
     .table tr:last-child td { @apply border-b-0; }
 
-    /* Stat tile with outline icon (reference "200+" cards) */
-    .stat { @apply rounded-2xl bg-tile p-5; }
-    .stat-value { @apply font-display text-3xl font-semibold tracking-tight text-ink-900; }
-    .stat-label { @apply mt-1 text-sm leading-snug text-ink-500; }
-    .stat-icon { @apply h-8 w-8 text-ink-900; }
+    /* Metrics: white card, label first, big display number, sun icon chip */
+    .stat { @apply rounded-[22px] border border-line bg-white p-5; }
+    .stat-value { @apply font-display text-4xl font-bold text-ink-900; }
+    .stat-label { @apply text-sm leading-snug text-ink-500; }
+    .stat-icon { @apply h-5 w-5 text-ink-900; }
+    .icon-chip { @apply flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-sun-soft text-ink-900; }
 
-    /* Brand-logo style marquee strip */
-    .marquee { @apply relative overflow-hidden border-y border-line bg-white py-6; }
-    .marquee-track { @apply flex w-max items-center gap-10 font-display text-xl font-semibold tracking-tight whitespace-nowrap text-ink-900; animation: vendra-marquee 40s linear infinite; }
-    .marquee:hover .marquee-track { animation-play-state: paused; }
-}
+    /* Chips */
+    .chip { @apply inline-flex items-center gap-2 rounded-full border border-line bg-white px-4 py-2 text-sm font-medium text-ink-800; }
 
-@keyframes vendra-marquee { to { transform: translateX(-50%); } }
-
-@media (prefers-reduced-motion: reduce) {
-    .marquee-track { animation: none; }
+    /* Phone frame mockup */
+    .phone { @apply relative mx-auto w-[min(19rem,100%)] rounded-[2.6rem] bg-ink-900 p-2.5 shadow-[0_40px_80px_-30px_rgba(23,22,18,.55)]; }
+    .phone-screen { @apply overflow-hidden rounded-[2.1rem] bg-paper; }
 }
 
-/*
- * Notched panel: a rounded panel with a "tab" cut from its top-right corner,
- * with convex rounded corners at both junctions. Set --nbg to the page background.
- */
-.notch {
-    --nw: 34%;
-    --nh: 46px;
-    --nr: 22px;
-    --nbg: #fff;
-    position: relative;
-    overflow: hidden;
-    border-radius: var(--nr);
-    isolation: isolate;
-}
-.notch::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: var(--nw);
-    height: var(--nh);
-    background: var(--nbg);
-    border-bottom-left-radius: var(--nr);
-    z-index: 5;
-}
-.notch::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 5;
-    background:
-        radial-gradient(circle at 0 100%, transparent calc(var(--nr) - 0.5px), var(--nbg) var(--nr)) right var(--nw) top 0 / var(--nr) var(--nr) no-repeat,
-        radial-gradient(circle at 0 100%, transparent calc(var(--nr) - 0.5px), var(--nbg) var(--nr)) right 0 top var(--nh) / var(--nr) var(--nr) no-repeat;
-}
-.notch-bl::before { top: auto; bottom: 0; right: auto; left: 0; border-radius: 0 var(--nr) 0 0; }
-.notch-bl::after {
-    background:
-        radial-gradient(circle at 100% 0, transparent calc(var(--nr) - 0.5px), var(--nbg) var(--nr)) left var(--nw) bottom 0 / var(--nr) var(--nr) no-repeat,
-        radial-gradient(circle at 100% 0, transparent calc(var(--nr) - 0.5px), var(--nbg) var(--nr)) left 0 bottom var(--nh) / var(--nr) var(--nr) no-repeat;
-}
-.notch-slot { position: absolute; top: 0; right: 0; width: var(--nw, 34%); height: var(--nh, 46px); z-index: 6; display: flex; align-items: center; justify-content: flex-end; padding-left: 12px; }
-
-/* Warm abstract artwork used instead of photography */
-.art-warm {
-    background:
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
-        radial-gradient(60% 55% at 20% 25%, #ffb648 0%, transparent 60%),
-        radial-gradient(50% 50% at 75% 20%, #ff7a59 0%, transparent 60%),
-        radial-gradient(55% 60% at 30% 85%, #ff4f8b 0%, transparent 62%),
-        radial-gradient(45% 45% at 85% 80%, #ffd36e 0%, transparent 60%),
-        linear-gradient(135deg, #ffe8c7, #ffc7b0);
-}
-.art-cool {
-    background:
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
-        radial-gradient(60% 60% at 15% 20%, #3b3b45 0%, transparent 60%),
-        radial-gradient(60% 60% at 85% 85%, #2a2a33 0%, transparent 60%),
-        linear-gradient(160deg, #18181c, #0d0d10);
-}
-/* Film grain is part of the art backgrounds; .grain is kept as a no-op hook. */
-.grain { }
+/* Rotating sticker mark (text on a circle) */
+.sticker { width: 7.5rem; height: 7.5rem; }
+.sticker-ring { animation: vendra-spin 18s linear infinite; transform-origin: 50% 50%; }
+@keyframes vendra-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .sticker-ring { animation: none; } }

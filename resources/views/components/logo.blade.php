@@ -1,5 +1,8 @@
 @props(['dark' => false])
-<span class="inline-flex items-center gap-2 text-[17px] font-semibold tracking-tight {{ $dark ? 'text-white' : 'text-ink-900' }}">
-    <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 2.5l8.5 4.75v9.5L12 21.5l-8.5-4.75v-9.5z"/><path d="M7.5 8.5L12 16l4.5-7.5"/></svg>
-    <span>Vendra</span>
+<span class="inline-flex items-center gap-2 font-display text-xl font-bold tracking-tight {{ $dark ? 'text-white' : 'text-ink-900' }}">
+    <svg width="26" height="26" viewBox="0 0 32 32" aria-hidden="true">
+        <path d="M16 3a13 13 0 0 1 13 13 13 13 0 0 1-13 13H5.5a1.5 1.5 0 0 1-1.2-2.4L6.6 24A13 13 0 0 1 16 3z" fill="#ffc83d"/>
+        <path d="M10.5 12.5l5.5 8 5.5-8" fill="none" stroke="#171612" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span>vendra</span>
 </span>

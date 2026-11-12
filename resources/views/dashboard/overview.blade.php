@@ -4,7 +4,7 @@
 @section('content')
 @php $tz = $currentBusiness->timezone; @endphp
 <span class="eyebrow"><x-icon name="calendar" class="h-3.5 w-3.5" /> {{ now($tz)->format('l, F j, Y') }}</span>
-<h1 class="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">Magandang araw, {{ explode(' ', auth()->user()->name)[0] }}!</h1>
+<h1 class="mt-4 font-display text-3xl font-bold sm:text-4xl">Magandang araw, <span class="mark">{{ explode(' ', auth()->user()->name)[0] }}</span>!</h1>
 <p class="lead mt-2">Here’s what needs you today at {{ $currentBusiness->name }}.</p>
 
 <div class="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -19,9 +19,9 @@
     @endphp
     @foreach ($tiles as [$label, $n, $href, $show, $icon])
         @continue(! $show)
-        <a href="{{ $href }}" class="stat group flex items-start gap-4 transition hover:bg-ink-100">
-            <x-icon :name="$icon" class="stat-icon" />
-            <span><span class="stat-value block">{{ $n }}</span><span class="stat-label block">{{ $label }}</span></span>
+        <a href="{{ $href }}" class="stat group flex flex-col transition hover:border-ink-300">
+            <span class="flex items-center justify-between"><span class="icon-chip"><x-icon :name="$icon" class="stat-icon" /></span><x-icon name="arrow" class="h-4 w-4 -rotate-45 text-ink-400 transition group-hover:text-ink-900" /></span>
+            <span class="stat-value mt-6 block">{{ $n }}</span><span class="stat-label mt-1 block">{{ $label }}</span>
         </a>
     @endforeach
 </div>
@@ -64,7 +64,7 @@
             <h2 class="h2">AI usage this month</h2>
             @php $used = $usage->requests ?? 0; $pct = $aiLimit ? min(100, round($used / $aiLimit * 100)) : 0; @endphp
             <p class="mt-2 text-sm">{{ $used }} of {{ $aiLimit }} replies</p>
-            <div class="mt-3 h-2 rounded-full bg-tile" role="progressbar" aria-valuenow="{{ $pct }}" aria-valuemin="0" aria-valuemax="100"> <div class="h-2 rounded-full {{ $pct >= 80 ? 'bg-amber-500' : 'bg-ink-900' }}" style="width: {{ $pct }}%"></div></div>
+            <div class="mt-3 h-2 rounded-full bg-tile" role="progressbar" aria-valuenow="{{ $pct }}" aria-valuemin="0" aria-valuemax="100"> <div class="h-2 rounded-full {{ $pct >= 80 ? 'bg-red-500' : 'bg-sun' }}" style="width: {{ $pct }}%"></div></div>
             <p class="mt-2 text-xs text-ink-500">At the limit, customers use forms and staff replies. No overage charges.</p>
         </section>
         @endif

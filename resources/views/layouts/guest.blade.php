@@ -10,12 +10,10 @@
         <p class="text-xs text-ink-400">Local development build · fictional data only</p>
     </div>
     <div class="hidden p-4 lg:block">
-        <div class="notch art-warm grain relative h-full min-h-[36rem]" style="--nw: 42%; --nh: 64px">
-            <span class="notch-slot"><span class="eyebrow">From inquiry to opportunity</span></span>
-            <div class="absolute inset-x-8 bottom-8 z-[6] max-w-md rounded-2xl bg-white/90 p-6 backdrop-blur">
-                <p class="text-2xl leading-snug font-semibold tracking-tight">“Magkano po ang haircut bukas ng 3pm?”</p>
-                <p class="mt-3 text-sm text-ink-600">Vendra answers from your live prices and schedule, prepares the booking, and lets your customer confirm. You stay in control.</p>
-            </div>
+        <div class="dots relative flex h-full min-h-[36rem] flex-col items-center justify-center rounded-[32px] bg-tile p-10">
+            <x-sticker class="absolute top-10 left-10" uid="guest" />
+            <x-phone-chat />
+            <p class="mt-8 max-w-sm text-center font-display text-2xl font-bold">The AI prepares. <span class="mark">You confirm.</span></p>
         </div>
     </div>
 </div>
