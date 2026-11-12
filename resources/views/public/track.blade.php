@@ -2,7 +2,7 @@
 @section('title', 'Track · '.$business->name)
 @section('content')
 <div class="mx-auto max-w-md">
-    <span class="eyebrow"><x-icon name="shield" class="h-3.5 w-3.5" /> Secure access</span>
+    <span class="eyebrow">Secure access</span>
     <h1 class="section-title mt-4">Track my request</h1>
     <p class="mt-1 text-sm text-ink-600">Enter your reference number and the email you used. We’ll email you a secure one-time link.</p>
     <form method="POST" action="{{ route('public.track.send', $business) }}" class="card mt-6 space-y-4">

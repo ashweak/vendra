@@ -3,7 +3,7 @@
 @section('heading', 'Overview')
 @section('content')
 @php $tz = $currentBusiness->timezone; @endphp
-<span class="eyebrow"><x-icon name="calendar" class="h-3.5 w-3.5" /> {{ now($tz)->format('l, F j, Y') }}</span>
+<span class="eyebrow">{{ now($tz)->format('l, F j, Y') }}</span>
 <h1 class="mt-4 font-display text-3xl font-bold sm:text-4xl">Magandang araw, <span class="mark">{{ explode(' ', auth()->user()->name)[0] }}</span>!</h1>
 <p class="lead mt-2">Here’s what needs you today at {{ $currentBusiness->name }}.</p>
 
