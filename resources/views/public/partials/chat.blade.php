@@ -1,7 +1,7 @@
 {{-- AI chat. Separate from page forms: typing in chat can never submit a booking/order (P8). --}}
 <div id="vchat" data-history="{{ route('public.chat.history', $business) }}" data-send="{{ route('public.chat.send', $business) }}" data-handoff="{{ route('public.chat.handoff', $business) }}" data-name="{{ $business->name }}">
-    <button id="vchat-open" type="button" class="fixed right-5 bottom-5 z-40 flex items-center gap-2.5 rounded-full bg-ink-900 py-3 pr-5 pl-3 text-sm font-medium text-white shadow-[0_10px_30px_-10px_rgba(0,0,0,.5)] transition hover:bg-ink-700 focus:outline-none focus-visible:ring-4 focus-visible:ring-ink-300" aria-expanded="false" aria-controls="vchat-panel">
-        <span class="flex h-7 w-7 items-center justify-center rounded-full bg-sun text-ink-900"><x-icon name="chat" class="h-4 w-4" /></span> Ask us anything
+    <button id="vchat-open" type="button" class="fixed right-4 bottom-4 z-40 flex h-14 w-14 items-center justify-center gap-2.5 rounded-full bg-ink-900 text-sm font-semibold text-white shadow-[0_10px_30px_-10px_rgba(0,0,0,.5)] transition hover:bg-ink-700 focus:outline-none focus-visible:ring-4 focus-visible:ring-ink-300 sm:right-5 sm:bottom-5 sm:h-auto sm:w-auto sm:py-3 sm:pr-5 sm:pl-3" aria-expanded="false" aria-controls="vchat-panel" aria-label="Ask us anything">
+        <span class="flex h-9 w-9 items-center justify-center rounded-full bg-sun text-ink-900 sm:h-7 sm:w-7"><x-icon name="chat" class="h-[18px] w-[18px] sm:h-4 sm:w-4" /></span><span class="hidden sm:inline">Ask us anything</span>
     </button>
     <section id="vchat-panel" class="fixed inset-0 z-50 hidden flex-col overflow-hidden bg-white sm:inset-auto sm:right-5 sm:bottom-5 sm:h-[36rem] sm:w-[25rem] sm:rounded-2xl sm:border sm:border-line sm:shadow-[0_30px_80px_-20px_rgba(0,0,0,.35)]" role="dialog" aria-label="Chat with {{ $business->name }}">
         <header class="flex items-center gap-3 border-b border-line px-4 py-3.5">
