@@ -1,0 +1,162 @@
+
+   INFO  Server running on [http://127.0.0.1:8000].  
+
+  Press Ctrl+C to stop the server
+
+  2026-11-12 18:30:18 / .......................................... ~ 500.32ms
+  2026-11-12 18:30:18 /css/vendra.css?v=1794508178 ................. ~ 0.03ms
+  2026-11-12 18:30:18 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.15ms
+  2026-11-12 18:30:18 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-12 18:30:19 /b/lumina-studio ............................. ~ 0.08ms
+  2026-11-12 18:30:19 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.03ms
+  2026-11-12 18:30:19 /css/vendra.css?v=1794508178 ................. ~ 0.05ms
+  2026-11-12 18:30:19 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-12 18:30:20 /b/lumina-studio/book ........................ ~ 0.08ms
+  2026-11-12 18:30:20 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.02ms
+  2026-11-12 18:30:20 /css/vendra.css?v=1794508178 ................. ~ 0.05ms
+  2026-11-12 18:30:20 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-12 18:30:20 /b/lumina-studio/slots ....................... ~ 0.01ms
+  2026-11-12 18:30:20 /b/lumina-studio/slots ....................... ~ 0.01ms
+  2026-11-12 18:30:21 /b/lumina-studio/book/review ................. ~ 0.08ms
+  2026-11-12 18:30:21 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.02ms
+  2026-11-12 18:30:21 /css/vendra.css?v=1794508178 ................. ~ 0.05ms
+  2026-11-12 18:30:21 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-12 18:30:21 /b/lumina-studio/book ........................ ~ 0.09ms
+  2026-11-12 18:30:22 /b/lumina-studio/r/APT-KX4YHF ................ ~ 0.02ms
+  2026-11-12 18:30:22 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.02ms
+  2026-11-12 18:30:22 /css/vendra.css?v=1794508178 ................. ~ 0.05ms
+  2026-11-12 18:30:22 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-12 18:30:22 /b/lumina-studio ............................. ~ 0.10ms
+  2026-11-12 18:30:22 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.04ms
+  2026-11-12 18:30:22 /css/vendra.css?v=1794508178 ................. ~ 0.09ms
+  2026-11-12 18:30:22 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.02ms
+  2026-11-12 18:30:22 /b/lumina-studio/chat ........................ ~ 0.01ms
+  2026-11-12 18:30:22 /b/lumina-studio/chat ........................ ~ 0.08ms
+  2026-11-12 18:30:24 /b/lumina-studio/chat ........................ ~ 0.10ms
+  2026-11-12 18:30:25 /b/ganda-beauty/track ........................ ~ 0.08ms
+  2026-11-12 18:30:25 /css/vendra.css?v=1794508178 ................. ~ 0.03ms
+  2026-11-12 18:30:25 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.12ms
+  2026-11-12 18:30:26 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-12 18:30:26 /b/ganda-beauty .............................. ~ 0.08ms
+  2026-11-12 18:30:26 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.03ms
+  2026-11-12 18:30:26 /css/vendra.css?v=1794508178 ................. ~ 0.06ms
+  2026-11-12 18:30:26 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.02ms
+  2026-11-12 18:30:27 /b/ganda-beauty/chat ......................... ~ 0.07ms
+  2026-11-12 18:30:27 /b/ganda-beauty/chat ....................... ~ 500.28ms
+  2026-11-12 18:30:29 /login ....................................... ~ 0.08ms
+  2026-11-12 18:30:29 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.03ms
+  2026-11-12 18:30:29 /css/vendra.css?v=1794508178 ................. ~ 0.06ms
+  2026-11-12 18:30:29 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.03ms
+  2026-11-12 18:30:29 /login ..................................... ~ 500.30ms
+  2026-11-12 18:30:29 /app ......................................... ~ 0.02ms
+  2026-11-12 18:30:29 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.02ms
+  2026-11-12 18:30:29 /css/vendra.css?v=1794508178 ................. ~ 0.05ms
+  2026-11-12 18:30:29 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-12 18:30:29 /app ......................................... ~ 0.08ms
+  2026-11-12 18:30:29 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.02ms
+  2026-11-12 18:30:29 /css/vendra.css?v=1794508178 ................. ~ 0.07ms
+  2026-11-12 18:30:29 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-12 18:30:30 /login ....................................... ~ 0.08ms
+  2026-11-12 18:30:30 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.02ms
+  2026-11-12 18:30:30 /css/vendra.css?v=1794508178 ................. ~ 0.01ms
+  2026-11-12 18:30:30 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-12 18:30:30 /login ..................................... ~ 500.33ms
+  2026-11-12 18:30:30 /app ......................................... ~ 0.02ms
+  2026-11-12 18:30:30 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.02ms
+  2026-11-12 18:30:30 /css/vendra.css?v=1794508178 ................. ~ 0.05ms
+  2026-11-12 18:30:30 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-12 18:30:31 /app ......................................... ~ 0.10ms
+  2026-11-12 18:30:31 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.02ms
+  2026-11-12 18:30:31 /css/vendra.css?v=1794508178 ................. ~ 0.05ms
+  2026-11-12 18:30:31 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-12 18:30:32 /app/conversations ........................... ~ 0.08ms
+  2026-11-12 18:30:32 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.02ms
+  2026-11-12 18:30:32 /css/vendra.css?v=1794508178 ................. ~ 0.08ms
+  2026-11-12 18:30:32 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-12 18:30:32 /app/conversations/2 ......................... ~ 0.01ms
+  2026-11-12 18:30:32 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.02ms
+  2026-11-12 18:30:32 /css/vendra.css?v=1794508178 ................. ~ 0.04ms
+  2026-11-12 18:30:32 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-12 18:30:32 /app/appointments ............................ ~ 0.09ms
+  2026-11-12 18:30:32 /css/vendra.css?v=1794508178 ................. ~ 0.03ms
+  2026-11-12 18:30:32 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.12ms
+  2026-11-12 18:30:32 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-12 18:30:33 /app/quotations .............................. ~ 0.09ms
+  2026-11-12 18:30:33 /css/vendra.css?v=1794508178 ................. ~ 0.05ms
+  2026-11-12 18:30:33 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.12ms
+  2026-11-12 18:30:33 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-12 18:30:33 /app/quotations/1 ............................ ~ 0.01ms
+  2026-11-12 18:30:33 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.02ms
+  2026-11-12 18:30:33 /css/vendra.css?v=1794508178 ................. ~ 0.04ms
+  2026-11-12 18:30:33 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-12 18:30:34 /app/settings/assistant ...................... ~ 0.10ms
+  2026-11-12 18:30:34 /css/vendra.css?v=1794508178 ................. ~ 0.02ms
+  2026-11-12 18:30:34 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.12ms
+  2026-11-12 18:30:34 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-12 18:30:34 /app/settings/assistant/test ................. ~ 0.01ms
+  2026-11-12 18:30:34 /app/settings/assistant ...................... ~ 0.01ms
+  2026-11-12 18:30:34 /css/vendra.css?v=1794508178 ................. ~ 0.02ms
+  2026-11-12 18:30:34 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.10ms
+  2026-11-12 18:30:34 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-12 18:30:35 /app/reports ................................. ~ 0.08ms
+  2026-11-12 18:30:35 /css/vendra.css?v=1794508178 ................. ~ 0.02ms
+  2026-11-12 18:30:35 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.11ms
+  2026-11-12 18:30:35 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-12 18:30:35 /app/catalog ................................. ~ 0.10ms
+  2026-11-12 18:30:35 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.02ms
+  2026-11-12 18:30:35 /css/vendra.css?v=1794508178 ................. ~ 0.05ms
+  2026-11-12 18:30:35 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-12 18:30:36 /app/team .................................... ~ 0.08ms
+  2026-11-12 18:30:36 /css/vendra.css?v=1794508178 ................. ~ 0.02ms
+  2026-11-12 18:30:36 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.12ms
+  2026-11-12 18:30:36 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-12 18:30:36 /logout ...................................... ~ 0.08ms
+  2026-11-12 18:30:37 /login ....................................... ~ 0.02ms
+  2026-11-12 18:30:37 /css/vendra.css?v=1794508178 ................. ~ 0.02ms
+  2026-11-12 18:30:37 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.11ms
+  2026-11-12 18:30:37 /login ....................................... ~ 0.01ms
+  2026-11-12 18:30:37 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-12 18:30:37 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.01ms
+  2026-11-12 18:30:37 /css/vendra.css?v=1794508178 ................. ~ 0.01ms
+  2026-11-12 18:30:37 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-12 18:30:37 /login ..................................... ~ 500.36ms
+  2026-11-12 18:30:37 /app ......................................... ~ 0.02ms
+  2026-11-12 18:30:37 /css/vendra.css?v=1794508178 ................. ~ 0.02ms
+  2026-11-12 18:30:37 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.11ms
+  2026-11-12 18:30:37 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-12 18:30:37 /app/orders .................................. ~ 0.09ms
+  2026-11-12 18:30:38 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.02ms
+  2026-11-12 18:30:38 /css/vendra.css?v=1794508178 ................. ~ 0.05ms
+  2026-11-12 18:30:38 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-12 18:30:38 /app/orders/1 ................................ ~ 0.08ms
+  2026-11-12 18:30:38 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.02ms
+  2026-11-12 18:30:38 /css/vendra.css?v=1794508178 ................. ~ 0.05ms
+  2026-11-12 18:30:38 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-12 18:30:39 /logout .................................... ~ 501.03ms
+  2026-11-12 18:30:39 /login ....................................... ~ 0.02ms
+  2026-11-12 18:30:39 /css/vendra.css?v=1794508178 ................. ~ 0.04ms
+  2026-11-12 18:30:39 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.19ms
+  2026-11-12 18:30:39 /login ....................................... ~ 0.92ms
+  2026-11-12 18:30:39 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.03ms
+  2026-11-12 18:30:39 /css/vendra.css?v=1794508178 ................. ~ 0.03ms
+  2026-11-12 18:30:39 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.15ms
+  2026-11-12 18:30:39 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-12 18:30:39 /login ....................................... ~ 0.01ms
+  2026-11-12 18:30:39 /app ......................................... ~ 0.03ms
+  2026-11-12 18:30:39 /css/vendra.css?v=1794508178 ............... ~ 500.28ms
+  2026-11-12 18:30:39 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 500.41ms
+  2026-11-12 18:30:39 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.02ms
+  2026-11-12 18:30:40 /app/settings/profile ........................ ~ 0.08ms
+  2026-11-12 18:30:41 /login ....................................... ~ 0.08ms
+  2026-11-12 18:30:41 /css/vendra.css?v=1794508178 ................. ~ 0.02ms
+  2026-11-12 18:30:41 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.14ms
+  2026-11-12 18:30:41 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-12 18:30:41 /login ....................................... ~ 0.01ms
+  2026-11-12 18:30:41 /admin ....................................... ~ 0.01ms
+  2026-11-12 18:30:41 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.02ms
+  2026-11-12 18:30:41 /css/vendra.css?v=1794508178 ................. ~ 0.04ms
+  2026-11-12 18:30:41 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-12 18:30:41 /admin ..................................... ~ 500.28ms
+  2026-11-12 18:30:41 /css/vendra.css?v=1794508178 ................. ~ 0.04ms
+  2026-11-12 18:30:41 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.13ms
+  2026-11-12 18:30:41 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
