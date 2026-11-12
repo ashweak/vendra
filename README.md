@@ -4,6 +4,12 @@ Vendra is a configurable AI business assistant for small businesses in the Phili
 questions in English, Tagalog and Taglish, then turns them into **bookings, orders, quotations and service
 requests** that staff can trust.
 
+[![Tests](https://github.com/ashweak/vendra/actions/workflows/tests.yml/badge.svg)](https://github.com/ashweak/vendra/actions/workflows/tests.yml)
+
+**Interactive demo (fictional data, runs in the browser):** https://ashweak.github.io/vendra/
+
+![Customer page with AI chat preparing a booking draft](https://raw.githubusercontent.com/ashweak/vendra/screenshots/06-chat.png)
+
 > **Status:** local build for demonstrations with **fictional data only**. It is not production-ready; see
 > [docs/SCOPE_CHANGES.md](docs/SCOPE_CHANGES.md) for the milestone status and the decisions recorded against the
 > approved plan.
@@ -94,7 +100,7 @@ can set `VENDRA_ENFORCE_MFA=false`.
 ### Tests and AI evaluation
 
 ```bash
-php artisan test                                   # feature + unit tests
+php artisan test                                   # 48 feature + unit tests
 php artisan migrate:fresh --seed
 php artisan vendra:ai-eval --provider=rules        # 60 fictional EN/TL/Taglish cases
 php artisan vendra:ai-eval --provider=gemini --sleep=5 --show   # with a key; mind free-tier limits

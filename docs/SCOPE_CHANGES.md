@@ -33,6 +33,8 @@ rather than silently replacing approved requirements.
 | M12 | Subscription records and platform admin written. Onboarding/support material: README only. |
 | M13–M14 | Not started, as the plan requires. They need a committed customer and a budget decision. |
 
-"Written" means the code exists and tests are included. They were **not executed in the build environment**
-(PHP packages could not be downloaded there). The first GitHub Actions run, or `php artisan test` on your
-machine, is the first real PASS/FAIL evidence.
+**Verification (GitHub Actions, PHP 8.3 and 8.4):** 48 feature/unit tests pass (185 assertions). The seeder
+runs. The AI evaluation passes 42/42 ordinary and 18/18 critical cases with the offline rules engine. A
+Playwright job boots the app and captures 22 screens (pushed to the `screenshots` branch) with no JavaScript or
+server errors. The rules engine was tuned against these cases, so this is a baseline. Gemini must be measured
+separately with `vendra:ai-eval --provider=gemini` (M8).
