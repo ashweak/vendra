@@ -11,6 +11,9 @@ class Membership extends Model
 {
     use BelongsToBusiness;
 
+    /** Mirror database defaults so new in-memory models behave the same as loaded ones. */
+    protected $attributes = ['is_active' => true];
+
     protected $guarded = ['id'];
 
     protected function casts(): array

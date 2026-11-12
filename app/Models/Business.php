@@ -11,6 +11,9 @@ class Business extends Model
 {
     use HasFactory;
 
+    /** Mirror database defaults so new in-memory models behave the same as loaded ones. */
+    protected $attributes = ['timezone' => 'Asia/Manila', 'category' => 'general', 'accent_color' => '#4f46e5', 'ai_tone' => 'friendly', 'ai_enabled' => true, 'status' => 'active', 'onboarding_step' => 1];
+
     protected $guarded = ['id'];
 
     protected function casts(): array

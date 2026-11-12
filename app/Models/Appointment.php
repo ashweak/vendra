@@ -26,6 +26,9 @@ class Appointment extends Model
 
     public const OPEN_STATUSES = ['pending_approval', 'confirmed'];
 
+    /** Mirror database defaults so new in-memory models behave the same as loaded ones. */
+    protected $attributes = ['source' => 'online'];
+
     protected $guarded = ['id'];
 
     protected function casts(): array

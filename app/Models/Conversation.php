@@ -18,6 +18,9 @@ class Conversation extends Model
         'closed' => 'Closed',
     ];
 
+    /** Mirror database defaults so new in-memory models behave the same as loaded ones. */
+    protected $attributes = ['state' => 'ai_active', 'channel' => 'web'];
+
     protected $guarded = ['id'];
 
     protected function casts(): array

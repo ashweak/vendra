@@ -10,6 +10,9 @@ class CatalogItem extends Model
 {
     use BelongsToBusiness;
 
+    /** Mirror database defaults so new in-memory models behave the same as loaded ones. */
+    protected $attributes = ['stock_reserved' => 0, 'is_active' => true, 'requires_approval' => false];
+
     protected $guarded = ['id', 'business_id', 'stock_reserved'];
 
     protected function casts(): array

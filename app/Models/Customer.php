@@ -11,6 +11,9 @@ class Customer extends Model
 {
     use BelongsToBusiness;
 
+    /** Mirror database defaults so new in-memory models behave the same as loaded ones. */
+    protected $attributes = ['marketing_consent' => false];
+
     protected $guarded = ['id', 'business_id'];
 
     protected function casts(): array

@@ -28,6 +28,9 @@ class Order extends Model
 
     public const OPEN_STATUSES = ['pending_approval', 'confirmed', 'preparing', 'ready_for_pickup'];
 
+    /** Mirror database defaults so new in-memory models behave the same as loaded ones. */
+    protected $attributes = ['payment_status' => 'unpaid', 'stock_deducted' => false];
+
     protected $guarded = ['id'];
 
     protected function casts(): array
