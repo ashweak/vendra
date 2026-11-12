@@ -42,7 +42,7 @@
         <div class="dots relative rounded-[32px] bg-tile px-6 pt-12 pb-10 sm:px-10">
             <x-sticker class="absolute -top-8 left-4 hidden sm:inline-flex" uid="hero" />
             <x-phone-chat />
-            <div class="absolute bottom-6 -left-3 hidden w-52 rounded-2xl bg-white p-3.5 shadow-[0_20px_40px_-20px_rgba(23,22,18,.4)] sm:block lg:-left-8">
+            <div class="absolute -bottom-6 -left-3 hidden w-52 rounded-2xl bg-white p-3.5 shadow-[0_20px_40px_-20px_rgba(23,22,18,.4)] sm:block lg:-left-8">
                 <p class="text-[11px] font-semibold tracking-wider text-ink-400 uppercase">New booking</p>
                 <p class="mt-1 font-display text-lg font-bold">APT-7KQ2LM</p>
                 <span class="badge badge-green mt-1">Confirmed</span>
@@ -158,7 +158,7 @@
 </main>
 
 <footer class="px-3 pb-3 sm:px-5 sm:pb-5">
-    <div class="relative mx-auto max-w-6xl overflow-hidden rounded-[32px] bg-sun px-7 py-14 sm:px-12">
+    <div class="relative mx-auto max-w-6xl overflow-hidden rounded-[32px] bg-sun px-7 py-14 sm:px-12 sm:py-16">
         <div class="relative z-10 max-w-xl">
             <h2 class="font-display text-4xl leading-[1.05] font-bold sm:text-5xl">Ready when your customers are.</h2>
             <div class="mt-8 flex flex-wrap gap-3">
@@ -166,7 +166,7 @@
                 <a href="{{ route('login') }}" class="btn border border-ink-900/20 text-ink-900 hover:bg-white/40">Sign in</a>
             </div>
         </div>
-        <x-sticker class="absolute right-10 bottom-10 hidden sm:inline-flex" tone="white" uid="footer" text="FROM INQUIRY TO OPPORTUNITY · VENDRA · " />
+        <x-sticker class="absolute top-1/2 right-12 hidden -translate-y-1/2 scale-125 md:inline-flex" tone="white" uid="footer" text="FROM INQUIRY TO OPPORTUNITY · VENDRA · " />
     </div>
     <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-2 py-5 text-xs text-ink-500">
         <x-logo />
