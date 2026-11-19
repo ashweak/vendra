@@ -38,3 +38,46 @@ jobs:
         run: php artisan migrate:fresh --seed --force
       - name: AI evaluation (offline rules engine, 60 fictional cases)
         run: php artisan vendra:ai-eval --provider=rules
+
+  docker:
+    runs-on: ubuntu-latest
+    name: Docker image (public demo)
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build image
+        run: docker build -t vendra .
+      - name: Start container like Render does
+        run: docker run -d --name vendra -p 8080:10000 -e VENDRA_PUBLIC_DEMO=true -e VENDRA_ENFORCE_MFA=false vendra
+      - name: Wait until healthy
+        run: |
+          for i in $(seq 1 60); do curl -fsS http://127.0.0.1:8080/up >/dev/null && exit 0; sleep 2; done
+          docker logs vendra; exit 1
+      - name: Smoke test pages, login and AI chat
+        run: |
+          set -e
+          B=http://127.0.0.1:8080
+          check() { code=$(curl -s -o /tmp/body -w '%{http_code}' "$B$1"); echo "GET $1 -> $code"; test "$code" = 200; grep -q "$2" /tmp/body; }
+          check / "From inquiry to"
+          check /b/lumina-studio "Lumina Hair"
+          check /b/ganda-beauty "Ganda Beauty Hub"
+          check /login "Demo accounts"
+          check /css/vendra.css "Bricolage"
+          curl -fsS -o /dev/null "$B/fonts/bricolage-grotesque-latin-wght-normal.woff2"
+
+          # AI chat round trip (session + CSRF + database writes as the web user)
+          curl -s -c /tmp/jar -b /tmp/jar "$B/b/lumina-studio" -o /tmp/shop
+          TOKEN=$(grep -o 'name="csrf-token" content="[^"]*"' /tmp/shop | sed 's/.*content="//; s/"$//')
+          curl -s -c /tmp/jar -b /tmp/jar -H "X-CSRF-TOKEN: $TOKEN" -H 'Accept: application/json' -H 'Content-Type: application/json' \
+               -d '{"message":"Magkano po ang haircut?"}' "$B/b/lumina-studio/chat" -o /tmp/chat
+          cat /tmp/chat; echo
+          grep -q '250.00' /tmp/chat
+
+          # Owner login reaches the dashboard
+          curl -s -c /tmp/jar2 -b /tmp/jar2 "$B/login" -o /tmp/login
+          TOKEN=$(grep -o 'name="csrf-token" content="[^"]*"' /tmp/login | sed 's/.*content="//; s/"$//')
+          curl -s -c /tmp/jar2 -b /tmp/jar2 -L --data-urlencode "_token=$TOKEN" --data-urlencode "email=owner@lumina.test" \
+               --data-urlencode "password=password" "$B/login" -o /tmp/app
+          grep -q "Magandang araw" /tmp/app
+          echo "All smoke tests passed"
+      - if: always()
+        run: docker logs vendra 2>&1 | tail -60

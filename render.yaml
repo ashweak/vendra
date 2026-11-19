@@ -1,0 +1,16 @@
+# One-click public demo on Render's free plan.
+# Fictional data is reseeded on every start; the free instance sleeps after 15 idle minutes
+# and takes about a minute to wake. No paid services and no AI key are needed.
+services:
+  - type: web
+    name: vendra-demo
+    runtime: docker
+    plan: free
+    healthCheckPath: /up
+    envVars:
+      - key: VENDRA_PUBLIC_DEMO
+        value: "true"
+      - key: VENDRA_ENFORCE_MFA
+        value: "false"
+      - key: SESSION_SECURE_COOKIE
+        value: "true"
