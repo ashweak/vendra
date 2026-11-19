@@ -2,7 +2,7 @@
 @section('title', 'Set up your business')
 @section('content')
 <p class="text-xs font-semibold uppercase tracking-wide text-ink-700">Step 1</p>
-<h1 class="text-3xl font-semibold tracking-tight">Tell us about your business</h1>
+<h1 class="font-display text-3xl font-bold tracking-tight">Tell us about your business</h1>
 <p class="mt-1 text-sm text-ink-600">Pick the closest category — it pre-fills modules you can change later.</p>
 <form method="POST" action="{{ route('onboarding.business') }}" class="mt-6 space-y-4">
     @csrf

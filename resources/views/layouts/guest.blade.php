@@ -1,20 +1,21 @@
 @extends('layouts.base')
 @section('body')
-<div class="grid min-h-full lg:grid-cols-2">
-    <div class="flex flex-col px-6 py-8 sm:px-12">
-        <a href="{{ route('landing') }}" class="self-start"><x-logo /></a>
-        <div class="mx-auto flex w-full max-w-sm flex-1 flex-col justify-center py-12">
+<div class="dots flex min-h-dvh flex-col bg-tile px-6 py-8 sm:px-12">
+    <a href="{{ route('landing') }}" class="self-start"><x-logo /></a>
+    <div class="mx-auto flex w-full max-w-5xl flex-1 items-center justify-center gap-16 py-12">
+        <div class="w-full max-w-md">
             <x-flash />
             @yield('content')
+            <div class="mt-8 border-t border-line pt-5">
+                <p class="flex flex-wrap gap-x-4 gap-y-1 text-xs text-ink-500"><span>✓ Answers from your own catalog</span><span>✓ English, Tagalog &amp; Taglish</span><span>✓ Staff stay in control</span></p>
+            </div>
         </div>
-        <p class="text-xs text-ink-400">Local development build · fictional data only</p>
-    </div>
-    <div class="hidden p-4 lg:block">
-        <div class="dots relative flex h-full min-h-[36rem] flex-col items-center justify-center rounded-[32px] bg-tile p-10">
-            <x-sticker class="absolute top-10 left-10" uid="guest" />
+        <div class="relative hidden shrink-0 flex-col items-center lg:flex" aria-hidden="true">
+            <x-sticker class="absolute -top-10 -left-12 hidden ring-8 ring-tile lg:inline-flex" uid="guest" />
             <x-phone-chat />
-            <p class="mt-8 max-w-sm text-center font-display text-2xl font-bold">The AI prepares. <span class="mark">You confirm.</span></p>
+            <p class="mt-7 max-w-sm text-center font-display text-2xl font-bold leading-tight">The AI prepares. <span class="mark">You confirm.</span></p>
         </div>
     </div>
+    <p class="text-center text-xs text-ink-400">{{ config('vendra.public_demo') ? 'Public demo · fictional data only' : 'Local development build · fictional data only' }}</p>
 </div>
 @endsection

@@ -1,7 +1,7 @@
 @extends('layouts.guest')
 @section('title', 'Sign in')
 @section('content')
-<h1 class="text-3xl font-semibold tracking-tight">Sign in</h1>
+<h1 class="font-display text-3xl font-bold tracking-tight">Sign in</h1>
 <form method="POST" action="{{ route('login') }}" class="mt-6 space-y-4">
     @csrf
     <div><label class="label" for="email">Email</label><input id="email" type="email" name="email" class="input" value="{{ old('email') }}" required autofocus autocomplete="username"></div>

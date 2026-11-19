@@ -1,7 +1,7 @@
 @extends('layouts.guest')
 @section('title', 'Two-factor authentication')
 @section('content')
-<h1 class="text-3xl font-semibold tracking-tight">Enter your code</h1>
+<h1 class="font-display text-3xl font-bold tracking-tight">Enter your code</h1>
 <p class="mt-1 text-sm text-ink-600">Open your authenticator app and enter the 6-digit code for Vendra.</p>
 <form method="POST" action="{{ route('mfa.challenge') }}" class="mt-6 space-y-4">
     @csrf

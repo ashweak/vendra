@@ -28,6 +28,8 @@ let page = await ctx.newPage();
 const errors = [];
 page.on('pageerror', e => errors.push(String(e)));
 await page.goto(BASE); await shot(page, '01-landing');
+await page.goto(`${BASE}/register`); await shot(page, '01b-register', false);
+await page.goto(`${BASE}/login`); await shot(page, '01c-login', false);
 await page.goto(`${BASE}/b/lumina-studio`); await shot(page, '02-public-home');
 
 await page.goto(`${BASE}/b/lumina-studio/book`);

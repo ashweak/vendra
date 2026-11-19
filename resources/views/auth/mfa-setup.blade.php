@@ -1,7 +1,7 @@
 @extends('layouts.guest')
 @section('title', 'Set up two-factor authentication')
 @section('content')
-<h1 class="text-3xl font-semibold tracking-tight">Turn on two-factor authentication</h1>
+<h1 class="font-display text-3xl font-bold tracking-tight">Turn on two-factor authentication</h1>
 <p class="mt-2 text-sm text-ink-600">Owners and platform admins must use an authenticator app (Google Authenticator, Microsoft Authenticator, Aegis, 2FAS…).</p>
 <ol class="mt-4 list-decimal space-y-2 pl-5 text-sm">
     <li>In your app, choose <strong>Add account → Enter a setup key</strong>.</li>
