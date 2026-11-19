@@ -42,7 +42,7 @@ jobs:
           cd recording
           ffmpeg -loglevel error -y -i raw.webm -c:v libx264 -preset veryfast -crf 26 -pix_fmt yuv420p -movflags +faststart -an vendra-demo.mp4
           ffmpeg -loglevel error -y -i raw.webm -vf "fps=8,scale=800:-1:flags=lanczos,split[a][b];[a]palettegen=max_colors=128[p];[b][p]paletteuse=dither=bayer:bayer_scale=4" vendra-demo.gif
-          ffmpeg -loglevel error -y -ss 4 -i raw.webm -frames:v 1 -q:v 3 poster.jpg
+          ffmpeg -loglevel error -y -ss 15 -i raw.webm -frames:v 1 -q:v 3 poster.jpg
           find . -maxdepth 1 -name '*.webm' ! -name raw.webm -delete
           rm raw.webm
           ls -la
