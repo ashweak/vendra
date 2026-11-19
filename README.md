@@ -6,9 +6,15 @@ requests** that staff can trust.
 
 [![Tests](https://github.com/ashweak/vendra/actions/workflows/tests.yml/badge.svg)](https://github.com/ashweak/vendra/actions/workflows/tests.yml)
 
-**Interactive demo (fictional data, runs in the browser):** https://ashweak.github.io/vendra/
+**Interactive demo (fictional data, runs in the browser):** https://ashweak.github.io/vendra/ ·
+**Case study:** https://ashweak.github.io/vendra/case-study.html
 
-![Customer page with AI chat preparing a booking draft](https://raw.githubusercontent.com/ashweak/vendra/screenshots/06-chat.png)
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/ashweak/vendra)
+
+![Walkthrough: a customer books through the AI chat and the owner approves](https://raw.githubusercontent.com/ashweak/vendra/recording/vendra-demo.gif)
+
+[Watch the walkthrough as MP4](https://raw.githubusercontent.com/ashweak/vendra/recording/vendra-demo.mp4) — recorded
+from the real app in GitHub Actions on every change to the script.
 
 > **Status:** local build for demonstrations with **fictional data only**. It is not production-ready; see
 > [docs/SCOPE_CHANGES.md](docs/SCOPE_CHANGES.md) for the milestone status and the decisions recorded against the
@@ -55,6 +61,23 @@ requests** that staff can trust.
 Laravel 13 (PHP ≥ 8.3) · Blade · Tailwind CSS 4 (precompiled) · MySQL or SQLite · Laravel scheduler ·
 server-side Gemini adapter with function calling · offline rules engine.
 
+## Host the live demo for free (Render)
+
+The repo includes a `Dockerfile` and a `render.yaml` Blueprint for Render's free web service plan. Check
+Render's current free-plan terms before you start; nothing in this setup uses a paid service.
+
+1. Click **Deploy to Render** above and sign in with GitHub.
+2. Review the `vendra-demo` service (Docker, **Free** plan) and click **Deploy Blueprint**.
+3. After the first build (about 5–8 minutes), open the `https://vendra-demo-xxxx.onrender.com` URL Render gives you.
+   The sign-in page lists one-click demo accounts.
+
+What to expect: public demo mode (`VENDRA_PUBLIC_DEMO=true`) reseeds **fictional data on every start**, the free
+instance sleeps after 15 idle minutes and takes about a minute to wake, and the AI uses the offline rules engine
+(no API key). Owner MFA is off in demo mode so visitors can sign in. CI builds the same image and smoke-tests
+pages, the AI chat and sign-in on every push.
+
+Run the image yourself: `docker build -t vendra . && docker run -p 8080:10000 -e VENDRA_PUBLIC_DEMO=true -e VENDRA_ENFORCE_MFA=false vendra`
+
 ## Run it locally (WSL Ubuntu)
 
 ```bash
@@ -100,7 +123,7 @@ can set `VENDRA_ENFORCE_MFA=false`.
 ### Tests and AI evaluation
 
 ```bash
-php artisan test                                   # 48 feature + unit tests
+php artisan test                                   # 50 feature + unit tests
 php artisan migrate:fresh --seed
 php artisan vendra:ai-eval --provider=rules        # 60 fictional EN/TL/Taglish cases
 php artisan vendra:ai-eval --provider=gemini --sleep=5 --show   # with a key; mind free-tier limits
@@ -137,6 +160,8 @@ app/Support/             PermissionMatrix (P4), Totp (MFA), CurrentBusiness (ten
 app/Console/Commands/    vendra:expire, vendra:retention, vendra:ai-eval
 tests/ai-eval/cases.json 60 fictional evaluation cases
 docs/SCOPE_CHANGES.md    decisions and milestone status
+Dockerfile, docker/      production image (Apache + PHP 8.4 + SQLite) used by render.yaml
+scripts/                 screenshots.mjs and record.mjs (Playwright, run in GitHub Actions)
 ```
 
 ---
