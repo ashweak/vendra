@@ -22,7 +22,7 @@ async function caption(text) {
         if (!el) {
             el = document.createElement('div');
             el.id = 'rec-caption';
-            el.style.cssText = 'position:fixed;left:50%;top:14px;transform:translateX(-50%);z-index:99999;background:#111;color:#fff;font:600 15px/1.2 Inter,system-ui,sans-serif;padding:10px 16px;border-radius:999px;box-shadow:0 8px 24px -8px rgba(0,0,0,.5);pointer-events:none;white-space:nowrap';
+            el.style.cssText = 'position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:99999;background:#111;color:#fff;font:600 15px/1.2 Inter,system-ui,sans-serif;padding:10px 16px;border-radius:999px;box-shadow:0 8px 24px -8px rgba(0,0,0,.5);pointer-events:none;white-space:nowrap';
             document.body.appendChild(el);
         }
         el.innerHTML = '<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#ffc83d;margin-right:9px;vertical-align:middle"></span>' + t;
@@ -124,9 +124,9 @@ await caption('10 · Approved — the customer can track it with a secure link')
 await pause(2200);
 await go('/app/conversations', '11 · Every AI conversation is saved for the team');
 await pause(1600);
-await page.locator('main a.card').first().click();
+await page.locator('main a.card', { hasText: 'Hair Color' }).first().click();
 await page.waitForLoadState('networkidle').catch(() => {});
-await caption('11 · Handoffs show why the AI passed the chat to a person');
+await caption('12 · The full chat and draft — staff can take over at any time');
 await pause(2600);
 
 const video = page.video();
