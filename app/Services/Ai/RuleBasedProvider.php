@@ -207,7 +207,11 @@ class RuleBasedProvider implements ChatProvider
             }
         }
 
-        return array_values($found);
+        // If the customer typed an item's full name, answer about those items only
+        // ("hair color" should not also match "Hair Spa" through the shared word "hair").
+        $exact = array_filter($found, fn ($i) => str_contains($t, mb_strtolower($i->name)));
+
+        return array_values($exact ?: $found);
     }
 
     private function say(string $en, string $tl): ProviderResult

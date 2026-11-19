@@ -3,6 +3,10 @@
 @section('body')
 @php $firstDemo = $demos->first(); @endphp
 
+@if (config('vendra.public_demo'))
+    <div class="bg-ink-900 px-4 py-2 text-center text-xs text-white/80">Public demo with fictional data — it resets whenever the server restarts. <a href="{{ route('login') }}" class="font-semibold text-sun underline underline-offset-2">Sign in with a demo account</a></div>
+@endif
+
 {{-- Floating pill navigation --}}
 <div class="sticky top-0 z-30 px-3 pt-3 sm:px-5">
     <nav class="mx-auto flex max-w-6xl items-center gap-2 rounded-full border border-line bg-white/85 py-2 pr-2 pl-5 shadow-[0_8px_30px_-18px_rgba(23,22,18,.35)] backdrop-blur" aria-label="Main">

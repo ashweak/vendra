@@ -19,6 +19,9 @@ return Application::configure(basePath: dirname(__DIR__))
             'platform' => \App\Http\Middleware\PlatformAdmin::class,
         ]);
         $middleware->redirectGuestsTo(fn () => route('login'));
+        // Hosting platforms (e.g. Render) terminate HTTPS at a proxy; trust its forwarded headers
+        // so generated URLs and secure cookies use https.
+        $middleware->trustProxies(at: '*');
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(

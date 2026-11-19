@@ -101,6 +101,14 @@ class AccessControlTest extends TestCase
         $this->actingAs($staff)->withSession([])->get(route('dashboard.overview'))->assertOk();
     }
 
+    public function test_demo_accounts_are_listed_only_in_public_demo_mode(): void
+    {
+        $this->get(route('login'))->assertOk()->assertDontSee('Demo accounts');
+        config(['vendra.public_demo' => true]);
+        $this->get(route('login'))->assertOk()->assertSee('Demo accounts')->assertSee('owner@lumina.test');
+        $this->get(route('landing'))->assertOk()->assertSee('Public demo with fictional data');
+    }
+
     public function test_platform_admin_has_no_automatic_business_access(): void
     {
         $b = $this->makeBusiness();

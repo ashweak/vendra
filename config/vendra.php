@@ -4,6 +4,9 @@ return [
     // Owners and platform admins must use TOTP MFA (P7). Only disable for local fictional demos.
     'enforce_mfa' => env('VENDRA_ENFORCE_MFA', true),
 
+    // Public demo deployments: fictional data that resets on every restart; demo logins are shown.
+    'public_demo' => (bool) env('VENDRA_PUBLIC_DEMO', false),
+
     'modules' => [
         'appointments' => 'Appointments',
         'quotations' => 'Quotations',

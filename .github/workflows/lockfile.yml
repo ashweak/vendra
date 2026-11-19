@@ -1,0 +1,33 @@
+name: Lockfile
+
+# Resolves composer.lock on the minimum supported PHP (8.3) so installs are reproducible
+# on PHP 8.3+, and publishes it to the 'lockfile' branch for review before committing.
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'composer.json'
+      - '.github/workflows/lockfile.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  lock:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          coverage: none
+      - run: composer update --no-interaction --no-progress --prefer-dist
+      - name: Publish composer.lock
+        run: |
+          mkdir -p /tmp/lock && cp composer.lock /tmp/lock/
+          cd /tmp/lock
+          git init -q -b lockfile
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add composer.lock && git commit -q -m "composer.lock for ${GITHUB_SHA::7} (PHP 8.3)"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" lockfile
