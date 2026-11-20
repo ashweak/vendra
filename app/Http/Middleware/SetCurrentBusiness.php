@@ -28,8 +28,7 @@ class SetCurrentBusiness
         View::share('currentBusiness', $membership->business);
         View::share('currentMembership', $membership);
         View::share('allMemberships', $memberships);
-        View::share('unreadNotifications', $user->unreadNotifications()->get()
-            ->filter(fn ($n) => (int) ($n->data['business_id'] ?? 0) === (int) $membership->business_id)->count());
+        View::share('unreadNotifications', $user->unreadNotificationsFor($membership->business_id)->count());
 
         return $next($request);
     }

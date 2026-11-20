@@ -63,4 +63,10 @@ class User extends Authenticatable
     {
         return $this->disabled_at !== null;
     }
+
+    /** Unread notifications for one business, filtered in the database instead of in PHP. */
+    public function unreadNotificationsFor(int $businessId)
+    {
+        return $this->unreadNotifications()->where('data->business_id', $businessId);
+    }
 }

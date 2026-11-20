@@ -31,7 +31,7 @@ class OverviewController extends DashboardController
             ],
             'usage' => AiUsage::forBusiness($b)->where('period', now()->format('Y-m'))->first(),
             'aiLimit' => $b->subscription?->ai_monthly_limit ?? config('vendra.ai.default_monthly_limit'),
-            'notifications' => auth()->user()->unreadNotifications()->latest()->get()->filter(fn ($n) => (int) ($n->data['business_id'] ?? 0) === (int) $b->id)->take(8),
+            'notifications' => auth()->user()->unreadNotificationsFor($b->id)->latest()->limit(8)->get(),
             'showSetup' => ! $b->activated_at && $m->isOwner(),
         ]);
     }
@@ -48,7 +48,7 @@ class OverviewController extends DashboardController
     public function readNotifications(Request $request)
     {
         $b = $this->business();
-        $request->user()->unreadNotifications()->get()->filter(fn ($n) => (int) ($n->data['business_id'] ?? 0) === (int) $b->id)->each->markAsRead();
+        $request->user()->unreadNotificationsFor($b->id)->update(['read_at' => now()]);
 
         return back();
     }

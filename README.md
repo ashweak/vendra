@@ -123,7 +123,7 @@ can set `VENDRA_ENFORCE_MFA=false`.
 ### Tests and AI evaluation
 
 ```bash
-php artisan test                                   # 50 feature + unit tests
+php artisan test                                   # 52 feature + unit tests
 php artisan migrate:fresh --seed
 php artisan vendra:ai-eval --provider=rules        # 60 fictional EN/TL/Taglish cases
 php artisan vendra:ai-eval --provider=gemini --sleep=5 --show   # with a key; mind free-tier limits
