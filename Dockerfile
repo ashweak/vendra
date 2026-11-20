@@ -12,7 +12,7 @@ RUN composer dump-autoload --no-dev --optimize --no-scripts
 FROM php:8.4-apache
 
 RUN docker-php-ext-install opcache \
-    && a2enmod headers \
+    && a2enmod headers deflate \
     && sed -ri 's/^Listen 80$/Listen ${PORT}/' /etc/apache2/ports.conf
 
 COPY docker/apache.conf /etc/apache2/sites-available/000-default.conf

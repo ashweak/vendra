@@ -63,6 +63,9 @@ jobs:
           check /login "Demo accounts"
           check /css/vendra.css "Bricolage"
           curl -fsS -o /dev/null "$B/fonts/bricolage-grotesque-latin-wght-normal.woff2"
+          curl -s -o /dev/null -D /tmp/h -H 'Accept-Encoding: gzip' "$B/css/vendra.css" && grep -qi '^content-encoding: gzip' /tmp/h
+          grep -qi 'immutable' /tmp/h
+          curl -s -o /dev/null -D /tmp/hh -H 'Accept-Encoding: gzip' "$B/" && grep -qi '^content-encoding: gzip' /tmp/hh
 
           # AI chat round trip (session + CSRF + database writes as the web user)
           curl -s -c /tmp/jar -b /tmp/jar "$B/b/lumina-studio" -o /tmp/shop
