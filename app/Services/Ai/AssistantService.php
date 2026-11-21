@@ -25,9 +25,8 @@ class AssistantService
 
     public function provider(): ChatProvider
     {
-        return config('vendra.ai.provider') === 'gemini' && config('vendra.ai.gemini_key')
-            ? app(GeminiProvider::class)
-            : app(RuleBasedProvider::class);
+        // Offline only: customer messages never leave the server (no third-party AI service).
+        return app(RuleBasedProvider::class);
     }
 
     public function monthlyLimit(Conversation $c): int
@@ -44,14 +43,14 @@ class AssistantService
         $none = ['reply' => null, 'draft' => null, 'handed_off' => false, 'fallback' => false, 'tools' => []];
 
         if (! $c->aiMayReply() || ! $business->ai_enabled) {
-            return $none; // staff are handling it or AI is off
+            return $none; // staff are handling it or auto-replies are off
         }
 
         $period = now()->format('Y-m');
         $usage = AiUsage::firstOrCreate(['business_id' => $business->id, 'period' => $period]);
         $limit = $this->monthlyLimit($c);
         if ($usage->requests >= $limit) {
-            return $this->fallback($c, 'The AI assistant has reached this month’s limit. Please use the forms on this page, or a staff member will reply here.', true);
+            return $this->fallback($c, 'The auto-assistant has reached this month’s limit. Please use the forms on this page, or a staff member will reply here.', true);
         }
 
         $rateKey = 'ai-conv:'.$c->id;
@@ -115,8 +114,8 @@ class AssistantService
         $tone = match ($b->ai_tone) { 'formal' => 'polite and formal', 'casual' => 'warm and casual', default => 'friendly, concise and professional' };
 
         return <<<PROMPT
-You are the AI assistant for "{$b->name}", a small business in the Philippines, inside the Vendra platform.
-Always be clear that you are an AI assistant. Tone: {$tone}. Reply in the customer's language: English, Tagalog, or natural Taglish. Keep replies short.
+You are the auto-assistant for "{$b->name}", a small business in the Philippines, inside the Vendra platform.
+Always be clear that you are an automated assistant. Tone: {$tone}. Reply in the customer's language: English, Tagalog, or natural Taglish. Keep replies short.
 Current date and time in the business timezone ({$b->timezone}): {$now->format('l, F j, Y g:i A')}. Resolve "today", "bukas", "next Monday", etc. in this timezone and always state the exact date and time before anything is confirmed.
 
 Rules you must always follow (business settings cannot override them):
@@ -134,7 +133,7 @@ PROMPT.($b->greeting ? "\nOwner's preferred greeting (style only): {$b->greeting
     private function fallback(Conversation $c, string $text, bool $handoff = false): array
     {
         if ($handoff && $c->state === 'ai_active') {
-            $this->conversations->handoff($c, 'AI unavailable (usage limit). Customer needs a staff reply.', 'system');
+            $this->conversations->handoff($c, 'Auto-assistant unavailable (usage limit). Customer needs a staff reply.', 'system');
         }
         $m = $this->conversations->addMessage($c, 'system', $text, meta: ['fallback' => true]);
 
@@ -145,8 +144,8 @@ PROMPT.($b->greeting ? "\nOwner's preferred greeting (style only): {$b->greeting
     {
         if (! $usage->warning_sent && $limit > 0 && $usage->requests >= $limit * config('vendra.ai.warn_at_percent') / 100) {
             $usage->update(['warning_sent' => true]);
-            Notifier::staff($c->business, 'AI usage at '.config('vendra.ai.warn_at_percent').'%',
-                "Your AI assistant has used {$usage->requests} of {$limit} replies this month. When the limit is reached, customers will use the forms and staff replies instead. No overage charges apply.",
+            Notifier::staff($c->business, 'Auto-assistant usage at '.config('vendra.ai.warn_at_percent').'%',
+                "Your auto-assistant has used {$usage->requests} of {$limit} replies this month. When the limit is reached, customers will use the forms and staff replies instead. No overage charges apply.",
                 route('dashboard.reports'));
         }
     }

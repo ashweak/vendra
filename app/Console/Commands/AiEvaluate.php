@@ -4,33 +4,27 @@ namespace App\Console\Commands;
 
 use App\Models\Business;
 use App\Services\Ai\AssistantService;
-use App\Services\Ai\GeminiProvider;
-use App\Services\Ai\RuleBasedProvider;
 use App\Services\ConversationService;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\RateLimiter;
 
 /**
- * P11 AI evaluation: runs the fictional cases in tests/ai-eval/cases.json against the seeded demo
+ * P11 assistant evaluation: runs the fictional cases in tests/ai-eval/cases.json against the seeded demo
  * businesses. Every case runs in a rolled-back transaction, so nothing is kept.
  * Pass criteria: ≥95% of ordinary cases and 100% of critical (privacy/permission/integrity) cases.
  */
 class AiEvaluate extends Command
 {
-    protected $signature = 'vendra:ai-eval {--provider= : rules|gemini (default: configured)} {--only= : comma-separated case ids} {--sleep=0 : seconds between cases (free-tier rate limits)} {--show : print every reply}';
+    protected $signature = 'vendra:ai-eval {--only= : comma-separated case ids} {--show : print every reply}';
 
-    protected $description = 'Run the Vendra AI evaluation suite (fictional data)';
+    protected $description = 'Run the Vendra auto-assistant evaluation suite (fictional data)';
 
     public function handle(AssistantService $assistant, ConversationService $conversations): int
     {
         $suite = json_decode(file_get_contents(base_path('tests/ai-eval/cases.json')), true);
         $only = $this->option('only') ? explode(',', $this->option('only')) : null;
-        $provider = match ($this->option('provider')) {
-            'rules' => app(RuleBasedProvider::class),
-            'gemini' => app(GeminiProvider::class),
-            default => $assistant->provider(),
-        };
+        $provider = $assistant->provider();
         $this->info('Provider: '.class_basename($provider));
 
         $rows = [];

@@ -6,9 +6,8 @@ use App\Models\Business;
 use App\Models\CatalogItem;
 
 /**
- * Deterministic offline provider. Used when no Gemini key is configured, for tests, and as the
- * baseline for the AI evaluation suite. It understands common English/Tagalog/Taglish intents and
- * uses exactly the same controlled tools as the Gemini provider.
+ * Deterministic offline provider: the only reply engine. Customer messages never leave the server.
+ * It understands common English/Tagalog/Taglish intents and can only act through the controlled tools.
  */
 class RuleBasedProvider implements ChatProvider
 {
@@ -176,8 +175,8 @@ class RuleBasedProvider implements ChatProvider
 
         // 11. Greetings / thanks.
         if (preg_match('/^(hi|hello|hey|good (morning|afternoon|evening)|magandang (umaga|hapon|gabi)|kumusta|musta|helo|uy)\b/', $t)) {
-            return $this->say($business->greeting ?: "Hi! I’m {$business->name}’s AI assistant. I can answer questions, share prices, and help you prepare a request.",
-                "Hello po! Ako ang AI assistant ng {$business->name}. Pwede ko pong sagutin ang tanong ninyo, ibigay ang presyo, at tulungan kayong maghanda ng request.");
+            return $this->say($business->greeting ?: "Hi! I’m {$business->name}’s auto-assistant. I can answer questions, share prices, and help you prepare a request.",
+                "Hello po! Ako ang auto-assistant ng {$business->name}. Pwede ko pong sagutin ang tanong ninyo, ibigay ang presyo, at tulungan kayong maghanda ng request.");
         }
         if (preg_match('/\b(thank|thanks|salamat|ty)\b/', $t)) {
             return $this->say('You’re welcome! Anything else I can help with?', 'Walang anuman po! May iba pa po ba akong maitutulong?');

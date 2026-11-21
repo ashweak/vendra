@@ -37,7 +37,7 @@ jobs:
       - name: Seed demo data
         run: php artisan migrate:fresh --seed --force
       - name: AI evaluation (offline rules engine, 60 fictional cases)
-        run: php artisan vendra:ai-eval --provider=rules
+        run: php artisan vendra:ai-eval
 
   docker:
     runs-on: ubuntu-latest

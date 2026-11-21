@@ -1,4 +1,4 @@
-@props(['text' => 'AI · TAGLISH · BOOKINGS · ORDERS · ', 'tone' => 'sun', 'uid' => 'a'])
+@props(['text' => 'TAGLISH · BOOKINGS · ORDERS · QUOTES · ', 'tone' => 'sun', 'uid' => 'a'])
 @php $cls = $attributes->get('class', ''); $positioned = str_contains($cls, 'absolute'); $hidden = preg_match('/(^|\s)hidden(\s|$)/', $cls); @endphp
 <span {{ $attributes->merge(['class' => 'sticker '.($hidden ? '' : 'inline-flex ').'items-center justify-center rounded-full text-ink-900 '.($positioned ? '' : 'relative ').($tone === 'white' ? 'bg-white' : 'bg-sun')]) }} aria-hidden="true">
     <svg class="sticker-ring absolute inset-0" viewBox="0 0 120 120">

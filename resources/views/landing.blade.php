@@ -107,7 +107,7 @@
 
         {{-- Stats band --}}
         <dl class="mt-4 grid divide-y divide-line rounded-[28px] border border-line bg-white sm:grid-cols-2 sm:divide-y-0 lg:grid-cols-4 lg:divide-x">
-            @foreach ([['24/7', 'answers about prices, hours and open times'], ['4', 'workflows: bookings, orders, quotes, requests'], ['100%', 'of submissions confirmed by the customer'], ['0', 'prices the AI can change on its own']] as [$v, $l])
+            @foreach ([['24/7', 'answers about prices, hours and open times'], ['4', 'workflows: bookings, orders, quotes, requests'], ['100%', 'of submissions confirmed by the customer'], ['0', 'customer chats sent to outside AI services']] as [$v, $l])
                 <div class="p-7"><dt class="sr-only">{{ $l }}</dt><dd class="font-display text-4xl font-bold">{{ $v }}</dd><p class="mt-1 text-sm text-ink-500">{{ $l }}</p></div>
             @endforeach
         </dl>
@@ -118,7 +118,7 @@
         <div class="flex flex-wrap items-end justify-between gap-6">
             <div class="max-w-xl">
                 <span class="eyebrow">How it works</span>
-                <h2 class="section-title mt-4">The AI prepares. People confirm.</h2>
+                <h2 class="section-title mt-4">Vendra prepares. People confirm.</h2>
             </div>
             <a href="{{ route('register') }}" class="btn btn-primary">Set up your shop</a>
         </div>

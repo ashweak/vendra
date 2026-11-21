@@ -52,14 +52,14 @@ class ConversationController extends DashboardController
     {
         $this->service->takeOver($this->find($id), $request->user());
 
-        return back()->with('status', 'You are now handling this conversation. The AI is paused.');
+        return back()->with('status', 'You are now handling this conversation. Auto-replies are paused.');
     }
 
     public function resume(Request $request, int $id)
     {
         $this->service->resumeAi($this->find($id), $request->user());
 
-        return back()->with('status', 'AI assistant resumed.');
+        return back()->with('status', 'Auto-replies resumed.');
     }
 
     public function assign(Request $request, int $id)

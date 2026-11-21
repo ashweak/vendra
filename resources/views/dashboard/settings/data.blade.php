@@ -11,7 +11,7 @@
             <dl class="mt-3 grid grid-cols-2 gap-2 text-sm">
                 <dt class="text-ink-500">Plan</dt><dd>{{ $subscription->plan_name }} <x-status :value="$subscription->status" /></dd>
                 <dt class="text-ink-500">Monthly fee</dt><dd>{{ peso($subscription->monthly_fee_cents) }}</dd>
-                <dt class="text-ink-500">AI replies / month</dt><dd>{{ $subscription->ai_monthly_limit }}</dd>
+                <dt class="text-ink-500">Auto-replies / month</dt><dd>{{ $subscription->ai_monthly_limit }}</dd>
                 <dt class="text-ink-500">Team members</dt><dd>{{ $subscription->staff_limit }} + owner</dd>
                 <dt class="text-ink-500">Renews</dt><dd>{{ $subscription->renews_on?->toFormattedDateString() ?? '—' }}</dd>
             </dl>

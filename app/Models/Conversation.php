@@ -12,7 +12,7 @@ class Conversation extends Model
     use BelongsToBusiness;
 
     public const STATES = [
-        'ai_active' => 'AI active',
+        'ai_active' => 'Auto-assistant active',
         'waiting_for_staff' => 'Waiting for staff',
         'staff_active' => 'Staff active',
         'closed' => 'Closed',

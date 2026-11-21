@@ -16,7 +16,7 @@ abstract class TestCase extends BaseTestCase
     protected function setUp(): void
     {
         parent::setUp();
-        config(['vendra.enforce_mfa' => false, 'vendra.ai.provider' => 'rules']);
+        config(['vendra.enforce_mfa' => false]);
         // Monday 2026-11-16 08:00 Manila – deterministic availability.
         $this->travelTo(CarbonImmutable::parse('2026-11-16 08:00', 'Asia/Manila'));
     }

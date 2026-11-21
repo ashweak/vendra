@@ -31,8 +31,7 @@ ENV PORT=10000 \
     SESSION_DRIVER=database \
     CACHE_STORE=database \
     QUEUE_CONNECTION=sync \
-    MAIL_MAILER=log \
-    VENDRA_AI_PROVIDER=rules
+    MAIL_MAILER=log
 
 RUN mkdir -p storage/framework/cache/data storage/framework/sessions storage/framework/views storage/logs bootstrap/cache \
     && chown -R www-data:www-data storage bootstrap/cache database \

@@ -50,7 +50,7 @@
         <div class="card text-sm">
             <h2 class="font-semibold">Payment</h2>
             <p class="mt-2"><x-status :value="$o->payment_status" :label="$o->payment_status === 'verified' ? 'Verified' : 'Not verified'" /></p>
-            <p class="mt-2 text-xs text-ink-500">Verify only after checking your GCash/bank/cash records. Screenshots or chat messages alone are not proof. The AI can never mark payments.</p>
+            <p class="mt-2 text-xs text-ink-500">Verify only after checking your GCash/bank/cash records. Screenshots or chat messages alone are not proof. The auto-assistant can never mark payments.</p>
             @if ($o->payment_status !== 'verified' && $canVerify)
                 <form method="POST" action="{{ route('dashboard.orders.verify', $o->id) }}" class="mt-3 space-y-2">@csrf
                     <input name="reason" class="input" placeholder="e.g. GCash ref 1234 checked in app" required>

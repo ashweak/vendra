@@ -39,11 +39,11 @@
         </div>
     </section>
     @endif
-    <section class="card"><h2 class="h2">Conversations & AI</h2>
+    <section class="card"><h2 class="h2">Conversations & auto-replies</h2>
         <p class="mt-2 text-sm">{{ $conversationCount }} conversations · {{ $handoffs }} handed to staff</p>
-        <table class="table mt-3"><thead><tr><th>Month</th><th class="text-right">AI replies</th><th class="text-right">Failures</th><th class="text-right">Tokens</th></tr></thead><tbody>
+        <table class="table mt-3"><thead><tr><th>Month</th><th class="text-right">Auto-replies</th><th class="text-right">Failures</th><th class="text-right">Tokens</th></tr></thead><tbody>
             @forelse ($usage as $u)<tr><td>{{ $u->period }}</td><td class="text-right">{{ $u->requests }} / {{ $aiLimit }}</td><td class="text-right">{{ $u->failures }}</td><td class="text-right">{{ number_format($u->tokens) }}</td></tr>
-            @empty<tr><td colspan="4" class="text-ink-500">No AI usage yet.</td></tr>@endforelse
+            @empty<tr><td colspan="4" class="text-ink-500">No auto-replies yet.</td></tr>@endforelse
         </tbody></table>
     </section>
 </div>

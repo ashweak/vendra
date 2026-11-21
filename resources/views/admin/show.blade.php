@@ -12,7 +12,7 @@
             <div><label class="label">Plan name</label><input name="plan_name" class="input" value="{{ $sub?->plan_name ?? 'Pilot' }}" required></div>
             <div><label class="label">Status</label><select name="status" class="input">@foreach (['trial', 'active', 'past_due', 'cancelled'] as $s)<option value="{{ $s }}" @selected($sub?->status === $s)>{{ $s }}</option>@endforeach</select></div>
             <div><label class="label">Monthly fee (₱)</label><input name="monthly_fee" type="number" step="0.01" min="0" class="input" value="{{ ($sub?->monthly_fee_cents ?? 0) / 100 }}"></div>
-            <div><label class="label">AI replies / month</label><input name="ai_monthly_limit" type="number" class="input" value="{{ $sub?->ai_monthly_limit ?? 300 }}"></div>
+            <div><label class="label">Auto-replies / month</label><input name="ai_monthly_limit" type="number" class="input" value="{{ $sub?->ai_monthly_limit ?? 300 }}"></div>
             <div><label class="label">Staff limit</label><input name="staff_limit" type="number" class="input" value="{{ $sub?->staff_limit ?? 3 }}"></div>
             <div><label class="label">Renews on</label><input name="renews_on" type="date" class="input" value="{{ $sub?->renews_on?->toDateString() }}"></div>
         </div>

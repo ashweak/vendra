@@ -46,12 +46,7 @@ return [
     ],
 
     'ai' => [
-        'provider' => env('VENDRA_AI_PROVIDER', 'rules'), // gemini | rules
-        'gemini_key' => env('GEMINI_API_KEY'),
-        // Check current model availability and free-tier limits at M8; do not assume.
-        'gemini_model' => env('GEMINI_MODEL', 'gemini-2.5-flash'),
-        'timeout_seconds' => 20,
-        'max_tool_rounds' => 4,
+        // The auto-assistant is the offline rules engine only: no third-party AI service and no API key.
         'default_monthly_limit' => 300,
         'warn_at_percent' => 80,
         'history_messages' => 12,

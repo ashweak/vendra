@@ -13,7 +13,7 @@
         <div class="relative hidden shrink-0 flex-col items-center lg:flex" aria-hidden="true">
             <x-sticker class="absolute -top-10 -left-12 hidden ring-8 ring-tile lg:inline-flex" uid="guest" />
             <x-phone-chat />
-            <p class="mt-7 max-w-sm text-center font-display text-2xl font-bold leading-tight">The AI prepares. <span class="mark">You confirm.</span></p>
+            <p class="mt-7 max-w-sm text-center font-display text-2xl font-bold leading-tight">The assistant prepares. <span class="mark">You confirm.</span></p>
         </div>
     </div>
     <p class="text-center text-xs text-ink-400">{{ config('vendra.public_demo') ? 'Public demo · fictional data only' : 'Local development build · fictional data only' }}</p>

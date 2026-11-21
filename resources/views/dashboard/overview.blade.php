@@ -61,7 +61,7 @@
         </section>
         @if ($currentMembership->can('reports.view'))
         <section class="card">
-            <h2 class="h2">AI usage this month</h2>
+            <h2 class="h2">Auto-replies this month</h2>
             @php $used = $usage->requests ?? 0; $pct = $aiLimit ? min(100, round($used / $aiLimit * 100)) : 0; @endphp
             <p class="mt-2 text-sm">{{ $used }} of {{ $aiLimit }} replies</p>
             <div class="mt-3 h-2 rounded-full bg-tile" role="progressbar" aria-valuenow="{{ $pct }}" aria-valuemin="0" aria-valuemax="100"> <div class="h-2 rounded-full {{ $pct >= 80 ? 'bg-red-500' : 'bg-sun' }}" style="width: {{ $pct }}%"></div></div>

@@ -1,7 +1,7 @@
 # Vendra — From inquiry to opportunity
 
-Vendra is a configurable AI business assistant for small businesses in the Philippines. It answers customer
-questions in English, Tagalog and Taglish, then turns them into **bookings, orders, quotations and service
+Vendra is a business assistant for small businesses in the Philippines. Its offline auto-assistant answers customer
+questions in English, Tagalog and Taglish, staff take over any chat, then turns them into **bookings, orders, quotations and service
 requests** that staff can trust.
 
 [![Tests](https://github.com/ashweak/vendra/actions/workflows/tests.yml/badge.svg)](https://github.com/ashweak/vendra/actions/workflows/tests.yml)
@@ -11,7 +11,7 @@ requests** that staff can trust.
 
 [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/ashweak/vendra)
 
-![Walkthrough: a customer books through the AI chat and the owner approves](https://raw.githubusercontent.com/ashweak/vendra/recording/vendra-demo.gif)
+![Walkthrough: a customer books through the chat and the owner approves](https://raw.githubusercontent.com/ashweak/vendra/recording/vendra-demo.gif)
 
 [Watch the walkthrough as MP4](https://raw.githubusercontent.com/ashweak/vendra/recording/vendra-demo.mp4) — recorded
 from the real app in GitHub Actions on every change to the script.
@@ -26,13 +26,13 @@ from the real app in GitHub Actions on every change to the script.
 - Branded business page with a searchable catalog, hours, policies and FAQ.
 - Booking, ordering, quotation and service-request forms. Every submission goes **form → review → confirm**.
   Double-clicks and refreshes never create duplicates.
-- AI chat that answers from the business's live data and prepares a **draft** the customer reviews in the
+- Chat with an offline auto-assistant that answers from the business's live data and prepares a **draft** the customer reviews in the
   form. Typing in chat never submits anything.
 - "Track my request": a single-use, expiring email link. A reference number alone never shows private data.
 
 **Business dashboard** (owner / manager / staff, enforced server-side)
-- Inbox with AI → *Waiting for staff* → *Staff active* → *Closed* states, handoff summaries, internal notes,
-  assignment, and explicit "Resume AI".
+- Inbox with *Auto-assistant* → *Waiting for staff* → *Staff active* → *Closed* states, handoff summaries, internal notes,
+  assignment, and explicit "Resume auto-replies".
 - Appointments: staff schedules, slot availability, locked double-booking checks, approval deadlines with
   expiry, walk-in/phone entries in the same calendar, safe rescheduling, no-shows.
 - Orders: stock is reserved on submission, deducted once at handover, and released on cancel or expiry. Delivery
@@ -47,19 +47,20 @@ from the real app in GitHub Actions on every change to the script.
 - Accounts, plans and usage records, verified Vendra fee payments, suspension, and an admin log.
 - **No access to business content** unless the owner grants a time-limited, logged, revocable support grant.
 
-**AI safety rules** (P6)
-- The AI uses only controlled tools: business info, catalog search, availability, draft preparation and
+**Auto-assistant rules** (P6)
+- No outside AI service: the rules engine runs on the server, so customer messages never leave Vendra.
+- It uses only controlled tools: business info, catalog search, availability, draft preparation and
   handoff.
 - It cannot book, order, change prices or stock, give discounts, verify payments, or read other customers'
   records.
 - Monthly limits per business, rate and concurrency limits, and an owner warning at 80%.
-- Forms and staff replies keep working when the AI is off, at its limit, or failing.
-- The AI checks the conversation state before replying, so it never replies over a staff member who took over.
+- Forms and staff replies keep working when auto-replies are off, at their limit, or failing.
+- It checks the conversation state before replying, so it never replies over a staff member who took over.
 
 ## Tech
 
 Laravel 13 (PHP ≥ 8.3) · Blade · Tailwind CSS 4 (precompiled) · MySQL or SQLite · Laravel scheduler ·
-server-side Gemini adapter with function calling · offline rules engine.
+offline rules engine (English, Tagalog, Taglish).
 
 ## Host the live demo for free (Render)
 
@@ -72,9 +73,9 @@ Render's current free-plan terms before you start; nothing in this setup uses a 
    The sign-in page lists one-click demo accounts.
 
 What to expect: public demo mode (`VENDRA_PUBLIC_DEMO=true`) reseeds **fictional data on every start**, the free
-instance sleeps after 15 idle minutes and takes about a minute to wake, and the AI uses the offline rules engine
+instance sleeps after 15 idle minutes and takes about a minute to wake, and the auto-assistant runs offline
 (no API key). Owner MFA is off in demo mode so visitors can sign in. CI builds the same image and smoke-tests
-pages, the AI chat and sign-in on every push.
+pages, the chat and sign-in on every push.
 
 Run the image yourself: `docker build -t vendra . && docker run -p 8080:10000 -e VENDRA_PUBLIC_DEMO=true -e VENDRA_ENFORCE_MFA=false vendra`
 
@@ -120,30 +121,22 @@ Emails (tracking links, staff alerts) are written to `storage/logs/laravel.log`.
 Owners and the admin must set up an authenticator app (TOTP) on first sign-in. For a quick local demo only, you
 can set `VENDRA_ENFORCE_MFA=false`.
 
-### Tests and AI evaluation
+### Tests and assistant evaluation
 
 ```bash
 php artisan test                                   # 52 feature + unit tests
 php artisan migrate:fresh --seed
-php artisan vendra:ai-eval --provider=rules        # 60 fictional EN/TL/Taglish cases
-php artisan vendra:ai-eval --provider=gemini --sleep=5 --show   # with a key; mind free-tier limits
+php artisan vendra:ai-eval          # 60 fictional EN/TL/Taglish cases (add --show to print replies)
 ```
 
 Pass criteria (P11): ≥95% of ordinary cases and 100% of the critical privacy, permission and integrity cases.
 The results describe these cases only and do not guarantee future behavior.
 
-### Gemini (optional)
+### Why there is no Gemini or other cloud AI
 
-Set `VENDRA_AI_PROVIDER=gemini` and `GEMINI_API_KEY`. Before using it, check the current model name, free-tier
-limits and data terms:
-
-- https://ai.google.dev/gemini-api/terms
-- https://ai.google.dev/gemini-api/docs/pricing
-- https://ai.google.dev/gemini-api/docs/rate-limits
-
-Use fictional or non-sensitive data only on the free tier. Using it with real customers needs suitable provider
-terms and the production review (M13). The key stays on the server. When a quota is reached, the app falls back
-to forms and staff replies.
+An earlier version could call Gemini's free tier. It was removed because Google's terms for unpaid use allow
+submitted content to be used to improve its products and reviewed by people, which isn't acceptable for real
+customers' messages. The offline rules engine costs nothing and keeps every message on the server.
 
 ## Cost rule
 
@@ -154,7 +147,7 @@ use. That needs a committed customer, a budget review and the production gate in
 
 ```
 app/Services/            Appointment, Order, Quotation, ServiceRequest, Conversation, CustomerAccess, AuditLogger
-app/Services/Ai/         AssistantService, AssistantTools (controlled functions), GeminiProvider, RuleBasedProvider, DateParser
+app/Services/Ai/         AssistantService, AssistantTools (controlled functions), RuleBasedProvider, DateParser
 app/Http/Controllers/    PublicController (customer page), ChatController, Dashboard/*, Admin/*
 app/Support/             PermissionMatrix (P4), Totp (MFA), CurrentBusiness (tenant), Money
 app/Console/Commands/    vendra:expire, vendra:retention, vendra:ai-eval

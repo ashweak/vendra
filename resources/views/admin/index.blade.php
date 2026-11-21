@@ -8,7 +8,7 @@
 </div>
 <div class="card mt-4 overflow-x-auto p-0">
     <table class="table">
-        <thead><tr><th>Business</th><th>Status</th><th>Plan</th><th>Team</th><th>Customers</th><th>AI this month</th></tr></thead>
+        <thead><tr><th>Business</th><th>Status</th><th>Plan</th><th>Team</th><th>Customers</th><th>Auto-replies this month</th></tr></thead>
         <tbody>
         @foreach ($businesses as $b)
             @php $u = $usage[$b->id] ?? null; @endphp

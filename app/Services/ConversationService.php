@@ -97,11 +97,11 @@ class ConversationService
     public function resumeAi(Conversation $c, User $user): Conversation
     {
         if (! $c->business->ai_enabled) {
-            throw new RuleViolation('The AI assistant is turned off for this business.');
+            throw new RuleViolation('The auto-assistant is turned off for this business.');
         }
         $c->state = 'ai_active';
         $c->save();
-        $this->addMessage($c, 'system', $user->name.' resumed the AI assistant.', internal: true);
+        $this->addMessage($c, 'system', $user->name.' resumed auto-replies.', internal: true);
         AuditLogger::log($c->business_id, 'conversation.ai_resumed', $c);
 
         return $c;

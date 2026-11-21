@@ -21,9 +21,9 @@
             <x-status :value="$c->state" :label="\App\Models\Conversation::STATES[$c->state]" />
         </header>
         @if ($c->state === 'ai_active')
-            <div class="border-b border-ink-100 bg-ink-50 px-4 py-2 text-xs text-ink-900">The AI is replying. Take over to pause it, or just send a reply (that also pauses it).</div>
+            <div class="border-b border-ink-100 bg-ink-50 px-4 py-2 text-xs text-ink-900">The auto-assistant is replying. Take over to pause it, or just send a reply (that also pauses it).</div>
         @elseif ($c->state !== 'closed')
-            <div class="border-b border-amber-100 bg-amber-50 px-4 py-2 text-xs text-amber-900">AI paused. It resumes only when someone clicks “Resume AI”.</div>
+            <div class="border-b border-amber-100 bg-amber-50 px-4 py-2 text-xs text-amber-900">Auto-replies paused. They resume only when someone clicks “Resume auto-replies”.</div>
         @endif
         <div class="flex-1 space-y-3 overflow-y-auto bg-tile p-4 text-sm">
             @foreach ($c->messages as $msg)
@@ -39,7 +39,7 @@
                             'bg-ink-600 text-white' => $msg->sender_type === 'staff',
                             'bg-ink-100 text-ink-950' => $msg->sender_type === 'ai',
                             'bg-ink-200 text-ink-700 text-xs' => $msg->sender_type === 'system'])>
-                            <span class="mb-0.5 block text-[11px] font-semibold opacity-75">{{ ['customer' => 'Customer', 'ai' => 'AI assistant', 'staff' => $msg->user?->name ?? 'Staff', 'system' => 'System'][$msg->sender_type] }}</span>
+                            <span class="mb-0.5 block text-[11px] font-semibold opacity-75">{{ ['customer' => 'Customer', 'ai' => 'Auto-assistant', 'staff' => $msg->user?->name ?? 'Staff', 'system' => 'System'][$msg->sender_type] }}</span>
                             <span class="whitespace-pre-line">{{ $msg->body }}</span>
                             @if (! empty($msg->meta['draft']))<span class="mt-1 block rounded bg-white/70 px-2 py-1 text-xs text-ink-700">Draft offered: {{ $msg->meta['draft']['title'] }}</span>@endif
                             <span class="mt-1 block text-[10px] opacity-60">{{ local_time($msg->created_at, $tz, 'M j g:i A') }}</span>
@@ -64,10 +64,10 @@
             <h2 class="font-semibold">Controls</h2>
             <div class="mt-3 flex flex-col gap-2">
                 @if ($c->state !== 'staff_active')
-                    <form method="POST" action="{{ route('dashboard.conversations.takeover', $c->id) }}">@csrf<button class="btn btn-secondary btn-sm w-full">Take over (pause AI)</button></form>
+                    <form method="POST" action="{{ route('dashboard.conversations.takeover', $c->id) }}">@csrf<button class="btn btn-secondary btn-sm w-full">Take over (pause auto-replies)</button></form>
                 @endif
                 @if ($c->state !== 'ai_active' && $currentBusiness->ai_enabled)
-                    <form method="POST" action="{{ route('dashboard.conversations.resume', $c->id) }}">@csrf<button class="btn btn-secondary btn-sm w-full">Resume AI</button></form>
+                    <form method="POST" action="{{ route('dashboard.conversations.resume', $c->id) }}">@csrf<button class="btn btn-secondary btn-sm w-full">Resume auto-replies</button></form>
                 @endif
                 @if ($c->state !== 'closed')
                     <form method="POST" action="{{ route('dashboard.conversations.close', $c->id) }}">@csrf<button class="btn btn-secondary btn-sm w-full">Close conversation</button></form>

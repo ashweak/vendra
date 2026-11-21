@@ -15,6 +15,7 @@ rather than silently replacing approved requirements.
 | 8 | 2026-11-12 | P4 team | Team members are added with a **temporary password shown once**, instead of email invitations. | No real email in local development (P9). |
 | 9 | 2026-11-12 | Portfolio | The portfolio shows a **static demo with fictional data**. The full app runs locally only. | GitHub Pages cannot run Laravel; no paid hosting (P9). |
 | 10 | 2026-11-19 | P9 hosting | Added a **Docker image and Render free-plan Blueprint** for an optional public demo. Public demo mode reseeds fictional data on every start and turns owner MFA off so visitors can sign in. The static portfolio demo stays. | Lets reviewers try the real app at zero cost; data is fictional and disposable. |
+| 11 | 2026-11-21 | P6 AI provider | **Removed the Gemini provider.** The offline rules engine is now the only auto-assistant; customer-facing copy says “auto-assistant”, not “AI”. | Gemini's unpaid tier lets Google use submitted content and have people review it, which isn't acceptable for real customer messages. Zero cost is kept. |
 
 ## Milestone status (honest)
 

@@ -1,5 +1,5 @@
 @extends('layouts.dashboard')
-@section('title', 'AI assistant')
+@section('title', 'Auto-assistant')
 @section('heading', 'Settings')
 @section('content')
 @include('dashboard.settings.nav')
@@ -9,9 +9,9 @@
         @csrf @method('PUT')
         <h1 class="h2">Assistant settings</h1>
         <p class="text-xs text-ink-500">Engine: {{ $provider }}. Platform safety rules always apply and can’t be overridden by these settings.</p>
-        <label class="flex items-center gap-2 text-sm"><input type="checkbox" name="ai_enabled" value="1" @checked($b->ai_enabled)> AI assistant on (forms and staff replies work either way)</label>
+        <label class="flex items-center gap-2 text-sm"><input type="checkbox" name="ai_enabled" value="1" @checked($b->ai_enabled)>Auto-assistant on (forms and staff replies work either way)</label>
         <div><label class="label" for="tone">Tone</label><select id="tone" name="ai_tone" class="input">@foreach (['friendly' => 'Friendly & concise', 'formal' => 'Polite & formal', 'casual' => 'Warm & casual'] as $k => $l)<option value="{{ $k }}" @selected($b->ai_tone === $k)>{{ $l }}</option>@endforeach</select></div>
-        <div><label class="label" for="greet">Greeting</label><textarea id="greet" name="greeting" rows="2" maxlength="300" class="input" placeholder="Hi! I’m the AI assistant of …">{{ $b->greeting }}</textarea></div>
+        <div><label class="label" for="greet">Greeting</label><textarea id="greet" name="greeting" rows="2" maxlength="300" class="input" placeholder="Hi! I’m the auto-assistant of …">{{ $b->greeting }}</textarea></div>
         <button class="btn btn-primary">Save</button>
         <div class="rounded-lg bg-tile p-3 text-xs text-ink-600">
             <p class="font-semibold text-ink-800">What the assistant can and can’t do</p>

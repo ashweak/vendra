@@ -1,4 +1,4 @@
-{{-- AI chat. Separate from page forms: typing in chat can never submit a booking/order (P8). --}}
+{{-- Customer chat (auto-assistant + staff). Separate from page forms: typing in chat can never submit a booking/order (P8). --}}
 <div id="vchat" data-history="{{ route('public.chat.history', $business) }}" data-send="{{ route('public.chat.send', $business) }}" data-handoff="{{ route('public.chat.handoff', $business) }}" data-name="{{ $business->name }}">
     <button id="vchat-open" type="button" class="fixed right-4 bottom-4 z-40 flex h-14 w-14 items-center justify-center gap-2.5 rounded-full bg-sun text-sm font-semibold text-ink-900 shadow-[0_10px_30px_-12px_rgba(23,22,18,.45)] transition hover:bg-sun-deep focus:outline-none focus-visible:ring-4 focus-visible:ring-ink-900/30 sm:right-5 sm:bottom-5 sm:h-auto sm:w-auto sm:py-3 sm:pr-5 sm:pl-3" aria-expanded="false" aria-controls="vchat-panel" aria-label="Ask us anything">
         <span class="flex h-9 w-9 items-center justify-center sm:h-7 sm:w-7"><x-icon name="chat" class="h-[18px] w-[18px] sm:h-4 sm:w-4" /></span><span class="hidden sm:inline">Ask us anything</span>
@@ -8,13 +8,13 @@
             <span class="flex h-10 w-10 items-center justify-center rounded-full bg-ink-900 text-sun"><x-icon name="spark" class="h-5 w-5" /></span>
             <div class="min-w-0 flex-1">
                 <p class="truncate font-semibold">{{ $business->name }}</p>
-                <p id="vchat-state" class="text-xs text-ink-500">AI assistant · answers from the business’s published info</p>
+                <p id="vchat-state" class="text-xs text-ink-500">Auto-assistant · staff can join anytime</p>
             </div>
             <button id="vchat-min" type="button" class="flex h-9 w-9 items-center justify-center rounded-full text-ink-500 hover:bg-tile" aria-label="Minimize chat">—</button>
         </header>
         <div id="vchat-log" class="dots flex-1 space-y-3 overflow-y-auto bg-tile p-4 text-sm" aria-live="polite">
             <div class="max-w-[85%] rounded-2xl rounded-tl-md bg-white px-3.5 py-2.5">
-                {{ $business->greeting ?: 'Hi! I’m '.$business->name.'’s AI assistant. Ask about prices, hours or open times — English, Tagalog or Taglish is fine.' }}
+                {{ $business->greeting ?: 'Hi! I’m '.$business->name.'’s auto-assistant. Ask about prices, hours or open times — English, Tagalog or Taglish is fine.' }}
             </div>
         </div>
         <form id="vchat-form" class="border-t border-line p-3">
@@ -38,7 +38,7 @@
     const stateEl = document.getElementById('vchat-state');
     const csrf = document.querySelector('meta[name=csrf-token]').content;
     let loaded = false, busy = false, lastId = 0, poll = null;
-    const states = { ai_active: 'AI assistant · answers from the business’s published info', waiting_for_staff: 'Waiting for staff · AI paused', staff_active: 'Staff is replying', closed: 'Conversation closed' };
+    const states = { ai_active: 'Auto-assistant · staff can join anytime', waiting_for_staff: 'Waiting for staff · auto-replies paused', staff_active: 'Staff is replying', closed: 'Conversation closed' };
 
     function bubble(m) {
         const wrap = document.createElement('div');
@@ -49,7 +49,7 @@
         if (m.from === 'ai' || m.from === 'staff') {
             const who = document.createElement('p');
             who.className = 'mb-0.5 text-[11px] font-medium text-ink-400';
-            who.textContent = m.from === 'ai' ? 'AI assistant' : (m.name || 'Staff');
+            who.textContent = m.from === 'ai' ? 'Auto-assistant' : (m.name || 'Staff');
             b.appendChild(who);
         }
         b.appendChild(document.createTextNode(m.body));

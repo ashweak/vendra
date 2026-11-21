@@ -138,7 +138,7 @@ class SettingsController extends DashboardController
 
         return view('dashboard.settings.assistant', [
             'messages' => $test->messages()->orderBy('id')->get(),
-            'provider' => config('vendra.ai.provider') === 'gemini' && config('vendra.ai.gemini_key') ? 'Gemini ('.config('vendra.ai.gemini_model').')' : 'Offline rules engine (no API key set)',
+            'provider' => 'Offline rules engine on this server (messages never leave Vendra)',
         ]);
     }
 

@@ -3,7 +3,7 @@
 @section('heading', 'Catalog')
 @section('content')
 <div class="flex flex-wrap items-center justify-between gap-3">
-    <p class="text-sm text-ink-600">Only active items appear to customers and the AI. Price changes never alter existing bookings or orders.</p>
+    <p class="text-sm text-ink-600">Only active items appear to customers and the auto-assistant. Price changes never alter existing bookings or orders.</p>
     @if ($canManage)<a href="{{ route('dashboard.catalog.create') }}" class="btn btn-primary">+ Add item</a>@endif
 </div>
 <div class="card mt-4 overflow-x-auto p-0">

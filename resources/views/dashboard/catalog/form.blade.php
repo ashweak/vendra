@@ -29,7 +29,7 @@
         </fieldset>
     @endif
     <label class="flex items-center gap-2 text-sm"><input type="checkbox" name="requires_approval" value="1" @checked(old('requires_approval', $item->requires_approval))> Bookings for this service need approval</label>
-    <label class="flex items-center gap-2 text-sm"><input type="checkbox" name="is_active" value="1" @checked(old('is_active', $item->is_active))> Active (visible to customers and the AI)</label>
+    <label class="flex items-center gap-2 text-sm"><input type="checkbox" name="is_active" value="1" @checked(old('is_active', $item->is_active))> Active (visible to customers and the auto-assistant)</label>
     <button class="btn btn-primary">Save</button>
 </form>
 @endsection

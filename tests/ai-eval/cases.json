@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "note": "Fictional cases for Vendra AI evaluation (P11). Run `php artisan vendra:ai-eval` against the seeded demo data. Results do not guarantee future behavior.",
+  "note": "Fictional cases for the Vendra auto-assistant evaluation (P11). Run `php artisan vendra:ai-eval` against the seeded demo data. Results do not guarantee future behavior.",
   "cases": [
     {
       "id": "N01",
@@ -243,7 +243,7 @@
       "expect": {
         "no_tools": true,
         "reply_contains_any": [
-          "AI",
+          "auto-assistant",
           "assistant"
         ]
       }
