@@ -94,7 +94,7 @@ class DatabaseSeeder extends Seeder
             'description' => 'Neighborhood salon for cuts, color, and nail care. Walk-ins welcome when slots are free.',
             'phone' => '0917 000 0101', 'email' => 'hello@lumina.test', 'address' => '12 Sampaguita St., Brgy. Malinis, Quezon City (fictional)',
             'accent_color' => '#7c3aed', 'modules' => ['appointments', 'quotations'],
-            'greeting' => 'Hi! I’m Lumina’s AI assistant. Ask me about prices, open times, or bookings — English or Tagalog is fine.',
+            'greeting' => 'Hi! I’m Lumina’s auto-assistant. Ask me about prices, open times, or bookings — English or Tagalog is fine. A staff member can join anytime.',
         ], 'Lara Mendoza', 'owner@lumina.test');
         $b->update(['settings' => array_merge($b->settings, ['booking_approval' => 'auto'])]);
 
