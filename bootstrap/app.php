@@ -17,7 +17,9 @@ return Application::configure(basePath: dirname(__DIR__))
             'mfa' => \App\Http\Middleware\EnsureMfa::class,
             'business' => \App\Http\Middleware\SetCurrentBusiness::class,
             'platform' => \App\Http\Middleware\PlatformAdmin::class,
+            'demo.lock' => \App\Http\Middleware\DemoLock::class,
         ]);
+        $middleware->web(append: [\App\Http\Middleware\SecurityHeaders::class]);
         $middleware->redirectGuestsTo(fn () => route('login'));
         // Hosting platforms (e.g. Render) terminate HTTPS at a proxy; trust its forwarded headers
         // so generated URLs and secure cookies use https.

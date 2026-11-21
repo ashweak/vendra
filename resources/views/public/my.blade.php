@@ -98,4 +98,19 @@
 @endforeach
 </div>
 @endif
+<section class="mt-10 rounded-[22px] border border-line bg-white p-6" aria-labelledby="privacy-h">
+    <h2 id="privacy-h" class="h2">Your information</h2>
+    <p class="mt-1 text-sm text-ink-600">Under the Data Privacy Act you can get a copy of your details, or ask {{ $business->name }} to correct or delete them. <a href="{{ route('public.privacy', $business) }}" class="link">Privacy notice</a></p>
+    <div class="mt-4 flex flex-wrap gap-3">
+        <a href="{{ route('public.my.data', $business) }}" class="btn btn-secondary btn-sm">Download my data (JSON)</a>
+    </div>
+    <form method="POST" action="{{ route('public.my.privacy', $business) }}" class="mt-5 grid gap-3 sm:grid-cols-[auto_1fr_auto] sm:items-end">
+        @csrf
+        <div><label class="label" for="pr-type">Request</label>
+            <select id="pr-type" name="type" class="input">@foreach (\App\Models\PrivacyRequest::TYPES as $k => $label)<option value="{{ $k }}">{{ $label }}</option>@endforeach</select></div>
+        <div><label class="label" for="pr-details">Details <span class="font-normal text-ink-500">(optional)</span></label><input id="pr-details" name="details" maxlength="1000" class="input" placeholder="e.g. my new mobile number is …"></div>
+        <button class="btn btn-primary btn-sm">Send request</button>
+    </form>
+    <p class="mt-3 text-xs text-ink-600">Deleting your details doesn’t cancel open bookings or orders, and some records may be kept where the law requires (for example, tax records).</p>
+</section>
 @endsection

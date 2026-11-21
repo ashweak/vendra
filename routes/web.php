@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\OnboardingController;
@@ -13,12 +15,19 @@ Route::get('/', fn () => view('landing', [
     'demos' => Business::whereNotNull('activated_at')->where('status', 'active')->orderBy('name')->get(),
 ]))->name('landing');
 
+Route::view('privacy', 'legal.privacy')->name('legal.privacy');
+Route::view('terms', 'legal.terms')->name('legal.terms');
+
 // ------------------------------------------------------------------ Auth
 Route::middleware('guest')->group(function () {
     Route::get('login', [AuthController::class, 'showLogin'])->name('login');
     Route::post('login', [AuthController::class, 'login'])->middleware('throttle:20,1');
     Route::get('register', [AuthController::class, 'showRegister'])->name('register');
     Route::post('register', [AuthController::class, 'register'])->middleware('throttle:10,1');
+    Route::get('forgot-password', [PasswordResetController::class, 'request'])->name('password.request');
+    Route::post('forgot-password', [PasswordResetController::class, 'email'])->name('password.email')->middleware(['throttle:6,1', 'demo.lock']);
+    Route::get('reset-password/{token}', [PasswordResetController::class, 'edit'])->name('password.reset');
+    Route::post('reset-password', [PasswordResetController::class, 'update'])->name('password.update')->middleware(['throttle:6,1', 'demo.lock']);
 });
 Route::middleware('auth')->group(function () {
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
@@ -26,6 +35,9 @@ Route::middleware('auth')->group(function () {
     Route::post('mfa/setup', [AuthController::class, 'confirmMfaSetup']);
     Route::get('mfa', [AuthController::class, 'showMfaChallenge'])->name('mfa.challenge');
     Route::post('mfa', [AuthController::class, 'verifyMfa']);
+    Route::get('email/verify', [AccountController::class, 'verifyNotice'])->name('verification.notice');
+    Route::get('email/verify/{id}/{hash}', [AccountController::class, 'verify'])->name('verification.verify')->middleware(['signed', 'throttle:6,1']);
+    Route::post('email/verification-notification', [AccountController::class, 'resendVerification'])->name('verification.send')->middleware('throttle:6,1');
     Route::get('start', [OnboardingController::class, 'showBusiness'])->name('onboarding.business');
     Route::post('start', [OnboardingController::class, 'storeBusiness'])->middleware('mfa');
 });
@@ -55,6 +67,9 @@ Route::prefix('b/{business}')->name('public.')->group(function () {
     Route::post('my/orders/{reference}/cancel', [PublicController::class, 'cancelOrder'])->name('my.order.cancel');
     Route::post('my/quotations/{reference}/respond', [PublicController::class, 'respondQuote'])->name('my.quote.respond');
     Route::get('my/files/{attachment}', [PublicController::class, 'attachment'])->name('my.file');
+    Route::get('my/data', [PublicController::class, 'myData'])->name('my.data')->middleware('throttle:10,1');
+    Route::post('my/privacy-request', [PublicController::class, 'storePrivacyRequest'])->name('my.privacy')->middleware('throttle:5,1');
+    Route::get('privacy', [PublicController::class, 'privacy'])->name('privacy');
     Route::get('chat', [ChatController::class, 'history'])->name('chat.history');
     Route::post('chat', [ChatController::class, 'send'])->name('chat.send')->middleware('throttle:20,1');
     Route::post('chat/handoff', [ChatController::class, 'handoff'])->name('chat.handoff');
@@ -80,14 +95,15 @@ Route::prefix('app')->name('dashboard.')->middleware(['auth', 'mfa', 'business']
 
     Route::get('customers', [Dashboard\CustomerController::class, 'index'])->name('customers.index');
     Route::get('customers/{id}', [Dashboard\CustomerController::class, 'show'])->name('customers.show');
-    Route::post('customers/{id}/anonymize', [Dashboard\CustomerController::class, 'anonymize'])->name('customers.anonymize');
+    Route::post('customers/{id}/anonymize', [Dashboard\CustomerController::class, 'anonymize'])->name('customers.anonymize')->middleware('demo.lock');
+    Route::post('customers/{id}/privacy/{requestId}', [Dashboard\CustomerController::class, 'resolvePrivacy'])->name('customers.privacy');
 
     Route::controller(Dashboard\CatalogController::class)->prefix('catalog')->name('catalog.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('new', 'create')->name('create');
-        Route::post('/', 'store')->name('store');
+        Route::post('/', 'store')->name('store')->middleware('demo.lock');
         Route::get('{id}/edit', 'edit')->name('edit');
-        Route::put('{id}', 'update')->name('update');
+        Route::put('{id}', 'update')->name('update')->middleware('demo.lock');
         Route::post('{id}/stock', 'adjustStock')->name('stock');
     });
 
@@ -135,29 +151,33 @@ Route::prefix('app')->name('dashboard.')->middleware(['auth', 'mfa', 'business']
     Route::get('reports', [Dashboard\ReportController::class, 'index'])->name('reports');
     Route::get('activity', [Dashboard\ReportController::class, 'logs'])->name('logs');
 
+    Route::get('account', [AccountController::class, 'edit'])->name('account');
+    Route::put('account', [AccountController::class, 'update'])->name('account.update')->middleware('demo.lock');
+    Route::put('account/password', [AccountController::class, 'updatePassword'])->name('account.password')->middleware(['throttle:6,1', 'demo.lock']);
+
     Route::get('team', [Dashboard\TeamController::class, 'index'])->name('team.index');
-    Route::post('team', [Dashboard\TeamController::class, 'store'])->name('team.store');
-    Route::put('team/{id}', [Dashboard\TeamController::class, 'update'])->name('team.update');
-    Route::post('team/{userId}/schedule', [Dashboard\TeamController::class, 'schedule'])->name('team.schedule');
+    Route::post('team', [Dashboard\TeamController::class, 'store'])->name('team.store')->middleware('demo.lock');
+    Route::put('team/{id}', [Dashboard\TeamController::class, 'update'])->name('team.update')->middleware('demo.lock');
+    Route::post('team/{userId}/schedule', [Dashboard\TeamController::class, 'schedule'])->name('team.schedule')->middleware('demo.lock');
 
     Route::controller(Dashboard\SettingsController::class)->prefix('settings')->name('settings.')->group(function () {
         Route::get('profile', 'profile')->name('profile');
-        Route::put('profile', 'updateProfile');
+        Route::put('profile', 'updateProfile')->middleware('demo.lock');
         Route::get('workflow', 'workflow')->name('workflow');
-        Route::put('workflow', 'updateWorkflow');
+        Route::put('workflow', 'updateWorkflow')->middleware('demo.lock');
         Route::get('hours', 'hours')->name('hours');
-        Route::put('hours', 'updateHours');
+        Route::put('hours', 'updateHours')->middleware('demo.lock');
         Route::get('knowledge', 'knowledge')->name('knowledge');
-        Route::post('knowledge', 'storeKnowledge');
-        Route::put('knowledge/{id}', 'updateKnowledge')->name('knowledge.update');
+        Route::post('knowledge', 'storeKnowledge')->middleware('demo.lock');
+        Route::put('knowledge/{id}', 'updateKnowledge')->name('knowledge.update')->middleware('demo.lock');
         Route::get('assistant', 'assistant')->name('assistant');
-        Route::put('assistant', 'updateAssistant');
+        Route::put('assistant', 'updateAssistant')->middleware('demo.lock');
         Route::post('assistant/test', 'testAssistant')->name('assistant.test')->middleware('throttle:20,1');
         Route::get('data', 'data')->name('data');
-        Route::post('support', 'grantSupport')->name('support.grant');
+        Route::post('support', 'grantSupport')->name('support.grant')->middleware('demo.lock');
         Route::post('support/{id}/revoke', 'revokeSupport')->name('support.revoke');
         Route::get('export/{type}', 'export')->name('export');
-        Route::post('close', 'close')->name('close');
+        Route::post('close', 'close')->name('close')->middleware('demo.lock');
     });
 });
 
@@ -166,7 +186,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'mfa', 'platform'])-
     Route::get('/', [AdminController::class, 'index'])->name('index');
     Route::get('logs', [AdminController::class, 'logs'])->name('logs');
     Route::get('businesses/{business}', [AdminController::class, 'show'])->name('show');
-    Route::put('businesses/{business}/subscription', [AdminController::class, 'updateSubscription'])->name('subscription');
-    Route::post('businesses/{business}/payments', [AdminController::class, 'recordPayment'])->name('payment');
-    Route::post('businesses/{business}/status', [AdminController::class, 'setStatus'])->name('status');
+    Route::put('businesses/{business}/subscription', [AdminController::class, 'updateSubscription'])->name('subscription')->middleware('demo.lock');
+    Route::post('businesses/{business}/payments', [AdminController::class, 'recordPayment'])->name('payment')->middleware('demo.lock');
+    Route::post('businesses/{business}/status', [AdminController::class, 'setStatus'])->name('status')->middleware('demo.lock');
 });

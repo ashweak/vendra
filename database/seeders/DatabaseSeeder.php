@@ -31,6 +31,9 @@ class DatabaseSeeder extends Seeder
         $this->salon();
         $this->retail();
         $this->cleaning();
+
+        // Demo accounts use invented .test addresses, so mark them verified.
+        User::query()->update(['email_verified_at' => now()]);
     }
 
     private function business(array $attrs, string $ownerName, string $ownerEmail): array
@@ -178,7 +181,7 @@ class DatabaseSeeder extends Seeder
         [$b, $owner] = $this->business([
             'name' => 'Kislap Home Cleaning', 'slug' => 'kislap-cleaning', 'category' => 'cleaning',
             'description' => 'General, deep and aircon cleaning for homes and small offices in Metro Manila.',
-            'phone' => '0917 000 0303', 'email' => 'book@kislap.test', 'address' => 'Serves Metro Manila (fictional)',
+            'phone' => '0917 000 0303', 'email' => 'book@kislap.test', 'address' => '8 Kalayaan Ave., Brgy. Pinyahan, Quezon City (fictional) · serves Metro Manila',
             'accent_color' => '#0d9488', 'modules' => ['service_requests', 'quotations', 'appointments'],
         ], 'Karlo Bautista', 'owner@kislap.test');
         $b->update(['settings' => array_merge($b->settings, ['booking_approval' => 'manual'])]);

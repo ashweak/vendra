@@ -22,4 +22,15 @@
         <p class="hint">Use fictional data only. Live customer use needs the production review in the plan (M13).</p>
     @endif
 </form>
+<section class="card mt-8 max-w-3xl text-sm" aria-labelledby="law-h">
+    <h2 id="law-h" class="h2">Before real customers: legal checklist</h2>
+    <ul class="mt-3 list-disc space-y-1.5 pl-5 text-ink-700">
+        <li><strong>Data Privacy Act (RA 10173):</strong> your page has a privacy notice and customers can download their data or ask for corrections and deletion. Answer those requests from the customer’s page.</li>
+        <li><strong>NPC registration:</strong> register your data processing system and a Data Protection Officer with the National Privacy Commission if you have 250 or more employees, process sensitive personal information of 1,000 or more people, or your processing is likely to pose a risk to people’s rights.</li>
+        <li><strong>Data breach:</strong> if a breach that requires notification happens, notify the NPC and affected customers within 72 hours.</li>
+        <li><strong>Internet Transactions Act (RA 11967):</strong> show your business name, physical address and contact details, and accurate prices and descriptions.</li>
+        <li><strong>BIR:</strong> Vendra summaries aren’t invoices. Issue invoices from your registered system or booklet.</li>
+    </ul>
+    <p class="mt-3 text-xs text-ink-600">General information, not legal advice. Check with the NPC, DTI, BIR or a lawyer for your situation.</p>
+</section>
 @endsection

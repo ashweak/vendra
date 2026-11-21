@@ -53,6 +53,7 @@ class Business extends Model
     public function catalogItems(): HasMany { return $this->hasMany(CatalogItem::class); }
     public function knowledgeEntries(): HasMany { return $this->hasMany(KnowledgeEntry::class); }
     public function customers(): HasMany { return $this->hasMany(Customer::class); }
+    public function privacyRequests(): HasMany { return $this->hasMany(PrivacyRequest::class); }
     public function conversations(): HasMany { return $this->hasMany(Conversation::class); }
     public function appointments(): HasMany { return $this->hasMany(Appointment::class); }
     public function orders(): HasMany { return $this->hasMany(Order::class); }

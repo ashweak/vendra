@@ -15,6 +15,7 @@
         ['Activity log', 'dashboard.logs', 'log', $m->can('logs.view')],
         ['Team', 'dashboard.team.index', 'users', $m->can('hours.manage')],
         ['Settings', 'dashboard.settings.profile', 'cog', $m->can('settings.manage')],
+        ['Your account', 'dashboard.account', 'users', true],
     ];
 @endphp
 <input type="checkbox" id="nav-toggle" class="peer sr-only" aria-label="Toggle navigation">
@@ -70,7 +71,7 @@
             <a href="{{ route('dashboard.overview') }}#notifications" class="relative flex h-10 w-10 items-center justify-center rounded-full border border-line bg-white text-ink-700 hover:border-ink-300" aria-label="Notifications">
                 <x-icon name="bell" class="h-[18px] w-[18px]" /> @if ($unreadNotifications)<span class="absolute -top-0.5 -right-0.5 rounded-full bg-sun px-1.5 text-[10px] font-bold text-ink-900 ring-2 ring-white">{{ $unreadNotifications }}</span>@endif
             </a>
-            <span class="hidden items-center gap-2.5 border-l border-line pl-4 text-sm sm:flex"><span class="flex h-9 w-9 items-center justify-center rounded-full bg-ink-900 text-xs font-semibold text-sun">{{ collect(explode(' ', auth()->user()->name))->map(fn ($p) => mb_substr($p, 0, 1))->take(2)->implode('') }}</span><span class="font-medium">{{ auth()->user()->name }}</span></span>
+            <a href="{{ route('dashboard.account') }}" title="Your account" class="hidden items-center gap-2.5 border-l border-line pl-4 text-sm hover:opacity-80 sm:flex"><span class="flex h-9 w-9 items-center justify-center rounded-full bg-ink-900 text-xs font-semibold text-sun">{{ collect(explode(' ', auth()->user()->name))->map(fn ($p) => mb_substr($p, 0, 1))->take(2)->implode('') }}</span><span class="font-medium">{{ auth()->user()->name }}</span></a>
             <form method="POST" action="{{ route('logout') }}">@csrf<button class="btn btn-secondary btn-sm">Sign out</button></form>
         </header>
         <main class="mx-auto w-full max-w-6xl flex-1 p-4 sm:p-8">
@@ -80,6 +81,9 @@
                 <div class="mb-5 flex flex-wrap items-center gap-2 rounded-xl bg-tile p-4 text-sm"><span class="badge bg-sun font-semibold">Setup</span> Setup not finished — your customer page isn’t accepting requests yet. <a class="link" href="{{ route('dashboard.onboarding') }}">Continue setup</a></div>
             @endif
             <x-flash />
+            @unless (auth()->user()->hasVerifiedEmail())
+                <div class="mb-5 flex flex-wrap items-center justify-between gap-3 rounded-xl bg-sun-soft px-4 py-3 text-sm"><span>Please verify your email ({{ auth()->user()->email }}). Your customer page can’t go live until you do.</span><form method="POST" action="{{ route('verification.send') }}">@csrf<button class="btn btn-secondary btn-sm">Resend link</button></form></div>
+            @endunless
             @yield('content')
         </main>
         <footer class="px-8 pb-6 text-xs text-ink-400">Vendra local build · fictional data only · not production-ready</footer>

@@ -53,6 +53,7 @@ class AuthController extends Controller
             'password' => ['required', 'confirmed', Password::min(10)],
         ]);
         $user = User::create($data);
+        $user->sendEmailVerificationNotification();
         Auth::login($user);
         $request->session()->regenerate();
 

@@ -17,6 +17,26 @@
         @endforeach
     </div>
     <aside class="space-y-4">
+        @if ($privacyRequests->isNotEmpty())
+        <div class="card text-sm" id="privacy-requests"><h2 class="font-semibold">Privacy requests</h2>
+            @foreach ($privacyRequests as $pr)
+                <div class="mt-3 border-t border-line pt-3">
+                    <p><strong>{{ \App\Models\PrivacyRequest::TYPES[$pr->type] ?? $pr->type }}</strong> · <x-status :value="$pr->status" :label="ucfirst($pr->status)" /></p>
+                    @if ($pr->details)<p class="mt-1 text-ink-700">“{{ $pr->details }}”</p>@endif
+                    <p class="text-xs text-ink-500">Received {{ local_time($pr->created_at, $tz) }}@if ($pr->handled_at) · handled {{ local_time($pr->handled_at, $tz) }} by {{ $pr->handler?->name }}@endif</p>
+                    @if ($pr->resolution)<p class="mt-1 text-xs text-ink-600">{{ $pr->resolution }}</p>@endif
+                    @if ($pr->status === 'open' && $currentMembership->can('exports.create'))
+                        <form method="POST" action="{{ route('dashboard.customers.privacy', [$customer->id, $pr->id]) }}" class="mt-2 space-y-2">
+                            @csrf
+                            <input name="resolution" class="input" maxlength="255" placeholder="What you did / told the customer" required>
+                            <div class="flex gap-2"><button name="status" value="done" class="btn btn-primary btn-sm">Mark done</button><button name="status" value="declined" class="btn btn-secondary btn-sm">Decline</button></div>
+                        </form>
+                    @endif
+                </div>
+            @endforeach
+            <p class="mt-3 text-xs text-ink-500">Reply to the customer by email. For deletion, use “Remove personal details” below.</p>
+        </div>
+        @endif
         <div class="card text-sm"><h2 class="font-semibold">Consent history</h2>
             @forelse ($consents as $cs)<p class="mt-2">{{ ucfirst($cs->type) }}: <strong>{{ $cs->granted ? 'granted' : 'withdrawn' }}</strong> <span class="block text-xs text-ink-500">{{ local_time($cs->recorded_at, $tz) }} via {{ str_replace('_', ' ', $cs->source) }}</span></p>
             @empty<p class="mt-2 text-ink-500">No consent records.</p>@endforelse

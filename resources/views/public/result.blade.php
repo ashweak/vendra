@@ -32,5 +32,6 @@
     <a href="{{ route('public.my', $business) }}" class="btn btn-secondary">View my requests</a>
     <a href="{{ route('public.home', $business) }}" class="btn btn-secondary">Back to {{ $business->name }}</a>
 </div>
-<p class="mt-4 text-center text-xs text-ink-500">Later, use “Track my request” with your reference and email to get a secure link.</p>
+<p class="mt-4 text-center text-xs text-ink-600">Later, use “Track my request” with your reference and email to get a secure link.</p>
+<p class="mt-1 text-center text-xs text-ink-600">This is a request summary, not an official invoice. {{ $business->name }} issues invoices separately.</p>
 @endsection

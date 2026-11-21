@@ -6,6 +6,8 @@ return [
 
     // Public demo deployments: fictional data that resets on every restart; demo logins are shown.
     'public_demo' => (bool) env('VENDRA_PUBLIC_DEMO', false),
+    // Shown on the platform privacy notice and terms. Leave empty to point people to the GitHub repository.
+    'contact_email' => env('VENDRA_CONTACT_EMAIL'),
 
     'modules' => [
         'appointments' => 'Appointments',

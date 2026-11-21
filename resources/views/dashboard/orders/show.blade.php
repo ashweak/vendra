@@ -18,7 +18,8 @@
                     <tr><td colspan="3" class="text-right font-semibold">Total</td><td class="text-right font-semibold">{{ peso($o->total_cents) }}</td></tr>
                 </tbody>
             </table>
-            <p class="mt-3 text-xs text-ink-500">Reservation {{ $o->stock_deducted ? 'converted to deduction at handover' : 'expires '.local_time($o->reservation_expires_at, $tz) }}.</p>
+            <p class="mt-3 text-xs text-ink-600">This summary is not a BIR invoice. Issue the invoice from your registered invoicing system or booklet.</p>
+            <p class="mt-1 text-xs text-ink-600">Reservation {{ $o->stock_deducted ? 'converted to deduction at handover' : 'expires '.local_time($o->reservation_expires_at, $tz) }}.</p>
         </div>
         @if ($next)
         <div class="card">

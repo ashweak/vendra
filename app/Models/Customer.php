@@ -27,4 +27,5 @@ class Customer extends Model
     public function serviceRequests(): HasMany { return $this->hasMany(ServiceRequest::class); }
     public function conversations(): HasMany { return $this->hasMany(Conversation::class); }
     public function consents(): HasMany { return $this->hasMany(Consent::class); }
+    public function privacyRequests(): HasMany { return $this->hasMany(PrivacyRequest::class); }
 }

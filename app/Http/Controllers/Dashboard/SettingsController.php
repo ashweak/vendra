@@ -28,6 +28,7 @@ class SettingsController extends DashboardController
         $data = $request->validate([
             'name' => 'required|string|max:120', 'description' => 'nullable|string|max:1000', 'phone' => 'nullable|string|max:40',
             'email' => 'nullable|email|max:190', 'address' => 'nullable|string|max:255',
+            'legal_name' => 'nullable|string|max:190', 'registration_no' => 'nullable|string|max:60', 'privacy_contact' => 'nullable|email|max:190',
             'accent_color' => ['required', 'regex:/^#[0-9a-fA-F]{6}$/'],
         ]);
         $b = $this->business();

@@ -8,9 +8,11 @@ use App\Models\Attachment;
 use App\Models\Business;
 use App\Models\CatalogItem;
 use App\Models\Order;
+use App\Models\PrivacyRequest;
 use App\Models\Quotation;
 use App\Models\ServiceRequest;
 use App\Services\AppointmentService;
+use App\Services\AuditLogger;
 use App\Services\CustomerAccess;
 use App\Services\CustomerService;
 use App\Services\Notifier;
@@ -385,6 +387,60 @@ class PublicController extends Controller
             'quotations' => $customer->quotations()->latest()->get(),
             'requests' => $customer->serviceRequests()->latest()->get(),
         ]);
+    }
+
+    /** Privacy notice for this business's customers (Data Privacy Act, RA 10173). */
+    public function privacy(Business $business)
+    {
+        abort_if($business->status === 'suspended', 404);
+
+        return view('public.privacy', ['business' => $business, 'retention' => config('vendra.retention')]);
+    }
+
+    /** Right of access / data portability: the verified customer downloads everything this business holds about them. */
+    public function myData(Business $business)
+    {
+        $customer = $this->access->customer($business) ?? abort(403);
+        $pick = fn ($rows, array $cols) => $rows->map(fn ($r) => collect($r->only($cols))->map(fn ($v) => $v instanceof \DateTimeInterface ? $v->format(DATE_ATOM) : $v))->values();
+
+        $data = [
+            'business' => ['name' => $business->name, 'registered_name' => $business->legal_name, 'privacy_contact' => $business->privacy_contact ?: $business->email],
+            'exported_at' => now()->toAtomString(),
+            'customer' => collect($customer->only(['name', 'email', 'phone', 'marketing_consent', 'created_at']))->map(fn ($v) => $v instanceof \DateTimeInterface ? $v->format(DATE_ATOM) : $v),
+            'consents' => $pick($customer->consents()->get(), ['type', 'granted', 'recorded_at']),
+            'appointments' => $pick($customer->appointments()->get(), ['reference', 'service_name', 'price_cents', 'starts_at', 'ends_at', 'status', 'created_at']),
+            'orders' => $pick($customer->orders()->with('items')->get()->each(fn ($o) => $o->setAttribute('item_lines', $o->items->map(fn ($i) => $i->only(['name', 'quantity', 'unit_price_cents']))->all())), ['reference', 'status', 'fulfillment_method', 'delivery_address', 'subtotal_cents', 'delivery_fee_cents', 'total_cents', 'notes', 'item_lines', 'created_at']),
+            'quotations' => $pick($customer->quotations()->get(), ['reference', 'status', 'created_at']),
+            'service_requests' => $pick($customer->serviceRequests()->get(), ['reference', 'description', 'status', 'created_at']),
+            'chat_messages' => $customer->conversations()->with(['messages' => fn ($q) => $q->customerVisible()->orderBy('id')])->get()
+                ->flatMap(fn ($c) => $c->messages->map(fn ($m) => ['from' => $m->sender_type, 'text' => $m->body, 'at' => $m->created_at?->format(DATE_ATOM)]))->values(),
+            'privacy_requests' => $pick($customer->privacyRequests()->get(), ['type', 'details', 'status', 'resolution', 'created_at', 'handled_at']),
+        ];
+        AuditLogger::log($business->id, 'privacy.data_exported', $customer, actorType: 'customer', actorId: $customer->id);
+
+        return response()->json($data, 200, [
+            'Content-Disposition' => 'attachment; filename="my-data-'.$business->slug.'.json"',
+        ], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+    }
+
+    /** Right to rectification / erasure: the request goes to the owner and managers to act on. */
+    public function storePrivacyRequest(Request $request, Business $business)
+    {
+        $customer = $this->access->customer($business) ?? abort(403);
+        $data = $request->validate([
+            'type' => 'required|in:'.implode(',', array_keys(PrivacyRequest::TYPES)),
+            'details' => 'nullable|string|max:1000',
+        ]);
+        if ($customer->privacyRequests()->where('status', 'open')->where('type', $data['type'])->exists()) {
+            return back()->with('status', 'You already have an open request of this kind. The business will contact you.');
+        }
+        $pr = new PrivacyRequest($data + ['customer_id' => $customer->id]);
+        $pr->business_id = $business->id;
+        $pr->save();
+        AuditLogger::log($business->id, 'privacy.request_received', $pr, ['type' => $data['type']], actorType: 'customer', actorId: $customer->id);
+        Notifier::staff($business, 'Privacy request: '.PrivacyRequest::TYPES[$data['type']], $customer->name.' sent a privacy request. Please act on it and reply to the customer.', route('dashboard.customers.show', $customer->id));
+
+        return back()->with('status', 'Request sent to '.$business->name.'. They will contact you by email.');
     }
 
     public function cancelAppointment(Business $business, string $reference)

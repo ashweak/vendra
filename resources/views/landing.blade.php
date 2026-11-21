@@ -4,7 +4,7 @@
 @php $firstDemo = $demos->first(); @endphp
 
 @if (config('vendra.public_demo'))
-    <div class="bg-ink-900 px-4 py-2 text-center text-xs text-white/80">Public demo with fictional data — it resets whenever the server restarts. <a href="{{ route('login') }}" class="font-semibold text-sun underline underline-offset-2">Sign in with a demo account</a></div>
+    <div class="bg-ink-900 px-4 py-2 text-center text-xs text-white/80">Public demo with fictional data — it resets every 6 hours. <a href="{{ route('login') }}" class="font-semibold text-sun underline underline-offset-2">Sign in with a demo account</a></div>
 @endif
 
 {{-- Floating pill navigation --}}
@@ -174,7 +174,8 @@
     </div>
     <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-2 py-5 text-xs text-ink-500">
         <x-logo />
-        <span>Working name · local build with fictional data. Increased income is not guaranteed.</span>
+        <span>Working name · fictional data. Increased income is not guaranteed.</span>
+        <span class="flex gap-4"><a href="{{ route('legal.privacy') }}" class="hover:text-ink-900">Privacy</a><a href="{{ route('legal.terms') }}" class="hover:text-ink-900">Terms</a></span>
     </div>
 </footer>
 @endsection

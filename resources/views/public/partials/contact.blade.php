@@ -1,6 +1,6 @@
 <fieldset class="mt-6 space-y-4">
     <legend class="h2">Your details</legend>
-    <p class="text-xs text-ink-500">We only ask for what this request needs. Never share passwords, PINs or card numbers.</p>
+    <p class="text-xs text-ink-600">We only ask for what this request needs. Never share passwords, PINs or card numbers. See how we use your details in our <a href="{{ route('public.privacy', $business) }}" class="link" target="_blank">privacy notice</a>.</p>
     <div class="grid gap-4 sm:grid-cols-2">
         <div><label class="label" for="name">Full name</label><input id="name" name="name" class="input" required maxlength="120" value="{{ old('name', $data['name'] ?? '') }}" autocomplete="name"><x-field-error name="name" /></div>
         <div><label class="label" for="email">Email</label><input id="email" type="email" name="email" class="input" required value="{{ old('email', $data['email'] ?? '') }}" autocomplete="email"><p class="hint">Used to send you a secure link to track this request.</p><x-field-error name="email" /></div>

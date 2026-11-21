@@ -6,7 +6,7 @@
     @csrf
     <div><label class="label" for="email">Email</label><input id="email" type="email" name="email" class="input" value="{{ old('email') }}" required autofocus autocomplete="username"></div>
     <div><label class="label" for="password">Password</label><input id="password" type="password" name="password" class="input" required autocomplete="current-password"></div>
-    <label class="flex items-center gap-2 text-sm"><input type="checkbox" name="remember" value="1"> Keep me signed in</label>
+    <div class="flex items-center justify-between gap-3 text-sm"><label class="flex items-center gap-2"><input type="checkbox" name="remember" value="1"> Keep me signed in</label><a href="{{ route('password.request') }}" class="font-medium underline decoration-sun decoration-2 underline-offset-4">Forgot password?</a></div>
     <button class="btn btn-primary w-full">Sign in</button>
 </form>
 @if (config('vendra.public_demo'))
@@ -19,7 +19,7 @@
                 </button>
             @endforeach
         </div>
-        <p class="mt-3 text-xs text-ink-600">Fictional data. Everything resets when the server restarts.</p>
+        <p class="mt-3 text-xs text-ink-600">Fictional data. Everything resets every 6 hours and whenever the server restarts. Changes that would affect other visitors are turned off.</p>
     </div>
     @push('scripts')
     <script>

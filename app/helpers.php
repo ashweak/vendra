@@ -21,9 +21,9 @@ if (! function_exists('status_tone')) {
     function status_tone(string $status): string
     {
         return match ($status) {
-            'confirmed', 'completed', 'accepted', 'verified', 'active' => 'green',
+            'confirmed', 'completed', 'accepted', 'verified', 'active', 'done' => 'green',
             'pending_approval', 'submitted', 'under_review', 'awaiting_owner_approval', 'awaiting_customer',
-            'sent', 'waiting_for_staff', 'unpaid', 'trial', 'past_due' => 'amber',
+            'sent', 'waiting_for_staff', 'unpaid', 'trial', 'past_due', 'open' => 'amber',
             'preparing', 'ready_for_pickup', 'dispatched', 'in_progress', 'ai_active', 'staff_active' => 'indigo',
             default => 'gray',
         };

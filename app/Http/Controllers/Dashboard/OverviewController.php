@@ -82,7 +82,8 @@ class OverviewController extends DashboardController
         $needsProducts = $b->moduleEnabled('orders');
 
         return [
-            ['label' => 'Business details', 'done' => (bool) ($b->name && ($b->phone || $b->email)), 'required' => true, 'url' => route('dashboard.settings.profile')],
+            ['label' => 'Verify your email', 'done' => (bool) auth()->user()?->hasVerifiedEmail(), 'required' => true, 'url' => route('verification.notice')],
+            ['label' => 'Business name, physical address, phone and email', 'done' => (bool) ($b->name && $b->address && $b->phone && $b->email), 'required' => true, 'url' => route('dashboard.settings.profile')],
             ['label' => 'Choose modules', 'done' => ! empty($b->modules), 'required' => true, 'url' => route('dashboard.settings.workflow')],
             ['label' => 'Opening hours', 'done' => $b->hours()->where('is_closed', false)->exists(), 'required' => $needsServices, 'url' => route('dashboard.settings.hours')],
             ['label' => 'Services in catalog', 'done' => ! $needsServices || $b->catalogItems()->services()->active()->exists(), 'required' => $needsServices, 'url' => route('dashboard.catalog.index')],
