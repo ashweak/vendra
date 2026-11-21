@@ -66,9 +66,6 @@ class AiEvaluate extends Command
             if ($this->option('show')) {
                 $this->line("<comment>{$case['id']}</comment> {$case['message']}\n  → ".str_replace("\n", ' / ', (string) $result['reply']));
             }
-            if ($s = (int) $this->option('sleep')) {
-                sleep($s);
-            }
         }
 
         $this->table(['Case', 'Lang', 'Category', 'Critical', 'Result', 'Notes / tools'], $rows);
