@@ -1,0 +1,5 @@
+@extends('errors.layout')
+@section('title', 'Page not found')
+@section('code', '404')
+@section('heading', 'Page not found')
+@section('message', 'This page doesn’t exist or the business page is no longer available.')

@@ -48,6 +48,10 @@ await shot(page, '04-review');
 await page.check('input[name=confirmed]');
 await page.click('button:has-text("Confirm and submit")');
 await shot(page, '05-result');
+await page.goto(`${BASE}/b/lumina-studio/my`); await shot(page, '05b-my-requests-privacy');
+await page.goto(`${BASE}/b/lumina-studio/privacy`); await shot(page, '05c-privacy-notice');
+await page.goto(`${BASE}/forgot-password`); await shot(page, '05d-forgot-password', false);
+await page.goto(`${BASE}/b/does-not-exist`); await shot(page, '05e-404', false);
 
 // Chat
 await page.goto(`${BASE}/b/lumina-studio`);
@@ -98,6 +102,8 @@ await page.click('button:has-text("Sign out")');
 await login(page, 'owner@ganda.test');
 await page.goto(`${BASE}/app/orders`); await shot(page, '19-orders');
 if (await page.locator('main table a').count()) { await page.locator('main table a').first().click(); await shot(page, '20-order-detail'); }
+await page.goto(`${BASE}/app/account`); await shot(page, '20b-account');
+await page.goto(`${BASE}/app/setup`); await shot(page, '20c-setup-legal');
 await page.click('button:has-text("Sign out")');
 
 await login(page, 'manager@lumina.test');

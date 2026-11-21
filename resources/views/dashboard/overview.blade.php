@@ -20,7 +20,7 @@
     @foreach ($tiles as [$label, $n, $href, $show, $icon])
         @continue(! $show)
         <a href="{{ $href }}" class="stat group flex flex-col transition hover:border-ink-300">
-            <span class="flex items-center justify-between"><span class="icon-chip"><x-icon :name="$icon" class="stat-icon" /></span><x-icon name="arrow" class="h-4 w-4 -rotate-45 text-ink-400 transition group-hover:text-ink-900" /></span>
+            <span class="flex items-center justify-between"><span class="icon-chip"><x-icon :name="$icon" class="stat-icon" /></span><x-icon name="arrow" class="h-4 w-4 -rotate-45 text-ink-500 transition group-hover:text-ink-900" /></span>
             <span class="stat-value mt-6 block">{{ $n }}</span><span class="stat-label mt-1 block">{{ $label }}</span>
         </a>
     @endforeach
@@ -53,7 +53,7 @@
                 <a href="{{ $n->data['url'] ?? '#' }}" class="mt-3 block rounded-xl bg-tile p-3.5 text-sm hover:bg-ink-100">
                     <p class="font-medium">{{ $n->data['title'] }}</p>
                     <p class="text-xs text-ink-600">{{ $n->data['body'] }}</p>
-                    <p class="mt-1 text-[11px] text-ink-400">{{ $n->created_at->diffForHumans() }}</p>
+                    <p class="mt-1 text-[11px] text-ink-500">{{ $n->created_at->diffForHumans() }}</p>
                 </a>
             @empty
                 <p class="mt-3 text-sm text-ink-500">You’re all caught up.</p>

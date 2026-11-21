@@ -47,7 +47,7 @@
             <x-sticker class="absolute -top-8 left-4 hidden sm:inline-flex" uid="hero" />
             <x-phone-chat />
             <div class="absolute -bottom-6 -left-3 hidden w-52 rounded-2xl bg-white p-3.5 shadow-[0_20px_40px_-20px_rgba(23,22,18,.4)] sm:block lg:-left-8">
-                <p class="text-[11px] font-semibold tracking-wider text-ink-400 uppercase">New booking</p>
+                <p class="text-[11px] font-semibold tracking-wider text-ink-500 uppercase">New booking</p>
                 <p class="mt-1 font-display text-lg font-bold">APT-7KQ2LM</p>
                 <span class="badge badge-green mt-1">Confirmed</span>
             </div>
@@ -131,7 +131,7 @@
             ] as $i => [$icon, $t, $b])
                 <li class="relative text-center">
                     <span class="relative mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-sun ring-8 ring-paper"><x-icon :name="$icon" class="h-5 w-5" /></span>
-                    <p class="mt-5 text-xs font-semibold tracking-widest text-ink-400">STEP {{ $i + 1 }}</p>
+                    <p class="mt-5 text-xs font-semibold tracking-widest text-ink-500">STEP {{ $i + 1 }}</p>
                     <h3 class="mt-2 text-xl font-bold">{{ $t }}</h3>
                     <p class="mx-auto mt-2 max-w-xs text-sm leading-relaxed text-ink-500">{{ $b }}</p>
                 </li>

@@ -64,12 +64,12 @@
                     <ul class="mt-2">
                         @foreach ($rows as $item)
                             @php $avail = $item->type === 'product' ? $item->availableStock() : null; @endphp
-                            <li class="group flex items-center gap-4 border-b border-dashed border-line py-4">
-                                <div class="min-w-0 flex-1">
+                            <li class="group flex flex-wrap items-center gap-x-4 gap-y-3 border-b border-dashed border-line py-4">
+                                <div class="min-w-0 flex-1 basis-full sm:basis-0">
                                     <div class="flex items-baseline gap-3">
-                                        <span class="font-display text-lg font-semibold">{{ $item->name }}</span>
-                                        <span class="flex-1 border-b-2 border-dotted border-ink-200" aria-hidden="true"></span>
-                                        <span class="font-display text-lg font-bold">{{ peso($item->price_cents) }}</span>
+                                        <span class="min-w-0 flex-1 font-display text-lg leading-snug font-semibold sm:flex-none">{{ $item->name }}</span>
+                                        <span class="hidden flex-1 border-b-2 border-dotted border-ink-200 sm:block" aria-hidden="true"></span>
+                                        <span class="shrink-0 font-display text-lg font-bold whitespace-nowrap">{{ peso($item->price_cents) }}</span>
                                     </div>
                                     <p class="mt-1 text-sm text-ink-500">
                                         {{ $item->type === 'service' ? $item->duration_minutes.' min' : ($avail === 0 ? 'Out of stock' : ($avail !== null && $avail <= 3 ? 'Only '.$avail.' left' : 'In stock')) }}@if ($item->description) · {{ $item->description }}@endif

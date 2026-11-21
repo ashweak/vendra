@@ -1,4 +1,4 @@
-// Records a short walkthrough of the real app (fictional seed data): a customer asks the AI,
+// Records a short walkthrough of the real app (fictional seed data): a customer asks the auto-assistant,
 // books through it, and the owner approves. Output: recording/raw.webm (converted to MP4/GIF in CI).
 // Usage: BASE=http://127.0.0.1:8000 node scripts/record.mjs
 import { chromium } from 'playwright';
@@ -53,22 +53,22 @@ const day = ['linggo', 'lunes', 'martes', 'miyerkules', 'huwebes', 'biyernes', '
 const iso = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 
 // 1. Landing
-await go('/', 'Vendra — AI assistant for small Philippine businesses');
+await go('/', 'Vendra — bookings, orders and chat for small Philippine businesses');
 await pause(1800);
 await scrollTo(700); await pause(800); await scrollTo(0); await pause(500);
 
-// 2. Business page + AI chat
+// 2. Business page + chat
 await go('/b/lumina-studio', '1 · A customer opens the salon’s Vendra page');
 await pause(1600);
 await page.click('#vchat-open');
-await caption('2 · They ask the AI in Taglish — prices come from the real catalog');
+await caption('2 · They ask in Taglish — the offline auto-assistant answers from the catalog');
 await pause(900);
 await say('Magkano po ang hair color?');
-await caption('3 · The AI checks live availability and drafts the booking');
+await caption('3 · It checks live availability and drafts the booking');
 await say(`Pa-book po ng hair color sa ${day} alas dos ng hapon`);
 await pause(800);
 
-// 3. Review & confirm (the customer always confirms; the AI never books on its own)
+// 3. Review & confirm (the customer always confirms; the assistant never books on its own)
 const cta = page.locator('#vchat-log a:has-text("Review & confirm")').last();
 if (await cta.count()) {
     await cta.click();
@@ -107,7 +107,7 @@ await page.type('#email', 'owner@lumina.test', { delay: 30 });
 await page.type('#password', 'password', { delay: 30 });
 await page.click('button:has-text("Sign in")');
 await page.waitForLoadState('networkidle').catch(() => {});
-await caption('8 · Today at a glance — bookings, orders and AI handoffs');
+await caption('8 · Today at a glance — bookings, orders and chats for staff');
 await pause(2400);
 await go('/app/appointments?status=pending_approval', '9 · The new booking is waiting for approval');
 await pause(1600);
@@ -122,7 +122,7 @@ await page.click('button[value=confirmed]');
 await page.waitForLoadState('networkidle').catch(() => {});
 await caption('10 · Approved — the customer can track it with a secure link');
 await pause(2200);
-await go('/app/conversations', '11 · Every AI conversation is saved for the team');
+await go('/app/conversations', '11 · Every chat is saved — staff can take over anytime');
 await pause(1600);
 await page.locator('main a.card', { hasText: 'Hair Color' }).first().click();
 await page.waitForLoadState('networkidle').catch(() => {});

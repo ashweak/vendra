@@ -16,6 +16,6 @@
             <p class="mt-7 max-w-sm text-center font-display text-2xl font-bold leading-tight">The assistant prepares. <span class="mark">You confirm.</span></p>
         </div>
     </div>
-    <p class="text-center text-xs text-ink-400">{{ config('vendra.public_demo') ? 'Public demo · fictional data only' : 'Local development build · fictional data only' }}</p>
+    <p class="text-center text-xs text-ink-500">{{ config('vendra.public_demo') ? 'Public demo · fictional data only' : 'Local development build · fictional data only' }}</p>
 </div>
 @endsection

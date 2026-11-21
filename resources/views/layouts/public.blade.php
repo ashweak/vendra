@@ -1,4 +1,5 @@
 @extends('layouts.base')
+@section('description', \Illuminate\Support\Str::limit(trim(($business->description ?: $business->name).' Book, order or ask in English, Tagalog or Taglish.'), 155))
 @push('head')
 <style>:root{--accent: {{ $business->accent_color }};}</style>
 @endpush

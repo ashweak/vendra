@@ -48,7 +48,7 @@
         b.className = mine ? 'max-w-[85%] rounded-2xl rounded-tr-md bg-ink-900 px-3.5 py-2.5 text-white whitespace-pre-line' : (m.from === 'system' ? 'mx-auto max-w-[90%] rounded-lg bg-amber-50 px-3 py-2 text-center text-xs text-amber-900' : 'max-w-[85%] rounded-2xl rounded-tl-md bg-white px-3.5 py-2.5 whitespace-pre-line');
         if (m.from === 'ai' || m.from === 'staff') {
             const who = document.createElement('p');
-            who.className = 'mb-0.5 text-[11px] font-medium text-ink-400';
+            who.className = 'mb-0.5 text-[11px] font-medium text-ink-500';
             who.textContent = m.from === 'ai' ? 'Auto-assistant' : (m.name || 'Staff');
             b.appendChild(who);
         }
@@ -84,10 +84,19 @@
     function resetLog() { [...log.children].slice(1).forEach(n => n.remove()); lastId = 0; }
     function open() {
         panel.classList.remove('hidden'); panel.classList.add('flex'); openBtn.classList.add('hidden'); openBtn.setAttribute('aria-expanded', 'true');
-        input.focus();
+        input.focus(); fitToViewport();
         if (!loaded) { loaded = true; refresh(); }
     }
-    function close() { panel.classList.add('hidden'); panel.classList.remove('flex'); openBtn.classList.remove('hidden'); openBtn.setAttribute('aria-expanded', 'false'); openBtn.focus(); }
+    function close() { panel.classList.add('hidden'); panel.classList.remove('flex'); fitToViewport(); openBtn.classList.remove('hidden'); openBtn.setAttribute('aria-expanded', 'false'); openBtn.focus(); }
+    // Phones: keep the full-screen chat (and its message box) inside the visible area when the keyboard opens.
+    const vv = window.visualViewport;
+    function fitToViewport() {
+        if (!vv || window.innerWidth >= 640 || panel.classList.contains('hidden')) { panel.style.height = ''; panel.style.top = ''; return; }
+        panel.style.top = vv.offsetTop + 'px';
+        panel.style.height = vv.height + 'px';
+        log.scrollTop = log.scrollHeight;
+    }
+    if (vv) { vv.addEventListener('resize', fitToViewport); vv.addEventListener('scroll', fitToViewport); }
     openBtn.addEventListener('click', open);
     document.querySelectorAll('[data-open-chat]').forEach(el => el.addEventListener('click', open));
     document.getElementById('vchat-min').addEventListener('click', close);
@@ -98,7 +107,7 @@
         if (!text || busy) return;
         busy = true; input.value = '';
         bubble({ from: 'customer', body: text });
-        const typing = document.createElement('p'); typing.className = 'text-xs text-ink-400'; typing.textContent = 'Typing…'; log.appendChild(typing); log.scrollTop = log.scrollHeight;
+        const typing = document.createElement('p'); typing.className = 'text-xs text-ink-500'; typing.textContent = 'Typing…'; log.appendChild(typing); log.scrollTop = log.scrollHeight;
         let data = null;
         try { data = await post(root.dataset.send, { message: text }); } finally { typing.remove(); busy = false; }
         if (data) { resetLog(); render(data); }

@@ -30,7 +30,7 @@
                     <div @class(['max-w-[85%] rounded-xl px-3 py-2 whitespace-pre-line', 'bg-ink-600 text-white' => $m->sender_type === 'customer', 'bg-white shadow-sm' => $m->sender_type === 'ai', 'bg-amber-50 text-xs text-amber-900' => $m->sender_type === 'system'])>
                         {{ $m->body }}
                         @if (! empty($m->meta['draft']))<span class="mt-1 block rounded bg-ink-100 px-2 py-1 text-xs text-ink-700">Draft: {{ $m->meta['draft']['title'] }} — {{ implode(' · ', $m->meta['draft']['lines']) }}</span>@endif
-                        @if (! empty($m->meta['tools']))<span class="mt-1 block text-[10px] text-ink-400">tools: {{ implode(', ', $m->meta['tools']) }}</span>@endif
+                        @if (! empty($m->meta['tools']))<span class="mt-1 block text-[10px] text-ink-500">tools: {{ implode(', ', $m->meta['tools']) }}</span>@endif
                     </div>
                 </div>
             @empty

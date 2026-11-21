@@ -1,0 +1,5 @@
+@extends('errors.layout')
+@section('title', 'Not allowed')
+@section('code', '403')
+@section('heading', 'Not allowed')
+@section('message', 'You don’t have access to this page. If you think you should, ask the business owner.')

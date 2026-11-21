@@ -16,7 +16,7 @@
             </span>
             <span class="text-xs text-ink-500">{{ $c->assignee?->name ?? 'Unassigned' }}</span>
             <x-status :value="$c->state" :label="\App\Models\Conversation::STATES[$c->state]" />
-            <span class="text-xs text-ink-400">{{ $c->last_activity_at?->diffForHumans() }}</span>
+            <span class="text-xs text-ink-500">{{ $c->last_activity_at?->diffForHumans() }}</span>
         </a>
     @empty
         <x-empty title="No conversations">When customers chat on your page, they appear here.</x-empty>

@@ -1,0 +1,5 @@
+@extends('errors.layout')
+@section('title', 'Page expired')
+@section('code', '419')
+@section('heading', 'Page expired')
+@section('message', 'The form was open too long. Go back, refresh the page and try again.')

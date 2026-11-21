@@ -77,4 +77,11 @@ class PrivacyTest extends TestCase
         $this->post(route('public.my.privacy', $b), ['type' => 'deletion'])->assertForbidden();
         $this->assertSame(0, PrivacyRequest::count());
     }
+
+    public function test_error_pages_are_branded_and_pages_have_share_previews(): void
+    {
+        $this->get('/b/no-such-business-here')->assertNotFound()->assertSee('Page not found');
+        $b = $this->makeBusiness(['description' => 'Neighborhood salon for cuts and color.']);
+        $this->get(route('public.home', $b))->assertSee('<meta property="og:description" content="Neighborhood salon for cuts and color.', false);
+    }
 }

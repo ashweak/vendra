@@ -86,7 +86,7 @@
             @endunless
             @yield('content')
         </main>
-        <footer class="px-8 pb-6 text-xs text-ink-400">Vendra local build · fictional data only · not production-ready</footer>
+        <footer class="px-8 pb-6 text-xs text-ink-500">Vendra local build · fictional data only · not production-ready</footer>
     </div>
 </div>
 @endsection
