@@ -2,8 +2,8 @@
 @section('title', $business->name)
 @section('content')
 @php
-    // Shared data for every theme layout (resources/views/public/home/{theme}.blade.php).
-    $layout = \App\Support\Themes::active($business);
+    // Shared data for every layout (resources/views/public/home/{layout}.blade.php).
+    $layout = \App\Support\Appearance::layout($business);
     $todayDow = now($business->timezone)->dayOfWeek;
     $todayHours = $hours->firstWhere('weekday', $todayDow);
     $openToday = $todayHours && ! $todayHours->is_closed && $todayHours->opens_at;

@@ -24,9 +24,10 @@ from the real app in GitHub Actions on every change to the script.
 
 **Customers** (no account needed)
 - Branded business page with a searchable catalog, hours, policies and FAQ.
-- **Six website themes** (Studio, Coral, Ocean, Roastery, Slate, Market), each with its own homepage layout,
-  header and footer, that the owner picks during setup and
-  can switch anytime in *Settings → Appearance*, with a live preview of their real page before saving.
+- **Appearance in two parts**, picked during setup and changeable anytime in *Settings → Appearance*: one of six
+  **layouts** (Classic, Brochure, Spotlight, Café, Panel, Shop — each with its own structure, header, footer and
+  headline font) and one of eight **color palettes** (Sunny, Coral, Ocean, Espresso, Slate, Garden, Berry, Lavender),
+  in any combination, with a live preview of the real page before saving.
 - Booking, ordering, quotation and service-request forms. Every submission goes **form → review → confirm**.
   Double-clicks and refreshes never create duplicates.
 - Chat with an offline auto-assistant that answers from the business's live data and prepares a **draft** the customer reviews in the
@@ -127,7 +128,7 @@ can set `VENDRA_ENFORCE_MFA=false`.
 ### Tests and assistant evaluation
 
 ```bash
-php artisan test                                   # 71 feature + unit tests
+php artisan test                                   # 72 feature + unit tests
 php artisan migrate:fresh --seed
 php artisan vendra:ai-eval          # 60 fictional EN/TL/Taglish cases (add --show to print replies)
 ```

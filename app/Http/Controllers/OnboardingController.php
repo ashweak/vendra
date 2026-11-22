@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Support\Themes;
+use App\Support\Appearance;
 use App\Models\Business;
 use App\Models\Membership;
 use App\Models\Subscription;
@@ -25,7 +25,8 @@ class OnboardingController extends Controller
             'category' => 'required|in:'.implode(',', array_keys(config('vendra.categories'))),
             'phone' => 'nullable|string|max:40',
             'address' => 'nullable|string|max:255',
-            'theme' => 'nullable|in:'.implode(',', Themes::keys()),
+            'layout' => 'nullable|in:'.implode(',', array_keys(Appearance::LAYOUTS)),
+            'palette' => 'nullable|in:'.implode(',', array_keys(Appearance::PALETTES)),
         ]);
 
         $slug = Str::slug($data['name']) ?: 'business';
@@ -41,7 +42,8 @@ class OnboardingController extends Controller
             'category' => $data['category'],
             'phone' => $data['phone'] ?? null,
             'address' => $data['address'] ?? null,
-            'theme' => Themes::resolve($data['theme'] ?? null),
+            'layout' => Appearance::resolveLayout($data['layout'] ?? null),
+            'palette' => Appearance::resolvePalette($data['palette'] ?? null),
             'email' => $request->user()->email,
             'modules' => config('vendra.categories.'.$data['category'].'.modules'),
             'settings' => config('vendra.default_settings'),

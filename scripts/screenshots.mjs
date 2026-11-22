@@ -63,9 +63,12 @@ for (const msg of ['Magkano po ang haircut?', `Pa-book po ng haircut sa ${['ling
 }
 await shot(page, '06-chat', false);
 
-// Website themes (Settings → Appearance), previewed on the same business page.
-for (const t of ['studio', 'coral', 'ocean', 'roastery', 'slate', 'market']) {
-    await page.goto(`${BASE}/b/lumina-studio?theme=${t}`); await shot(page, `06t-theme-${t}`);
+// Appearance (Settings → Appearance): every layout, then every palette on one layout.
+for (const l of ['classic', 'brochure', 'spotlight', 'cafe', 'panel', 'shop']) {
+    await page.goto(`${BASE}/b/lumina-studio?layout=${l}`); await shot(page, `06t-layout-${l}`);
+}
+for (const p of ['sunny', 'coral', 'ocean', 'espresso', 'slate', 'garden', 'berry', 'lavender']) {
+    await page.goto(`${BASE}/b/lumina-studio?layout=brochure&palette=${p}`); await shot(page, `06p-palette-${p}`, false);
 }
 await ctx.close();
 
@@ -74,10 +77,10 @@ const m = await browser.newContext({ viewport: { width: 390, height: 844 }, devi
 page = await m.newPage();
 await page.goto(`${BASE}/b/ganda-beauty/track`); await shot(page, '07b-mobile-track', false);
 await page.goto(`${BASE}/b/ganda-beauty`); await shot(page, '07-mobile-shop');
-for (const t of ['studio', 'coral', 'ocean', 'roastery', 'slate', 'market']) {
-    await page.goto(`${BASE}/b/ganda-beauty?theme=${t}`); await shot(page, `07t-mobile-theme-${t}`);
+for (const l of ['classic', 'brochure', 'spotlight', 'cafe', 'panel', 'shop']) {
+    await page.goto(`${BASE}/b/ganda-beauty?layout=${l}`); await shot(page, `07t-mobile-layout-${l}`);
 }
-await page.goto(`${BASE}/b/kislap-cleaning?theme=roastery`);
+await page.goto(`${BASE}/b/kislap-cleaning?layout=cafe&palette=lavender`);
 {
     // The chat button must be the top element at its own position on every page.
     const hit = await page.evaluate(() => { const b = document.getElementById('vchat-open').getBoundingClientRect(); const el = document.elementFromPoint(b.x + b.width / 2, b.y + b.height / 2); return el ? (el.closest('#vchat-open') ? 'ok' : el.outerHTML.slice(0, 160)) : 'none'; });

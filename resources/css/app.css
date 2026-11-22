@@ -61,6 +61,7 @@
     --color-sun: #ffc83d;
     --color-sun-soft: #fff3cc;
     --color-sun-deep: #e0a400;
+    --color-sun-ink: #826826; /* accent color dark enough for text */
     --color-leaf: #1f7a4d;
 }
 
@@ -140,10 +141,32 @@
 @media (prefers-reduced-motion: reduce) { .sticker-ring { animation: none; } }
 
 /*
- * Website themes (Settings → Appearance). Unlayered on purpose so they override the defaults above.
- * Colors were checked for WCAG AA contrast (body text 4.5:1) against each theme's backgrounds.
+ * Customer page appearance (Settings → Appearance). Unlayered on purpose so it overrides the defaults above.
+ * Palettes ([data-palette]) set colors only; layouts ([data-layout]) set fonts and shape. Any pair works.
+ * Every palette was checked for WCAG AA contrast (body text 4.5:1) on its backgrounds.
  */
-[data-theme="coral"] {
+[data-palette="sunny"] {
+    --color-ink-50: #f7f6f2;
+    --color-ink-100: #efede6;
+    --color-ink-200: #e2dfd5;
+    --color-ink-300: #c9c5b8;
+    --color-ink-400: #9c978a;
+    --color-ink-500: #706b60;
+    --color-ink-600: #4d4941;
+    --color-ink-700: #33302a;
+    --color-ink-800: #22201c;
+    --color-ink-900: #171612;
+    --color-ink-950: #0c0b09;
+    --color-paper: #fbfaf6;
+    --color-tile: #f3f1ea;
+    --color-line: #e6e2d8;
+    --color-sun: #ffc83d;
+    --color-sun-soft: #fff3cc;
+    --color-sun-deep: #e0a400;
+    --color-sun-ink: #826826;
+    --color-leaf: #1f7a4d;
+}
+[data-palette="coral"] {
     --color-ink-50: #f8f2ed;
     --color-ink-100: #efe9e5;
     --color-ink-200: #e1dcda;
@@ -161,10 +184,10 @@
     --color-sun: #ff7043;
     --color-sun-soft: #ffe4d8;
     --color-sun-deep: #f46534;
+    --color-sun-ink: #a7543f;
     --color-leaf: #1f7a4d;
-    --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
 }
-[data-theme="ocean"] {
+[data-palette="ocean"] {
     --color-ink-50: #eef1fa;
     --color-ink-100: #e5e8f3;
     --color-ink-200: #d7dbe9;
@@ -182,10 +205,10 @@
     --color-sun: #46c0ff;
     --color-sun-soft: #dcf2ff;
     --color-sun-deep: #1d9be0;
+    --color-sun-ink: #2d70ae;
     --color-leaf: #127a52;
-    --font-display: 'Inter', ui-sans-serif, system-ui, sans-serif;
 }
-[data-theme="roastery"] {
+[data-palette="espresso"] {
     --color-ink-50: #f5efe9;
     --color-ink-100: #ece6e0;
     --color-ink-200: #dfd9d2;
@@ -203,10 +226,10 @@
     --color-sun: #e0703a;
     --color-sun-soft: #f8dfcd;
     --color-sun-deep: #d86c34;
+    --color-sun-ink: #9c502c;
     --color-leaf: #2f6b3f;
-    --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
 }
-[data-theme="slate"] {
+[data-palette="slate"] {
     --color-ink-50: #f1f3f6;
     --color-ink-100: #e8eaed;
     --color-ink-200: #d9dce0;
@@ -224,10 +247,10 @@
     --color-sun: #22b3cf;
     --color-sun-soft: #daf3f8;
     --color-sun-deep: #1693ab;
+    --color-sun-ink: #1d788f;
     --color-leaf: #15803d;
-    --font-display: 'Inter', ui-sans-serif, system-ui, sans-serif;
 }
-[data-theme="market"] {
+[data-palette="garden"] {
     --color-ink-50: #eff4ed;
     --color-ink-100: #e5ece5;
     --color-ink-200: #d7e0d9;
@@ -245,21 +268,65 @@
     --color-sun: #a9dc5e;
     --color-sun-soft: #eaf6d8;
     --color-sun-deep: #86c23c;
+    --color-sun-ink: #4c7941;
     --color-leaf: #1a7f3c;
 }
-[data-theme="coral"] .font-display, [data-theme="coral"] h1, [data-theme="coral"] h2, [data-theme="coral"] h3,
-[data-theme="roastery"] .font-display, [data-theme="roastery"] h1, [data-theme="roastery"] h2, [data-theme="roastery"] h3 { font-weight: 600; letter-spacing: -0.01em; }
-[data-theme="coral"] .mark { background: none; font-style: italic; color: #c2461c; padding: 0; }
-[data-theme="roastery"] .mark { background: none; font-style: italic; color: #a4471b; padding: 0; }
-[data-theme="roastery"] .eyebrow { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: 0.08em; }
-[data-theme="ocean"] .font-display, [data-theme="ocean"] h1, [data-theme="ocean"] h2, [data-theme="ocean"] h3,
-[data-theme="slate"] .font-display, [data-theme="slate"] h1, [data-theme="slate"] h2, [data-theme="slate"] h3 { letter-spacing: -0.03em; }
-[data-theme="slate"] .card, [data-theme="slate"] .tile { border-radius: 14px; }
-[data-theme="slate"] .btn, [data-theme="slate"] .chip, [data-theme="slate"] .btn-play { border-radius: 10px; }
-[data-theme="slate"] .btn-play-icon { border-radius: 8px; }
-[data-theme="ocean"] .card, [data-theme="ocean"] .tile { border-radius: 26px; }
+[data-palette="berry"] {
+    --color-ink-50: #f9f0f3;
+    --color-ink-100: #f0e7eb;
+    --color-ink-200: #e3d9de;
+    --color-ink-300: #ccbfc5;
+    --color-ink-400: #9d8c95;
+    --color-ink-500: #6a5561;
+    --color-ink-600: #553d4b;
+    --color-ink-700: #462d3b;
+    --color-ink-800: #3b2231;
+    --color-ink-900: #331828;
+    --color-ink-950: #2a0f1f;
+    --color-paper: #fff7fa;
+    --color-tile: #fbe9f1;
+    --color-line: #f1d5e2;
+    --color-sun: #ff5c93;
+    --color-sun-soft: #ffe0ec;
+    --color-sun-deep: #f0477f;
+    --color-sun-ink: #b1426a;
+    --color-leaf: #1f7a4d;
+}
+[data-palette="lavender"] {
+    --color-ink-50: #f1eff9;
+    --color-ink-100: #e9e6f2;
+    --color-ink-200: #dbd9e6;
+    --color-ink-300: #c3c0d2;
+    --color-ink-400: #938ea8;
+    --color-ink-500: #5e587b;
+    --color-ink-600: #484168;
+    --color-ink-700: #39315b;
+    --color-ink-800: #2e2651;
+    --color-ink-900: #251d4a;
+    --color-ink-950: #1c1442;
+    --color-paper: #f8f6ff;
+    --color-tile: #efeaff;
+    --color-line: #ddd5f6;
+    --color-sun: #a78bfa;
+    --color-sun-soft: #ede6ff;
+    --color-sun-deep: #9a7ef5;
+    --color-sun-ink: #705db0;
+    --color-leaf: #1f7a4d;
+}
+[data-layout="brochure"], [data-layout="cafe"] { --font-display: 'Fraunces', Georgia, 'Times New Roman', serif; }
+[data-layout="spotlight"], [data-layout="panel"] { --font-display: 'Inter', ui-sans-serif, system-ui, sans-serif; }
+[data-layout="brochure"] .font-display, [data-layout="brochure"] h1, [data-layout="brochure"] h2, [data-layout="brochure"] h3,
+[data-layout="cafe"] .font-display, [data-layout="cafe"] h1, [data-layout="cafe"] h2, [data-layout="cafe"] h3 { font-weight: 600; letter-spacing: -0.01em; }
+[data-layout="brochure"] .mark, [data-layout="cafe"] .mark { background: none; font-style: italic; color: var(--color-sun-ink); padding: 0; }
+[data-layout="cafe"] .eyebrow { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: 0.08em; }
+[data-layout="spotlight"] .font-display, [data-layout="spotlight"] h1, [data-layout="spotlight"] h2, [data-layout="spotlight"] h3,
+[data-layout="panel"] .font-display, [data-layout="panel"] h1, [data-layout="panel"] h2, [data-layout="panel"] h3 { letter-spacing: -0.03em; }
+[data-layout="panel"] .card, [data-layout="panel"] .tile { border-radius: 14px; }
+[data-layout="panel"] .btn, [data-layout="panel"] .chip, [data-layout="panel"] .btn-play { border-radius: 10px; }
+[data-layout="panel"] .btn-play-icon { border-radius: 8px; }
+[data-layout="spotlight"] .card, [data-layout="spotlight"] .tile { border-radius: 26px; }
 
-/* Roastery category ribbon: slow scroll, paused for people who prefer less motion. */
+/* Café layout category ribbon: slow scroll, paused for people who prefer less motion. */
 @keyframes vendra-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 .vendra-marquee { animation: vendra-marquee 40s linear infinite; }
 @media (prefers-reduced-motion: reduce) { .vendra-marquee { animation: none; } }

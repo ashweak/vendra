@@ -1,4 +1,4 @@
-{{-- Header: open layout, name left and links right, no bar (Ocean). --}}
+{{-- Header: open layout, name left and links right, no bar (Spotlight). --}}
 <header class="sticky top-0 z-30 bg-paper/85 backdrop-blur">
     <nav class="mx-auto flex h-[4.5rem] max-w-6xl items-center gap-2 px-3 sm:px-8" aria-label="Business">
         <a href="{{ route('public.home', $business) }}" class="flex min-w-0 shrink-0 items-center gap-3" aria-label="{{ $business->name }} home">

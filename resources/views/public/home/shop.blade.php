@@ -1,4 +1,4 @@
-{{-- Market: dark promo banner with search and price tags, two offer tiles, category shelf,
+{{-- Shop: dark promo banner with search and price tags, two offer tiles, category shelf,
      product grid by category, perks strip, visit cards, FAQ. --}}
 @php $slug = fn ($g, $i) => 'grp-'.(\Illuminate\Support\Str::slug($g) ?: $i); @endphp
 <section class="mx-auto max-w-6xl px-5 pt-6 sm:px-8">

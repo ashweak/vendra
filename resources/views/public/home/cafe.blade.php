@@ -1,4 +1,4 @@
-{{-- Roastery: bento hero (big story tile, featured item, dark status tile), scrolling category ribbon,
+{{-- Café: bento hero (big story tile, featured item, dark status tile), scrolling category ribbon,
      menu cards by category, dark "how it works" band, visit cards, FAQ. --}}
 @php $slug = fn ($g, $i) => 'grp-'.(\Illuminate\Support\Str::slug($g) ?: $i); @endphp
 <section class="mx-auto max-w-6xl px-5 pt-6 pb-12 sm:px-8">
@@ -79,7 +79,7 @@
             <div class="mt-5 grid grid-cols-2 gap-4 lg:grid-cols-4">
                 @foreach ($rows as $item)
                     <article class="flex flex-col rounded-[22px] border border-line bg-white p-3">
-                        <div class="flex aspect-[4/3] items-center justify-center rounded-2xl bg-tile font-display text-6xl text-sun-deep italic" aria-hidden="true">{{ mb_substr($item->name, 0, 1) }}</div>
+                        <div class="flex aspect-[4/3] items-center justify-center rounded-2xl bg-tile font-display text-6xl text-sun-ink italic" aria-hidden="true">{{ mb_substr($item->name, 0, 1) }}</div>
                         <h4 class="mt-3 px-1 font-display text-lg leading-snug font-semibold">{{ $item->name }}</h4>
                         <p class="mt-0.5 px-1 text-xs text-ink-500">@include('public.home.parts.meta', ['withDescription' => false])</p>
                         <div class="mt-auto flex flex-wrap items-center justify-between gap-2 px-1 pt-3">
@@ -109,7 +109,7 @@
 
 <section class="mx-auto grid max-w-6xl gap-5 px-5 py-16 sm:px-8 lg:grid-cols-2">
     <div class="card p-6 sm:p-8"><h2 class="font-display text-2xl font-semibold">Opening hours</h2>@include('public.home.parts.hours', ['class' => 'mt-5'])</div>
-    <div class="card p-6 sm:p-8"><h2 class="font-display text-2xl font-semibold">Find us</h2>@include('public.home.parts.contact', ['class' => 'mt-5', 'iconClass' => 'text-sun-deep'])</div>
+    <div class="card p-6 sm:p-8"><h2 class="font-display text-2xl font-semibold">Find us</h2>@include('public.home.parts.contact', ['class' => 'mt-5', 'iconClass' => 'text-sun-ink'])</div>
 </section>
 
 @if ($knowledge->isNotEmpty())

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Support\Themes;
+use App\Support\Appearance;
 use App\Models\Conversation;
 use App\Models\KnowledgeEntry;
 use App\Models\SupportGrant;
@@ -43,20 +43,23 @@ class SettingsController extends DashboardController
     {
         $this->authorizeAbility('settings.manage');
 
-        return view('dashboard.settings.appearance', ['themes' => Themes::ALL]);
+        return view('dashboard.settings.appearance', ['layouts' => Appearance::LAYOUTS, 'palettes' => Appearance::PALETTES]);
     }
 
-    /** Website theme for the customer pages. Not demo-locked: it only changes colors and fonts. */
+    /** Layout and colors of the customer pages, chosen separately. Not demo-locked: only the look changes. */
     public function updateAppearance(Request $request)
     {
         $this->authorizeAbility('settings.manage');
-        $data = $request->validate(['theme' => 'required|in:'.implode(',', Themes::keys())]);
+        $data = $request->validate([
+            'layout' => 'required|in:'.implode(',', array_keys(Appearance::LAYOUTS)),
+            'palette' => 'required|in:'.implode(',', array_keys(Appearance::PALETTES)),
+        ]);
         $b = $this->business();
-        $old = $b->theme;
+        $old = ['layout' => $b->layout, 'palette' => $b->palette];
         $b->update($data);
-        AuditLogger::log($b->id, 'settings.theme_changed', $b, ['from' => $old, 'to' => $data['theme']]);
+        AuditLogger::log($b->id, 'settings.appearance_changed', $b, ['from' => $old, 'to' => $data]);
 
-        return back()->with('status', 'Theme changed to '.Themes::ALL[$data['theme']]['name'].'. Your customer page uses it now.');
+        return back()->with('status', 'Saved: '.Appearance::LAYOUTS[$data['layout']]['name'].' layout with '.Appearance::PALETTES[$data['palette']]['name'].' colors. Your customer page uses it now.');
     }
 
     public function workflow()

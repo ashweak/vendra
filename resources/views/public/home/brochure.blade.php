@@ -1,4 +1,4 @@
-{{-- Coral: centered brochure hero, three quick-action cards, service cards, assistant band, visit info, FAQ. --}}
+{{-- Brochure: centered brochure hero, three quick-action cards, service cards, assistant band, visit info, FAQ. --}}
 <div class="bg-[linear-gradient(180deg,var(--color-sun-soft),var(--color-paper)_78%)]">
     <section class="mx-auto max-w-4xl px-5 pt-12 pb-14 text-center sm:px-8 sm:pt-20">
         <x-flash />
@@ -88,7 +88,7 @@
     </div>
     <div class="card flex flex-col p-6 sm:p-8">
         <h2 class="font-display text-2xl font-semibold">Contact & how it works</h2>
-        @include('public.home.parts.contact', ['class' => 'mt-5', 'iconClass' => 'text-sun-deep'])
+        @include('public.home.parts.contact', ['class' => 'mt-5', 'iconClass' => 'text-sun-ink'])
         <div class="mt-6 border-t border-line pt-6">@include('public.home.parts.steps', ['numClass' => 'bg-sun text-ink-900'])</div>
     </div>
 </section>

@@ -1,4 +1,4 @@
-{{-- Footer: simple light bar (Studio, Slate). --}}
+{{-- Footer: simple light bar (Classic, Panel). --}}
     <footer class="border-t border-line bg-white">
         <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 py-6 pr-24 pl-5 text-xs text-ink-500 sm:px-8">
             <span class="flex flex-col gap-1">

@@ -1,9 +1,11 @@
 @extends('layouts.base')
 @php
-    // ?theme= lets an owner preview another theme without saving; it only changes what that visitor sees.
-    $activeTheme = \App\Support\Themes::active($business);
+    // ?layout= and ?palette= let an owner preview without saving; they only change what that visitor sees.
+    $activeLayout = \App\Support\Appearance::layout($business);
+    $activePalette = \App\Support\Appearance::palette($business);
 @endphp
-@section('theme', $activeTheme)
+@section('layout', $activeLayout)
+@section('palette', $activePalette)
 @section('description', \Illuminate\Support\Str::limit(trim(($business->description ?: $business->name).' Book, order or ask in English, Tagalog or Taglish.'), 155))
 @push('head')
 <style>:root{--accent: {{ $business->accent_color }};}</style>
@@ -16,9 +18,8 @@
     if ($business->moduleEnabled('quotations')) $links[] = ['Get a quote', 'public.quote', 'doc'];
     if ($business->moduleEnabled('service_requests')) $links[] = ['Request service', 'public.request', 'tool'];
     $links[] = ['Track request', 'public.track', 'search'];
-    // Each theme pairs its homepage layout with a header and footer style.
-    $chrome = ['studio' => ['pill', 'simple'], 'coral' => ['bar', 'dark'], 'ocean' => ['split', 'dark'],
-        'roastery' => ['stacked', 'dark'], 'slate' => ['bar', 'simple'], 'market' => ['stacked', 'dark']][$activeTheme];
+    // Each layout pairs its homepage with a header and footer style.
+    $chrome = \App\Support\Appearance::CHROME[$activeLayout];
     $fullBleed = request()->routeIs('public.home');
     $todayRow = $business->hours()->where('weekday', now($business->timezone)->dayOfWeek)->first();
     $statusLine = $todayRow && ! $todayRow->is_closed && $todayRow->opens_at

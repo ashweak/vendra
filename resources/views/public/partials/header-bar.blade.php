@@ -1,4 +1,4 @@
-{{-- Header: full-width bar with underlined tabs (Coral, Slate). --}}
+{{-- Header: full-width bar with underlined tabs (Brochure, Panel). --}}
 <header class="sticky top-0 z-30 border-b border-line bg-white/90 backdrop-blur">
     <nav class="mx-auto flex h-16 max-w-6xl items-center gap-2 px-3 sm:gap-4 sm:px-8" aria-label="Business">
         <a href="{{ route('public.home', $business) }}" class="flex min-w-0 shrink-0 items-center gap-2.5" aria-label="{{ $business->name }} home">

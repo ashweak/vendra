@@ -1,4 +1,4 @@
-{{-- Slate: app-like panel. Sticky business card on the left; stats, catalog table, steps and FAQ on the right. --}}
+{{-- Panel: app-like panel. Sticky business card on the left; stats, catalog table, steps and FAQ on the right. --}}
 @php $slug = fn ($g, $i) => 'grp-'.(\Illuminate\Support\Str::slug($g) ?: $i); @endphp
 <div class="mx-auto grid max-w-6xl gap-6 px-5 py-8 sm:px-8 lg:grid-cols-[300px_minmax(0,1fr)]">
     <aside class="space-y-4 lg:sticky lg:top-24 lg:self-start">
@@ -63,7 +63,7 @@
             <h2 class="text-lg font-semibold">How requests work</h2>
             <ol class="mt-4 grid gap-3 sm:grid-cols-3">
                 @foreach ($steps as $i => $step)
-                    <li class="rounded-xl border border-line p-4 text-sm"><span class="text-xs font-semibold text-sun-deep">Step {{ $i + 1 }}</span><p class="mt-1">{{ $step }}</p></li>
+                    <li class="rounded-xl border border-line p-4 text-sm"><span class="text-xs font-semibold text-sun-ink">Step {{ $i + 1 }}</span><p class="mt-1">{{ $step }}</p></li>
                 @endforeach
             </ol>
         </section>

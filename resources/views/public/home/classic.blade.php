@@ -1,4 +1,4 @@
-{{-- Studio: split hero with phone preview, two-column price list, bento visit block, FAQ. --}}
+{{-- Classic: split hero with phone preview, two-column price list, bento visit block, FAQ. --}}
 <div class="mx-auto max-w-6xl px-5 py-10 sm:px-8">
 <x-flash />
 {{-- Hero --}}

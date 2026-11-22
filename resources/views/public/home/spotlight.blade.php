@@ -1,4 +1,4 @@
-{{-- Ocean: headline with stats and a layered visual, swipeable "popular" row, ring diagram for steps, info cards, FAQ grid. --}}
+{{-- Spotlight: headline with stats and a layered visual, swipeable "popular" row, ring diagram for steps, info cards, FAQ grid. --}}
 <section class="mx-auto max-w-6xl px-5 pt-6 pb-16 sm:px-8 lg:pt-12">
     <x-flash />
     <div class="grid items-center gap-12 lg:grid-cols-[1.05fr_1fr]">
@@ -44,7 +44,7 @@
                 @foreach ($items as $item)
                     <article class="flex w-64 shrink-0 snap-start flex-col rounded-3xl border border-line bg-paper p-3">
                         <div class="relative flex h-32 items-center justify-center rounded-2xl bg-tile">
-                            <span class="font-display text-6xl font-extrabold text-sun-deep" aria-hidden="true">{{ mb_substr($item->name, 0, 1) }}</span>
+                            <span class="font-display text-6xl font-extrabold text-sun-ink" aria-hidden="true">{{ mb_substr($item->name, 0, 1) }}</span>
                             <span class="absolute top-3 left-3 rounded-full bg-white px-2.5 py-0.5 text-[11px] font-semibold text-ink-700">{{ $item->category ?: ($item->type === 'service' ? 'Service' : 'Product') }}</span>
                         </div>
                         <h3 class="mt-4 px-1 font-semibold leading-snug">{{ $item->name }}</h3>
@@ -79,7 +79,7 @@
 <section class="bg-tile">
     <div class="mx-auto grid max-w-6xl gap-5 px-5 py-16 sm:px-8 lg:grid-cols-3">
         <div class="card p-6"><h2 class="font-display text-xl font-extrabold">Opening hours</h2>@include('public.home.parts.hours', ['class' => 'mt-4'])</div>
-        <div class="card p-6"><h2 class="font-display text-xl font-extrabold">Contact</h2>@include('public.home.parts.contact', ['class' => 'mt-5', 'iconClass' => 'text-sun-deep'])</div>
+        <div class="card p-6"><h2 class="font-display text-xl font-extrabold">Contact</h2>@include('public.home.parts.contact', ['class' => 'mt-5', 'iconClass' => 'text-sun-ink'])</div>
         <div class="flex flex-col rounded-[26px] bg-ink-900 p-6 text-white">
             <h2 class="font-display text-xl font-extrabold">Need help now?</h2>
             <p class="mt-2 text-sm text-white/75">Ask in English, Tagalog or Taglish. Our auto-assistant answers right away, and staff reply {{ $business->setting('response_hours') }}.</p>

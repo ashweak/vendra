@@ -1,4 +1,4 @@
-{{-- Footer: dark, with columns (Coral, Ocean, Roastery, Market). --}}
+{{-- Footer: dark, with columns (Brochure, Spotlight, Café, Shop). --}}
 <footer class="bg-ink-900 text-white">
     <div class="mx-auto grid max-w-6xl gap-8 px-5 pt-12 pb-8 sm:grid-cols-2 sm:px-8 lg:grid-cols-4">
         <div class="lg:col-span-2">
