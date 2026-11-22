@@ -94,6 +94,8 @@ class ThemeTest extends TestCase
                 ->assertSee('Late arrivals')->assertSee('1 Rizal St., Manila')
                 ->assertSee(route('public.privacy', $b), false)
                 ->assertSee('data-open-chat', false)
+                ->assertSee('45 min')->assertSee('Only 2 left')
+                ->assertDontSee('__raw_block', false)->assertDontSee('$item', false)->assertDontSee('@php', false)
                 ->assertDontSee('Order Sold Out Serum', false);
             $this->assertSame(1, substr_count($r->getContent(), '<h1'), "Theme {$key} must have exactly one h1");
 

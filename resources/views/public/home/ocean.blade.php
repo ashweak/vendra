@@ -22,8 +22,8 @@
                 <div class="pointer-events-none absolute -bottom-20 -left-16 h-56 w-56 rounded-full border-[22px] border-ink-900/10"></div>
                 <div class="relative">@include('public.home.parts.phone')</div>
             </div>
-            <div class="absolute top-10 -left-6 hidden items-center gap-2 rounded-2xl bg-white px-4 py-3 text-sm font-semibold shadow-[0_18px_40px_-20px_rgba(0,0,0,.4)] sm:flex"><span class="flex h-7 w-7 items-center justify-center rounded-lg bg-sun-soft"><x-icon name="check" class="h-4 w-4" /></span>Request confirmed</div>
-            <div class="absolute -right-4 bottom-12 hidden items-center gap-2 rounded-2xl bg-white px-4 py-3 text-sm font-semibold shadow-[0_18px_40px_-20px_rgba(0,0,0,.4)] sm:flex"><span class="flex h-7 w-7 items-center justify-center rounded-lg bg-sun-soft"><x-icon name="users" class="h-4 w-4" /></span>Staff online</div>
+            <div class="absolute -top-5 left-6 hidden items-center gap-2 rounded-2xl bg-white px-4 py-3 text-sm font-semibold shadow-[0_18px_40px_-20px_rgba(0,0,0,.4)] sm:flex"><span class="flex h-7 w-7 items-center justify-center rounded-lg bg-sun-soft"><x-icon name="check" class="h-4 w-4" /></span>Request confirmed</div>
+            <div class="absolute right-6 -bottom-5 hidden items-center gap-2 rounded-2xl bg-white px-4 py-3 text-sm font-semibold shadow-[0_18px_40px_-20px_rgba(0,0,0,.4)] sm:flex"><span class="flex h-7 w-7 items-center justify-center rounded-lg bg-sun-soft"><x-icon name="users" class="h-4 w-4" /></span>Staff online</div>
         </div>
     </div>
 </section>
