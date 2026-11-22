@@ -31,6 +31,8 @@ class CatalogItem extends Model
     }
 
     public function scopeActive($q) { return $q->where('is_active', true); }
+
+    public function imageUrl(): ?string { return \App\Services\ImageStore::url($this->image_path); }
     public function scopeServices($q) { return $q->where('type', 'service'); }
     public function scopeProducts($q) { return $q->where('type', 'product'); }
 }

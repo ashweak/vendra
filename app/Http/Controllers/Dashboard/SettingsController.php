@@ -57,6 +57,7 @@ class SettingsController extends DashboardController
         $b = $this->business();
         $old = ['layout' => $b->layout, 'palette' => $b->palette];
         $b->update($data);
+        $request->session()->forget('appearance_preview.'.$b->id); // the saved look replaces any preview
         AuditLogger::log($b->id, 'settings.appearance_changed', $b, ['from' => $old, 'to' => $data]);
 
         return back()->with('status', 'Saved: '.Appearance::LAYOUTS[$data['layout']]['name'].' layout with '.Appearance::PALETTES[$data['palette']]['name'].' colors. Your customer page uses it now.');

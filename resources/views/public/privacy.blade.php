@@ -6,8 +6,7 @@
     $who = $business->legal_name ?: $business->name;
 @endphp
 <article class="mx-auto max-w-3xl">
-    <span class="eyebrow">Privacy notice</span>
-    <h1 class="section-title mt-4">How {{ $business->name }} handles your information</h1>
+    <x-page-head eyebrow="Privacy notice" :title="'How '.$business->name.' handles your information'" />
     <p class="mt-3 text-sm text-ink-600">Under the Data Privacy Act of 2012 (Republic Act No. 10173). Last updated {{ now()->format('F j, Y') }}.</p>
 
     <div class="mt-8 space-y-7 text-[15px] leading-relaxed text-ink-800">

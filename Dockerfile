@@ -11,7 +11,14 @@ RUN composer dump-autoload --no-dev --optimize --no-scripts
 
 FROM php:8.4-apache
 
-RUN docker-php-ext-install opcache \
+# gd (JPEG/PNG/WebP) and exif: uploaded pictures are re-encoded and stripped of metadata.
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends libpng-dev libjpeg62-turbo-dev libwebp-dev libfreetype6-dev \
+    && docker-php-ext-configure gd --with-jpeg --with-webp --with-freetype \
+    && docker-php-ext-install -j"$(nproc)" gd exif opcache \
+    && apt-get purge -y --auto-remove libpng-dev libjpeg62-turbo-dev libwebp-dev libfreetype6-dev \
+    && apt-get install -y --no-install-recommends libpng16-16 libjpeg62-turbo libwebp7 libfreetype6 \
+    && rm -rf /var/lib/apt/lists/* \
     && a2enmod headers deflate \
     && sed -ri 's/^Listen 80$/Listen ${PORT}/' /etc/apache2/ports.conf
 
@@ -33,7 +40,7 @@ ENV PORT=10000 \
     QUEUE_CONNECTION=sync \
     MAIL_MAILER=log
 
-RUN mkdir -p storage/framework/cache/data storage/framework/sessions storage/framework/views storage/logs bootstrap/cache \
+RUN mkdir -p storage/app/public storage/framework/cache/data storage/framework/sessions storage/framework/views storage/logs bootstrap/cache \
     && chown -R www-data:www-data storage bootstrap/cache database \
     && chmod +x docker/entrypoint.sh
 

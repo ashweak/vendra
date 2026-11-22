@@ -70,4 +70,16 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->unreadNotifications()->where('data->business_id', $businessId);
     }
+
+    public function avatarUrl(): ?string
+    {
+        return \App\Services\ImageStore::url($this->avatar_path);
+    }
+
+    public function initials(): string
+    {
+        $parts = preg_split('/\s+/', trim($this->name)) ?: [''];
+
+        return mb_strtoupper(mb_substr($parts[0], 0, 1).(count($parts) > 1 ? mb_substr(end($parts), 0, 1) : ''));
+    }
 }

@@ -154,12 +154,23 @@ Route::prefix('app')->name('dashboard.')->middleware(['auth', 'mfa', 'business']
     Route::get('account', [AccountController::class, 'edit'])->name('account');
     Route::put('account', [AccountController::class, 'update'])->name('account.update')->middleware('demo.lock');
     Route::put('account/password', [AccountController::class, 'updatePassword'])->name('account.password')->middleware(['throttle:6,1', 'demo.lock']);
+    Route::post('account/avatar', [AccountController::class, 'updateAvatar'])->name('account.avatar')->middleware(['throttle:20,1', 'demo.lock']);
+    Route::delete('account/avatar', [AccountController::class, 'removeAvatar'])->name('account.avatar.remove')->middleware('demo.lock');
 
     Route::get('team', [Dashboard\TeamController::class, 'index'])->name('team.index');
     Route::post('team', [Dashboard\TeamController::class, 'store'])->name('team.store')->middleware('demo.lock');
     Route::put('team/{id}', [Dashboard\TeamController::class, 'update'])->name('team.update')->middleware('demo.lock');
     Route::post('team/{userId}/schedule', [Dashboard\TeamController::class, 'schedule'])->name('team.schedule')->middleware('demo.lock');
 
+    // Photos (logo, cover, gallery). Uploads are turned off in the public demo so visitors can't post pictures for everyone.
+    Route::controller(Dashboard\PhotoController::class)->prefix('settings/photos')->name('settings.photos')->group(function () {
+        Route::get('/', 'index');
+        Route::post('gallery', 'storeGallery')->name('.gallery')->middleware(['demo.lock', 'throttle:20,1']);
+        Route::put('gallery/{id}', 'updateGallery')->name('.gallery.update')->middleware('demo.lock');
+        Route::delete('gallery/{id}', 'destroyGallery')->name('.gallery.destroy')->middleware('demo.lock');
+        Route::post('{kind}', 'upload')->name('.upload')->whereIn('kind', ['logo', 'cover'])->middleware(['demo.lock', 'throttle:20,1']);
+        Route::delete('{kind}', 'remove')->name('.remove')->whereIn('kind', ['logo', 'cover'])->middleware('demo.lock');
+    });
     Route::controller(Dashboard\SettingsController::class)->prefix('settings')->name('settings.')->group(function () {
         Route::get('profile', 'profile')->name('profile');
         Route::put('profile', 'updateProfile')->middleware('demo.lock');

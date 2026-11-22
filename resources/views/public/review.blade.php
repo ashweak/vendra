@@ -13,8 +13,7 @@
         return $out;
     };
 @endphp
-<span class="eyebrow">Step 2 of 2 · Review</span>
-<h1 class="section-title mt-4">Review and confirm</h1>
+<x-page-head eyebrow="Step 2 of 2 · Review" title="Review and confirm" />
 <p class="mt-1 text-sm text-ink-600">Please check these details. Nothing is submitted until you confirm.</p>
 @if ($error)<div role="alert" class="mt-4 rounded-lg border border-amber-300 bg-amber-50 px-4 py-3 text-sm text-amber-900">{{ $error }}</div>@endif
 <div class="card mt-6 max-w-2xl">

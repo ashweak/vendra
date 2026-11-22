@@ -23,6 +23,8 @@ else
     php artisan migrate --force
 fi
 
+# Public URLs for uploaded pictures (public/storage -> storage/app/public).
+php artisan storage:link --force >/dev/null 2>&1 || true
 php artisan config:cache
 php artisan view:cache
 chown -R www-data:www-data storage bootstrap/cache database

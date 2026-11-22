@@ -17,6 +17,7 @@
         <h2 class="h2">If you run a business on Vendra</h2>
         <ul class="mt-2 list-disc space-y-1 pl-5">
             <li>You are responsible for your prices, listings, replies and for following the laws that apply to you — including showing your business name, physical address and contact details (Internet Transactions Act, RA 11967) and protecting your customers’ data (Data Privacy Act, RA 10173).</li>
+            <li>Upload only pictures you own or have permission to use (Intellectual Property Code, RA 8293). Don’t post photos that show customers or other people without their consent.</li>
             <li>Booking and order summaries in Vendra are <strong>not official invoices</strong>. Issue BIR-registered invoices from your own registered system or booklet.</li>
             <li>Verify payments yourself against your GCash, bank or cash records. Screenshots alone are not proof.</li>
             <li>Act on customers’ privacy requests (shown on the customer’s page in your dashboard).</li>

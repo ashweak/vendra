@@ -2,9 +2,7 @@
 @section('title', 'Track · '.$business->name)
 @section('content')
 <div class="mx-auto max-w-md">
-    <span class="eyebrow">Secure access</span>
-    <h1 class="section-title mt-4">Track my request</h1>
-    <p class="mt-1 text-sm text-ink-600">Enter your reference number and the email you used. We’ll email you a secure one-time link.</p>
+    <x-page-head eyebrow="Secure access" title="Track my request" intro="Enter your reference number and the email you used. We’ll email you a secure one-time link." />
     <form method="POST" action="{{ route('public.track.send', $business) }}" class="card mt-6 space-y-4">
         @csrf
         <div><label class="label" for="ref">Reference number</label><input id="ref" name="reference" class="input font-mono uppercase" placeholder="APT-XXXXXX" required maxlength="20" value="{{ old('reference') }}"></div>

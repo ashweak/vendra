@@ -70,6 +70,15 @@ for (const l of ['classic', 'brochure', 'spotlight', 'cafe', 'panel', 'shop']) {
 for (const p of ['sunny', 'coral', 'ocean', 'espresso', 'slate', 'garden', 'berry', 'lavender']) {
     await page.goto(`${BASE}/b/lumina-studio?layout=brochure&palette=${p}`); await shot(page, `06p-palette-${p}`, false);
 }
+// A preview follows the visitor to other pages until they exit it.
+await page.goto(`${BASE}/b/lumina-studio?layout=panel&palette=garden`);
+await page.goto(`${BASE}/b/lumina-studio/book`); await shot(page, '06q-preview-on-book-page', false);
+log('preview-persists', await page.evaluate(() => document.documentElement.dataset.layout + '/' + document.documentElement.dataset.palette));
+await page.goto(`${BASE}/b/lumina-studio?preview=off`);
+// Seeded pictures: Kislap (cover + gallery + logo) and Ganda (product photos) in other layouts.
+await page.goto(`${BASE}/b/kislap-cleaning`); await shot(page, '06r-photos-kislap');
+await page.goto(`${BASE}/b/ganda-beauty?layout=cafe&palette=coral`); await shot(page, '06s-photos-ganda-cafe');
+await page.goto(`${BASE}/b/ganda-beauty?preview=off`);
 await ctx.close();
 
 // ---------- Mobile
@@ -80,12 +89,14 @@ await page.goto(`${BASE}/b/ganda-beauty`); await shot(page, '07-mobile-shop');
 for (const l of ['classic', 'brochure', 'spotlight', 'cafe', 'panel', 'shop']) {
     await page.goto(`${BASE}/b/ganda-beauty?layout=${l}`); await shot(page, `07t-mobile-layout-${l}`);
 }
+await page.goto(`${BASE}/b/ganda-beauty?preview=off`);
 await page.goto(`${BASE}/b/kislap-cleaning?layout=cafe&palette=lavender`);
 {
     // The chat button must be the top element at its own position on every page.
     const hit = await page.evaluate(() => { const b = document.getElementById('vchat-open').getBoundingClientRect(); const el = document.elementFromPoint(b.x + b.width / 2, b.y + b.height / 2); return el ? (el.closest('#vchat-open') ? 'ok' : el.outerHTML.slice(0, 160)) : 'none'; });
     log('launcher-hit-test kislap', hit);
 }
+await page.goto(`${BASE}/b/kislap-cleaning?preview=off`);
 await page.goto(`${BASE}/b/ganda-beauty`);
 await page.click('#vchat-open');
 await page.fill('#vchat-input', 'I want to order 2 niacinamide toner for pickup');
@@ -103,6 +114,8 @@ page.on('pageerror', e => errors.push(String(e)));
 await login(page, 'owner@lumina.test');
 await page.goto(`${BASE}/app`); await shot(page, '10-dashboard-overview');
 await page.goto(`${BASE}/app/settings/appearance`); await shot(page, '10b-settings-appearance');
+await page.goto(`${BASE}/app/settings/photos`); await shot(page, '10c-settings-photos');
+await page.goto(`${BASE}/app/account`); await shot(page, '10d-account-profile-picture', false);
 await page.goto(`${BASE}/app/conversations`);
 await page.locator('main a.card').first().click(); await shot(page, '11-inbox-handoff');
 const tmr = new Date(Date.now() + 86400000); if (tmr.getDay() === 0) tmr.setDate(tmr.getDate() + 1);

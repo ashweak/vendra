@@ -2,9 +2,10 @@
 @php $slug = fn ($g, $i) => 'grp-'.(\Illuminate\Support\Str::slug($g) ?: $i); @endphp
 <div class="mx-auto grid max-w-6xl gap-6 px-5 py-8 sm:px-8 lg:grid-cols-[300px_minmax(0,1fr)]">
     <aside class="space-y-4 lg:sticky lg:top-24 lg:self-start">
-        <div class="card p-5">
+        <div class="card overflow-hidden p-5">
+            @if ($cover)<img src="{{ $cover }}" alt="{{ $business->name }}" class="-mx-5 -mt-5 mb-4 aspect-[16/9] w-[calc(100%+2.5rem)] max-w-none object-cover">@endif
             <div class="flex items-center gap-3">
-                <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl font-display text-lg font-bold text-white" style="background: var(--accent)">{{ mb_substr($business->name, 0, 1) }}</span>
+                <x-biz-mark :business="$business" class="h-12 w-12 rounded-xl text-lg" />
                 <div class="min-w-0"><p class="truncate font-semibold">{{ $business->name }}</p><p class="truncate text-xs text-ink-500">{{ $categoryLabel }}</p></div>
             </div>
             <p class="mt-4 flex items-center gap-2 rounded-lg bg-tile px-3 py-2 text-sm"><span class="h-2 w-2 rounded-full {{ $openToday ? 'bg-leaf' : 'bg-ink-300' }}"></span>{{ $todayLabel }}</p>
@@ -49,7 +50,7 @@
                     <p id="{{ $slug($g, $loop->index) }}" class="border-b border-line bg-paper px-5 py-2 text-xs font-semibold tracking-wider text-ink-600 uppercase">{{ $g }}</p>
                     @foreach ($rows as $item)
                         <div class="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-4 gap-y-1 border-b border-line px-5 py-3.5 last:border-0 sm:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)_7rem_6rem]">
-                            <span class="col-start-1 row-start-1 font-medium sm:col-start-auto sm:row-start-auto">{{ $item->name }}</span>
+                            <span class="col-start-1 row-start-1 flex items-center gap-3 font-medium sm:col-start-auto sm:row-start-auto">@if ($item->image_path)<img src="{{ $item->imageUrl() }}" alt="" loading="lazy" class="h-9 w-9 shrink-0 rounded-lg object-cover">@endif<span>{{ $item->name }}</span></span>
                             <span class="col-start-1 row-start-2 text-sm text-ink-500 sm:col-start-auto sm:row-start-auto">@include('public.home.parts.meta', ['withDescription' => false])</span>
                             <span class="col-start-2 row-start-1 text-right font-semibold whitespace-nowrap sm:col-start-auto sm:row-start-auto">{{ peso($item->price_cents) }}</span>
                             <span class="col-start-2 row-start-2 text-right sm:col-start-auto sm:row-start-auto">@include('public.home.parts.action', ['btn' => 'btn btn-secondary btn-sm'])</span>
@@ -58,6 +59,20 @@
                 @endforeach
             @endif
         </section>
+
+        @if ($gallery->isNotEmpty())
+            <section class="card p-5" aria-labelledby="panel-photos">
+                <h2 id="panel-photos" class="text-lg font-semibold">Photos</h2>
+                <div class="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
+                    @foreach ($gallery as $photo)
+                        <figure>
+                            <img src="{{ $photo->url() }}" alt="{{ $photo->caption ?: 'Photo '.$loop->iteration.' of '.$business->name }}" loading="lazy" class="aspect-[4/3] w-full rounded-lg object-cover">
+                            @if ($photo->caption)<figcaption class="mt-1 text-xs text-ink-500">{{ $photo->caption }}</figcaption>@endif
+                        </figure>
+                    @endforeach
+                </div>
+            </section>
+        @endif
 
         <section class="card p-5">
             <h2 class="text-lg font-semibold">How requests work</h2>

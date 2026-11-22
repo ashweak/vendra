@@ -9,7 +9,7 @@
     <div class="border-b border-line bg-paper/95 backdrop-blur">
         <nav class="mx-auto flex h-16 max-w-6xl items-center gap-2 px-3 sm:gap-4 sm:px-8" aria-label="Business">
             <a href="{{ route('public.home', $business) }}" class="flex min-w-0 shrink-0 items-center gap-2.5" aria-label="{{ $business->name }} home">
-                <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border-2 border-ink-900 font-display text-sm font-bold text-ink-900">{{ mb_substr($business->name, 0, 1) }}</span>
+                <x-biz-mark :business="$business" outline class="h-9 w-9 rounded-full text-sm" />
                 <span class="hidden max-w-[13rem] truncate font-display text-lg font-bold sm:inline">{{ $business->name }}</span>
             </a>
             <div class="flex flex-1 items-center justify-center gap-1 lg:gap-0">

@@ -16,6 +16,9 @@
                     <button type="button" class="text-sm font-semibold text-white underline decoration-sun decoration-2 underline-offset-4" data-open-chat>Ask in Taglish</button>
                 </div>
             </div>
+            @if ($cover)
+            <img src="{{ $cover }}" alt="{{ $business->name }}" class="aspect-[4/3] w-full rounded-2xl object-cover shadow-[0_18px_40px_-24px_rgba(0,0,0,.6)]">
+            @else
             <div class="hidden grid-cols-2 gap-3 sm:grid" aria-hidden="true">
                 @foreach ($items->take(4)->values() as $i => $tag)
                     <div @class(['rounded-2xl p-4 text-ink-900 shadow-[0_18px_40px_-24px_rgba(0,0,0,.6)]', 'bg-sun -rotate-2' => $i === 0, 'bg-white rotate-1' => $i === 1, 'bg-sun-soft rotate-2' => $i === 2, 'bg-white -rotate-1' => $i === 3])>
@@ -25,6 +28,7 @@
                     </div>
                 @endforeach
             </div>
+            @endif
         </div>
     </div>
     <div class="mt-4 grid gap-4 sm:grid-cols-2">
@@ -68,8 +72,10 @@
                 @foreach ($rows as $item)
                     @php $left = $item->type === 'product' ? $item->availableStock() : null; @endphp
                     <article class="flex flex-col rounded-2xl border border-line bg-white p-3">
-                        <div class="relative flex aspect-square items-center justify-center rounded-xl bg-tile">
-                            <span class="font-display text-5xl font-bold text-ink-700" aria-hidden="true">{{ mb_substr($item->name, 0, 1) }}</span>
+                        <div class="relative">
+                            <x-item-visual :item="$item" class="flex aspect-square w-full items-center justify-center rounded-xl bg-tile">
+                                <span class="font-display text-5xl font-bold text-ink-700" aria-hidden="true">{{ mb_substr($item->name, 0, 1) }}</span>
+                            </x-item-visual>
                             @if ($left !== null && $left > 0 && $left <= 3)<span class="absolute top-2 left-2 rounded-md bg-sun px-2 py-0.5 text-[11px] font-semibold text-ink-900">Only {{ $left }} left</span>@endif
                             @if ($left === 0)<span class="absolute top-2 left-2 rounded-md bg-ink-900 px-2 py-0.5 text-[11px] font-semibold text-white">Sold out</span>@endif
                         </div>
@@ -83,6 +89,8 @@
         @endforeach
     @endif
 </section>
+
+@include('public.home.parts.gallery', ['title' => 'From our store', 'sectionClass' => 'mx-auto max-w-6xl px-5 pt-14 sm:px-8'])
 
 <section class="mx-auto max-w-6xl px-5 pt-14 sm:px-8">
     <div class="grid grid-cols-1 gap-3 rounded-[28px] border-2 border-sun p-3 sm:grid-cols-2 lg:grid-cols-4">

@@ -18,6 +18,7 @@
             <li>No outside AI service: the chat auto-assistant runs on Vendra’s own server, so messages aren’t sent to Google, OpenAI or others.</li>
             <li>No selling of data, no advertising trackers, no third-party scripts or fonts.</li>
             <li>Each business’s data is kept separate. Platform admins can’t see a business’s records unless its owner grants time-limited, logged support access.</li>
+            <li>Uploaded pictures (logos, cover and gallery photos, product photos, profile pictures) are re-encoded on upload, which removes hidden details such as GPS location and camera info. Business photos are public on that business’s page; profile pictures are shown only inside the dashboard.</li>
             <li>Passwords are hashed, sign-in attempts are rate-limited, owners use two-step sign-in, and important actions are logged.</li>
         </ul>
     </section>

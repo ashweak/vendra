@@ -8,7 +8,7 @@
         @foreach ($members as $m)
             <div class="card">
                 <div class="flex flex-wrap items-center gap-3">
-                    <span class="flex h-10 w-10 items-center justify-center rounded-full bg-ink-100 font-semibold text-ink-800">{{ mb_substr($m->user->name, 0, 1) }}</span>
+                    <x-avatar :user="$m->user" class="h-10 w-10 text-sm" />
                     <span class="min-w-0 flex-1"><span class="block font-medium">{{ $m->user->name }}</span><span class="block text-xs text-ink-500">{{ $m->user->email }}</span></span>
                     <span class="badge badge-indigo">{{ ucfirst($m->role) }}</span>
                     @unless ($m->is_active)<span class="badge badge-gray">Disabled</span>@endunless

@@ -1,9 +1,7 @@
 @extends('layouts.public')
 @section('title', 'Order · '.$business->name)
 @section('content')
-<span class="eyebrow">Step 1 of 2 · Details</span>
-<h1 class="section-title mt-4">Order products</h1>
-<p class="lead mt-3 max-w-xl">Set quantities, then review your order. Stock is reserved only after you submit.</p>
+<x-page-head eyebrow="Step 1 of 2 · Details" title="Order products" intro="Set quantities, then review your order. Stock is reserved only after you submit." />
 <div class="mt-8 grid gap-10 lg:grid-cols-[1fr_20rem]">
 <form method="POST" action="{{ route('public.order.review', $business) }}" class="min-w-0">
     @csrf

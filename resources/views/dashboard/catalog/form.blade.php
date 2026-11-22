@@ -4,7 +4,7 @@
 @section('content')
 <a href="{{ route('dashboard.catalog.index') }}" class="link text-sm">← Catalog</a>
 <h1 class="h1 mt-2">{{ $item->exists ? 'Edit '.$item->name : 'Add a service or product' }}</h1>
-<form method="POST" action="{{ $item->exists ? route('dashboard.catalog.update', $item->id) : route('dashboard.catalog.store') }}" class="card mt-4 max-w-2xl space-y-4">
+<form method="POST" action="{{ $item->exists ? route('dashboard.catalog.update', $item->id) : route('dashboard.catalog.store') }}" enctype="multipart/form-data" class="card mt-4 max-w-2xl space-y-4">
     @csrf @if($item->exists) @method('PUT') @endif
     @unless ($item->exists)
         <fieldset><legend class="label">Type</legend>
@@ -20,6 +20,16 @@
         @if (! $item->exists || ($item->type === 'product' && $item->stock_on_hand === null))
             <div><label class="label" for="stock">Starting stock (products, optional)</label><input id="stock" name="stock_on_hand" type="number" min="0" class="input" value="{{ old('stock_on_hand') }}"><p class="hint">Leave blank to not track stock.</p></div>
         @endif
+    </div>
+    <div>
+        <label class="label" for="image">Photo <span class="font-normal text-ink-500">(optional)</span></label>
+        <div class="flex flex-wrap items-center gap-4">
+            @if ($item->image_path)<img src="{{ $item->imageUrl() }}" alt="Current photo of {{ $item->name }}" class="h-20 w-20 rounded-xl object-cover ring-1 ring-line">@endif
+            <input id="image" type="file" name="image" accept="image/jpeg,image/png,image/webp" class="text-sm">
+            @if ($item->image_path)<label class="flex items-center gap-2 text-sm"><input type="checkbox" name="remove_image" value="1"> Remove photo</label>@endif
+        </div>
+        <p class="hint">JPG, PNG or WebP up to 5 MB. We remove hidden details such as location before saving.</p>
+        <x-field-error name="image" />
     </div>
     <div><label class="label" for="desc">Description</label><textarea id="desc" name="description" rows="3" class="input">{{ old('description', $item->description) }}</textarea></div>
     @if ($team->isNotEmpty() && ($item->type === 'service' || ! $item->exists))

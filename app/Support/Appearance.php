@@ -52,19 +52,46 @@ class Appearance
         return $key !== null && isset(self::PALETTES[$key]) ? $key : self::DEFAULT_PALETTE;
     }
 
-    /** Layout to render: a valid ?layout= preview (only that visitor sees it), else the saved one. */
-    public static function layout(Business $business): string
+    /**
+     * The visitor's preview choice for this business, kept in their session so it follows them to every page.
+     * ?layout= / ?palette= set it, ?preview=off clears it. Only that visitor sees it; nothing is saved.
+     */
+    public static function preview(Business $business): array
     {
-        $preview = request()->query('layout');
+        $request = request();
+        if (! $request->hasSession()) {
+            return [];
+        }
+        $key = 'appearance_preview.'.$business->id;
+        if ($request->query('preview') === 'off') {
+            $request->session()->forget($key);
 
-        return is_string($preview) && isset(self::LAYOUTS[$preview]) ? $preview : self::resolveLayout($business->layout);
+            return [];
+        }
+        $current = $request->session()->get($key, []);
+        $next = $current;
+        foreach (['layout' => self::LAYOUTS, 'palette' => self::PALETTES] as $part => $options) {
+            $value = $request->query($part);
+            if (is_string($value) && isset($options[$value])) {
+                $next[$part] = $value;
+            }
+        }
+        if ($next !== $current) {
+            $request->session()->put($key, $next);
+        }
+
+        return $next;
     }
 
-    /** Palette to render: a valid ?palette= preview, else the saved one. */
+    /** Layout to render: the visitor's preview if any, else the saved one. */
+    public static function layout(Business $business): string
+    {
+        return self::preview($business)['layout'] ?? self::resolveLayout($business->layout);
+    }
+
+    /** Palette to render: the visitor's preview if any, else the saved one. */
     public static function palette(Business $business): string
     {
-        $preview = request()->query('palette');
-
-        return is_string($preview) && isset(self::PALETTES[$preview]) ? $preview : self::resolvePalette($business->palette);
+        return self::preview($business)['palette'] ?? self::resolvePalette($business->palette);
     }
 }

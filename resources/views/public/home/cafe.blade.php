@@ -23,7 +23,7 @@
             <article class="flex flex-col rounded-[28px] border border-line bg-white p-5">
                 <span class="w-fit rounded-full bg-tile px-3 py-1 text-[11px] font-semibold tracking-wider text-ink-600 uppercase">Featured</span>
                 <div class="mt-4 flex items-center gap-4">
-                    <span class="flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl bg-sun font-display text-4xl text-ink-900 italic" aria-hidden="true">{{ mb_substr($featured->name, 0, 1) }}</span>
+                    <x-item-visual :item="$featured" class="flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl bg-sun font-display text-4xl text-ink-900 italic"><span aria-hidden="true">{{ mb_substr($featured->name, 0, 1) }}</span></x-item-visual>
                     <div class="min-w-0">
                         <h2 class="font-display text-xl font-semibold leading-tight">{{ $featured->name }}</h2>
                         <p class="mt-1 text-xs text-ink-500">@include('public.home.parts.meta', ['item' => $featured, 'withDescription' => false])</p>
@@ -35,13 +35,14 @@
                 </div>
             </article>
         @endif
-        <div class="flex flex-col justify-between gap-6 rounded-[28px] bg-ink-900 p-6 text-white">
-            <div>
+        <div class="relative flex flex-col justify-between gap-6 overflow-hidden rounded-[28px] bg-ink-900 p-6 text-white">
+            @if ($cover)<img src="{{ $cover }}" alt="" class="absolute inset-0 h-full w-full object-cover"><div class="absolute inset-0 bg-ink-900/70"></div>@endif
+            <div class="relative">
                 <p class="text-xs tracking-wider text-white/60 uppercase">Today</p>
                 <p class="mt-2 font-display text-2xl font-semibold">{{ $todayLabel }}</p>
                 <p class="mt-2 text-sm text-white/70">Staff reply in chat {{ $business->setting('response_hours') }}.</p>
             </div>
-            <button type="button" class="btn btn-sun w-full" data-open-chat>Message us</button>
+            <button type="button" class="btn btn-sun relative w-full" data-open-chat>Message us</button>
         </div>
     </div>
 </section>
@@ -79,7 +80,7 @@
             <div class="mt-5 grid grid-cols-2 gap-4 lg:grid-cols-4">
                 @foreach ($rows as $item)
                     <article class="flex flex-col rounded-[22px] border border-line bg-white p-3">
-                        <div class="flex aspect-[4/3] items-center justify-center rounded-2xl bg-tile font-display text-6xl text-sun-ink italic" aria-hidden="true">{{ mb_substr($item->name, 0, 1) }}</div>
+                        <x-item-visual :item="$item" class="flex aspect-[4/3] w-full items-center justify-center rounded-2xl bg-tile font-display text-6xl text-sun-ink italic"><span aria-hidden="true">{{ mb_substr($item->name, 0, 1) }}</span></x-item-visual>
                         <h4 class="mt-3 px-1 font-display text-lg leading-snug font-semibold">{{ $item->name }}</h4>
                         <p class="mt-0.5 px-1 text-xs text-ink-500">@include('public.home.parts.meta', ['withDescription' => false])</p>
                         <div class="mt-auto flex flex-wrap items-center justify-between gap-2 px-1 pt-3">
@@ -92,6 +93,8 @@
         @endforeach
     @endif
 </section>
+
+@include('public.home.parts.gallery', ['title' => 'From our place', 'sectionClass' => 'mx-auto max-w-6xl px-5 pb-16 sm:px-8'])
 
 <section class="bg-ink-900 text-white">
     <div class="mx-auto grid max-w-6xl gap-10 px-5 py-16 sm:px-8 lg:grid-cols-[1fr_1.2fr] lg:items-center">

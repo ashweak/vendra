@@ -16,6 +16,7 @@ use App\Services\QuotationService;
 use App\Services\ServiceRequestService;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * FICTIONAL demo data only (P7/P9). All names, emails and numbers are invented.
@@ -80,6 +81,39 @@ class DatabaseSeeder extends Seeder
         return $i;
     }
 
+    /**
+     * Copy the illustrated demo pictures (database/seeders/images, generated shapes, not real photos)
+     * onto the public disk so the demo shows covers, galleries, a logo and product photos.
+     */
+    private function pictures(Business $b, string $set, array $items = []): void
+    {
+        $source = database_path('seeders/images/'.$set);
+        if (! is_dir($source)) {
+            return;
+        }
+        $disk = Storage::disk('public');
+        $put = function (string $file, string $dir) use ($disk, $source): ?string {
+            if (! is_file($source.'/'.$file)) {
+                return null;
+            }
+            $path = $dir.'/'.$file;
+            $disk->put($path, file_get_contents($source.'/'.$file));
+
+            return $path;
+        };
+        $root = 'businesses/'.$b->id;
+        $b->update(array_filter(['cover_path' => $put('cover.webp', $root), 'logo_path' => $put('logo.webp', $root)]));
+        $captions = ['Our space', 'Fresh stock this week', 'Where the magic happens', 'Come say hi'];
+        foreach (glob($source.'/gallery-*.webp') ?: [] as $i => $file) {
+            $b->photos()->create(['path' => $put(basename($file), $root.'/gallery'), 'caption' => $captions[$i] ?? null, 'sort' => $i + 1]);
+        }
+        foreach (array_values($items) as $i => $item) {
+            if ($path = $put('item-'.($i + 1).'.webp', $root.'/items')) {
+                $item->update(['image_path' => $path]);
+            }
+        }
+    }
+
     private function knowledge(Business $b, array $entries): void
     {
         foreach ($entries as [$kind, $title, $body]) {
@@ -96,6 +130,7 @@ class DatabaseSeeder extends Seeder
             'accent_color' => '#7c3aed', 'modules' => ['appointments', 'quotations'],
             'greeting' => 'Hi! I’m Lumina’s auto-assistant. Ask me about prices, open times, or bookings — English or Tagalog is fine. A staff member can join anytime.',
         ], 'Lara Mendoza', 'owner@lumina.test');
+        $this->pictures($b, 'lumina');
         $b->update(['settings' => array_merge($b->settings, ['booking_approval' => 'auto'])]);
 
         $maria = User::create(['name' => 'Maria Santos', 'email' => 'manager@lumina.test', 'password' => 'password']);
@@ -161,10 +196,12 @@ class DatabaseSeeder extends Seeder
         $b->update(['settings' => array_merge($b->settings, ['fulfillment_methods' => ['pickup', 'delivery'], 'order_approval' => 'manual'])]);
 
         $serum = $this->item($b, ['type' => 'product', 'name' => 'Vitamin C Serum 30ml', 'category' => 'Skincare', 'price_cents' => 49900, 'stock_on_hand' => 12]);
-        $this->item($b, ['type' => 'product', 'name' => 'Sunscreen SPF50 50ml', 'category' => 'Skincare', 'price_cents' => 35000, 'stock_on_hand' => 3]);
+        $sun = $this->item($b, ['type' => 'product', 'name' => 'Sunscreen SPF50 50ml', 'category' => 'Skincare', 'price_cents' => 35000, 'stock_on_hand' => 3]);
         $toner = $this->item($b, ['type' => 'product', 'name' => 'Niacinamide Toner 100ml', 'category' => 'Skincare', 'price_cents' => 28000, 'stock_on_hand' => 20]);
-        $this->item($b, ['type' => 'product', 'name' => 'Lip and Cheek Tint', 'category' => 'Makeup', 'price_cents' => 15000, 'stock_on_hand' => 0]);
-        $this->item($b, ['type' => 'product', 'name' => 'Gentle Facial Wash 150ml', 'category' => 'Skincare', 'price_cents' => 22000, 'description' => 'Stock not tracked (made to order).']);
+        $tint = $this->item($b, ['type' => 'product', 'name' => 'Lip and Cheek Tint', 'category' => 'Makeup', 'price_cents' => 15000, 'stock_on_hand' => 0]);
+        $wash = $this->item($b, ['type' => 'product', 'name' => 'Gentle Facial Wash 150ml', 'category' => 'Skincare', 'price_cents' => 22000, 'description' => 'Stock not tracked (made to order).']);
+
+        $this->pictures($b, 'ganda', [$serum, $sun, $toner, $tint, $wash]);
 
         $this->knowledge($b, [
             ['policy', 'Payment', 'Pay by GCash or cash on pickup. Staff confirm payment before releasing delivery orders.'],
@@ -185,6 +222,7 @@ class DatabaseSeeder extends Seeder
             'accent_color' => '#0d9488', 'layout' => 'spotlight', 'palette' => 'ocean', 'modules' => ['service_requests', 'quotations', 'appointments'],
         ], 'Karlo Bautista', 'owner@kislap.test');
         $b->update(['settings' => array_merge($b->settings, ['booking_approval' => 'manual'])]);
+        $this->pictures($b, 'kislap');
 
         $this->item($b, ['type' => 'service', 'name' => 'General Cleaning (up to 50 sqm)', 'category' => 'Home', 'price_cents' => 150000, 'duration_minutes' => 180]);
         $this->item($b, ['type' => 'service', 'name' => 'Deep Cleaning (up to 50 sqm)', 'category' => 'Home', 'price_cents' => 350000, 'duration_minutes' => 300]);

@@ -1,9 +1,7 @@
 @extends('layouts.public')
 @section('title', 'Book · '.$business->name)
 @section('content')
-<span class="eyebrow">Step 1 of 2 · Details</span>
-<h1 class="section-title mt-4">Book an appointment</h1>
-<p class="lead mt-3 max-w-xl">Choose a service and an open time. You’ll review everything before submitting.</p>
+<x-page-head eyebrow="Step 1 of 2 · Details" title="Book an appointment" intro="Choose a service and an open time. You’ll review everything before submitting." />
 @if ($services->isEmpty())
     <x-empty title="No services available yet">Please check back later or ask in the chat.</x-empty>
 @else

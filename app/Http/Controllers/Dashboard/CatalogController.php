@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Services\ImageStore;
 use App\Models\CatalogItem;
 use App\Services\AuditLogger;
 use App\Services\OrderService;
@@ -32,9 +33,11 @@ class CatalogController extends DashboardController
         $this->authorizeAbility('catalog.manage');
         $item = new CatalogItem($this->validated($request));
         $item->business_id = $this->business()->id;
+        $newImage = $this->storeImage($request, $item->business_id);
         if ($item->type === 'product' && $request->filled('stock_on_hand')) {
             $item->stock_on_hand = (int) $request->input('stock_on_hand');
         }
+        $item->image_path = $newImage;
         $item->save();
         $item->staff()->sync($this->staffIds($request));
         AuditLogger::log($item->business_id, 'catalog.created', $item, ['name' => $item->name, 'price_cents' => $item->price_cents]);
@@ -55,15 +58,33 @@ class CatalogController extends DashboardController
         $item = $this->business()->catalogItems()->findOrFail($id);
         $before = $item->only(['name', 'price_cents', 'is_active']);
         $item->fill($this->validated($request, $item));
+        $newImage = $this->storeImage($request, $item->business_id);
+        $oldImage = $item->image_path;
+        if ($newImage || $request->boolean('remove_image')) {
+            $item->image_path = $newImage;
+        }
         if ($item->type === 'product' && $item->stock_on_hand === null && $request->filled('stock_on_hand')) {
             $item->stock_on_hand = (int) $request->input('stock_on_hand'); // start tracking stock
         }
         $item->save();
+        if ($oldImage && $oldImage !== $item->image_path) {
+            app(ImageStore::class)->delete($oldImage);
+        }
         $item->staff()->sync($this->staffIds($request));
         // Existing transactions keep their agreed snapshot prices (P6).
         AuditLogger::log($item->business_id, 'catalog.updated', $item, ['before' => $before, 'after' => $item->only(['name', 'price_cents', 'is_active'])]);
 
         return redirect()->route('dashboard.catalog.index')->with('status', 'Item updated. Existing bookings and orders keep their agreed prices.');
+    }
+
+    /** Optional item photo, checked and stored before the item is saved. Returns the new path or null. */
+    private function storeImage(Request $request, int $businessId): ?string
+    {
+        $request->validate(['image' => ['nullable', ...array_slice(ImageStore::RULES, 1)], 'remove_image' => 'nullable|boolean']);
+
+        return $request->hasFile('image')
+            ? app(ImageStore::class)->store($request->file('image'), 'businesses/'.$businessId.'/items', 1000, 1000)
+            : null;
     }
 
     public function adjustStock(Request $request, int $id, OrderService $orders)

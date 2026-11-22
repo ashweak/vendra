@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\AuditLogger;
+use App\Services\ImageStore;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
@@ -59,6 +60,28 @@ class AccountController extends Controller
         AuditLogger::log(null, 'account.password_changed', $user);
 
         return back()->with('status', 'Password changed.');
+    }
+
+    public function updateAvatar(Request $request, ImageStore $images)
+    {
+        $request->validate(['avatar' => ImageStore::RULES]);
+        $user = $request->user();
+        $path = $images->store($request->file('avatar'), 'avatars', 400, 400, square: true, field: 'avatar');
+        $old = $user->avatar_path;
+        $user->forceFill(['avatar_path' => $path])->save();
+        $images->delete($old);
+        AuditLogger::log(null, 'account.avatar_updated', $user);
+
+        return back()->with('status', 'Profile picture updated.');
+    }
+
+    public function removeAvatar(Request $request, ImageStore $images)
+    {
+        $user = $request->user();
+        $images->delete($user->avatar_path);
+        $user->forceFill(['avatar_path' => null])->save();
+
+        return back()->with('status', 'Profile picture removed.');
     }
 
     public function verifyNotice(Request $request)

@@ -5,8 +5,11 @@
 @include('dashboard.settings.nav')
 @php
     $b = $currentBusiness;
-    $selLayout = old('layout', \App\Support\Appearance::resolveLayout($b->layout));
-    $selPalette = old('palette', \App\Support\Appearance::resolvePalette($b->palette));
+    // Pre-select from a preview ("Use this look") when given, otherwise the saved choice.
+    $qLayout = request()->query('layout');
+    $qPalette = request()->query('palette');
+    $selLayout = old('layout', is_string($qLayout) && isset($layouts[$qLayout]) ? $qLayout : \App\Support\Appearance::resolveLayout($b->layout));
+    $selPalette = old('palette', is_string($qPalette) && isset($palettes[$qPalette]) ? $qPalette : \App\Support\Appearance::resolvePalette($b->palette));
 @endphp
 <form method="POST" action="{{ route('dashboard.settings.appearance') }}" class="max-w-5xl" id="appearance-form">
     @csrf @method('PUT')

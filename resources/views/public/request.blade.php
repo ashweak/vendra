@@ -1,9 +1,7 @@
 @extends('layouts.public')
 @section('title', 'Request a service · '.$business->name)
 @section('content')
-<span class="eyebrow">Step 1 of 2 · Details</span>
-<h1 class="section-title mt-4">Request a service</h1>
-<p class="lead mt-3 max-w-xl">Describe the job. A preferred date is a preference, not a confirmed booking.</p>
+<x-page-head eyebrow="Step 1 of 2 · Details" title="Request a service" intro="Describe the job. A preferred date is a preference, not a confirmed booking." />
 <div class="mt-8 grid gap-10 lg:grid-cols-[1fr_20rem]">
 <form method="POST" action="{{ route('public.request.review', $business) }}" class="min-w-0">
     @csrf

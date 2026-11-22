@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Storage;
 
 /** Public demo only: wipes everything and reseeds the fictional data. */
 class ResetDemo extends Command
@@ -19,6 +20,10 @@ class ResetDemo extends Command
             return self::SUCCESS;
         }
 
+        // Uploaded pictures go too, so nothing a visitor added survives the reset.
+        foreach (['businesses', 'avatars'] as $dir) {
+            Storage::disk('public')->deleteDirectory($dir);
+        }
         $this->call('migrate:fresh', ['--seed' => true, '--force' => true]);
         $this->info('Demo data reset.');
 

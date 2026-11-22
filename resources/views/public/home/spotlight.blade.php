@@ -18,6 +18,7 @@
         </div>
         <div class="relative mx-auto w-full max-w-md" aria-hidden="true">
             <div class="relative overflow-hidden rounded-[40px] bg-sun px-6 py-10 sm:px-10">
+                @if ($cover)<img src="{{ $cover }}" alt="" class="absolute inset-0 h-full w-full object-cover">@endif
                 <div class="pointer-events-none absolute -top-24 -right-24 h-72 w-72 rounded-full border-[28px] border-white/25"></div>
                 <div class="pointer-events-none absolute -bottom-20 -left-16 h-56 w-56 rounded-full border-[22px] border-ink-900/10"></div>
                 <div class="relative">@include('public.home.parts.phone')</div>
@@ -43,8 +44,10 @@
             <div class="-mx-5 mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-4 sm:-mx-8 sm:px-8" tabindex="0" aria-label="Catalog">
                 @foreach ($items as $item)
                     <article class="flex w-64 shrink-0 snap-start flex-col rounded-3xl border border-line bg-paper p-3">
-                        <div class="relative flex h-32 items-center justify-center rounded-2xl bg-tile">
-                            <span class="font-display text-6xl font-extrabold text-sun-ink" aria-hidden="true">{{ mb_substr($item->name, 0, 1) }}</span>
+                        <div class="relative">
+                            <x-item-visual :item="$item" class="flex h-32 w-full items-center justify-center rounded-2xl bg-tile">
+                                <span class="font-display text-6xl font-extrabold text-sun-ink" aria-hidden="true">{{ mb_substr($item->name, 0, 1) }}</span>
+                            </x-item-visual>
                             <span class="absolute top-3 left-3 rounded-full bg-white px-2.5 py-0.5 text-[11px] font-semibold text-ink-700">{{ $item->category ?: ($item->type === 'service' ? 'Service' : 'Product') }}</span>
                         </div>
                         <h3 class="mt-4 px-1 font-semibold leading-snug">{{ $item->name }}</h3>
@@ -59,6 +62,8 @@
         @endif
     </div>
 </section>
+
+@include('public.home.parts.gallery', ['variant' => 'row', 'title' => 'Gallery'])
 
 <section class="mx-auto grid max-w-6xl items-center gap-12 px-5 py-16 sm:px-8 lg:grid-cols-2">
     <div class="relative mx-auto flex h-72 w-72 items-center justify-center sm:h-80 sm:w-80" aria-hidden="true">

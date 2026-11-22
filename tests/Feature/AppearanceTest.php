@@ -19,14 +19,44 @@ class AppearanceTest extends TestCase
 
         $this->get(route('public.home', $b))->assertOk()->assertSee('data-layout="cafe" data-palette="lavender"', false);
         $this->get(route('public.book', $b))->assertOk()->assertSee('data-layout="cafe" data-palette="lavender"', false);
-        $this->get(route('public.home', [$b, 'layout' => 'panel', 'palette' => 'garden']))->assertSee('data-layout="panel" data-palette="garden"', false);
-        // Previewing one part keeps the other.
         $this->get(route('public.home', [$b, 'palette' => 'berry']))->assertSee('data-layout="cafe" data-palette="berry"', false);
+        $this->get(route('public.home', [$b, 'preview' => 'off']));
         $this->get(route('public.home', [$b, 'layout' => '"><script>x</script>', 'palette' => ['x']]))
             ->assertSee('data-layout="cafe" data-palette="lavender"', false)->assertDontSee('<script>x</script>', false);
         // The dashboard keeps Vendra's own look.
         $owner = $this->addMember($b, 'owner');
         $this->actingAs($owner)->get(route('dashboard.overview'))->assertSee('data-layout="classic" data-palette="sunny"', false);
+    }
+
+    public function test_a_preview_follows_the_visitor_to_every_page_until_turned_off(): void
+    {
+        $b = $this->makeBusiness(['layout' => 'cafe', 'palette' => 'lavender']);
+        $other = $this->makeBusiness(['layout' => 'shop', 'palette' => 'ocean']);
+        $look = fn (string $layout, string $palette) => 'data-layout="'.$layout.'" data-palette="'.$palette.'"';
+
+        $this->get(route('public.home', [$b, 'layout' => 'panel', 'palette' => 'garden']))->assertSee($look('panel', 'garden'), false)->assertSee('Exit preview');
+        foreach (['public.book', 'public.order', 'public.quote', 'public.request', 'public.track', 'public.privacy'] as $page) {
+            $this->get(route($page, $b))->assertOk()->assertSee($look('panel', 'garden'), false)->assertSee('Exit preview');
+        }
+        // Changing one part keeps the other previewed part.
+        $this->get(route('public.book', [$b, 'palette' => 'berry']))->assertSee($look('panel', 'berry'), false);
+        $this->get(route('public.home', $b))->assertSee($look('panel', 'berry'), false);
+        // Other businesses are not affected.
+        $this->get(route('public.home', $other))->assertSee($look('shop', 'ocean'), false)->assertDontSee('Exit preview');
+
+        $this->get(route('public.book', [$b, 'preview' => 'off']))->assertSee($look('cafe', 'lavender'), false)->assertDontSee('Exit preview');
+        $this->get(route('public.home', $b))->assertSee($look('cafe', 'lavender'), false);
+    }
+
+    public function test_saving_the_look_ends_the_preview(): void
+    {
+        $b = $this->makeBusiness();
+        $owner = $this->addMember($b, 'owner');
+        $this->actingAs($owner)->get(route('public.home', [$b, 'layout' => 'brochure', 'palette' => 'coral']))->assertSee('Use this look');
+        $this->actingAs($owner)->get(route('dashboard.settings.appearance', ['layout' => 'brochure', 'palette' => 'coral']))
+            ->assertOk()->assertSee('value="brochure" class="peer sr-only" checked', false);
+        $this->actingAs($owner)->put(route('dashboard.settings.appearance'), ['layout' => 'brochure', 'palette' => 'coral'])->assertSessionHasNoErrors();
+        $this->actingAs($owner)->get(route('public.home', $b))->assertSee('data-layout="brochure" data-palette="coral"', false)->assertDontSee('Exit preview');
     }
 
     public function test_owner_changes_layout_and_colors_separately_and_invalid_values_are_rejected(): void

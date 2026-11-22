@@ -39,7 +39,7 @@
                 </form>
             @else
                 <div class="flex items-center gap-3 rounded-2xl bg-tile p-3">
-                    <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full font-display text-sm font-bold text-white" style="background: {{ $b->accent_color }}">{{ mb_substr($b->name, 0, 1) }}</span>
+                    <x-biz-mark :business="$b" class="h-9 w-9 rounded-full text-sm" />
                     <span class="min-w-0"><span class="block truncate text-sm font-semibold">{{ $b->name }}</span><span class="block text-xs text-ink-500">{{ ucfirst($m->role) }}</span></span>
                 </div>
             @endif
@@ -71,7 +71,7 @@
             <a href="{{ route('dashboard.overview') }}#notifications" class="relative flex h-10 w-10 items-center justify-center rounded-full border border-line bg-white text-ink-700 hover:border-ink-300" aria-label="Notifications">
                 <x-icon name="bell" class="h-[18px] w-[18px]" /> @if ($unreadNotifications)<span class="absolute -top-0.5 -right-0.5 rounded-full bg-sun px-1.5 text-[10px] font-bold text-ink-900 ring-2 ring-white">{{ $unreadNotifications }}</span>@endif
             </a>
-            <a href="{{ route('dashboard.account') }}" title="Your account" class="hidden items-center gap-2.5 border-l border-line pl-4 text-sm hover:opacity-80 sm:flex"><span class="flex h-9 w-9 items-center justify-center rounded-full bg-ink-900 text-xs font-semibold text-sun">{{ collect(explode(' ', auth()->user()->name))->map(fn ($p) => mb_substr($p, 0, 1))->take(2)->implode('') }}</span><span class="font-medium">{{ auth()->user()->name }}</span></a>
+            <a href="{{ route('dashboard.account') }}" title="Your account" class="hidden items-center gap-2.5 border-l border-line pl-4 text-sm hover:opacity-80 sm:flex"><x-avatar :user="auth()->user()" class="h-9 w-9 text-xs" /><span class="font-medium">{{ auth()->user()->name }}</span></a>
             <form method="POST" action="{{ route('logout') }}">@csrf<button class="btn btn-secondary btn-sm">Sign out</button></form>
         </header>
         <main class="mx-auto w-full max-w-6xl flex-1 p-4 sm:p-8">

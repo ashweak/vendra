@@ -17,8 +17,9 @@
         </div>
     </div>
     <div class="dots relative rounded-[32px] bg-tile px-6 pt-12 pb-10 sm:px-10">
-        <x-sticker class="absolute -top-8 right-6 hidden sm:inline-flex" uid="shop" text="ASK IN TAGLISH · 24/7 · " />
-        @include('public.home.parts.phone')
+        @if ($cover)<img src="{{ $cover }}" alt="{{ $business->name }}" class="absolute inset-0 h-full w-full rounded-[32px] object-cover">@endif
+        <x-sticker class="absolute -top-8 right-6 z-10 hidden sm:inline-flex" uid="shop" text="ASK IN TAGLISH · 24/7 · " />
+        <div class="relative">@include('public.home.parts.phone')</div>
     </div>
 </section>
 
@@ -41,13 +42,16 @@
                     <ul class="mt-2">
                         @foreach ($rows as $item)
                             <li class="group flex flex-wrap items-center gap-x-4 gap-y-3 border-b border-dashed border-line py-4">
-                                <div class="min-w-0 flex-1 basis-full sm:basis-0">
+                                <div class="flex min-w-0 flex-1 basis-full gap-3 sm:basis-0">
+                                @if ($item->image_path)<img src="{{ $item->imageUrl() }}" alt="{{ $item->name }}" loading="lazy" class="h-14 w-14 shrink-0 rounded-xl object-cover">@endif
+                                <div class="min-w-0 flex-1">
                                     <div class="flex items-baseline gap-3">
                                         <span class="min-w-0 flex-1 font-display text-lg leading-snug font-semibold sm:flex-none">{{ $item->name }}</span>
                                         <span class="hidden flex-1 border-b-2 border-dotted border-ink-200 sm:block" aria-hidden="true"></span>
                                         <span class="shrink-0 font-display text-lg font-bold whitespace-nowrap">{{ peso($item->price_cents) }}</span>
                                     </div>
                                     <p class="mt-1 text-sm text-ink-500">@include('public.home.parts.meta')</p>
+                                </div>
                                 </div>
                                 @include('public.home.parts.action', ['btn' => 'btn btn-secondary btn-sm shrink-0 group-hover:border-ink-900'])
                             </li>
@@ -58,6 +62,8 @@
         </div>
     @endif
 </section>
+
+@include('public.home.parts.gallery', ['title' => 'Inside our space', 'sectionClass' => 'pt-24'])
 
 {{-- Visit us: bento --}}
 <section class="pt-24">

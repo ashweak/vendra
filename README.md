@@ -27,7 +27,12 @@ from the real app in GitHub Actions on every change to the script.
 - **Appearance in two parts**, picked during setup and changeable anytime in *Settings → Appearance*: one of six
   **layouts** (Classic, Brochure, Spotlight, Café, Panel, Shop — each with its own structure, header, footer and
   headline font) and one of eight **color palettes** (Sunny, Coral, Ocean, Espresso, Slate, Garden, Berry, Lavender),
-  in any combination, with a live preview of the real page before saving.
+  in any combination, with a live preview of the real page before saving. A preview follows the visitor to every
+  page (book, order, track…) until they exit it or save it.
+- **Business photos**: a logo, a cover photo, a gallery of up to 8 pictures with captions, and a photo per
+  product or service, shown in every layout (*Settings → Photos*, *Catalog*). Staff accounts have **profile
+  pictures**. Every upload is decoded and re-encoded (WebP), resized, and stripped of hidden metadata such as GPS
+  location; anything that isn't a real JPG/PNG/WebP is refused. Uploads are off in the public demo.
 - Booking, ordering, quotation and service-request forms. Every submission goes **form → review → confirm**.
   Double-clicks and refreshes never create duplicates.
 - Chat with an offline auto-assistant that answers from the business's live data and prepares a **draft** the customer reviews in the
@@ -128,7 +133,7 @@ can set `VENDRA_ENFORCE_MFA=false`.
 ### Tests and assistant evaluation
 
 ```bash
-php artisan test                                   # 72 feature + unit tests
+php artisan test                                   # 80 feature + unit tests
 php artisan migrate:fresh --seed
 php artisan vendra:ai-eval          # 60 fictional EN/TL/Taglish cases (add --show to print replies)
 ```

@@ -19,6 +19,8 @@
     $minPrice = $items->min('price_cents');
     $openDays = $hours->filter(fn ($h) => ! $h->is_closed && $h->opens_at)->count();
     $steps = ['Ask or pick what you need — chat or form.', 'Review every detail, then confirm.', 'We approve or follow up. Track it by email link.'];
+    $gallery = $business->photos()->get();
+    $cover = $business->coverUrl();
 @endphp
 <div data-layout="{{ $layout }}">
     @include('public.home.'.$layout)

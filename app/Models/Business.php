@@ -54,6 +54,11 @@ class Business extends Model
     public function knowledgeEntries(): HasMany { return $this->hasMany(KnowledgeEntry::class); }
     public function customers(): HasMany { return $this->hasMany(Customer::class); }
     public function privacyRequests(): HasMany { return $this->hasMany(PrivacyRequest::class); }
+    public function photos(): HasMany { return $this->hasMany(BusinessPhoto::class)->orderBy('sort')->orderBy('id'); }
+
+    public function logoUrl(): ?string { return \App\Services\ImageStore::url($this->logo_path); }
+
+    public function coverUrl(): ?string { return \App\Services\ImageStore::url($this->cover_path); }
     public function conversations(): HasMany { return $this->hasMany(Conversation::class); }
     public function appointments(): HasMany { return $this->hasMany(Appointment::class); }
     public function orders(): HasMany { return $this->hasMany(Order::class); }

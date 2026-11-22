@@ -2,8 +2,7 @@
 @section('title', 'My requests · '.$business->name)
 @section('content')
 @php $tz = $business->timezone; @endphp
-<span class="eyebrow">Verified for this browser</span>
-<h1 class="section-title mt-4">My requests</h1>
+<x-page-head eyebrow="Verified for this browser" title="My requests" />
 <p class="mt-1 text-sm text-ink-600">Signed in as {{ $customer->name }} for {{ $business->name }} only. This access expires automatically.</p>
 
 @if ($appointments->isNotEmpty())

@@ -1,9 +1,7 @@
 @extends('layouts.public')
 @section('title', 'Request a quote · '.$business->name)
 @section('content')
-<span class="eyebrow">Step 1 of 2 · Details</span>
-<h1 class="section-title mt-4">Request a quotation</h1>
-<p class="lead mt-3 max-w-xl">Tell us what you need. The business reviews it and sends a quote you can accept or decline.</p>
+<x-page-head eyebrow="Step 1 of 2 · Details" title="Request a quotation" intro="Tell us what you need. The business reviews it and sends a quote you can accept or decline." />
 <div class="mt-8 grid gap-10 lg:grid-cols-[1fr_20rem]">
 <form method="POST" action="{{ route('public.quote.review', $business) }}" enctype="multipart/form-data" class="min-w-0">
     @csrf

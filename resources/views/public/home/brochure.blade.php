@@ -15,6 +15,9 @@
         </p>
     </section>
 
+    @if ($cover)
+        <div class="mx-auto max-w-6xl px-5 pb-6 sm:px-8"><img src="{{ $cover }}" alt="{{ $business->name }}" class="aspect-[16/9] w-full rounded-[28px] object-cover sm:aspect-[16/6]"></div>
+    @endif
     <section class="mx-auto grid max-w-6xl gap-4 px-5 pb-16 sm:grid-cols-3 sm:px-8" aria-label="Quick actions">
         <a href="{{ $primary[1] }}" class="card group flex flex-col p-6 transition hover:-translate-y-0.5 hover:shadow-[0_18px_40px_-24px_rgba(0,0,0,.35)]">
             <span class="icon-chip bg-sun text-ink-900"><x-icon :name="$business->moduleEnabled('appointments') ? 'calendar' : 'bag'" class="h-5 w-5" /></span>
@@ -49,6 +52,7 @@
         <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             @foreach ($items as $item)
                 <article class="card flex flex-col p-6">
+                    @if ($item->image_path)<img src="{{ $item->imageUrl() }}" alt="{{ $item->name }}" loading="lazy" class="-mx-2 -mt-2 mb-5 aspect-[4/3] w-[calc(100%+1rem)] rounded-2xl object-cover">@endif
                     <div class="flex items-center gap-3">
                         <span class="icon-chip h-9 w-9"><x-icon :name="$item->type === 'service' ? 'calendar' : 'bag'" class="h-4 w-4" /></span>
                         <span class="text-xs font-semibold tracking-wider text-ink-500 uppercase">{{ $item->category ?: ($item->type === 'service' ? 'Service' : 'Product') }}</span>
@@ -64,6 +68,8 @@
         </div>
     @endif
 </section>
+
+@include('public.home.parts.gallery', ['title' => 'A look inside', 'sectionClass' => 'mx-auto max-w-6xl px-5 pb-16 sm:px-8'])
 
 <section class="bg-tile">
     <div class="mx-auto grid max-w-6xl items-center gap-12 px-5 py-16 sm:px-8 lg:grid-cols-2">

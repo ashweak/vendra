@@ -21,7 +21,7 @@ jobs:
       - uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
-          extensions: dom, curl, libxml, mbstring, zip, pdo, sqlite, pdo_sqlite, intl
+          extensions: dom, curl, libxml, mbstring, zip, pdo, sqlite, pdo_sqlite, intl, gd, exif
           coverage: none
       - name: Install Composer dependencies
         run: composer install --prefer-dist --no-interaction --no-progress
@@ -74,6 +74,12 @@ jobs:
                -d '{"message":"Magkano po ang haircut?"}' "$B/b/lumina-studio/chat" -o /tmp/chat
           cat /tmp/chat; echo
           grep -q '250.00' /tmp/chat
+
+          # Seeded pictures are served (storage link + gd/exif built in)
+          docker exec vendra php -r 'exit(function_exists("imagewebp") && function_exists("exif_read_data") ? 0 : 1);'
+          IMG=$(grep -o '/storage/businesses/[^"]*\.webp' /tmp/shop | head -1)
+          echo "Cover: $IMG"; test -n "$IMG"
+          curl -s -o /dev/null -w '%{http_code} %{content_type}\n' "$B$IMG" | tee /tmp/img; grep -q '^200 image/webp' /tmp/img
 
           # Owner login reaches the dashboard
           curl -s -c /tmp/jar2 -b /tmp/jar2 "$B/login" -o /tmp/login

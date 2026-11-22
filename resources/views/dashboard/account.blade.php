@@ -2,6 +2,25 @@
 @section('title', 'Your account')
 @section('heading', 'Your account')
 @section('content')
+<div class="card mb-6 flex max-w-4xl flex-wrap items-center gap-5">
+    <x-avatar :user="$user" class="h-20 w-20 text-2xl" />
+    <div class="min-w-0 flex-1">
+        <h2 class="h2">Profile picture</h2>
+        <p class="mt-1 text-sm text-ink-600">Shown to your team in the dashboard. JPG, PNG or WebP up to 5 MB; we crop it to a square and remove hidden details such as location.</p>
+        <div class="mt-3 flex flex-wrap items-center gap-3">
+            <form method="POST" action="{{ route('dashboard.account.avatar') }}" enctype="multipart/form-data" class="flex flex-wrap items-center gap-3">
+                @csrf
+                <label class="sr-only" for="avatar">Choose a picture</label>
+                <input id="avatar" type="file" name="avatar" accept="image/jpeg,image/png,image/webp" required class="text-sm">
+                <button class="btn btn-primary btn-sm">Upload</button>
+            </form>
+            @if ($user->avatar_path)
+                <form method="POST" action="{{ route('dashboard.account.avatar.remove') }}">@csrf @method('DELETE')<button class="btn btn-secondary btn-sm">Remove</button></form>
+            @endif
+        </div>
+        <x-field-error name="avatar" />
+    </div>
+</div>
 <div class="grid max-w-4xl gap-6 lg:grid-cols-2">
     <form method="POST" action="{{ route('dashboard.account.update') }}" class="card space-y-4">
         @csrf @method('PUT')
