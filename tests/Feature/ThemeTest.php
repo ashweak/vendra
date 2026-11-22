@@ -75,4 +75,43 @@ class ThemeTest extends TestCase
             $this->assertStringContainsString('[data-theme="'.$key.'"] {', $css, "Missing CSS for theme {$key}");
         }
     }
+
+    public function test_every_theme_has_its_own_homepage_layout_with_the_full_catalog(): void
+    {
+        $b = $this->makeBusiness(['address' => '1 Rizal St., Manila', 'phone' => '0917 000 0000', 'email' => 'hi@biz.test']);
+        $b->catalogItems()->create(['type' => 'service', 'name' => 'Classic Haircut', 'category' => 'Hair', 'price_cents' => 25000, 'duration_minutes' => 45]);
+        $b->catalogItems()->create(['type' => 'product', 'name' => 'Argan Hair Oil', 'category' => 'Retail', 'price_cents' => 39900, 'stock_on_hand' => 2]);
+        $b->catalogItems()->create(['type' => 'product', 'name' => 'Sold Out Serum', 'category' => 'Retail', 'price_cents' => 10000, 'stock_on_hand' => 0]);
+        $b->knowledgeEntries()->create(['kind' => 'policy', 'title' => 'Late arrivals', 'body' => 'We hold your slot for 15 minutes.', 'is_published' => true]);
+        $layouts = [];
+
+        foreach (Themes::keys() as $key) {
+            $r = $this->get(route('public.home', [$b, 'theme' => $key]));
+            $r->assertOk()
+                ->assertSee('data-layout="'.$key.'"', false)
+                ->assertSee('Classic Haircut')->assertSee('Argan Hair Oil')->assertSee('₱250.00')
+                ->assertSee(route('public.book', [$b, 'service' => $b->catalogItems()->where('name', 'Classic Haircut')->value('id')]), false)
+                ->assertSee('Late arrivals')->assertSee('1 Rizal St., Manila')
+                ->assertSee(route('public.privacy', $b), false)
+                ->assertSee('data-open-chat', false)
+                ->assertDontSee('Order Sold Out Serum', false);
+            $this->assertSame(1, substr_count($r->getContent(), '<h1'), "Theme {$key} must have exactly one h1");
+
+            // Search works in every layout, including the empty state.
+            $this->get(route('public.home', [$b, 'theme' => $key, 'q' => 'zzz-nothing']))->assertOk()->assertSee('Nothing found');
+            // Inner pages use the theme's header too.
+            $this->get(route('public.book', [$b, 'theme' => $key]))->assertOk()->assertSee('data-theme="'.$key.'"', false);
+
+            $layouts[$key] = md5(preg_replace('/\s+/', '', strip_tags($r->getContent(), '<section><article><aside><div>')));
+        }
+        $this->assertCount(count(Themes::keys()), array_unique($layouts), 'Each theme should render a different page structure');
+    }
+
+    public function test_layout_works_with_an_empty_catalog(): void
+    {
+        $b = $this->makeBusiness();
+        foreach (Themes::keys() as $key) {
+            $this->get(route('public.home', [$b, 'theme' => $key]))->assertOk()->assertSee('Nothing found');
+        }
+    }
 }

@@ -25,6 +25,17 @@ class Themes
         return array_keys(self::ALL);
     }
 
+    /**
+     * The theme to render for a business page: a valid ?theme= preview (it only changes what that visitor
+     * sees), otherwise the business's saved theme.
+     */
+    public static function active(\App\Models\Business $business): string
+    {
+        $preview = request()->query('theme');
+
+        return is_string($preview) && isset(self::ALL[$preview]) ? $preview : self::resolve($business->theme);
+    }
+
     /** A valid theme key, falling back to the default for anything unknown. */
     public static function resolve(?string $key): string
     {

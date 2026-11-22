@@ -1,0 +1,1 @@
+@php $avail = $item->type === 'product' ? $item->availableStock() : null; @endphp{{ $item->type === 'service' ? $item->duration_minutes.' min' : ($avail === 0 ? 'Out of stock' : ($avail !== null && $avail <= 3 ? 'Only '.$avail.' left' : 'In stock')) }}@if (($withDescription ?? true) && $item->description) · {{ $item->description }}@endif

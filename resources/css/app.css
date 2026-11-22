@@ -258,3 +258,8 @@
 [data-theme="slate"] .btn, [data-theme="slate"] .chip, [data-theme="slate"] .btn-play { border-radius: 10px; }
 [data-theme="slate"] .btn-play-icon { border-radius: 8px; }
 [data-theme="ocean"] .card, [data-theme="ocean"] .tile { border-radius: 26px; }
+
+/* Roastery category ribbon: slow scroll, paused for people who prefer less motion. */
+@keyframes vendra-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.vendra-marquee { animation: vendra-marquee 40s linear infinite; }
+@media (prefers-reduced-motion: reduce) { .vendra-marquee { animation: none; } }

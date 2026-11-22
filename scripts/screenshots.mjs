@@ -65,7 +65,7 @@ await shot(page, '06-chat', false);
 
 // Website themes (Settings → Appearance), previewed on the same business page.
 for (const t of ['studio', 'coral', 'ocean', 'roastery', 'slate', 'market']) {
-    await page.goto(`${BASE}/b/lumina-studio?theme=${t}`); await shot(page, `06t-theme-${t}`, false);
+    await page.goto(`${BASE}/b/lumina-studio?theme=${t}`); await shot(page, `06t-theme-${t}`);
 }
 await ctx.close();
 
@@ -74,7 +74,10 @@ const m = await browser.newContext({ viewport: { width: 390, height: 844 }, devi
 page = await m.newPage();
 await page.goto(`${BASE}/b/ganda-beauty/track`); await shot(page, '07b-mobile-track', false);
 await page.goto(`${BASE}/b/ganda-beauty`); await shot(page, '07-mobile-shop');
-await page.goto(`${BASE}/b/kislap-cleaning?theme=roastery`); await shot(page, '07t-mobile-theme-roastery', false);
+for (const t of ['studio', 'coral', 'ocean', 'roastery', 'slate', 'market']) {
+    await page.goto(`${BASE}/b/ganda-beauty?theme=${t}`); await shot(page, `07t-mobile-theme-${t}`);
+}
+await page.goto(`${BASE}/b/kislap-cleaning?theme=roastery`);
 {
     // The chat button must be the top element at its own position on every page.
     const hit = await page.evaluate(() => { const b = document.getElementById('vchat-open').getBoundingClientRect(); const el = document.elementFromPoint(b.x + b.width / 2, b.y + b.height / 2); return el ? (el.closest('#vchat-open') ? 'ok' : el.outerHTML.slice(0, 160)) : 'none'; });
