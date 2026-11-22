@@ -49,10 +49,10 @@
                     <p id="{{ $slug($g, $loop->index) }}" class="border-b border-line bg-paper px-5 py-2 text-xs font-semibold tracking-wider text-ink-600 uppercase">{{ $g }}</p>
                     @foreach ($rows as $item)
                         <div class="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-4 gap-y-1 border-b border-line px-5 py-3.5 last:border-0 sm:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)_7rem_6rem]">
-                            <span class="font-medium">{{ $item->name }}</span>
-                            <span class="col-start-1 text-sm text-ink-500 sm:col-start-auto">@include('public.home.parts.meta', ['withDescription' => false])</span>
-                            <span class="row-start-1 text-right font-semibold whitespace-nowrap sm:row-start-auto">{{ peso($item->price_cents) }}</span>
-                            <span class="row-start-2 text-right sm:row-start-auto">@include('public.home.parts.action', ['btn' => 'btn btn-secondary btn-sm'])</span>
+                            <span class="col-start-1 row-start-1 font-medium sm:col-start-auto sm:row-start-auto">{{ $item->name }}</span>
+                            <span class="col-start-1 row-start-2 text-sm text-ink-500 sm:col-start-auto sm:row-start-auto">@include('public.home.parts.meta', ['withDescription' => false])</span>
+                            <span class="col-start-2 row-start-1 text-right font-semibold whitespace-nowrap sm:col-start-auto sm:row-start-auto">{{ peso($item->price_cents) }}</span>
+                            <span class="col-start-2 row-start-2 text-right sm:col-start-auto sm:row-start-auto">@include('public.home.parts.action', ['btn' => 'btn btn-secondary btn-sm'])</span>
                         </div>
                     @endforeach
                 @endforeach
