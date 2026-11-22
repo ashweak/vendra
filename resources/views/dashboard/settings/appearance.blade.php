@@ -42,7 +42,7 @@
                             </span>
                             <span class="mt-1 block px-1 text-xs text-ink-600">{{ $t['description'] }}</span>
                             <span class="mt-1 block px-1 text-[11px] text-ink-500">Headlines: {{ $t['font'] }}</span>
-                            <span class="absolute top-4 right-4 hidden h-7 w-7 items-center justify-center rounded-full bg-ink-900 text-white peer-checked:flex"><x-icon name="check" class="h-4 w-4" /></span>
+                            <span class="absolute -top-2.5 -right-2.5 hidden h-7 w-7 items-center justify-center rounded-full bg-ink-900 text-white ring-4 ring-paper peer-checked:flex"><x-icon name="check" class="h-4 w-4" /></span>
                         </label>
                         <a href="{{ route('public.home', [$b, 'theme' => $key]) }}" target="_blank" rel="noopener" class="mt-2 mb-1 ml-1 inline-flex text-xs font-semibold underline decoration-sun decoration-2 underline-offset-4">Preview my page ↗</a>
                     </div>
