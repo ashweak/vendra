@@ -12,12 +12,12 @@ class Themes
     public const DEFAULT = 'studio';
 
     public const ALL = [
-        'studio' => ['name' => 'Studio', 'description' => 'Warm paper, sunny yellow and bold rounded headlines. Friendly for salons and shops.', 'font' => 'Bricolage Grotesque', 'swatches' => ['#fbfaf6', '#ffc83d', '#171612']],
-        'coral' => ['name' => 'Coral', 'description' => 'Soft peach with coral buttons and elegant serif headlines. Clean and professional.', 'font' => 'Fraunces (serif)', 'swatches' => ['#fff8f2', '#ff7043', '#242b38']],
-        'ocean' => ['name' => 'Ocean', 'description' => 'Cool blue and deep navy with crisp, modern type. Good for classes, tutors and services.', 'font' => 'Inter', 'swatches' => ['#f4f7ff', '#46c0ff', '#14205e']],
-        'roastery' => ['name' => 'Roastery', 'description' => 'Cream, espresso brown and burnt orange with italic serif accents. Cozy for cafés and food.', 'font' => 'Fraunces (serif)', 'swatches' => ['#f7f0e7', '#e0703a', '#2d1d16']],
-        'slate' => ['name' => 'Slate', 'description' => 'Quiet white and slate with a teal accent and tighter corners. Neat for repair and tech services.', 'font' => 'Inter', 'swatches' => ['#f8fafc', '#22b3cf', '#16202f']],
-        'market' => ['name' => 'Market', 'description' => 'Fresh greens with a lime accent. Made for groceries, sari-sari stores and farm produce.', 'font' => 'Bricolage Grotesque', 'swatches' => ['#f7faf4', '#a9dc5e', '#133d30']],
+        'studio' => ['name' => 'Studio', 'description' => 'Split welcome with a chat preview and a classic two-column price list. Warm paper and sunny yellow.', 'font' => 'Bricolage Grotesque', 'swatches' => ['#fbfaf6', '#ffc83d', '#171612']],
+        'coral' => ['name' => 'Coral', 'description' => 'Centered welcome, quick-action cards and service cards. Soft peach, coral buttons, serif headlines.', 'font' => 'Fraunces (serif)', 'swatches' => ['#fff8f2', '#ff7043', '#242b38']],
+        'ocean' => ['name' => 'Ocean', 'description' => 'Bold headline with stats, a swipeable item row and a ring-style how-it-works. Cool blue and navy.', 'font' => 'Inter', 'swatches' => ['#f4f7ff', '#46c0ff', '#14205e']],
+        'roastery' => ['name' => 'Roastery', 'description' => 'Bento welcome with a featured item, scrolling categories and menu cards. Cream, espresso and burnt orange.', 'font' => 'Fraunces (serif)', 'swatches' => ['#f7f0e7', '#e0703a', '#2d1d16']],
+        'slate' => ['name' => 'Slate', 'description' => 'App-style panel: business card on the side, stat cards and a clean price table. White, slate and teal.', 'font' => 'Inter', 'swatches' => ['#f8fafc', '#22b3cf', '#16202f']],
+        'market' => ['name' => 'Market', 'description' => 'Store-style banner with search, a category shelf and a product grid. Fresh greens and lime.', 'font' => 'Bricolage Grotesque', 'swatches' => ['#f7faf4', '#a9dc5e', '#133d30']],
     ];
 
     public static function keys(): array
