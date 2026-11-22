@@ -1,7 +1,8 @@
 @extends('layouts.base')
 @php
     // ?theme= lets an owner preview another theme without saving; it only changes what that visitor sees.
-    $activeTheme = \App\Support\Themes::resolve(request()->query('theme') ?: $business->theme);
+    $previewTheme = request()->query('theme');
+    $activeTheme = is_string($previewTheme) && isset(\App\Support\Themes::ALL[$previewTheme]) ? $previewTheme : \App\Support\Themes::resolve($business->theme);
 @endphp
 @section('theme', $activeTheme)
 @section('description', \Illuminate\Support\Str::limit(trim(($business->description ?: $business->name).' Book, order or ask in English, Tagalog or Taglish.'), 155))

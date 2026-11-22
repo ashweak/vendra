@@ -75,6 +75,12 @@ page = await m.newPage();
 await page.goto(`${BASE}/b/ganda-beauty/track`); await shot(page, '07b-mobile-track', false);
 await page.goto(`${BASE}/b/ganda-beauty`); await shot(page, '07-mobile-shop');
 await page.goto(`${BASE}/b/kislap-cleaning?theme=roastery`); await shot(page, '07t-mobile-theme-roastery', false);
+{
+    // The chat button must be the top element at its own position on every page.
+    const hit = await page.evaluate(() => { const b = document.getElementById('vchat-open').getBoundingClientRect(); const el = document.elementFromPoint(b.x + b.width / 2, b.y + b.height / 2); return el ? (el.closest('#vchat-open') ? 'ok' : el.outerHTML.slice(0, 160)) : 'none'; });
+    log('launcher-hit-test kislap', hit);
+}
+await page.goto(`${BASE}/b/ganda-beauty`);
 await page.click('#vchat-open');
 await page.fill('#vchat-input', 'I want to order 2 niacinamide toner for pickup');
 await page.click('#vchat-form button[aria-label=Send]');
