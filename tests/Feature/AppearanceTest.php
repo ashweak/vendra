@@ -158,8 +158,12 @@ class AppearanceTest extends TestCase
         $this->assertCount(count(Appearance::LAYOUTS), array_unique($structures), 'Each layout should render a different page structure');
 
         // The palette changes colors only: same layout with another palette → same page structure.
-        $structure = fn (string $palette) => md5(preg_replace('/\s+/', '', strip_tags(
-            $this->get(route('public.home', [$b, 'layout' => 'shop', 'palette' => $palette]))->getContent(), '<section><article><aside><div>')));
+        $this->get(route('public.home', [$b, 'preview' => 'off']));
+        $structure = function (string $palette) use ($b) {
+            $b->update(['layout' => 'shop', 'palette' => $palette]);
+
+            return md5(preg_replace('/\s+/', '', strip_tags($this->get(route('public.home', $b))->getContent(), '<section><article><aside><div>')));
+        };
         $this->assertSame($structure('sunny'), $structure('berry'));
     }
 

@@ -133,7 +133,7 @@ class PhotoTest extends TestCase
         $b = $this->makeBusiness();
         $owner = $this->addMember($b, 'owner');
         $this->actingAs($owner)->post(route('dashboard.catalog.store'), [
-            'type' => 'product', 'name' => 'Argan Oil', 'price' => '399', 'image' => UploadedFile::fake()->image('oil.jpg', 1600, 1600),
+            'type' => 'product', 'name' => 'Argan Oil', 'price' => '399', 'is_active' => '1', 'image' => UploadedFile::fake()->image('oil.jpg', 1600, 1600),
         ])->assertSessionHasNoErrors();
         $item = $b->catalogItems()->where('name', 'Argan Oil')->sole();
         $this->assertNotNull($item->image_path);
@@ -149,10 +149,10 @@ class PhotoTest extends TestCase
         $this->assertFalse($b->catalogItems()->where('name', 'Broken')->exists());
 
         $old = $item->image_path;
-        $this->actingAs($owner)->put(route('dashboard.catalog.update', $item->id), ['type' => 'product', 'name' => 'Argan Oil', 'price' => '399', 'image' => UploadedFile::fake()->image('n.png', 300, 300)])
+        $this->actingAs($owner)->put(route('dashboard.catalog.update', $item->id), ['name' => 'Argan Oil', 'price' => '399', 'is_active' => '1', 'image' => UploadedFile::fake()->image('n.png', 300, 300)])
             ->assertSessionHasNoErrors();
         Storage::disk('public')->assertMissing($old);
-        $this->actingAs($owner)->put(route('dashboard.catalog.update', $item->id), ['type' => 'product', 'name' => 'Argan Oil', 'price' => '399', 'remove_image' => '1'])
+        $this->actingAs($owner)->put(route('dashboard.catalog.update', $item->id), ['name' => 'Argan Oil', 'price' => '399', 'is_active' => '1', 'remove_image' => '1'])
             ->assertSessionHasNoErrors();
         $this->assertNull($item->fresh()->image_path);
         $this->assertEmpty(Storage::disk('public')->allFiles());
