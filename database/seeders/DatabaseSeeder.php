@@ -156,7 +156,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Ganda Beauty Hub', 'slug' => 'ganda-beauty', 'category' => 'retail',
             'description' => 'Affordable skincare and beauty products. Order online for pickup or delivery within the city.',
             'phone' => '0917 000 0202', 'email' => 'shop@ganda.test', 'address' => '45 Mabini Ave., Pasig City (fictional)',
-            'accent_color' => '#db2777', 'modules' => ['orders'],
+            'accent_color' => '#db2777', 'theme' => 'coral', 'modules' => ['orders'],
         ], 'Gina Ramos', 'owner@ganda.test');
         $b->update(['settings' => array_merge($b->settings, ['fulfillment_methods' => ['pickup', 'delivery'], 'order_approval' => 'manual'])]);
 
@@ -182,7 +182,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Kislap Home Cleaning', 'slug' => 'kislap-cleaning', 'category' => 'cleaning',
             'description' => 'General, deep and aircon cleaning for homes and small offices in Metro Manila.',
             'phone' => '0917 000 0303', 'email' => 'book@kislap.test', 'address' => '8 Kalayaan Ave., Brgy. Pinyahan, Quezon City (fictional) · serves Metro Manila',
-            'accent_color' => '#0d9488', 'modules' => ['service_requests', 'quotations', 'appointments'],
+            'accent_color' => '#0d9488', 'theme' => 'ocean', 'modules' => ['service_requests', 'quotations', 'appointments'],
         ], 'Karlo Bautista', 'owner@kislap.test');
         $b->update(['settings' => array_merge($b->settings, ['booking_approval' => 'manual'])]);
 

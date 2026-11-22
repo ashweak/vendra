@@ -19,6 +19,22 @@
     src: url('../fonts/bricolage-grotesque-latin-wght-normal.woff2') format('woff2-variations');
 }
 
+@font-face {
+    font-family: 'Fraunces';
+    font-style: normal;
+    font-display: swap;
+    font-weight: 100 900;
+    src: url('../fonts/fraunces-latin-wght-normal.woff2') format('woff2-variations');
+}
+
+@font-face {
+    font-family: 'Fraunces';
+    font-style: italic;
+    font-display: swap;
+    font-weight: 100 900;
+    src: url('../fonts/fraunces-latin-wght-italic.woff2') format('woff2-variations');
+}
+
 /*
  * Vendra design language ("Sari-sari modern"):
  * warm paper surfaces, ink text, a single sun-yellow accent, pill-shaped controls,
@@ -122,3 +138,123 @@
 .sticker-ring { animation: vendra-spin 18s linear infinite; transform-origin: 50% 50%; }
 @keyframes vendra-spin { to { transform: rotate(360deg); } }
 @media (prefers-reduced-motion: reduce) { .sticker-ring { animation: none; } }
+
+/*
+ * Website themes (Settings → Appearance). Unlayered on purpose so they override the defaults above.
+ * Colors were checked for WCAG AA contrast (body text 4.5:1) against each theme's backgrounds.
+ */
+[data-theme="coral"] {
+    --color-ink-50: #f8f2ed;
+    --color-ink-100: #efe9e5;
+    --color-ink-200: #e1dcda;
+    --color-ink-300: #c8c5c4;
+    --color-ink-400: #969699;
+    --color-ink-500: #5f626a;
+    --color-ink-600: #494d57;
+    --color-ink-700: #393e49;
+    --color-ink-800: #2d3340;
+    --color-ink-900: #242b38;
+    --color-ink-950: #1b2230;
+    --color-paper: #fff8f2;
+    --color-tile: #fdeee3;
+    --color-line: #f2dccb;
+    --color-sun: #ff7043;
+    --color-sun-soft: #ffe4d8;
+    --color-sun-deep: #f46534;
+    --color-leaf: #1f7a4d;
+    --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+}
+[data-theme="ocean"] {
+    --color-ink-50: #eef1fa;
+    --color-ink-100: #e5e8f3;
+    --color-ink-200: #d7dbe9;
+    --color-ink-300: #bdc2d7;
+    --color-ink-400: #8991b2;
+    --color-ink-500: #515a89;
+    --color-ink-600: #3a4479;
+    --color-ink-700: #29346d;
+    --color-ink-800: #1e2964;
+    --color-ink-900: #14205e;
+    --color-ink-950: #0b1757;
+    --color-paper: #f4f7ff;
+    --color-tile: #e8efff;
+    --color-line: #d5e0fa;
+    --color-sun: #46c0ff;
+    --color-sun-soft: #dcf2ff;
+    --color-sun-deep: #1d9be0;
+    --color-leaf: #127a52;
+    --font-display: 'Inter', ui-sans-serif, system-ui, sans-serif;
+}
+[data-theme="roastery"] {
+    --color-ink-50: #f5efe9;
+    --color-ink-100: #ece6e0;
+    --color-ink-200: #dfd9d2;
+    --color-ink-300: #c7c0ba;
+    --color-ink-400: #988e88;
+    --color-ink-500: #655851;
+    --color-ink-600: #4f413a;
+    --color-ink-700: #40312b;
+    --color-ink-800: #35261f;
+    --color-ink-900: #2d1d16;
+    --color-ink-950: #24140d;
+    --color-paper: #f7f0e7;
+    --color-tile: #efe4d6;
+    --color-line: #e2d2bf;
+    --color-sun: #e0703a;
+    --color-sun-soft: #f8dfcd;
+    --color-sun-deep: #d86c34;
+    --color-leaf: #2f6b3f;
+    --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+}
+[data-theme="slate"] {
+    --color-ink-50: #f1f3f6;
+    --color-ink-100: #e8eaed;
+    --color-ink-200: #d9dce0;
+    --color-ink-300: #c0c4c9;
+    --color-ink-400: #8c929a;
+    --color-ink-500: #545b66;
+    --color-ink-600: #3c4451;
+    --color-ink-700: #2c3542;
+    --color-ink-800: #202937;
+    --color-ink-900: #16202f;
+    --color-ink-950: #0d1726;
+    --color-paper: #f8fafc;
+    --color-tile: #eef2f6;
+    --color-line: #e1e7ee;
+    --color-sun: #22b3cf;
+    --color-sun-soft: #daf3f8;
+    --color-sun-deep: #1693ab;
+    --color-leaf: #15803d;
+    --font-display: 'Inter', ui-sans-serif, system-ui, sans-serif;
+}
+[data-theme="market"] {
+    --color-ink-50: #eff4ed;
+    --color-ink-100: #e5ece5;
+    --color-ink-200: #d7e0d9;
+    --color-ink-300: #bdcbc2;
+    --color-ink-400: #899f96;
+    --color-ink-500: #517065;
+    --color-ink-600: #395c51;
+    --color-ink-700: #294f42;
+    --color-ink-800: #1d4538;
+    --color-ink-900: #133d30;
+    --color-ink-950: #0a3528;
+    --color-paper: #f7faf4;
+    --color-tile: #edf4e8;
+    --color-line: #d9e6d1;
+    --color-sun: #a9dc5e;
+    --color-sun-soft: #eaf6d8;
+    --color-sun-deep: #86c23c;
+    --color-leaf: #1a7f3c;
+}
+[data-theme="coral"] .font-display, [data-theme="coral"] h1, [data-theme="coral"] h2, [data-theme="coral"] h3,
+[data-theme="roastery"] .font-display, [data-theme="roastery"] h1, [data-theme="roastery"] h2, [data-theme="roastery"] h3 { font-weight: 600; letter-spacing: -0.01em; }
+[data-theme="coral"] .mark { background: none; font-style: italic; color: #c2461c; padding: 0; }
+[data-theme="roastery"] .mark { background: none; font-style: italic; color: #a4471b; padding: 0; }
+[data-theme="roastery"] .eyebrow { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: 0.08em; }
+[data-theme="ocean"] .font-display, [data-theme="ocean"] h1, [data-theme="ocean"] h2, [data-theme="ocean"] h3,
+[data-theme="slate"] .font-display, [data-theme="slate"] h1, [data-theme="slate"] h2, [data-theme="slate"] h3 { letter-spacing: -0.03em; }
+[data-theme="slate"] .card, [data-theme="slate"] .tile { border-radius: 14px; }
+[data-theme="slate"] .btn, [data-theme="slate"] .chip, [data-theme="slate"] .btn-play { border-radius: 10px; }
+[data-theme="slate"] .btn-play-icon { border-radius: 8px; }
+[data-theme="ocean"] .card, [data-theme="ocean"] .tile { border-radius: 26px; }

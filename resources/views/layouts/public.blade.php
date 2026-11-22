@@ -1,4 +1,9 @@
 @extends('layouts.base')
+@php
+    // ?theme= lets an owner preview another theme without saving; it only changes what that visitor sees.
+    $activeTheme = \App\Support\Themes::resolve(request()->query('theme') ?: $business->theme);
+@endphp
+@section('theme', $activeTheme)
 @section('description', \Illuminate\Support\Str::limit(trim(($business->description ?: $business->name).' Book, order or ask in English, Tagalog or Taglish.'), 155))
 @push('head')
 <style>:root{--accent: {{ $business->accent_color }};}</style>

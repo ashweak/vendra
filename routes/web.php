@@ -163,6 +163,8 @@ Route::prefix('app')->name('dashboard.')->middleware(['auth', 'mfa', 'business']
     Route::controller(Dashboard\SettingsController::class)->prefix('settings')->name('settings.')->group(function () {
         Route::get('profile', 'profile')->name('profile');
         Route::put('profile', 'updateProfile')->middleware('demo.lock');
+        Route::get('appearance', 'appearance')->name('appearance');
+        Route::put('appearance', 'updateAppearance');
         Route::get('workflow', 'workflow')->name('workflow');
         Route::put('workflow', 'updateWorkflow')->middleware('demo.lock');
         Route::get('hours', 'hours')->name('hours');

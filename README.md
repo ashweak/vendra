@@ -24,6 +24,8 @@ from the real app in GitHub Actions on every change to the script.
 
 **Customers** (no account needed)
 - Branded business page with a searchable catalog, hours, policies and FAQ.
+- **Six website themes** (Studio, Coral, Ocean, Roastery, Slate, Market) that the owner picks during setup and
+  can switch anytime in *Settings → Appearance*, with a live preview of their real page before saving.
 - Booking, ordering, quotation and service-request forms. Every submission goes **form → review → confirm**.
   Double-clicks and refreshes never create duplicates.
 - Chat with an offline auto-assistant that answers from the business's live data and prepares a **draft** the customer reviews in the
@@ -39,7 +41,7 @@ from the real app in GitHub Actions on every change to the script.
   fees are reviewed by staff. Payment verification is separate and done only by staff.
 - Quotations: immutable versions, owner approval before sending, acceptance tied to a specific version,
   one-time conversion to a service request.
-- Service requests, customers with consent history, reports (submitted, confirmed and completed shown
+- Service requests, customers with consent history and privacy requests, reports (submitted, confirmed and completed shown
   separately), activity log, CSV exports, team and schedules, onboarding checklist, closure with a 30-day
   export window.
 

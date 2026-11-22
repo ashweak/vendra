@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Support\Themes;
 use App\Models\Conversation;
 use App\Models\KnowledgeEntry;
 use App\Models\SupportGrant;
@@ -36,6 +37,26 @@ class SettingsController extends DashboardController
         AuditLogger::log($b->id, 'settings.profile_updated', $b, $data);
 
         return back()->with('status', 'Profile saved.');
+    }
+
+    public function appearance()
+    {
+        $this->authorizeAbility('settings.manage');
+
+        return view('dashboard.settings.appearance', ['themes' => Themes::ALL]);
+    }
+
+    /** Website theme for the customer pages. Not demo-locked: it only changes colors and fonts. */
+    public function updateAppearance(Request $request)
+    {
+        $this->authorizeAbility('settings.manage');
+        $data = $request->validate(['theme' => 'required|in:'.implode(',', Themes::keys())]);
+        $b = $this->business();
+        $old = $b->theme;
+        $b->update($data);
+        AuditLogger::log($b->id, 'settings.theme_changed', $b, ['from' => $old, 'to' => $data['theme']]);
+
+        return back()->with('status', 'Theme changed to '.Themes::ALL[$data['theme']]['name'].'. Your customer page uses it now.');
     }
 
     public function workflow()

@@ -62,6 +62,11 @@ for (const msg of ['Magkano po ang haircut?', `Pa-book po ng haircut sa ${['ling
     await page.waitForTimeout(1500);
 }
 await shot(page, '06-chat', false);
+
+// Website themes (Settings → Appearance), previewed on the same business page.
+for (const t of ['studio', 'coral', 'ocean', 'roastery', 'slate', 'market']) {
+    await page.goto(`${BASE}/b/lumina-studio?theme=${t}`); await shot(page, `06t-theme-${t}`, false);
+}
 await ctx.close();
 
 // ---------- Mobile
@@ -69,6 +74,7 @@ const m = await browser.newContext({ viewport: { width: 390, height: 844 }, devi
 page = await m.newPage();
 await page.goto(`${BASE}/b/ganda-beauty/track`); await shot(page, '07b-mobile-track', false);
 await page.goto(`${BASE}/b/ganda-beauty`); await shot(page, '07-mobile-shop');
+await page.goto(`${BASE}/b/kislap-cleaning?theme=roastery`); await shot(page, '07t-mobile-theme-roastery', false);
 await page.click('#vchat-open');
 await page.fill('#vchat-input', 'I want to order 2 niacinamide toner for pickup');
 await page.click('#vchat-form button[aria-label=Send]');
@@ -84,6 +90,7 @@ page = await dctx.newPage();
 page.on('pageerror', e => errors.push(String(e)));
 await login(page, 'owner@lumina.test');
 await page.goto(`${BASE}/app`); await shot(page, '10-dashboard-overview');
+await page.goto(`${BASE}/app/settings/appearance`); await shot(page, '10b-settings-appearance');
 await page.goto(`${BASE}/app/conversations`);
 await page.locator('main a.card').first().click(); await shot(page, '11-inbox-handoff');
 const tmr = new Date(Date.now() + 86400000); if (tmr.getDay() === 0) tmr.setDate(tmr.getDate() + 1);

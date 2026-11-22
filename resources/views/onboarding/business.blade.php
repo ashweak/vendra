@@ -18,6 +18,19 @@
             @endforeach
         </div>
     </fieldset>
+    <fieldset>
+        <legend class="label">Website look</legend>
+        <p class="hint -mt-1 mb-2">Pick a theme for your customer page. You can change it anytime in Settings → Appearance.</p>
+        <div class="grid grid-cols-2 gap-2 sm:grid-cols-3">
+            @foreach (\App\Support\Themes::ALL as $key => $t)
+                <label class="flex cursor-pointer flex-col gap-2 rounded-lg border border-line p-2.5 text-sm has-[:checked]:border-ink-900 has-[:checked]:bg-ink-50">
+                    <span class="flex items-center gap-2"><input type="radio" name="theme" value="{{ $key }}" @checked(old('theme', \App\Support\Themes::DEFAULT) === $key)><span class="font-medium">{{ $t['name'] }}</span></span>
+                    <span class="flex gap-1" aria-hidden="true">@foreach ($t['swatches'] as $c)<span class="h-5 flex-1 rounded border border-black/10" style="background: {{ $c }}"></span>@endforeach</span>
+                </label>
+            @endforeach
+        </div>
+        <x-field-error name="theme" />
+    </fieldset>
     <div><label class="label" for="phone">Phone (optional)</label><input id="phone" name="phone" class="input" value="{{ old('phone') }}"></div>
     <div><label class="label" for="address">Address (optional)</label><input id="address" name="address" class="input" value="{{ old('address') }}"></div>
     <button class="btn btn-primary w-full">Create business</button>
