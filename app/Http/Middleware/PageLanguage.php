@@ -26,8 +26,12 @@ class PageLanguage
         $locale = ($request->hasSession() ? $request->session()->get('page_lang') : null)
             ?? (preg_match('/^\s*(fil|tl)\b/i', (string) $request->header('Accept-Language')) ? 'fil' : null)
             ?? ($business instanceof Business ? $business->setting('language', 'en') : 'en');
+        $previous = app()->getLocale();
         app()->setLocale(isset(self::LANGUAGES[$locale]) ? $locale : 'en');
-
-        return $next($request);
+        try {
+            return $next($request); // the page is rendered inside this call
+        } finally {
+            app()->setLocale($previous); // never leaks into the next request on long-running workers
+        }
     }
 }

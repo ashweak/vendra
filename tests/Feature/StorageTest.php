@@ -44,7 +44,7 @@ class StorageTest extends TestCase
 
     public function test_pictures_can_live_on_cloudflare_r2(): void
     {
-        config(['vendra.media_disk' => 'r2']);
+        config(['vendra.media_disk' => 'r2', 'filesystems.disks.r2.url' => 'https://media.example.com']);
         Storage::fake('r2', ['url' => 'https://media.example.com']);
         Storage::fake('public');
         $b = $this->makeBusiness();
