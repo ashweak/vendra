@@ -21,7 +21,12 @@ jobs:
         with:
           php-version: '8.3'
           coverage: none
-      - run: composer update --no-interaction --no-progress --prefer-dist
+      # Adding a package only resolves that package (and its new dependencies); nothing else moves.
+      - name: Resolve
+        run: |
+          NEW=$(php -r '$j=json_decode(file_get_contents("composer.json"),true);$l=json_decode(file_get_contents("composer.lock"),true);$have=array_column(array_merge($l["packages"],$l["packages-dev"]),"name");$req=array_keys(array_merge($j["require"],$j["require-dev"]??[]));echo implode(" ",array_filter($req,fn($p)=>str_contains($p,"/")&&!in_array($p,$have)));')
+          echo "New packages: ${NEW:-none}"
+          if [ -n "$NEW" ]; then composer update $NEW --with-dependencies --no-interaction --no-progress --prefer-dist; else composer update --no-interaction --no-progress --prefer-dist; fi
       - name: Publish composer.lock
         run: |
           mkdir -p /tmp/lock && cp composer.lock /tmp/lock/
