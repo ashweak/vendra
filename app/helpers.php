@@ -20,20 +20,20 @@ if (! function_exists('local_time')) {
         if (app()->getLocale() === 'en') {
             return $local->format($format);
         }
-        // Month and day names follow the page language; AM/PM stays as Filipinos write it.
+        // Month and day names follow the page language (lang/fil.json); numbers and AM/PM stay as they are.
         $out = '';
         for ($i = 0, $n = strlen($format); $i < $n; $i++) {
             $c = $format[$i];
             if ($c === '\\' && $i + 1 < $n) {
                 $out .= $c.$format[++$i];
-            } elseif ($c === 'A' || $c === 'a') {
-                $out .= preg_replace('/(.)/', '\\\\$1', $local->format($c));
+            } elseif (in_array($c, ['F', 'M', 'l', 'D'], true)) {
+                $out .= preg_replace('/(.)/u', '\\\\$1', __($local->format($c)));
             } else {
                 $out .= $c;
             }
         }
 
-        return $local->locale(app()->getLocale())->translatedFormat($out);
+        return $local->format($out);
     }
 }
 

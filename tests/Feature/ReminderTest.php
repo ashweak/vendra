@@ -69,21 +69,19 @@ class ReminderTest extends TestCase
     public function test_reminder_uses_the_page_language_of_the_business(): void
     {
         Notification::fake();
-        $b = $this->makeBusiness([], ['language' => 'fil']);
-        $this->appointment($b, '2026-11-18 10:00');
+        $b = $this->makeBusiness(['phone' => '0917 000 0101'], ['language' => 'fil']);
+        $a = $this->appointment($b, '2026-11-18 10:00');
         $this->travelTo(CarbonImmutable::parse('2026-11-17 12:00', 'Asia/Manila'));
         $this->artisan('vendra:remind');
-        Notification::assertSentOnDemand(AppointmentReminder::class, function ($n) {
-            if ($n->locale !== 'fil') {
-                return false;
-            }
-            app()->setLocale('fil');
-            $mail = $n->toMail(new AnonymousNotifiable);
-            app()->setLocale('en');
+        Notification::assertSentOnDemand(AppointmentReminder::class, fn ($n) => $n->locale === 'fil');
 
-            return str_starts_with($mail->subject, 'Paalala:') && $mail->actionText === 'Tingnan o kanselahin ang booking ko'
-                && str_contains(implode(' ', $mail->introLines), 'Miyerkules, Nobyembre 18, 2026');
-        });
+        app()->setLocale('fil');
+        $mail = (new AppointmentReminder($a->fresh()))->toMail(new AnonymousNotifiable);
+        app()->setLocale('en');
+        $this->assertSame('Paalala: Hair Color, long; "special" sa '.$b->name, $mail->subject);
+        $this->assertSame('Tingnan o kanselahin ang booking ko', $mail->actionText);
+        $this->assertStringContainsString('Miyerkules, Nobyembre 18, 2026 at 10:00 AM', implode(' ', $mail->introLines));
+        $this->assertStringContainsString('Telepono: 0917 000 0101', implode(' ', $mail->outroLines));
     }
 
     public function test_calendar_file_is_valid_ics_and_only_for_the_signed_in_customer(): void

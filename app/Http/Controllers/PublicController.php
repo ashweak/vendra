@@ -300,7 +300,7 @@ class PublicController extends Controller
         return $this->review($business, 'request', $data, [
             'Description' => $data['description'],
             'Location' => $data['location'] ?? '—',
-            'Preferred date' => ($data['preferred_date'] ?? null) ? __(':date (preference only)', ['date' => CarbonImmutable::parse($data['preferred_date'])->locale(app()->getLocale())->translatedFormat('l, F j, Y')]) : '—',
+            'Preferred date' => ($data['preferred_date'] ?? null) ? __(':date (preference only)', ['date' => local_time(CarbonImmutable::parse($data['preferred_date'], $business->timezone), $business->timezone, 'l, F j, Y')]) : '—',
             'Name' => $data['name'], 'Email' => $data['email'], 'Phone' => $data['phone'] ?? '—',
         ], 'A preferred date is not a confirmed booking. The business will review your request and contact you.');
     }

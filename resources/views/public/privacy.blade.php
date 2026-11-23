@@ -7,7 +7,7 @@
 @endphp
 <article class="mx-auto max-w-3xl">
     <x-page-head :eyebrow="__('Privacy notice')" :title="__('How :business handles your information', ['business' => $business->name])" />
-    <p class="mt-3 text-sm text-ink-600">{{ __('Under the Data Privacy Act of 2012 (Republic Act No. 10173). Last updated :date.', ['date' => now()->locale(app()->getLocale())->translatedFormat('F j, Y')]) }}</p>
+    <p class="mt-3 text-sm text-ink-600">{{ __('Under the Data Privacy Act of 2012 (Republic Act No. 10173). Last updated :date.', ['date' => local_time(now(), $business->timezone, 'F j, Y')]) }}</p>
 
     <div class="mt-8 space-y-7 text-[15px] leading-relaxed text-ink-800">
         <section>

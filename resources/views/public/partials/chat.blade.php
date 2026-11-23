@@ -38,11 +38,11 @@
     const stateEl = document.getElementById('vchat-state');
     const csrf = document.querySelector('meta[name=csrf-token]').content;
     let loaded = false, busy = false, lastId = 0, poll = null;
-    const T = @json([
+    const T = {{ \Illuminate\Support\Js::from([
         'states' => ['ai_active' => __('Auto-assistant · staff can join anytime'), 'waiting_for_staff' => __('Waiting for staff · auto-replies paused'), 'staff_active' => __('Staff is replying'), 'closed' => __('Conversation closed')],
         'ai' => __('Auto-assistant'), 'staff' => __('Staff'), 'review' => __('Review & confirm'), 'typing' => __('Typing…'),
         'slow' => __('You’re sending messages quickly. Please wait a moment.'), 'failed' => __('Message not sent. Please try again or use the forms on this page.'),
-    ]);
+    ]) }};
     const states = T.states;
 
     function bubble(m) {

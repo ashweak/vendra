@@ -58,7 +58,7 @@
         <p class="mt-1 text-sm text-ink-600">{{ \Illuminate\Support\Str::limit($q->requirements, 160) }}</p>
         @if (in_array($q->status, ['sent', 'accepted', 'declined', 'expired'], true) && $v && $v->sent_at)
             <div class="mt-3 rounded-lg border border-line p-3 text-sm">
-                <p class="font-medium">{{ __('Version :v · valid until :date', ['v' => $v->version, 'date' => $v->valid_until->locale(app()->getLocale())->translatedFormat('M j, Y')]) }}</p>
+                <p class="font-medium">{{ __('Version :v · valid until :date', ['v' => $v->version, 'date' => local_time($v->valid_until, $tz, 'M j, Y')]) }}</p>
                 <table class="table mt-2"><tbody>
                     @foreach ($v->line_items as $l)<tr><td>{{ $l['quantity'] }} × {{ $l['description'] }}</td><td class="text-right">{{ peso($l['line_total_cents']) }}</td></tr>@endforeach
                     <tr><td class="font-semibold">{{ __('Total') }}</td><td class="text-right font-semibold">{{ peso($v->total_cents) }}</td></tr>

@@ -45,7 +45,7 @@
 <script>
 (() => {
     const svc = document.getElementById('service'), date = document.getElementById('date'), box = document.getElementById('slots');
-    const T = @json(['checking' => __('Checking open times…'), 'none' => __('No open times on this date. Please try another date.'), 'error' => __('We couldn’t check availability. Please try again.'), 'pick' => __('Please choose a time.')]);
+    const T = {{ \Illuminate\Support\Js::from(['checking' => __('Checking open times…'), 'none' => __('No open times on this date. Please try another date.'), 'error' => __('We couldn’t check availability. Please try again.'), 'pick' => __('Please choose a time.')]) }};
     const time = document.getElementById('time'), staff = document.getElementById('staff_id');
     async function load() {
         if (!svc.value || !date.value) return;

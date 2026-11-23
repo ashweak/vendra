@@ -52,6 +52,7 @@ class PushTest extends TestCase
 
         $this->actingAs($owner)->postJson(route('dashboard.push.unsubscribe'), ['endpoint' => 'https://fcm.googleapis.com/fcm/send/abc123'])->assertOk();
         $this->assertSame(0, PushSubscription::count());
+        $this->app['auth']->forgetGuards();
         $this->postJson(route('dashboard.push.subscribe'), ['endpoint' => 'https://fcm.googleapis.com/fcm/send/z'])->assertUnauthorized();
     }
 
@@ -86,6 +87,7 @@ class PushTest extends TestCase
         // The service worker then asks what to show, with the user's own session.
         $this->actingAs($owner)->getJson(route('dashboard.push.latest'))->assertOk()
             ->assertJson(['title' => 'New booking APT-123456', 'body' => 'Hair Color for Ana – Confirmed', 'url' => route('dashboard.overview')]);
+        $this->app['auth']->forgetGuards();
         $this->getJson(route('dashboard.push.latest'))->assertUnauthorized();
     }
 
