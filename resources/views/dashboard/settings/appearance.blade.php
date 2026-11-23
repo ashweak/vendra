@@ -58,6 +58,17 @@
         <x-field-error name="palette" />
     </fieldset>
 
+    <fieldset class="mt-10">
+        <legend class="h2">Page language</legend>
+        <p class="mt-1 text-sm text-ink-600">The language your customer page opens in. Visitors can switch between English and Filipino anytime, and the chat understands both (and Taglish).</p>
+        <div class="mt-4 flex flex-wrap gap-3">
+            @foreach (\App\Http\Middleware\PageLanguage::LANGUAGES as $code => $name)
+                <label class="flex items-center gap-2 rounded-xl border border-line bg-white px-4 py-3 text-sm"><input type="radio" name="language" value="{{ $code }}" @checked(old('language', $b->setting('language', 'en')) === $code)> {{ $name }}</label>
+            @endforeach
+        </div>
+        <x-field-error name="language" />
+    </fieldset>
+
     <div class="sticky bottom-0 mt-8 flex flex-wrap items-center gap-3 border-t border-line bg-paper/95 py-4 backdrop-blur">
         <button class="btn btn-primary">Save appearance</button>
         <a id="appearance-preview" href="{{ route('public.home', [$b, 'layout' => $selLayout, 'palette' => $selPalette]) }}" target="_blank" rel="noopener" class="btn btn-secondary">Preview this combination ↗</a>

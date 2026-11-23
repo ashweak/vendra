@@ -9,6 +9,11 @@ return [
     // Shown on the platform privacy notice and terms. Leave empty to point people to the GitHub repository.
     'contact_email' => env('VENDRA_CONTACT_EMAIL'),
 
+    // Where uploads live. 'public'/'local' keep files on the server; on hosts whose disk is wiped on
+    // restart (Render free plan), use Cloudflare R2: VENDRA_MEDIA_DISK=r2 and VENDRA_FILES_DISK=r2_private.
+    'media_disk' => env('VENDRA_MEDIA_DISK', 'public'),   // business photos, product photos, profile pictures
+    'files_disk' => env('VENDRA_FILES_DISK', 'local'),    // private customer attachments (quotation files)
+
     'modules' => [
         'appointments' => 'Appointments',
         'quotations' => 'Quotations',
@@ -31,6 +36,8 @@ return [
         'booking_lead_minutes' => 60,          // earliest bookable time from now
         'booking_horizon_days' => 30,
         'cancellation_hours' => 6,             // self-service cancellation window
+        'booking_reminders' => true,
+        'language' => 'en',                    // default customer page language: en | fil (visitors can switch)           // email customers the day before (with a calendar file)
         'order_approval' => 'manual',          // auto | manual
         'order_reservation_hours' => 24,       // reservation expiry for submitted orders
         'fulfillment_methods' => ['pickup'],   // pickup, delivery

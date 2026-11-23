@@ -33,7 +33,7 @@ class ApplyRetention extends Command
         $files = Attachment::where('expires_at', '<', now())->whereHasMorph('attachable', [\App\Models\Quotation::class], fn ($q) => $q->whereNotIn('status', ['submitted', 'under_review', 'awaiting_owner_approval', 'sent', 'accepted']));
         $report['attachments'] = $files->count();
         $dry || $files->each(function ($a) {
-            Storage::disk('local')->delete($a->path);
+            Storage::disk(config('vendra.files_disk'))->delete($a->path);
             $a->delete();
         });
 

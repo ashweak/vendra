@@ -5,14 +5,17 @@ namespace App\Notifications;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-/** In-app (database) + locally captured email. A failed notification never reverses a saved transaction. */
+/** In-app (database) + locally captured email + optional device push. A failed notification never reverses a saved transaction. */
 class StaffAlert extends Notification
 {
     public function __construct(public string $title, public string $body, public ?string $url = null, public int $businessId = 0) {}
 
     public function via(object $notifiable): array
     {
-        return ['database', 'mail'];
+        // Also wake the user's devices that turned on alerts (the push itself carries no details).
+        return \App\Services\WebPush::enabled() && \App\Models\PushSubscription::where('user_id', $notifiable->id ?? 0)->exists()
+            ? ['database', 'mail', \App\Notifications\Channels\PushChannel::class]
+            : ['database', 'mail'];
     }
 
     public function toMail(object $notifiable): MailMessage

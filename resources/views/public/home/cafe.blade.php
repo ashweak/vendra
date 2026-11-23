@@ -7,23 +7,23 @@
         <div class="relative overflow-hidden rounded-[28px] bg-sun-soft p-7 sm:p-12 lg:row-span-2">
             <span class="eyebrow">{{ $categoryLabel }}</span>
             <h1 class="display mt-6">{{ $business->name }}</h1>
-            <p class="mt-4 font-display text-2xl text-ink-800 sm:text-3xl">Ask, review, then <span class="mark">confirm</span>.</p>
+            <p class="mt-4 font-display text-2xl text-ink-800 sm:text-3xl">{{ __('Ask, review, then') }} <span class="mark">{{ __('confirm') }}</span>.</p>
             <p class="lead mt-4 max-w-lg">{{ $intro }}</p>
             <div class="mt-8 flex flex-wrap items-center gap-4">
                 <a href="{{ $primary[1] }}" class="btn btn-primary px-6">{{ $primary[0] }}</a>
-                <button type="button" class="text-sm font-semibold underline decoration-sun-deep decoration-2 underline-offset-4" data-open-chat>Ask in Taglish →</button>
+                <button type="button" class="text-sm font-semibold underline decoration-sun-deep decoration-2 underline-offset-4" data-open-chat>{{ __('Ask in Taglish →') }}</button>
             </div>
             <div class="mt-10 grid max-w-md grid-cols-3 gap-4 border-t border-ink-900/10 pt-6">
-                <p><span class="block font-display text-3xl font-semibold">{{ $items->count() }}</span><span class="text-xs text-ink-600">on the menu</span></p>
-                <p><span class="block font-display text-3xl font-semibold">{{ $openDays }}</span><span class="text-xs text-ink-600">days open</span></p>
-                <p><span class="block font-display text-3xl font-semibold">3</span><span class="text-xs text-ink-600">languages in chat</span></p>
+                <p><span class="block font-display text-3xl font-semibold">{{ $items->count() }}</span><span class="text-xs text-ink-600">{{ __('on the menu') }}</span></p>
+                <p><span class="block font-display text-3xl font-semibold">{{ $openDays }}</span><span class="text-xs text-ink-600">{{ __('days open') }}</span></p>
+                <p><span class="block font-display text-3xl font-semibold">3</span><span class="text-xs text-ink-600">{{ __('languages in chat') }}</span></p>
             </div>
         </div>
         @if ($featured)
             <article class="flex flex-col rounded-[28px] border border-line bg-white p-5">
-                <span class="w-fit rounded-full bg-tile px-3 py-1 text-[11px] font-semibold tracking-wider text-ink-600 uppercase">Featured</span>
+                <span class="w-fit rounded-full bg-tile px-3 py-1 text-[11px] font-semibold tracking-wider text-ink-600 uppercase">{{ __('Featured') }}</span>
                 <div class="mt-4 flex items-center gap-4">
-                    <x-item-visual :item="$featured" class="flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl bg-sun font-display text-4xl text-ink-900 italic"><span aria-hidden="true">{{ mb_substr($featured->name, 0, 1) }}</span></x-item-visual>
+                    <x-item-visual :item="$featured" sizes="80px" class="flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl bg-sun font-display text-4xl text-ink-900 italic"><span aria-hidden="true">{{ mb_substr($featured->name, 0, 1) }}</span></x-item-visual>
                     <div class="min-w-0">
                         <h2 class="font-display text-xl font-semibold leading-tight">{{ $featured->name }}</h2>
                         <p class="mt-1 text-xs text-ink-500">@include('public.home.parts.meta', ['item' => $featured, 'withDescription' => false])</p>
@@ -36,13 +36,13 @@
             </article>
         @endif
         <div class="relative flex flex-col justify-between gap-6 overflow-hidden rounded-[28px] bg-ink-900 p-6 text-white">
-            @if ($cover)<img src="{{ $cover }}" alt="" class="absolute inset-0 h-full w-full object-cover"><div class="absolute inset-0 bg-ink-900/70"></div>@endif
+            @if ($cover)<img src="{{ $cover }}" @srcset($business->cover_path, '(min-width: 1024px) 40vw, 100vw') alt="" class="absolute inset-0 h-full w-full object-cover"><div class="absolute inset-0 bg-ink-900/70"></div>@endif
             <div class="relative">
-                <p class="text-xs tracking-wider text-white/60 uppercase">Today</p>
+                <p class="text-xs tracking-wider text-white/60 uppercase">{{ __('Today') }}</p>
                 <p class="mt-2 font-display text-2xl font-semibold">{{ $todayLabel }}</p>
-                <p class="mt-2 text-sm text-white/70">Staff reply in chat {{ $business->setting('response_hours') }}.</p>
+                <p class="mt-2 text-sm text-white/70">{{ __('Staff reply in chat :hours.', ['hours' => $business->setting('response_hours')]) }}</p>
             </div>
-            <button type="button" class="btn btn-sun relative w-full" data-open-chat>Message us</button>
+            <button type="button" class="btn btn-sun relative w-full" data-open-chat>{{ __('Message us') }}</button>
         </div>
     </div>
 </section>
@@ -62,15 +62,15 @@
 <section id="catalog" class="mx-auto max-w-6xl px-5 py-16 sm:px-8">
     <div class="flex flex-wrap items-end justify-between gap-4">
         <div>
-            <span class="eyebrow">The menu</span>
-            <h2 class="section-title mt-4">Pick your <span class="mark">favorite</span></h2>
+            <span class="eyebrow">{{ __('The menu') }}</span>
+            <h2 class="section-title mt-4">{{ __('Pick your') }} <span class="mark">{{ __('favorite') }}</span></h2>
         </div>
         @include('public.home.parts.search', ['class' => 'flex w-full gap-2 sm:w-auto', 'inputClass' => 'rounded-full sm:w-64'])
     </div>
     @if ($items->isEmpty())
-        <div class="mt-8"><x-empty title="Nothing found">Try another search, or ask us in the chat.</x-empty></div>
+        <div class="mt-8"><x-empty title="{{ __('Nothing found') }}">{{ __('Try another search, or ask us in the chat.') }}</x-empty></div>
     @else
-        <nav class="mt-6 flex flex-wrap gap-2" aria-label="Menu sections">
+        <nav class="mt-6 flex flex-wrap gap-2" aria-label="{{ __('Menu sections') }}">
             @foreach ($groups->keys() as $i => $g)
                 <a href="#{{ $slug($g, $i) }}" class="rounded-full border border-line bg-white px-4 py-1.5 text-sm font-medium hover:border-ink-900">{{ $g }}</a>
             @endforeach
@@ -94,13 +94,13 @@
     @endif
 </section>
 
-@include('public.home.parts.gallery', ['title' => 'From our place', 'sectionClass' => 'mx-auto max-w-6xl px-5 pb-16 sm:px-8'])
+@include('public.home.parts.gallery', ['title' => __('From our place'), 'sectionClass' => 'mx-auto max-w-6xl px-5 pb-16 sm:px-8'])
 
 <section class="bg-ink-900 text-white">
     <div class="mx-auto grid max-w-6xl gap-10 px-5 py-16 sm:px-8 lg:grid-cols-[1fr_1.2fr] lg:items-center">
         <div>
-            <h2 class="font-display text-4xl font-semibold sm:text-5xl">How it <span class="text-sun italic">works</span></h2>
-            <p class="mt-4 max-w-sm text-white/70">No account needed. You see every detail before anything is sent.</p>
+            <h2 class="font-display text-4xl font-semibold sm:text-5xl">{{ __('How it') }} <span class="text-sun italic">{{ __('works') }}</span></h2>
+            <p class="mt-4 max-w-sm text-white/70">{{ __('No account needed. You see every detail before anything is sent.') }}</p>
         </div>
         <ol class="space-y-3">
             @foreach ($steps as $i => $step)
@@ -111,13 +111,13 @@
 </section>
 
 <section class="mx-auto grid max-w-6xl gap-5 px-5 py-16 sm:px-8 lg:grid-cols-2">
-    <div class="card p-6 sm:p-8"><h2 class="font-display text-2xl font-semibold">Opening hours</h2>@include('public.home.parts.hours', ['class' => 'mt-5'])</div>
-    <div class="card p-6 sm:p-8"><h2 class="font-display text-2xl font-semibold">Find us</h2>@include('public.home.parts.contact', ['class' => 'mt-5', 'iconClass' => 'text-sun-ink'])</div>
+    <div class="card p-6 sm:p-8"><h2 class="font-display text-2xl font-semibold">{{ __('Opening hours') }}</h2>@include('public.home.parts.hours', ['class' => 'mt-5'])</div>
+    <div class="card p-6 sm:p-8"><h2 class="font-display text-2xl font-semibold">{{ __('Find us') }}</h2>@include('public.home.parts.contact', ['class' => 'mt-5', 'iconClass' => 'text-sun-ink'])</div>
 </section>
 
 @if ($knowledge->isNotEmpty())
     <section class="mx-auto grid max-w-6xl gap-10 px-5 pb-8 sm:px-8 lg:grid-cols-[1fr_1.4fr]">
-        <h2 class="section-title">Good to <span class="mark">know</span></h2>
+        <h2 class="section-title">{{ __('Good to') }} <span class="mark">{{ __('know') }}</span></h2>
         @include('public.home.parts.faq')
     </section>
 @endif

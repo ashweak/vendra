@@ -14,3 +14,5 @@ services:
         value: "false"
       - key: SESSION_SECURE_COOKIE
         value: "true"
+      # Optional: keep uploads across restarts with Cloudflare R2 (free tier).
+      # Add the R2_* variables in Render's dashboard; see "Storage" in README.md.

@@ -99,13 +99,13 @@ class PublicController extends Controller
 
         return $this->review($business, 'book', $data, [
             'Service' => $service->name,
-            'When' => $start->format('l, F j, Y \a\t g:i A'),
-            'Duration' => ($service->duration_minutes ?? 60).' minutes',
-            'With' => $staff?->name ?? 'Any available staff',
+            'When' => local_time($start, $business->timezone, 'l, F j, Y \a\t g:i A'),
+            'Duration' => __(':minutes minutes', ['minutes' => $service->duration_minutes ?? 60]),
+            'With' => $staff?->name ?? __('Any available staff'),
             'Price' => Money::format($service->price_cents),
             'Name' => $data['name'], 'Email' => $data['email'], 'Phone' => $data['phone'] ?? '—',
             'Notes' => $data['notes'] ?? '—',
-        ], $approval ? 'This booking needs approval. You will see the decision deadline after submitting.' : null);
+        ], $approval ? __('This booking needs approval. You will see the decision deadline after submitting.') : null);
     }
 
     public function storeBooking(Request $request, Business $business)
@@ -173,14 +173,14 @@ class PublicController extends Controller
         }
         $summary += [
             'Subtotal' => Money::format($priced['subtotal_cents']),
-            'Fulfillment' => ucfirst($data['fulfillment_method']).($data['fulfillment_method'] === 'delivery' ? ' to '.$data['delivery_address'] : ''),
-            'Delivery fee' => $data['fulfillment_method'] === 'delivery' ? 'To be confirmed by staff before your order is confirmed' : 'None',
-            'Payment' => 'Not collected online. The business will tell you how to pay; staff verify payment.',
+            'Fulfillment' => $data['fulfillment_method'] === 'delivery' ? __('Delivery to :address', ['address' => $data['delivery_address']]) : __('Pickup'),
+            'Delivery fee' => $data['fulfillment_method'] === 'delivery' ? __('To be confirmed by staff before your order is confirmed') : __('None'),
+            'Payment' => __('Not collected online. The business will tell you how to pay; staff verify payment.'),
             'Name' => $data['name'], 'Email' => $data['email'], 'Phone' => $data['phone'] ?? '—',
         ];
 
         return $this->review($business, 'order', $data + ['reviewed_subtotal' => $priced['subtotal_cents']], $summary,
-            'Stock is reserved only after you submit, and reservations expire after '.$business->setting('order_reservation_hours').' hours if not completed.', $error);
+            __('Stock is reserved only after you submit, and reservations expire after :hours hours if not completed.', ['hours' => $business->setting('order_reservation_hours')]), $error);
     }
 
     public function storeOrder(Request $request, Business $business)
@@ -249,7 +249,7 @@ class PublicController extends Controller
 
         return $this->review($business, 'quote', $data, [
             'What you need' => $data['requirements'],
-            'Attachment' => $request->hasFile('attachment') ? $request->file('attachment')->getClientOriginalName() : 'None',
+            'Attachment' => $request->hasFile('attachment') ? $request->file('attachment')->getClientOriginalName() : __('None'),
             'Name' => $data['name'], 'Email' => $data['email'], 'Phone' => $data['phone'] ?? '—',
         ], 'A quotation request is not an order or booking. The business will review it and send you a quote to accept or decline.');
     }
@@ -300,7 +300,7 @@ class PublicController extends Controller
         return $this->review($business, 'request', $data, [
             'Description' => $data['description'],
             'Location' => $data['location'] ?? '—',
-            'Preferred date' => ($data['preferred_date'] ?? null) ? CarbonImmutable::parse($data['preferred_date'])->format('l, F j, Y').' (preference only)' : '—',
+            'Preferred date' => ($data['preferred_date'] ?? null) ? __(':date (preference only)', ['date' => CarbonImmutable::parse($data['preferred_date'])->locale(app()->getLocale())->translatedFormat('l, F j, Y')]) : '—',
             'Name' => $data['name'], 'Email' => $data['email'], 'Phone' => $data['phone'] ?? '—',
         ], 'A preferred date is not a confirmed booking. The business will review your request and contact you.');
     }
@@ -356,11 +356,11 @@ class PublicController extends Controller
     {
         $data = $request->validate(['reference' => 'required|string|max:20', 'email' => 'required|email']);
         $key = 'track:'.$business->id.':'.$request->ip();
-        abort_if(\Illuminate\Support\Facades\RateLimiter::tooManyAttempts($key, 5), 429, 'Too many requests. Please wait a few minutes.');
+        abort_if(\Illuminate\Support\Facades\RateLimiter::tooManyAttempts($key, 5), 429, __('Too many requests. Please wait a few minutes.'));
         \Illuminate\Support\Facades\RateLimiter::hit($key, 300);
         $this->access->sendLink($business, $data['reference'], $data['email']);
 
-        return back()->with('status', 'If the reference and email match our records, we sent a secure link to that email. It expires in 30 minutes.');
+        return back()->with('status', __('If the reference and email match our records, we sent a secure link to that email. It expires in 30 minutes.'));
     }
 
     public function access(Business $business, string $token)
@@ -440,7 +440,21 @@ class PublicController extends Controller
         AuditLogger::log($business->id, 'privacy.request_received', $pr, ['type' => $data['type']], actorType: 'customer', actorId: $customer->id);
         Notifier::staff($business, 'Privacy request: '.PrivacyRequest::TYPES[$data['type']], $customer->name.' sent a privacy request. Please act on it and reply to the customer.', route('dashboard.customers.show', $customer->id));
 
-        return back()->with('status', 'Request sent to '.$business->name.'. They will contact you by email.');
+        return back()->with('status', __('Request sent to :business. They will contact you by email.', ['business' => $business->name]));
+    }
+
+    /** Calendar file (.ics) for one of the signed-in customer's bookings. */
+    public function appointmentCalendar(Business $business, string $reference)
+    {
+        $customer = $this->access->customer($business) ?? abort(403);
+        $a = $customer->appointments()->where('reference', $reference)->whereIn('status', Appointment::OPEN_STATUSES)->firstOrFail();
+        $a->setRelation('business', $business);
+
+        return response(\App\Support\Ics::appointment($a), 200, [
+            'Content-Type' => 'text/calendar; charset=utf-8',
+            'Content-Disposition' => 'attachment; filename="'.$a->reference.'.ics"',
+            'Cache-Control' => 'private, no-store',
+        ]);
     }
 
     public function cancelAppointment(Business $business, string $reference)
@@ -487,7 +501,7 @@ class PublicController extends Controller
         $owner = $attachment->attachable;
         abort_unless($customer && (int) $attachment->business_id === (int) $business->id && $owner && (int) $owner->customer_id === (int) $customer->id, 404);
 
-        return response()->file(storage_path('app/private/'.$attachment->path), ['Content-Disposition' => 'inline; filename="'.addslashes($attachment->original_name).'"']);
+        return $attachment->inlineResponse();
     }
 
     // ---------------------------------------------------------------- Helpers
@@ -551,11 +565,16 @@ class PublicController extends Controller
     {
         $meta = session("stash.$token");
         $from = "stash/{$business->id}/$token";
-        if (! $meta || ! \Illuminate\Support\Facades\Storage::disk('local')->exists($from)) {
+        $stash = \Illuminate\Support\Facades\Storage::disk('local');
+        if (! $meta || ! $stash->exists($from)) {
             return;
         }
         $to = "attachments/{$business->id}/".Str::random(40);
-        \Illuminate\Support\Facades\Storage::disk('local')->move($from, $to);
+        $files = \Illuminate\Support\Facades\Storage::disk(config('vendra.files_disk'));
+        if (! $files->writeStream($to, $stash->readStream($from))) {
+            return;
+        }
+        $stash->delete($from);
         $a = new Attachment(['path' => $to, 'original_name' => Str::limit($meta['name'], 180), 'mime' => $meta['mime'], 'size' => $meta['size'],
             'expires_at' => now()->addDays(config('vendra.retention.attachments_days'))]);
         $a->business_id = $business->id;

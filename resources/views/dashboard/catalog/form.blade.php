@@ -24,7 +24,7 @@
     <div>
         <label class="label" for="image">Photo <span class="font-normal text-ink-500">(optional)</span></label>
         <div class="flex flex-wrap items-center gap-4">
-            @if ($item->image_path)<img src="{{ $item->imageUrl() }}" alt="Current photo of {{ $item->name }}" class="h-20 w-20 rounded-xl object-cover ring-1 ring-line">@endif
+            @if ($item->image_path)<img src="{{ $item->imageUrl() }}" @srcset($item->image_path, '80px') alt="Current photo of {{ $item->name }}" class="h-20 w-20 rounded-xl object-cover ring-1 ring-line">@endif
             <input id="image" type="file" name="image" accept="image/jpeg,image/png,image/webp" class="text-sm">
             @if ($item->image_path)<label class="flex items-center gap-2 text-sm"><input type="checkbox" name="remove_image" value="1"> Remove photo</label>@endif
         </div>

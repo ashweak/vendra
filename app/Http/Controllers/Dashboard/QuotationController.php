@@ -108,7 +108,7 @@ class QuotationController extends DashboardController
         $q = $this->find($id, 'quotes.draft');
         $a = $q->attachments()->findOrFail($attachmentId);
 
-        return response()->file(storage_path('app/private/'.$a->path), ['Content-Disposition' => 'inline; filename="'.addslashes($a->original_name).'"']);
+        return $a->inlineResponse();
     }
 
     private function find(int $id, string $ability): Quotation

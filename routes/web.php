@@ -23,9 +23,9 @@ Route::middleware('guest')->group(function () {
     Route::get('login', [AuthController::class, 'showLogin'])->name('login');
     Route::post('login', [AuthController::class, 'login'])->middleware('throttle:20,1');
     Route::get('register', [AuthController::class, 'showRegister'])->name('register');
-    Route::post('register', [AuthController::class, 'register'])->middleware('throttle:10,1');
+    Route::post('register', [AuthController::class, 'register'])->middleware(['throttle:10,1', 'spam.guard']);
     Route::get('forgot-password', [PasswordResetController::class, 'request'])->name('password.request');
-    Route::post('forgot-password', [PasswordResetController::class, 'email'])->name('password.email')->middleware(['throttle:6,1', 'demo.lock']);
+    Route::post('forgot-password', [PasswordResetController::class, 'email'])->name('password.email')->middleware(['throttle:6,1', 'demo.lock', 'spam.guard']);
     Route::get('reset-password/{token}', [PasswordResetController::class, 'edit'])->name('password.reset');
     Route::post('reset-password', [PasswordResetController::class, 'update'])->name('password.update')->middleware(['throttle:6,1', 'demo.lock']);
 });
@@ -43,32 +43,33 @@ Route::middleware('auth')->group(function () {
 });
 
 // ------------------------------------------------------------------ Customer page
-Route::prefix('b/{business}')->name('public.')->group(function () {
+Route::prefix('b/{business}')->name('public.')->middleware('page.language')->group(function () {
     Route::get('/', [PublicController::class, 'home'])->name('home');
     Route::get('book', [PublicController::class, 'book'])->name('book');
     Route::get('slots', [PublicController::class, 'slots'])->name('slots')->middleware('throttle:60,1');
-    Route::post('book/review', [PublicController::class, 'reviewBooking'])->name('book.review');
-    Route::post('book', [PublicController::class, 'storeBooking'])->name('book.store')->middleware('throttle:10,1');
+    Route::post('book/review', [PublicController::class, 'reviewBooking'])->name('book.review')->middleware('spam.guard');
+    Route::post('book', [PublicController::class, 'storeBooking'])->name('book.store')->middleware(['throttle:10,1', 'spam.guard']);
     Route::get('order', [PublicController::class, 'order'])->name('order');
-    Route::post('order/review', [PublicController::class, 'reviewOrder'])->name('order.review');
-    Route::post('order', [PublicController::class, 'storeOrder'])->name('order.store')->middleware('throttle:10,1');
+    Route::post('order/review', [PublicController::class, 'reviewOrder'])->name('order.review')->middleware('spam.guard');
+    Route::post('order', [PublicController::class, 'storeOrder'])->name('order.store')->middleware(['throttle:10,1', 'spam.guard']);
     Route::get('quote', [PublicController::class, 'quote'])->name('quote');
-    Route::post('quote/review', [PublicController::class, 'reviewQuote'])->name('quote.review');
-    Route::post('quote', [PublicController::class, 'storeQuote'])->name('quote.store')->middleware('throttle:10,1');
+    Route::post('quote/review', [PublicController::class, 'reviewQuote'])->name('quote.review')->middleware('spam.guard');
+    Route::post('quote', [PublicController::class, 'storeQuote'])->name('quote.store')->middleware(['throttle:10,1', 'spam.guard']);
     Route::get('request', [PublicController::class, 'serviceRequest'])->name('request');
-    Route::post('request/review', [PublicController::class, 'reviewServiceRequest'])->name('request.review');
-    Route::post('request', [PublicController::class, 'storeServiceRequest'])->name('request.store')->middleware('throttle:10,1');
+    Route::post('request/review', [PublicController::class, 'reviewServiceRequest'])->name('request.review')->middleware('spam.guard');
+    Route::post('request', [PublicController::class, 'storeServiceRequest'])->name('request.store')->middleware(['throttle:10,1', 'spam.guard']);
     Route::get('r/{reference}', [PublicController::class, 'result'])->name('result');
     Route::get('track', [PublicController::class, 'track'])->name('track');
-    Route::post('track', [PublicController::class, 'sendTrackLink'])->name('track.send');
+    Route::post('track', [PublicController::class, 'sendTrackLink'])->name('track.send')->middleware('spam.guard');
     Route::get('access/{token}', [PublicController::class, 'access'])->name('access');
     Route::get('my', [PublicController::class, 'my'])->name('my');
+    Route::get('my/appointments/{reference}/calendar.ics', [PublicController::class, 'appointmentCalendar'])->name('my.appointment.ics');
     Route::post('my/appointments/{reference}/cancel', [PublicController::class, 'cancelAppointment'])->name('my.appointment.cancel');
     Route::post('my/orders/{reference}/cancel', [PublicController::class, 'cancelOrder'])->name('my.order.cancel');
     Route::post('my/quotations/{reference}/respond', [PublicController::class, 'respondQuote'])->name('my.quote.respond');
     Route::get('my/files/{attachment}', [PublicController::class, 'attachment'])->name('my.file');
     Route::get('my/data', [PublicController::class, 'myData'])->name('my.data')->middleware('throttle:10,1');
-    Route::post('my/privacy-request', [PublicController::class, 'storePrivacyRequest'])->name('my.privacy')->middleware('throttle:5,1');
+    Route::post('my/privacy-request', [PublicController::class, 'storePrivacyRequest'])->name('my.privacy')->middleware(['throttle:5,1', 'spam.guard']);
     Route::get('privacy', [PublicController::class, 'privacy'])->name('privacy');
     Route::get('chat', [ChatController::class, 'history'])->name('chat.history');
     Route::post('chat', [ChatController::class, 'send'])->name('chat.send')->middleware('throttle:20,1');
@@ -80,6 +81,10 @@ Route::prefix('app')->name('dashboard.')->middleware(['auth', 'mfa', 'business']
     Route::get('/', [Dashboard\OverviewController::class, 'index'])->name('overview');
     Route::post('switch', [Dashboard\OverviewController::class, 'switch'])->name('switch');
     Route::post('notifications/read', [Dashboard\OverviewController::class, 'readNotifications'])->name('notifications.read');
+    // Device alerts (installable dashboard): only this user's own devices; no business data is sent through push servers.
+    Route::post('push/subscribe', [Dashboard\PushController::class, 'subscribe'])->name('push.subscribe')->middleware('throttle:10,1');
+    Route::post('push/unsubscribe', [Dashboard\PushController::class, 'unsubscribe'])->name('push.unsubscribe');
+    Route::get('push/latest', [Dashboard\PushController::class, 'latest'])->name('push.latest');
     Route::get('setup', [Dashboard\OverviewController::class, 'onboarding'])->name('onboarding');
     Route::post('setup/activate', [Dashboard\OverviewController::class, 'activate'])->name('activate');
 

@@ -1,4 +1,18 @@
 @extends('layouts.base')
+@push('head')
+    {{-- Installable dashboard (PWA): home-screen icon, offline page, device alerts. --}}
+    <link rel="manifest" href="{{ asset('manifest.webmanifest') }}">
+    <link rel="apple-touch-icon" href="{{ asset('icons/apple-touch-icon.png') }}">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Vendra">
+    <script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js', { scope: '/app' }).catch(() => {}));
+    }
+    window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); window.vendraInstall = e; document.dispatchEvent(new Event('vendra:installable')); });
+    </script>
+@endpush
 @section('body')
 @php
     $b = $currentBusiness; $m = $currentMembership;

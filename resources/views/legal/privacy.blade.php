@@ -16,7 +16,14 @@
         <h2 class="h2">What Vendra does and doesn’t do</h2>
         <ul class="mt-2 list-disc space-y-1 pl-5">
             <li>No outside AI service: the chat auto-assistant runs on Vendra’s own server, so messages aren’t sent to Google, OpenAI or others.</li>
-            <li>No selling of data, no advertising trackers, no third-party scripts or fonts.</li>
+            <li>No selling of data, no advertising trackers, no third-party fonts.@unless (\App\Services\HumanCheck::turnstileEnabled()) No third-party scripts.@endunless</li>
+            @if (\App\Services\HumanCheck::turnstileEnabled())
+                <li>Public forms use Cloudflare Turnstile to stop spam bots. Cloudflare sees your IP address and browser details for that check only.</li>
+            @endif
+            @if (config('vendra.media_disk') !== 'public' || config('vendra.files_disk') !== 'local')
+                <li>Uploaded files are stored with Cloudflare R2 (encrypted at rest). Customer attachments are kept in a private bucket that isn’t reachable from the web.</li>
+            @endif
+            <li>Booking reminder emails are sent the day before a confirmed booking; each business can turn them off. Staff can turn on device alerts; an alert only says that something new arrived, and its details load from Vendra after sign-in.</li>
             <li>Each business’s data is kept separate. Platform admins can’t see a business’s records unless its owner grants time-limited, logged support access.</li>
             <li>Uploaded pictures (logos, cover and gallery photos, product photos, profile pictures) are re-encoded on upload, which removes hidden details such as GPS location and camera info. Business photos are public on that business’s page; profile pictures are shown only inside the dashboard.</li>
             <li>Passwords are hashed, sign-in attempts are rate-limited, owners use two-step sign-in, and important actions are logged.</li>

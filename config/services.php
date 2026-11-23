@@ -14,6 +14,19 @@ return [
     |
     */
 
+    // Cloudflare Turnstile (free "I'm human" check on public forms). Leave empty to use only the honeypot.
+    'turnstile' => [
+        'site_key' => env('TURNSTILE_SITE_KEY'),
+        'secret_key' => env('TURNSTILE_SECRET_KEY'),
+    ],
+
+    // Dashboard alerts on phones/computers (Web Push with VAPID keys). Generate with: php artisan vendra:vapid
+    'webpush' => [
+        'public_key' => env('VAPID_PUBLIC_KEY'),
+        'private_key' => env('VAPID_PRIVATE_KEY'),
+        'subject' => env('VAPID_SUBJECT'),
+    ],
+
     'postmark' => [
         'key' => env('POSTMARK_API_KEY'),
     ],

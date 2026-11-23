@@ -330,3 +330,6 @@
 @keyframes vendra-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 .vendra-marquee { animation: vendra-marquee 40s linear infinite; }
 @media (prefers-reduced-motion: reduce) { .vendra-marquee { animation: none; } }
+
+/* Honeypot field for spam protection: off-screen, never shown or announced. */
+.hp-field { position: absolute !important; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden; }

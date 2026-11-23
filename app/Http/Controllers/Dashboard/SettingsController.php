@@ -53,10 +53,15 @@ class SettingsController extends DashboardController
         $data = $request->validate([
             'layout' => 'required|in:'.implode(',', array_keys(Appearance::LAYOUTS)),
             'palette' => 'required|in:'.implode(',', array_keys(Appearance::PALETTES)),
+            'language' => 'nullable|in:'.implode(',', array_keys(\App\Http\Middleware\PageLanguage::LANGUAGES)),
         ]);
         $b = $this->business();
-        $old = ['layout' => $b->layout, 'palette' => $b->palette];
-        $b->update($data);
+        $old = ['layout' => $b->layout, 'palette' => $b->palette, 'language' => $b->setting('language')];
+        $update = ['layout' => $data['layout'], 'palette' => $data['palette']];
+        if (! empty($data['language'])) {
+            $update['settings'] = array_merge($b->settings ?? [], ['language' => $data['language']]);
+        }
+        $b->update($update);
         $request->session()->forget('appearance_preview.'.$b->id); // the saved look replaces any preview
         AuditLogger::log($b->id, 'settings.appearance_changed', $b, ['from' => $old, 'to' => $data]);
 
@@ -81,7 +86,9 @@ class SettingsController extends DashboardController
             'order_approval' => 'required|in:auto,manual', 'order_reservation_hours' => 'required|integer|min:1|max:336',
             'fulfillment_methods' => 'array', 'fulfillment_methods.*' => 'in:pickup,delivery',
             'quote_valid_days' => 'required|integer|min:1|max:90', 'response_hours' => 'required|string|max:120',
+            'booking_reminders' => 'nullable|boolean',
         ]);
+        $data['booking_reminders'] = $request->boolean('booking_reminders');
         $b = $this->business();
         $modules = array_values($data['modules'] ?? []);
         if (! $modules) {

@@ -11,6 +11,7 @@
         <div><label class="label" for="password">Password</label><input id="password" type="password" name="password" class="input" required minlength="10" autocomplete="new-password"><p class="hint">At least 10 characters.</p></div>
         <div><label class="label" for="password_confirmation">Confirm password</label><input id="password_confirmation" type="password" name="password_confirmation" class="input" required autocomplete="new-password"></div>
     </div>
+    <x-human-check />
     <button class="btn btn-primary w-full">Create account</button>
 </form>
 <p class="mt-4 text-center text-sm text-ink-600">Already have one? <a class="link" href="{{ route('login') }}">Sign in</a></p>

@@ -18,9 +18,9 @@ class CustomerAccessLink extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->subject("Your {$this->business->name} request link")
-            ->line("Use this link to view your requests with {$this->business->name}. It expires in 30 minutes and works once.")
-            ->action('View my requests', $this->url)
-            ->line('If you did not ask for this, you can ignore this email.');
+            ->subject(__('Your :business request link', ['business' => $this->business->name]))
+            ->line(__('Use this link to view your requests with :business. It expires in 30 minutes and works once.', ['business' => $this->business->name]))
+            ->action(__('View my requests'), $this->url)
+            ->line(__('If you did not ask for this, you can ignore this email.'));
     }
 }

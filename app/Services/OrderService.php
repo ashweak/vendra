@@ -49,7 +49,7 @@ class OrderService
             }
             $available = $p->availableStock();
             if ($available !== null && $qty > $available) {
-                throw new RuleViolation("Only {$available} left of {$p->name}.", 'insufficient_stock', ['item' => $p->id, 'available' => $available]);
+                throw new RuleViolation(__('Only :count left of :item.', ['count' => $available, 'item' => $p->name]), 'insufficient_stock', ['item' => $p->id, 'available' => $available]);
             }
             $line = $p->price_cents * $qty;
             $subtotal += $line;

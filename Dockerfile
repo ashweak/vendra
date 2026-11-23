@@ -7,7 +7,10 @@ WORKDIR /app
 COPY composer.json composer.lock ./
 RUN composer install --no-dev --prefer-dist --no-interaction --no-progress --no-scripts --no-autoloader
 COPY . .
-RUN composer dump-autoload --no-dev --optimize --no-scripts
+# Keep only the S3 part of the AWS SDK (used for Cloudflare R2), then build the final autoloader.
+RUN composer dump-autoload --no-dev --optimize --no-scripts \
+    && composer run-script pre-autoload-dump --no-dev \
+    && composer dump-autoload --no-dev --optimize --no-scripts
 
 FROM php:8.4-apache
 

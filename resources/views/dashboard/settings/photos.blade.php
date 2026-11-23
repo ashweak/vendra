@@ -26,7 +26,7 @@
         <section class="card space-y-4">
             <h2 class="h2">Cover photo</h2>
             @if ($b->cover_path)
-                <img src="{{ $b->coverUrl() }}" alt="Current cover photo" class="aspect-[16/7] w-full rounded-2xl object-cover ring-1 ring-line">
+                <img src="{{ $b->coverUrl() }}" @srcset($b->cover_path, '(min-width: 1024px) 600px, 100vw') alt="Current cover photo" class="aspect-[16/7] w-full rounded-2xl object-cover ring-1 ring-line">
             @else
                 <div class="dots flex aspect-[16/7] w-full items-center justify-center rounded-2xl bg-tile text-sm text-ink-500">No cover photo yet</div>
             @endif
@@ -65,7 +65,7 @@
             <ul class="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                 @foreach ($photos as $photo)
                     <li class="rounded-2xl border border-line p-2">
-                        <img src="{{ $photo->url() }}" alt="{{ $photo->caption ?: 'Gallery photo '.$loop->iteration }}" class="aspect-[4/3] w-full rounded-xl object-cover">
+                        <img src="{{ $photo->url() }}" @srcset($photo->path, '(min-width: 1024px) 220px, 50vw') loading="lazy" alt="{{ $photo->caption ?: 'Gallery photo '.$loop->iteration }}" class="aspect-[4/3] w-full rounded-xl object-cover">
                         <form method="POST" action="{{ route('dashboard.settings.photos.gallery.update', $photo->id) }}" class="mt-2 flex gap-1.5">
                             @csrf @method('PUT')
                             <label class="sr-only" for="cap-{{ $photo->id }}">Caption</label>

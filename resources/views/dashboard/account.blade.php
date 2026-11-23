@@ -49,5 +49,73 @@
         <button class="btn btn-primary">Change password</button>
     </form>
 </div>
+<section class="card mt-6 max-w-4xl" aria-labelledby="device-h" id="device-card">
+    <h2 id="device-h" class="h2">This phone or computer</h2>
+    <p class="hint mt-1">Install Vendra like an app, and get an alert here when a customer books, orders or asks for staff.</p>
+    <div class="mt-4 flex flex-wrap items-center gap-3">
+        <button type="button" class="btn btn-secondary btn-sm" id="install-btn" hidden>Install the Vendra app</button>
+        <p class="text-sm text-ink-600" id="install-ios" hidden>On iPhone or iPad: tap <strong>Share</strong>, then <strong>Add to Home Screen</strong>. Alerts work from the installed app (iOS 16.4 or later).</p>
+        @if (\App\Services\WebPush::enabled())
+            <button type="button" class="btn btn-primary btn-sm" id="push-on" hidden>Turn on alerts on this device</button>
+            <button type="button" class="btn btn-secondary btn-sm" id="push-off" hidden>Turn off alerts on this device</button>
+        @endif
+        <p class="text-sm text-ink-600" id="push-status" role="status" aria-live="polite">@unless (\App\Services\WebPush::enabled())Device alerts aren’t set up on this server yet (the administrator adds VAPID keys).@endunless</p>
+    </div>
+    <p class="hint mt-3">Alerts only say that something new arrived; open Vendra to see the details. You can turn them off here or in your browser settings.</p>
+</section>
 <p class="mt-6 max-w-4xl text-sm text-ink-600">Two-step verification: {{ $user->hasMfa() ? 'on.' : 'not set up.' }} @unless ($user->hasMfa())<a href="{{ route('mfa.setup') }}" class="underline">Set it up</a>.@endunless</p>
+@push('scripts')
+<script>
+(() => {
+    const $ = (id) => document.getElementById(id);
+    const install = $('install-btn');
+    const standalone = matchMedia('(display-mode: standalone)').matches || navigator.standalone;
+    const ios = /iP(hone|od|ad)/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    if (!standalone && ios) $('install-ios').hidden = false;
+    const showInstall = () => { if (window.vendraInstall && !standalone) install.hidden = false; };
+    document.addEventListener('vendra:installable', showInstall); showInstall();
+    install.addEventListener('click', async () => {
+        if (!window.vendraInstall) return;
+        window.vendraInstall.prompt(); await window.vendraInstall.userChoice; window.vendraInstall = null; install.hidden = true;
+    });
+
+    const on = $('push-on'), off = $('push-off'), status = $('push-status');
+    if (!on) return;
+    const key = @json(\App\Services\WebPush::publicKey());
+    const csrf = document.querySelector('meta[name=csrf-token]').content;
+    const post = (url, body) => fetch(url, { method: 'POST', credentials: 'same-origin', headers: { 'Content-Type': 'application/json', Accept: 'application/json', 'X-CSRF-TOKEN': csrf }, body: JSON.stringify(body) });
+    const toKey = (b64) => { const s = atob(b64.replace(/-/g, '+').replace(/_/g, '/') + '='.repeat((4 - b64.length % 4) % 4)); return Uint8Array.from(s, (c) => c.charCodeAt(0)); };
+    if (!('serviceWorker' in navigator) || !('PushManager' in window) || !('Notification' in window)) {
+        status.textContent = ios && !standalone ? 'Install the app first (see above), then turn on alerts from the installed app.' : 'This browser doesn’t support alerts.';
+        return;
+    }
+    const sync = async () => {
+        const reg = await navigator.serviceWorker.getRegistration('/app');
+        const sub = reg && await reg.pushManager.getSubscription();
+        on.hidden = !!sub; off.hidden = !sub;
+        status.textContent = sub ? 'Alerts are on for this device.' : (Notification.permission === 'denied' ? 'Alerts are blocked in this browser’s site settings.' : '');
+    };
+    on.addEventListener('click', async () => {
+        on.disabled = true;
+        try {
+            if (await Notification.requestPermission() !== 'granted') { status.textContent = 'Alerts weren’t allowed.'; return; }
+            const reg = await navigator.serviceWorker.register('/sw.js', { scope: '/app' });
+            await navigator.serviceWorker.ready;
+            const sub = await reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: toKey(key) });
+            const res = await post(@json(route('dashboard.push.subscribe')), { endpoint: sub.endpoint });
+            if (!res.ok) { await sub.unsubscribe(); const j = await res.json().catch(() => ({})); status.textContent = j.message || 'Couldn’t turn on alerts.'; return; }
+            await sync();
+        } catch (e) { status.textContent = 'Couldn’t turn on alerts on this device.'; }
+        finally { on.disabled = false; }
+    });
+    off.addEventListener('click', async () => {
+        const reg = await navigator.serviceWorker.getRegistration('/app');
+        const sub = reg && await reg.pushManager.getSubscription();
+        if (sub) { await post(@json(route('dashboard.push.unsubscribe')), { endpoint: sub.endpoint }); await sub.unsubscribe(); }
+        await sync();
+    });
+    sync();
+})();
+</script>
+@endpush
 @endsection

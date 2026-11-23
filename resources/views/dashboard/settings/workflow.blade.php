@@ -23,6 +23,7 @@
         <div><label class="label" for="bl">Earliest booking (minutes from now)</label><input id="bl" type="number" name="booking_lead_minutes" class="input" value="{{ $s('booking_lead_minutes') }}"></div>
         <div><label class="label" for="bh">Book up to (days ahead)</label><input id="bh" type="number" name="booking_horizon_days" class="input" value="{{ $s('booking_horizon_days') }}"></div>
         <div><label class="label" for="ch">Customer self-cancel until (hours before)</label><input id="ch" type="number" name="cancellation_hours" class="input" value="{{ $s('cancellation_hours') }}"></div>
+        <div class="sm:col-span-2"><label class="flex items-start gap-2 text-sm"><input type="hidden" name="booking_reminders" value="0"><input type="checkbox" name="booking_reminders" value="1" class="mt-1" @checked((bool) $s('booking_reminders'))> <span><strong>Email reminders</strong> — customers get an email the day before a confirmed booking, with a calendar file. Fewer no-shows.</span></label></div>
     </fieldset>
     <fieldset class="card grid gap-4 sm:grid-cols-2">
         <legend class="h2 sm:col-span-2">Orders</legend>

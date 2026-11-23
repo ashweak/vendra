@@ -18,5 +18,8 @@ class AppServiceProvider extends ServiceProvider
     {
         Paginator::defaultView('pagination.vendra');
         Paginator::defaultSimpleView('pagination.vendra');
+
+        // <img src="…" @srcset($path, '(min-width: 1024px) 33vw, 100vw')> adds the smaller copies of an upload.
+        \Illuminate\Support\Facades\Blade::directive('srcset', fn (string $args) => "<?php echo \\App\\Services\\ImageStore::attrs($args); ?>");
     }
 }

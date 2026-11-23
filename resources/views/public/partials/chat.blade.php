@@ -1,31 +1,31 @@
 {{-- Customer chat (auto-assistant + staff). Separate from page forms: typing in chat can never submit a booking/order (P8). --}}
 <div id="vchat" data-history="{{ route('public.chat.history', $business) }}" data-send="{{ route('public.chat.send', $business) }}" data-handoff="{{ route('public.chat.handoff', $business) }}" data-name="{{ $business->name }}">
-    <button id="vchat-open" type="button" class="fixed right-4 bottom-4 z-40 flex h-14 w-14 items-center justify-center gap-2.5 rounded-full bg-sun text-sm font-semibold text-ink-900 shadow-[0_10px_30px_-12px_rgba(23,22,18,.45)] transition hover:bg-sun-deep focus:outline-none focus-visible:ring-4 focus-visible:ring-ink-900/30 sm:right-5 sm:bottom-5 sm:h-auto sm:w-auto sm:py-3 sm:pr-5 sm:pl-3" aria-expanded="false" aria-controls="vchat-panel" aria-label="Ask us anything">
-        <span class="flex h-9 w-9 items-center justify-center sm:h-7 sm:w-7"><x-icon name="chat" class="h-[18px] w-[18px] sm:h-4 sm:w-4" /></span><span class="hidden sm:inline">Ask us anything</span>
+    <button id="vchat-open" type="button" class="fixed right-4 bottom-4 z-40 flex h-14 w-14 items-center justify-center gap-2.5 rounded-full bg-sun text-sm font-semibold text-ink-900 shadow-[0_10px_30px_-12px_rgba(23,22,18,.45)] transition hover:bg-sun-deep focus:outline-none focus-visible:ring-4 focus-visible:ring-ink-900/30 sm:right-5 sm:bottom-5 sm:h-auto sm:w-auto sm:py-3 sm:pr-5 sm:pl-3" aria-expanded="false" aria-controls="vchat-panel" aria-label="{{ __('Ask us anything') }}">
+        <span class="flex h-9 w-9 items-center justify-center sm:h-7 sm:w-7"><x-icon name="chat" class="h-[18px] w-[18px] sm:h-4 sm:w-4" /></span><span class="hidden sm:inline">{{ __('Ask us anything') }}</span>
     </button>
-    <section id="vchat-panel" class="fixed inset-0 z-50 hidden flex-col overflow-hidden bg-white sm:inset-auto sm:right-5 sm:bottom-5 sm:h-[36rem] sm:w-[25rem] sm:rounded-2xl sm:border sm:border-line sm:shadow-[0_30px_80px_-20px_rgba(0,0,0,.35)]" role="dialog" aria-label="Chat with {{ $business->name }}">
+    <section id="vchat-panel" class="fixed inset-0 z-50 hidden flex-col overflow-hidden bg-white sm:inset-auto sm:right-5 sm:bottom-5 sm:h-[36rem] sm:w-[25rem] sm:rounded-2xl sm:border sm:border-line sm:shadow-[0_30px_80px_-20px_rgba(0,0,0,.35)]" role="dialog" aria-label="{{ __('Chat with :business', ['business' => $business->name]) }}">
         <header class="flex items-center gap-3 border-b border-line px-4 py-3.5">
             <span class="flex h-10 w-10 items-center justify-center rounded-full bg-ink-900 text-sun"><x-icon name="spark" class="h-5 w-5" /></span>
             <div class="min-w-0 flex-1">
                 <p class="truncate font-semibold">{{ $business->name }}</p>
-                <p id="vchat-state" class="text-xs text-ink-500">Auto-assistant · staff can join anytime</p>
+                <p id="vchat-state" class="text-xs text-ink-500">{{ __('Auto-assistant · staff can join anytime') }}</p>
             </div>
-            <button id="vchat-min" type="button" class="flex h-9 w-9 items-center justify-center rounded-full text-ink-500 hover:bg-tile" aria-label="Minimize chat">—</button>
+            <button id="vchat-min" type="button" class="flex h-9 w-9 items-center justify-center rounded-full text-ink-500 hover:bg-tile" aria-label="{{ __('Minimize chat') }}">—</button>
         </header>
         <div id="vchat-log" class="dots flex-1 space-y-3 overflow-y-auto bg-tile p-4 text-sm" aria-live="polite">
             <div class="max-w-[85%] rounded-2xl rounded-tl-md bg-white px-3.5 py-2.5">
-                {{ $business->greeting ?: 'Hi! I’m '.$business->name.'’s auto-assistant. Ask about prices, hours or open times — English, Tagalog or Taglish is fine.' }}
+                {{ $business->greeting ?: __('Hi! I’m :business’s auto-assistant. Ask about prices, hours or open times — English, Tagalog or Taglish is fine.', ['business' => $business->name]) }}
             </div>
         </div>
         <form id="vchat-form" class="border-t border-line p-3">
             <div class="flex gap-2">
-                <label for="vchat-input" class="sr-only">Message</label>
-                <input id="vchat-input" name="message" maxlength="1000" autocomplete="off" class="input rounded-full" placeholder="Type your message…">
-                <button class="btn btn-sun px-4" aria-label="Send"><x-icon name="arrow" class="h-4 w-4" /></button>
+                <label for="vchat-input" class="sr-only">{{ __('Message') }}</label>
+                <input id="vchat-input" name="message" maxlength="1000" autocomplete="off" class="input rounded-full" placeholder="{{ __('Type your message…') }}">
+                <button class="btn btn-sun px-4" aria-label="{{ __('Send') }}"><x-icon name="arrow" class="h-4 w-4" /></button>
             </div>
             <div class="mt-2 flex items-center justify-between text-xs text-ink-500">
-                <button id="vchat-staff" type="button" class="link">Talk to staff</button>
-                <span>Nothing is booked until you confirm a form.</span>
+                <button id="vchat-staff" type="button" class="link">{{ __('Talk to staff') }}</button>
+                <span>{{ __('Nothing is booked until you confirm a form.') }}</span>
             </div>
         </form>
     </section>
@@ -38,7 +38,12 @@
     const stateEl = document.getElementById('vchat-state');
     const csrf = document.querySelector('meta[name=csrf-token]').content;
     let loaded = false, busy = false, lastId = 0, poll = null;
-    const states = { ai_active: 'Auto-assistant · staff can join anytime', waiting_for_staff: 'Waiting for staff · auto-replies paused', staff_active: 'Staff is replying', closed: 'Conversation closed' };
+    const T = @json([
+        'states' => ['ai_active' => __('Auto-assistant · staff can join anytime'), 'waiting_for_staff' => __('Waiting for staff · auto-replies paused'), 'staff_active' => __('Staff is replying'), 'closed' => __('Conversation closed')],
+        'ai' => __('Auto-assistant'), 'staff' => __('Staff'), 'review' => __('Review & confirm'), 'typing' => __('Typing…'),
+        'slow' => __('You’re sending messages quickly. Please wait a moment.'), 'failed' => __('Message not sent. Please try again or use the forms on this page.'),
+    ]);
+    const states = T.states;
 
     function bubble(m) {
         const wrap = document.createElement('div');
@@ -49,7 +54,7 @@
         if (m.from === 'ai' || m.from === 'staff') {
             const who = document.createElement('p');
             who.className = 'mb-0.5 text-[11px] font-medium text-ink-500';
-            who.textContent = m.from === 'ai' ? 'Auto-assistant' : (m.name || 'Staff');
+            who.textContent = m.from === 'ai' ? T.ai : (m.name || T.staff);
             b.appendChild(who);
         }
         b.appendChild(document.createTextNode(m.body));
@@ -58,7 +63,7 @@
             card.className = 'mt-2.5 rounded-xl bg-sun-soft p-3';
             const t = document.createElement('p'); t.className = 'font-semibold'; t.textContent = m.draft.title; card.appendChild(t);
             (m.draft.lines || []).forEach(l => { const p = document.createElement('p'); p.className = 'text-xs text-ink-600'; p.textContent = l; card.appendChild(p); });
-            const a = document.createElement('a'); a.href = m.draft.url; a.className = 'btn btn-primary btn-sm mt-2.5 w-full'; a.textContent = 'Review & confirm';
+            const a = document.createElement('a'); a.href = m.draft.url; a.className = 'btn btn-primary btn-sm mt-2.5 w-full'; a.textContent = T.review;
             card.appendChild(a); b.appendChild(card);
         }
         wrap.appendChild(b);
@@ -77,8 +82,8 @@
     }
     async function post(url, body) {
         const r = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json', 'X-CSRF-TOKEN': csrf }, body: JSON.stringify(body || {}) });
-        if (r.status === 429) { bubble({ from: 'system', body: 'You’re sending messages quickly. Please wait a moment.' }); return; }
-        if (!r.ok) { bubble({ from: 'system', body: 'Message not sent. Please try again or use the forms on this page.' }); return; }
+        if (r.status === 429) { bubble({ from: 'system', body: T.slow }); return; }
+        if (!r.ok) { bubble({ from: 'system', body: T.failed }); return; }
         return await r.json();
     }
     function resetLog() { [...log.children].slice(1).forEach(n => n.remove()); lastId = 0; }
@@ -107,7 +112,7 @@
         if (!text || busy) return;
         busy = true; input.value = '';
         bubble({ from: 'customer', body: text });
-        const typing = document.createElement('p'); typing.className = 'text-xs text-ink-500'; typing.textContent = 'Typing…'; log.appendChild(typing); log.scrollTop = log.scrollHeight;
+        const typing = document.createElement('p'); typing.className = 'text-xs text-ink-500'; typing.textContent = T.typing; log.appendChild(typing); log.scrollTop = log.scrollHeight;
         let data = null;
         try { data = await post(root.dataset.send, { message: text }); } finally { typing.remove(); busy = false; }
         if (data) { resetLog(); render(data); }

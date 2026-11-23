@@ -81,6 +81,11 @@ jobs:
           echo "Cover: $IMG"; test -n "$IMG"
           curl -s -o /dev/null -w '%{http_code} %{content_type}\n' "$B$IMG" | tee /tmp/img; grep -q '^200 image/webp' /tmp/img
 
+          # Installable dashboard files and the Filipino page
+          curl -s -o /dev/null -w '%{http_code} %{content_type}\n' "$B/manifest.webmanifest" | tee /tmp/mf; grep -q '^200 application/manifest+json' /tmp/mf
+          curl -s -D - -o /dev/null "$B/sw.js" | tee /tmp/sw; grep -qi '^cache-control: no-cache' /tmp/sw
+          curl -s "$B/b/kislap-cleaning?lang=fil" | grep -q 'lang="fil"'
+
           # Owner login reaches the dashboard
           curl -s -c /tmp/jar2 -b /tmp/jar2 "$B/login" -o /tmp/login
           TOKEN=$(grep -o 'name="csrf-token" content="[^"]*"' /tmp/login | sed 's/.*content="//; s/"$//')

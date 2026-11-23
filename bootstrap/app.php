@@ -18,6 +18,8 @@ return Application::configure(basePath: dirname(__DIR__))
             'business' => \App\Http\Middleware\SetCurrentBusiness::class,
             'platform' => \App\Http\Middleware\PlatformAdmin::class,
             'demo.lock' => \App\Http\Middleware\DemoLock::class,
+            'spam.guard' => \App\Http\Middleware\SpamGuard::class,
+            'page.language' => \App\Http\Middleware\PageLanguage::class,
         ]);
         $middleware->web(append: [\App\Http\Middleware\SecurityHeaders::class]);
         $middleware->redirectGuestsTo(fn () => route('login'));

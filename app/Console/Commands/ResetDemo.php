@@ -22,8 +22,9 @@ class ResetDemo extends Command
 
         // Uploaded pictures go too, so nothing a visitor added survives the reset.
         foreach (['businesses', 'avatars'] as $dir) {
-            Storage::disk('public')->deleteDirectory($dir);
+            Storage::disk(config('vendra.media_disk'))->deleteDirectory($dir);
         }
+        Storage::disk(config('vendra.files_disk'))->deleteDirectory('attachments');
         $this->call('migrate:fresh', ['--seed' => true, '--force' => true]);
         $this->info('Demo data reset.');
 

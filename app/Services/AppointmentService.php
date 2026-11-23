@@ -228,7 +228,7 @@ class AppointmentService
         $business = $appointment->business;
         $hours = (int) $business->setting('cancellation_hours');
         if ($appointment->status === 'confirmed' && now()->diffInMinutes($appointment->starts_at, false) < $hours * 60) {
-            throw new RuleViolation("Cancellations less than {$hours} hours before the appointment need staff review. Please message the business.");
+            throw new RuleViolation(__('Cancellations less than :hours hours before the appointment need staff review. Please message the business.', ['hours' => $hours]));
         }
         $updated = $this->transition($appointment, 'cancelled', null, 'Cancelled by customer');
         AuditLogger::log($business->id, 'appointment.customer_cancelled', $updated, [], null, 'customer', $customer->id);

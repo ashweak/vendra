@@ -29,7 +29,7 @@
         @break
     @case('panel')
         <div {{ $attributes->merge(['class' => 'border-b border-line pb-5']) }}>
-            <p class="text-sm text-ink-500"><a href="{{ $biz ? route('public.home', $biz) : '#' }}" class="hover:text-ink-900">Home</a>@if ($eyebrow) <span aria-hidden="true">›</span> {{ $eyebrow }}@endif</p>
+            <p class="text-sm text-ink-500"><a href="{{ $biz ? route('public.home', $biz) : '#' }}" class="hover:text-ink-900">{{ __('Home') }}</a>@if ($eyebrow) <span aria-hidden="true">›</span> {{ $eyebrow }}@endif</p>
             <h1 class="mt-2 font-display text-3xl font-bold">{{ $title }}</h1>
             @if ($intro)<p class="mt-2 max-w-xl text-ink-600">{{ $intro }}</p>@endif
         </div>

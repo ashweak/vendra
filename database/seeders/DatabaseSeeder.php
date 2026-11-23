@@ -16,7 +16,7 @@ use App\Services\QuotationService;
 use App\Services\ServiceRequestService;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Storage;
+use App\Services\ImageStore;
 
 /**
  * FICTIONAL demo data only (P7/P9). All names, emails and numbers are invented.
@@ -91,24 +91,18 @@ class DatabaseSeeder extends Seeder
         if (! is_dir($source)) {
             return;
         }
-        $disk = Storage::disk('public');
-        $put = function (string $file, string $dir) use ($disk, $source): ?string {
-            if (! is_file($source.'/'.$file)) {
-                return null;
-            }
-            $path = $dir.'/'.$file;
-            $disk->put($path, file_get_contents($source.'/'.$file));
-
-            return $path;
-        };
+        // Stored through ImageStore like a real upload, so the demo gets the same small copies (srcset).
+        $images = app(ImageStore::class);
+        $put = fn (string $file, string $dir, int $w, int $h, bool $square = false) => is_file($source.'/'.$file)
+            ? $images->storeFile($source.'/'.$file, $dir, $w, $h, $square) : null;
         $root = 'businesses/'.$b->id;
-        $b->update(array_filter(['cover_path' => $put('cover.webp', $root), 'logo_path' => $put('logo.webp', $root)]));
+        $b->update(array_filter(['cover_path' => $put('cover.webp', $root, 2000, 1200), 'logo_path' => $put('logo.webp', $root, 512, 512, true)]));
         $captions = ['Our space', 'Fresh stock this week', 'Where the magic happens', 'Come say hi'];
         foreach (glob($source.'/gallery-*.webp') ?: [] as $i => $file) {
-            $b->photos()->create(['path' => $put(basename($file), $root.'/gallery'), 'caption' => $captions[$i] ?? null, 'sort' => $i + 1]);
+            $b->photos()->create(['path' => $put(basename($file), $root.'/gallery', 1600, 1200), 'caption' => $captions[$i] ?? null, 'sort' => $i + 1]);
         }
         foreach (array_values($items) as $i => $item) {
-            if ($path = $put('item-'.($i + 1).'.webp', $root.'/items')) {
+            if ($path = $put('item-'.($i + 1).'.webp', $root.'/items', 1000, 1000)) {
                 $item->update(['image_path' => $path]);
             }
         }

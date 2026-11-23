@@ -79,6 +79,10 @@ await page.goto(`${BASE}/b/lumina-studio?preview=off`);
 await page.goto(`${BASE}/b/kislap-cleaning`); await shot(page, '06r-photos-kislap');
 await page.goto(`${BASE}/b/ganda-beauty?layout=cafe&palette=coral`); await shot(page, '06s-photos-ganda-cafe');
 await page.goto(`${BASE}/b/ganda-beauty?preview=off`);
+// Filipino pages (visitor switch), then back to English for the rest.
+await page.goto(`${BASE}/b/ganda-beauty?lang=fil`); await shot(page, '06u-filipino-home');
+await page.goto(`${BASE}/b/lumina-studio/book`); await shot(page, '06v-filipino-book', false);
+await page.goto(`${BASE}/b/lumina-studio?lang=en`);
 await ctx.close();
 
 // ---------- Mobile

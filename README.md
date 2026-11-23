@@ -32,7 +32,15 @@ from the real app in GitHub Actions on every change to the script.
 - **Business photos**: a logo, a cover photo, a gallery of up to 8 pictures with captions, and a photo per
   product or service, shown in every layout (*Settings → Photos*, *Catalog*). Staff accounts have **profile
   pictures**. Every upload is decoded and re-encoded (WebP), resized, and stripped of hidden metadata such as GPS
-  location; anything that isn't a real JPG/PNG/WebP is refused. Uploads are off in the public demo.
+  location; anything that isn't a real JPG/PNG/WebP is refused. Large pictures also get 480 px and 960 px copies
+  (`srcset`), so phones on mobile data download less. Uploads are off in the public demo.
+- **English or Filipino**: every customer page, the chat widget, form errors and customer emails come in both.
+  Visitors switch with the EN/FIL toggle; the owner sets the default (*Settings → Appearance*), and browsers set to
+  Filipino get it automatically. The dashboard stays in English.
+- **Spam protection** on every public form and sign-up: a hidden honeypot field, plus optional
+  [Cloudflare Turnstile](https://developers.cloudflare.com/turnstile/) (free) when its keys are set.
+- **Booking reminders**: an email the day before each confirmed booking, with a calendar (`.ics`) file attached.
+  Customers can also tap "Add to calendar" after booking. Owners can turn reminders off (*Settings → Workflow*).
 - Booking, ordering, quotation and service-request forms. Every submission goes **form → review → confirm**.
   Double-clicks and refreshes never create duplicates.
 - Chat with an offline auto-assistant that answers from the business's live data and prepares a **draft** the customer reviews in the
@@ -40,6 +48,9 @@ from the real app in GitHub Actions on every change to the script.
 - "Track my request": a single-use, expiring email link. A reference number alone never shows private data.
 
 **Business dashboard** (owner / manager / staff, enforced server-side)
+- **Installable app**: add the dashboard to a phone's home screen (offline page included) and turn on **device
+  alerts** for new bookings, orders and chats (*Your account*). Alerts are data-less Web Push (VAPID): the push
+  service never sees customer details; the phone fetches them from Vendra after sign-in.
 - Inbox with *Auto-assistant* → *Waiting for staff* → *Staff active* → *Closed* states, handoff summaries, internal notes,
   assignment, and explicit "Resume auto-replies".
 - Appointments: staff schedules, slot availability, locked double-booking checks, approval deadlines with
@@ -88,6 +99,18 @@ pages, the chat and sign-in on every push.
 
 Run the image yourself: `docker build -t vendra . && docker run -p 8080:10000 -e VENDRA_PUBLIC_DEMO=true -e VENDRA_ENFORCE_MFA=false vendra`
 
+### Optional free add-ons (add the variables on Render → *Environment*)
+
+| Feature | What to do | Variables |
+|---|---|---|
+| **Keep uploads across restarts** (Render's disk is wiped on every deploy/restart) | Create two [Cloudflare R2](https://developers.cloudflare.com/r2/) buckets (free tier: 10 GB): one with *Public access* on (pictures), one private (customer attachments). Create an R2 API token with read/write on both. | `VENDRA_MEDIA_DISK=r2`, `VENDRA_FILES_DISK=r2_private`, `R2_ENDPOINT` (`https://<account-id>.r2.cloudflarestorage.com`), `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`, `R2_BUCKET`, `R2_PRIVATE_BUCKET`, `R2_PUBLIC_URL` (the bucket's `https://pub-….r2.dev` or custom domain) |
+| **Spam check on forms** | Add a Turnstile widget in Cloudflare for your Render domain. | `TURNSTILE_SITE_KEY`, `TURNSTILE_SECRET_KEY` |
+| **Device alerts** | Run `php artisan vendra:vapid` once and copy the three lines. | `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`, `VAPID_SUBJECT` |
+| **Real emails** (reminders, tracking links) | Any SMTP service with a free tier. Without it, emails are only written to the log. | `MAIL_MAILER=smtp`, `MAIL_HOST`, `MAIL_PORT`, `MAIL_USERNAME`, `MAIL_PASSWORD`, `MAIL_FROM_ADDRESS` |
+
+The database is SQLite inside the container, so a real (non-demo) deployment also needs a hosted MySQL database
+(`DB_CONNECTION=mysql` and the `DB_*` variables).
+
 ## Run it locally (WSL Ubuntu)
 
 ```bash
@@ -133,7 +156,7 @@ can set `VENDRA_ENFORCE_MFA=false`.
 ### Tests and assistant evaluation
 
 ```bash
-php artisan test                                   # 80 feature + unit tests
+php artisan test                                   # 98 feature + unit tests
 php artisan migrate:fresh --seed
 php artisan vendra:ai-eval          # 60 fictional EN/TL/Taglish cases (add --show to print replies)
 ```

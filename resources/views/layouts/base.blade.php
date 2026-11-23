@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-layout="@yield('layout', 'classic')" data-palette="@yield('palette', 'sunny')" class="h-full bg-paper">
+<html lang="{{ app()->getLocale() === 'fil' ? 'fil' : 'en' }}" data-layout="@yield('layout', 'classic')" data-palette="@yield('palette', 'sunny')" class="h-full bg-paper">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
