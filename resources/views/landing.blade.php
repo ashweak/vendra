@@ -82,7 +82,7 @@
                 <p class="mt-3 max-w-md text-sm text-white/60">{{ __('Prices, hours and open times come straight from your dashboard. No guessing, no made-up promos.') }}</p>
                 <div class="mt-7 grid gap-2 sm:grid-cols-3">
                     @foreach ([['Haircut', '₱250', '45 min'], ['Hair Spa', '₱600', '60 min'], ['Manicure', '₱150', '30 min']] as [$n, $p, $d])
-                        <div class="rounded-2xl bg-white/[.07] p-4"><p class="text-sm text-white/60">{{ __($n) }}</p><p class="mt-1 font-display text-2xl font-bold">{{ $p }}</p><p class="text-xs text-white/40">{{ $d }}</p></div>
+                        <div class="rounded-2xl bg-white/[.07] p-4"><p class="text-sm text-white/60">{{ __($n) }}</p><p class="mt-1 font-display text-2xl font-bold">{{ $p }}</p><p class="text-xs text-white/70">{{ $d }}</p></div>
                     @endforeach
                 </div>
             </div>
@@ -109,7 +109,7 @@
         {{-- Stats band --}}
         <dl class="mt-4 grid divide-y divide-line rounded-[28px] border border-line bg-white sm:grid-cols-2 sm:divide-y-0 lg:grid-cols-4 lg:divide-x">
             @foreach ([['24/7', 'answers about prices, hours and open times'], ['4', 'workflows: bookings, orders, quotes, requests'], ['100%', 'of submissions confirmed by the customer'], ['0', 'customer chats sent to outside AI services']] as [$v, $l])
-                <div class="p-7"><dt class="sr-only">{{ $l }}</dt><dd class="font-display text-4xl font-bold">{{ $v }}</dd><p class="mt-1 text-sm text-ink-500">{{ $l }}</p></div>
+                <div class="flex flex-col-reverse p-7"><dt class="mt-1 text-sm text-ink-500">{{ __($l) }}</dt><dd class="font-display text-4xl font-bold">{{ $v }}</dd></div>
             @endforeach
         </dl>
     </section>

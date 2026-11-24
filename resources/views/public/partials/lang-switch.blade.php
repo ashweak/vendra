@@ -3,6 +3,7 @@
     @foreach (['en' => 'EN', 'fil' => 'FIL'] as $code => $short)
         @php $on = app()->getLocale() === $code; @endphp
         <a href="{{ request()->fullUrlWithQuery(['lang' => $code]) }}" hreflang="{{ $code }}" lang="{{ $code }}" title="{{ \App\Http\Middleware\PageLanguage::LANGUAGES[$code] }}" @if ($on) aria-current="true" @endif
-           @class(['rounded-full px-2.5 py-1', 'bg-ink-900 text-white' => $on && ! ($dark ?? false), 'bg-white text-ink-900' => $on && ($dark ?? false), 'opacity-70 hover:opacity-100' => ! $on])>{{ $short }}</a>
+           @class(['rounded-full px-2.5 py-1', 'bg-ink-900 text-white' => $on && ! ($dark ?? false), 'bg-white text-ink-900' => $on && ($dark ?? false),
+               'text-ink-700 hover:bg-ink-50' => ! $on && ! ($dark ?? false), 'text-white hover:bg-white/15' => ! $on && ($dark ?? false)])>{{ $short }}</a>
     @endforeach
 </div>

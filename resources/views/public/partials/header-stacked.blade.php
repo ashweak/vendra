@@ -8,9 +8,9 @@
     </div>
     <div class="border-b border-line bg-paper/95 backdrop-blur">
         <nav class="mx-auto flex h-16 max-w-6xl items-center gap-2 px-3 sm:gap-4 sm:px-8" aria-label="{{ __('Business') }}">
-            <a href="{{ route('public.home', $business) }}" class="flex min-w-0 shrink-0 items-center gap-2.5" aria-label="{{ __(':business home', ['business' => $business->name]) }}">
+            <a href="{{ route('public.home', $business) }}" class="flex min-w-0 shrink-0 items-center gap-2.5">
                 <x-biz-mark :business="$business" outline class="h-9 w-9 rounded-full text-sm" />
-                <span class="hidden max-w-[13rem] truncate font-display text-lg font-bold sm:inline">{{ $business->name }}</span>
+                <span class="sr-only max-w-[13rem] truncate font-display text-lg font-bold sm:not-sr-only">{{ $business->name }}</span>
             </a>
             <div class="flex flex-1 items-center justify-center gap-1 lg:gap-0">
                 @include('public.partials.nav-links', ['variant' => 'stacked'])

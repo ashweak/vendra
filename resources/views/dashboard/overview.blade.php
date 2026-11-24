@@ -64,7 +64,7 @@
             <h2 class="h2">Auto-replies this month</h2>
             @php $used = $usage->requests ?? 0; $pct = $aiLimit ? min(100, round($used / $aiLimit * 100)) : 0; @endphp
             <p class="mt-2 text-sm">{{ $used }} of {{ $aiLimit }} replies</p>
-            <div class="mt-3 h-2 rounded-full bg-tile" role="progressbar" aria-valuenow="{{ $pct }}" aria-valuemin="0" aria-valuemax="100"> <div class="h-2 rounded-full {{ $pct >= 80 ? 'bg-red-500' : 'bg-sun' }}" style="width: {{ $pct }}%"></div></div>
+            <div class="mt-3 h-2 rounded-full bg-tile" role="progressbar" aria-label="Auto-replies used this month" aria-valuenow="{{ $pct }}" aria-valuemin="0" aria-valuemax="100"> <div class="h-2 rounded-full {{ $pct >= 80 ? 'bg-red-500' : 'bg-sun' }}" style="width: {{ $pct }}%"></div></div>
             <p class="mt-2 text-xs text-ink-500">At the limit, customers use forms and staff replies. No overage charges.</p>
         </section>
         @endif

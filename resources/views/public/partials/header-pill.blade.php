@@ -1,9 +1,9 @@
 {{-- Header: floating pill (Classic). Icons on phones, labels from lg. --}}
     <div class="sticky top-0 z-30 px-3 pt-3 sm:px-5">
         <nav class="mx-auto flex max-w-6xl items-center gap-1 rounded-full border border-line bg-white/85 py-1.5 pr-1.5 pl-1.5 shadow-[0_8px_30px_-18px_rgba(23,22,18,.35)] backdrop-blur sm:gap-2 sm:py-2 sm:pr-2 sm:pl-2.5" aria-label="{{ __('Business') }}">
-            <a href="{{ route('public.home', $business) }}" class="flex min-w-0 shrink-0 items-center gap-2.5" aria-label="{{ __(':business home', ['business' => $business->name]) }}">
+            <a href="{{ route('public.home', $business) }}" class="flex min-w-0 shrink-0 items-center gap-2.5">
                 <x-biz-mark :business="$business" class="h-10 w-10 rounded-full text-sm" />
-                <span class="hidden truncate font-display text-[15px] font-bold sm:inline">{{ $business->name }}</span>
+                <span class="sr-only truncate font-display text-[15px] font-bold sm:not-sr-only">{{ $business->name }}</span>
             </a>
             <div class="flex flex-1 items-center justify-center gap-2 text-sm sm:gap-3 lg:gap-1">
                 @foreach ($links as [$label, $route, $icon])
