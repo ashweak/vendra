@@ -28,6 +28,16 @@ let page = await ctx.newPage();
 const errors = [];
 page.on('pageerror', e => errors.push(String(e)));
 await page.goto(BASE); await shot(page, '01-landing');
+// The sticky navigation must stay on screen all the way down (landing and a customer page).
+for (const url of [BASE, `${BASE}/b/lumina-studio`]) {
+  await page.goto(url);
+  await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+  await page.waitForTimeout(300);
+  const top = await page.evaluate(() => { const el = document.querySelector('nav[aria-label="Main"], header nav, header'); return el ? Math.round(el.getBoundingClientRect().top) : null; });
+  log('sticky-nav', url, top);
+  if (top === null || top < -5 || top > 120) throw new Error(`Navigation scrolled away on ${url} (top=${top})`);
+}
+await page.goto(BASE); await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight)); await page.waitForTimeout(300); await shot(page, '01b-landing-scrolled', false);
 await page.goto(`${BASE}/register`); await shot(page, '01b-register', false);
 await page.goto(`${BASE}/login`); await shot(page, '01c-login', false);
 await page.goto(`${BASE}/b/lumina-studio`); await shot(page, '02-public-home');

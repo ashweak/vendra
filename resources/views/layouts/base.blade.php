@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="{{ asset('css/vendra.css') }}?v={{ @filemtime(public_path('css/vendra.css')) }}">
     @stack('head')
 </head>
-<body class="h-full overflow-x-clip font-sans text-ink-900 antialiased">
+<body class="min-h-full overflow-x-clip font-sans text-ink-900 antialiased">
     @yield('body')
     @stack('scripts')
 </body>
