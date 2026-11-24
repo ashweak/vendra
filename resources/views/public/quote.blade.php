@@ -7,7 +7,7 @@
     @csrf
     <div class="card space-y-4">
         <div><label class="label" for="req">{{ __('What do you need?') }}</label><textarea id="req" name="requirements" rows="5" minlength="10" maxlength="3000" required class="input" placeholder="{{ __('E.g. hair and makeup for 6 people, Dec 14, at our venue in Quezon City.') }}">{{ old('requirements', $prefill['requirements'] ?? '') }}</textarea><x-field-error name="requirements" /></div>
-        <div><label class="label" for="att">{{ __('Photo or PDF (optional, max 5 MB)') }}</label><input id="att" type="file" name="attachment" accept=".jpg,.jpeg,.png,.pdf" class="block text-sm"><p class="hint">{{ __('Files are stored privately and deleted after 90 days unless needed for an active request.') }}</p><x-field-error name="attachment" /></div>
+        <div><label class="label" for="att">{{ __('Photo or PDF (optional, max 5 MB)') }}</label><input id="att" type="file" name="attachment" data-shrink="2000" data-shrink-jpeg data-shrink-busy="{{ __('Preparing picture…') }}" data-shrink-done="{{ __('Ready to upload: :after (was :before).') }}" accept=".jpg,.jpeg,.png,.pdf" class="block text-sm"><p class="hint">{{ __('Files are stored privately and deleted after 90 days unless needed for an active request.') }}</p><x-field-error name="attachment" /></div>
     </div>
     @include('public.partials.contact', ['data' => []])
     <x-human-check />

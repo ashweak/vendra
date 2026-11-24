@@ -37,6 +37,10 @@ from the real app in GitHub Actions on every change to the script.
 - **English or Filipino**: every customer page, the chat widget, form errors and customer emails come in both.
   Visitors switch with the EN/FIL toggle; the owner sets the default (*Settings → Appearance*), and browsers set to
   Filipino get it automatically. The dashboard stays in English.
+- **Found on Google**: `sitemap.xml`, `robots.txt`, and schema.org business data on every shop page (hours,
+  address, phone, prices), with canonical and English/Filipino language links. Private pages are `noindex`.
+- **Photos shrink before upload**: big phone photos are resized in the browser first (faster on mobile data,
+  no 5 MB errors); the server still checks and re-encodes every file.
 - **Spam protection** on every public form and sign-up: a hidden honeypot field, plus optional
   [Cloudflare Turnstile](https://developers.cloudflare.com/turnstile/) (free) when its keys are set.
 - **Booking reminders**: an email the day before each confirmed booking, with a calendar (`.ics`) file attached.
@@ -51,6 +55,11 @@ from the real app in GitHub Actions on every change to the script.
 - **Installable app**: add the dashboard to a phone's home screen (offline page included) and turn on **device
   alerts** for new bookings, orders and chats (*Your account*). Alerts are data-less Web Push (VAPID): the push
   service never sees customer details; the phone fetches them from Vendra after sign-in.
+- **Unanswered questions → FAQ**: questions the auto-assistant couldn't answer are listed by how often they're
+  asked (contact details masked). Write the answer once (*Settings → Unanswered questions*) and it becomes a
+  published FAQ that the assistant uses from then on. The assistant now answers from published FAQ/policies.
+- **Suggested replies** in each conversation, built from the business's FAQ, live prices and hours, in the
+  customer's language. Staff tap one, edit it, then send.
 - Inbox with *Auto-assistant* → *Waiting for staff* → *Staff active* → *Closed* states, handoff summaries, internal notes,
   assignment, and explicit "Resume auto-replies".
 - Appointments: staff schedules, slot availability, locked double-booking checks, approval deadlines with
@@ -94,7 +103,9 @@ Render's current free-plan terms before you start; nothing in this setup uses a 
 
 What to expect: public demo mode (`VENDRA_PUBLIC_DEMO=true`) reseeds **fictional data on every start**, the free
 instance sleeps after 15 idle minutes and takes about a minute to wake, and the auto-assistant runs offline
-(no API key). Owner MFA is off in demo mode so visitors can sign in. CI builds the same image and smoke-tests
+(no API key). Owner MFA is off in demo mode so visitors can sign in. The **Quality** workflow checks every page
+with axe-core (WCAG 2.1 AA; any serious problem fails) and Lighthouse (performance, accessibility, best
+practices and SEO budgets). CI builds the same image and smoke-tests
 pages, the chat and sign-in on every push.
 
 Run the image yourself: `docker build -t vendra . && docker run -p 8080:10000 -e VENDRA_PUBLIC_DEMO=true -e VENDRA_ENFORCE_MFA=false vendra`
@@ -156,7 +167,7 @@ can set `VENDRA_ENFORCE_MFA=false`.
 ### Tests and assistant evaluation
 
 ```bash
-php artisan test                                   # 98 feature + unit tests
+php artisan test                                   # 108 feature + unit tests
 php artisan migrate:fresh --seed
 php artisan vendra:ai-eval          # 60 fictional EN/TL/Taglish cases (add --show to print replies)
 ```

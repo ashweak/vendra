@@ -54,6 +54,13 @@ class RuleBasedProvider implements ChatProvider
                 'Para baguhin o i-check ang request, buksan po ang “Track my request” sa page na ito at i-verify gamit ang email ninyo. Para sa seguridad, hindi ko po ma-check ang records dito sa chat.');
         }
 
+        // 5b. The owner's published FAQ and policies, when the question clearly matches one.
+        // (Matched locally first; the tool call is only recorded when an entry is actually used.)
+        $faq = KnowledgeMatcher::match($business, $message, 1)->first() ? ($tools->execute('search_knowledge', ['question' => $message])['matches'][0] ?? null) : null;
+        if ($faq && $faq['score'] >= 0.5) {
+            return $this->say($faq['answer'], $faq['answer']);
+        }
+
         $services = CatalogItem::forBusiness($business)->active()->get();
         $mentioned = $this->matchItems($services, $t);
         if (! $mentioned) {
@@ -170,7 +177,12 @@ class RuleBasedProvider implements ChatProvider
                 return "• {$i['name']}: {$i['price']}{$extra}";
             }, array_values(array_filter($list['items'], fn ($i) => ! $mentioned || in_array($i['id'], $wanted, true))));
 
-            return $this->say(implode("\n", $lines ?: ['No matching items found.']), implode("\n", $lines ?: ['Walang tugmang item.']));
+            if (! $lines) {
+                return $this->say('I couldn’t find that in our list. I can pass your question to staff, or you can browse the menu on this page.',
+                    'Wala po iyan sa listahan namin. Pwede ko pong ipasa sa staff ang tanong ninyo, o tingnan ang menu sa page na ito.', unanswered: true);
+            }
+
+            return $this->say(implode("\n", $lines), implode("\n", $lines));
         }
 
         // 11. Greetings / thanks.
@@ -182,9 +194,14 @@ class RuleBasedProvider implements ChatProvider
             return $this->say('You’re welcome! Anything else I can help with?', 'Walang anuman po! May iba pa po ba akong maitutulong?');
         }
 
-        // 12. Ask a focused clarification.
+        // 12. A weaker FAQ match is still better than "I didn't get that".
+        if ($faq) {
+            return $this->say($faq['answer'], $faq['answer']);
+        }
+
+        // 13. Ask a focused clarification, and log the question so the owner can add an answer.
         return $this->say('Sorry, I didn’t quite get that. I can share prices and hours, check open times, or help you request a booking'.($business->moduleEnabled('orders') ? ', order' : '').' — or connect you with staff. What would you like?',
-            'Pasensya na po, hindi ko masyadong naintindihan. Pwede ko pong ibigay ang presyo at oras, i-check ang bakanteng oras, o tulungan kayong mag-request — o ipasa kayo sa staff. Ano po ang gusto ninyo?');
+            'Pasensya na po, hindi ko masyadong naintindihan. Pwede ko pong ibigay ang presyo at oras, i-check ang bakanteng oras, o tulungan kayong mag-request — o ipasa kayo sa staff. Ano po ang gusto ninyo?', unanswered: true);
     }
 
     /** @return CatalogItem[] */
@@ -213,8 +230,8 @@ class RuleBasedProvider implements ChatProvider
         return array_values($exact ?: $found);
     }
 
-    private function say(string $en, string $tl): ProviderResult
+    private function say(string $en, string $tl, bool $unanswered = false): ProviderResult
     {
-        return new ProviderResult($this->tagalog ? $tl : $en, 0);
+        return new ProviderResult($this->tagalog ? $tl : $en, 0, $unanswered);
     }
 }

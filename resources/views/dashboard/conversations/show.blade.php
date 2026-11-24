@@ -50,6 +50,16 @@
         </div>
         <form method="POST" action="{{ route('dashboard.conversations.reply', $c->id) }}" class="border-t border-line p-3">
             @csrf
+            @if ($suggestions)
+                <div class="mb-2" aria-labelledby="sugg-h">
+                    <p id="sugg-h" class="text-xs font-semibold text-ink-500">Suggested replies <span class="font-normal">— from your FAQ, prices and hours. Tap to edit, then send.</span></p>
+                    <div class="mt-1.5 flex flex-wrap gap-1.5">
+                        @foreach ($suggestions as $s)
+                            <button type="button" class="chip text-xs hover:bg-sun/40" data-suggest="{{ $s['text'] }}" title="{{ \Illuminate\Support\Str::limit($s['text'], 300) }}">{{ $s['label'] }}</button>
+                        @endforeach
+                    </div>
+                </div>
+            @endif
             <label for="body" class="sr-only">Reply</label>
             <textarea id="body" name="body" rows="2" class="input" required maxlength="2000" placeholder="Write a reply…"></textarea>
             <div class="mt-2 flex flex-wrap items-center justify-between gap-2">
@@ -94,4 +104,16 @@
         @endif
     </aside>
 </div>
+@push('scripts')
+<script>
+document.querySelectorAll('[data-suggest]').forEach((b) => b.addEventListener('click', () => {
+    const box = document.getElementById('body');
+    box.value = b.dataset.suggest;
+    box.focus();
+    box.setSelectionRange(box.value.length, box.value.length);
+    box.style.height = 'auto';
+    box.style.height = Math.min(box.scrollHeight, 320) + 'px';
+}));
+</script>
+@endpush
 @endsection

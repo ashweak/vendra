@@ -1,4 +1,5 @@
 @extends('layouts.public')
+@section('robots', 'noindex')
 @section('title', __('My requests').' · '.$business->name)
 @section('content')
 @php $tz = $business->timezone; @endphp

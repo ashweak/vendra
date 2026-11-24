@@ -34,6 +34,7 @@ class ConversationController extends DashboardController
             'conversation' => $c,
             'conversations' => $this->scopeVisible($this->business()->conversations()->where('channel', 'web')->with('customer'))->latest('last_activity_at')->limit(30)->get(),
             'team' => $this->business()->activeStaff()->get(),
+            'suggestions' => $c->state === 'closed' ? [] : \App\Services\Ai\ReplySuggester::for($c, request()->user()),
         ]);
     }
 

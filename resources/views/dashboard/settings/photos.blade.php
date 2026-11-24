@@ -17,7 +17,7 @@
             <form method="POST" action="{{ route('dashboard.settings.photos.upload', 'logo') }}" enctype="multipart/form-data" class="flex flex-wrap items-center gap-3">
                 @csrf
                 <label class="sr-only" for="logo">Choose a logo</label>
-                <input id="logo" type="file" name="photo" accept="image/jpeg,image/png,image/webp" required class="text-sm">
+                <input id="logo" type="file" name="photo" data-shrink="1200" accept="image/jpeg,image/png,image/webp" required class="text-sm">
                 <button class="btn btn-primary btn-sm">Upload logo</button>
             </form>
             @if ($b->logo_path)<form method="POST" action="{{ route('dashboard.settings.photos.remove', 'logo') }}">@csrf @method('DELETE')<button class="text-sm text-red-700 underline">Remove logo</button></form>@endif
@@ -34,7 +34,7 @@
             <form method="POST" action="{{ route('dashboard.settings.photos.upload', 'cover') }}" enctype="multipart/form-data" class="flex flex-wrap items-center gap-3">
                 @csrf
                 <label class="sr-only" for="cover">Choose a cover photo</label>
-                <input id="cover" type="file" name="photo" accept="image/jpeg,image/png,image/webp" required class="text-sm">
+                <input id="cover" type="file" name="photo" data-shrink="2400" accept="image/jpeg,image/png,image/webp" required class="text-sm">
                 <button class="btn btn-primary btn-sm">Upload cover</button>
             </form>
             @if ($b->cover_path)<form method="POST" action="{{ route('dashboard.settings.photos.remove', 'cover') }}">@csrf @method('DELETE')<button class="text-sm text-red-700 underline">Remove cover photo</button></form>@endif
@@ -52,7 +52,7 @@
                 <form method="POST" action="{{ route('dashboard.settings.photos.gallery') }}" enctype="multipart/form-data" class="flex flex-wrap items-center gap-3">
                     @csrf
                     <label class="sr-only" for="gallery">Choose photos</label>
-                    <input id="gallery" type="file" name="photos[]" multiple accept="image/jpeg,image/png,image/webp" required class="text-sm">
+                    <input id="gallery" type="file" name="photos[]" data-shrink="2000" multiple accept="image/jpeg,image/png,image/webp" required class="text-sm">
                     <button class="btn btn-primary btn-sm">Add photos</button>
                 </form>
             @endif

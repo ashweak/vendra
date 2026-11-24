@@ -1,0 +1,55 @@
+name: Quality
+
+# Accessibility (axe-core, WCAG 2.1 AA) and Lighthouse (performance, accessibility, best practices, SEO)
+# on the running app with fictional data. Any serious accessibility problem or a score below budget fails.
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'resources/**'
+      - 'public/**'
+      - 'app/**'
+      - 'routes/**'
+      - 'scripts/a11y.mjs'
+      - 'lighthouserc.json'
+      - '.github/workflows/quality.yml'
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mbstring, pdo, sqlite, pdo_sqlite, intl, gd, exif
+          coverage: none
+      - run: composer install --prefer-dist --no-interaction --no-progress
+      - name: Boot app with fictional data
+        run: |
+          cp .env.example .env
+          sed -i 's/^DB_CONNECTION=mysql/DB_CONNECTION=sqlite/; s/^DB_DATABASE=vendra/# DB_DATABASE=/; s/^VENDRA_ENFORCE_MFA=true/VENDRA_ENFORCE_MFA=false/; s/^APP_DEBUG=true/APP_DEBUG=false/; s/^APP_ENV=local/APP_ENV=production/' .env
+          php artisan key:generate
+          touch database/database.sqlite
+          php artisan storage:link
+          php artisan migrate --seed --force
+          php artisan config:cache && php artisan route:cache && php artisan view:cache
+          (PHP_CLI_SERVER_WORKERS=4 php artisan serve --port=8000 > storage/logs/serve.log 2>&1 &)
+          sleep 3
+          curl -fsS http://127.0.0.1:8000/up > /dev/null
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm i --no-save playwright@1 @axe-core/playwright@4 && npx playwright install --with-deps chromium
+      - name: Accessibility (axe-core)
+        run: node scripts/a11y.mjs
+      - name: Lighthouse
+        if: always()
+        run: npx --yes @lhci/cli@0.14 autorun
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: quality-reports
+          path: |
+            quality/
+            storage/logs/

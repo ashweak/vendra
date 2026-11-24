@@ -11,9 +11,11 @@ use App\Http\Controllers\PublicController;
 use App\Models\Business;
 use Illuminate\Support\Facades\Route;
 
+Route::get('robots.txt', [\App\Http\Controllers\SeoController::class, 'robots'])->name('robots');
+Route::get('sitemap.xml', [\App\Http\Controllers\SeoController::class, 'sitemap'])->name('sitemap');
 Route::get('/', fn () => view('landing', [
     'demos' => Business::whereNotNull('activated_at')->where('status', 'active')->orderBy('name')->get(),
-]))->name('landing');
+]))->name('landing')->middleware('page.language');
 
 Route::view('privacy', 'legal.privacy')->name('legal.privacy');
 Route::view('terms', 'legal.terms')->name('legal.terms');
@@ -176,6 +178,10 @@ Route::prefix('app')->name('dashboard.')->middleware(['auth', 'mfa', 'business']
         Route::post('{kind}', 'upload')->name('.upload')->whereIn('kind', ['logo', 'cover'])->middleware(['demo.lock', 'throttle:20,1']);
         Route::delete('{kind}', 'remove')->name('.remove')->whereIn('kind', ['logo', 'cover'])->middleware('demo.lock');
     });
+    // Questions the auto-assistant couldn't answer → FAQ.
+    Route::get('settings/unanswered', [Dashboard\AssistantGapController::class, 'index'])->name('settings.unanswered');
+    Route::post('settings/unanswered/{id}/answer', [Dashboard\AssistantGapController::class, 'answer'])->name('settings.unanswered.answer')->middleware('demo.lock');
+    Route::post('settings/unanswered/{id}/dismiss', [Dashboard\AssistantGapController::class, 'dismiss'])->name('settings.unanswered.dismiss')->middleware('demo.lock');
     Route::controller(Dashboard\SettingsController::class)->prefix('settings')->name('settings.')->group(function () {
         Route::get('profile', 'profile')->name('profile');
         Route::put('profile', 'updateProfile')->middleware('demo.lock');

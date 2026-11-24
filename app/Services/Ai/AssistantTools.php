@@ -41,6 +41,8 @@ class AssistantTools
         $b = $this->business;
         $d = [
             ['name' => 'get_business_info', 'description' => 'Business name, address, contact, opening hours, response hours, enabled services, and published FAQ/policies.'],
+            ['name' => 'search_knowledge', 'description' => 'Find the owner\'s published FAQ and policy entries that answer a question.',
+                'parameters' => ['type' => 'object', 'properties' => ['question' => ['type' => 'string']], 'required' => ['question']]],
             ['name' => 'search_catalog', 'description' => 'Search the approved catalog of services and products with live prices and availability.',
                 'parameters' => ['type' => 'object', 'properties' => [
                     'query' => ['type' => 'string', 'description' => 'Keywords, e.g. "haircut" or "serum". Empty for all.'],
@@ -100,6 +102,8 @@ class AssistantTools
         try {
             return match ($name) {
                 'get_business_info' => $this->businessInfo(),
+                'search_knowledge' => ['matches' => KnowledgeMatcher::match($this->business, (string) ($args['question'] ?? ''))
+                    ->map(fn ($m) => ['title' => $m['entry']->title, 'answer' => $m['entry']->body, 'score' => $m['score']])->all()],
                 'search_catalog' => $this->searchCatalog((string) ($args['query'] ?? ''), (string) ($args['type'] ?? 'any')),
                 'check_availability' => $this->checkAvailability((int) ($args['service_id'] ?? 0), (string) ($args['date'] ?? '')),
                 'prepare_booking' => $this->prepareBooking($args),

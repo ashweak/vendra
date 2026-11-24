@@ -3,6 +3,7 @@
 namespace App\Services\Ai;
 
 use App\Models\AiUsage;
+use App\Models\AssistantGap;
 use App\Models\Conversation;
 use App\Services\AppointmentService;
 use App\Services\ConversationService;
@@ -99,7 +100,11 @@ class AssistantService
             $message = $this->conversations->addMessage($c, 'ai', $result->text, meta: array_filter([
                 'draft' => $tools->draft,
                 'tools' => array_column($tools->calls, 'name'),
+                'unanswered' => $result->unanswered ?: null,
             ]));
+            if ($result->unanswered) {
+                AssistantGap::record($c, $customerText);
+            }
 
             return ['reply' => $message->body, 'draft' => $tools->draft, 'handed_off' => $tools->handedOff, 'fallback' => false, 'tools' => $tools->calls];
         } finally {

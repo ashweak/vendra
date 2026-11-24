@@ -11,7 +11,7 @@
             <form method="POST" action="{{ route('dashboard.account.avatar') }}" enctype="multipart/form-data" class="flex flex-wrap items-center gap-3">
                 @csrf
                 <label class="sr-only" for="avatar">Choose a picture</label>
-                <input id="avatar" type="file" name="avatar" accept="image/jpeg,image/png,image/webp" required class="text-sm">
+                <input id="avatar" type="file" name="avatar" data-shrink="1200" accept="image/jpeg,image/png,image/webp" required class="text-sm">
                 <button class="btn btn-primary btn-sm">Upload</button>
             </form>
             @if ($user->avatar_path)

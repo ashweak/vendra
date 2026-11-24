@@ -45,6 +45,10 @@ class ApplyRetention extends Command
         $report['audit logs'] = $logs->count();
         $dry || $logs->delete();
 
+        $gaps = \App\Models\AssistantGap::where('last_asked_at', '<', now()->subDays($r['unanswered_questions_days'] ?? 90));
+        $report['unanswered questions'] = $gaps->count();
+        $dry || $gaps->delete();
+
         $tokens = CustomerAccessToken::where('expires_at', '<', now()->subDays($r['access_tokens_days']));
         $report['access tokens'] = $tokens->count();
         $dry || $tokens->delete();

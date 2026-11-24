@@ -7,6 +7,12 @@
 @section('layout', $activeLayout)
 @section('palette', $activePalette)
 @section('description', \Illuminate\Support\Str::limit(trim(($business->description ?: $business->name).' '.__('Book, order or ask in English, Tagalog or Taglish.')), 155))
+@if ($business->coverUrl() || $business->logoUrl())
+    @section('og_image', $business->coverUrl() ?: $business->logoUrl())
+@endif
+@if ($business->status !== 'active' || ! $business->activated_at)
+    @section('robots', 'noindex')
+@endif
 @push('head')
 <style>:root{--accent: {{ $business->accent_color }};}</style>
 @endpush

@@ -1,4 +1,5 @@
 @extends('layouts.public')
+@section('robots', 'noindex')
 @section('title', __('Review').' · '.$business->name)
 @section('content')
 @php

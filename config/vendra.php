@@ -52,6 +52,7 @@ return [
         'ai_diagnostics_days' => 30,
         'audit_logs_months' => 12,
         'access_tokens_days' => 7,
+        'unanswered_questions_days' => 90,     // assistant gaps not asked again within this time are removed
     ],
 
     'ai' => [

@@ -1,5 +1,8 @@
 @extends('layouts.public')
 @section('title', $business->name)
+@push('head')
+    {{ \App\Support\BusinessSchema::tag($business, $hours, $items) }}
+@endpush
 @section('content')
 @php
     // Shared data for every layout (resources/views/public/home/{layout}.blade.php).
