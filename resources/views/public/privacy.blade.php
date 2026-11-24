@@ -31,6 +31,9 @@
                 <li>{{ __('Basic technical records (such as your IP address on actions) to keep the service secure.') }}</li>
             </ul>
             <p class="mt-2">{{ __('Please don’t send passwords, PINs, card numbers or health details. We never ask for them.') }}</p>
+            @if ($business->messengerConnected())
+                <p class="mt-2">{{ __('If you message us on Facebook Messenger, Meta (Facebook) also processes those messages under its own privacy policy. We receive them in the same inbox as this website’s chat.') }}</p>
+            @endif
             @if (\App\Services\HumanCheck::turnstileEnabled())
                 <p class="mt-2">{{ __('Our forms use Cloudflare Turnstile to stop spam bots. Cloudflare sees your IP address and browser details for that check only.') }}</p>
             @endif

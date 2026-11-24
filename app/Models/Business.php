@@ -16,12 +16,21 @@ class Business extends Model
 
     protected $guarded = ['id'];
 
+    /** The Messenger page token is a secret: encrypted in the database and never serialized. */
+    protected $hidden = ['messenger_token'];
+
+    public function messengerConnected(): bool
+    {
+        return filled($this->messenger_page_id) && filled($this->messenger_token);
+    }
+
     protected function casts(): array
     {
         return [
             'modules' => 'array',
             'settings' => 'array',
             'ai_enabled' => 'boolean',
+            'messenger_token' => 'encrypted',
             'activated_at' => 'datetime',
             'closing_requested_at' => 'datetime',
         ];

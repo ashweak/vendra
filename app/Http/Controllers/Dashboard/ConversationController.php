@@ -16,7 +16,7 @@ class ConversationController extends DashboardController
         $state = $request->query('state');
         $q = $b->conversations()->with('customer', 'assignee')
             ->when($state, fn ($q) => $q->where('state', $state))
-            ->where('channel', 'web')
+            ->whereIn('channel', ['web', 'messenger'])
             ->latest('last_activity_at');
         if (! $this->membership()->can('conversations.all')) {
             $q->where('assigned_to', auth()->id());
@@ -32,7 +32,7 @@ class ConversationController extends DashboardController
 
         return view('dashboard.conversations.show', [
             'conversation' => $c,
-            'conversations' => $this->scopeVisible($this->business()->conversations()->where('channel', 'web')->with('customer'))->latest('last_activity_at')->limit(30)->get(),
+            'conversations' => $this->scopeVisible($this->business()->conversations()->whereIn('channel', ['web', 'messenger'])->with('customer'))->latest('last_activity_at')->limit(30)->get(),
             'team' => $this->business()->activeStaff()->get(),
             'suggestions' => $c->state === 'closed' ? [] : \App\Services\Ai\ReplySuggester::for($c, request()->user()),
         ]);
@@ -42,9 +42,20 @@ class ConversationController extends DashboardController
     {
         $c = $this->find($id);
         $data = $request->validate(['body' => 'required|string|max:2000', 'internal' => 'nullable|boolean']);
-        $request->boolean('internal')
-            ? $this->service->note($c, $request->user(), $data['body'])
-            : $this->service->staffReply($c, $request->user(), $data['body']);
+        if ($request->boolean('internal')) {
+            $this->service->note($c, $request->user(), $data['body']);
+
+            return back();
+        }
+        $this->service->staffReply($c, $request->user(), $data['body']);
+        if ($c->channel === 'messenger' && $c->external_id) {
+            $problem = app(\App\Services\Messenger\MessengerClient::class)->sendText($this->business(), $c->external_id, $data['body']);
+            if ($problem) {
+                $this->service->note($c, $request->user(), 'Not delivered to Messenger: '.$problem);
+
+                return back()->withErrors(['messenger' => 'Saved, but not delivered to Messenger: '.$problem]);
+            }
+        }
 
         return back();
     }

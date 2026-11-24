@@ -87,8 +87,10 @@ class SettingsController extends DashboardController
             'fulfillment_methods' => 'array', 'fulfillment_methods.*' => 'in:pickup,delivery',
             'quote_valid_days' => 'required|integer|min:1|max:90', 'response_hours' => 'required|string|max:120',
             'booking_reminders' => 'nullable|boolean',
+            'daily_summary' => 'nullable|boolean',
         ]);
         $data['booking_reminders'] = $request->boolean('booking_reminders');
+        $data['daily_summary'] = $request->boolean('daily_summary');
         $b = $this->business();
         $modules = array_values($data['modules'] ?? []);
         if (! $modules) {

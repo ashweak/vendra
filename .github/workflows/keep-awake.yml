@@ -1,0 +1,28 @@
+name: Keep demo awake
+
+# Render's free plan sleeps after 15 idle minutes, so the first visitor waits about a minute.
+# Opening the health check every 10 minutes keeps one free service awake (within Render's free 750 hours/month).
+# Set the repository variable DEMO_URL to change the address; remove this file to let the demo sleep.
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Ping the demo
+        env:
+          DEMO_URL: ${{ vars.DEMO_URL || 'https://vendra-demo.onrender.com' }}
+        run: |
+          for i in 1 2 3; do
+            code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 90 "$DEMO_URL/up") || code=000
+            echo "Attempt $i: $code"
+            [ "$code" = "200" ] && exit 0
+            sleep 20
+          done
+          echo "::warning::Demo did not answer with 200 (it may be redeploying)."

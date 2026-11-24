@@ -13,6 +13,8 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        // Facebook signs its webhook calls (checked in the controller); they can't carry a CSRF token.
+        $middleware->validateCsrfTokens(except: ['webhooks/messenger']);
         $middleware->alias([
             'mfa' => \App\Http\Middleware\EnsureMfa::class,
             'business' => \App\Http\Middleware\SetCurrentBusiness::class,

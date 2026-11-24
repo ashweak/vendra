@@ -4,7 +4,7 @@
 @section('content')
 <div class="flex flex-wrap items-center justify-between gap-3">
     <p class="text-sm text-ink-600">Only active items appear to customers and the auto-assistant. Price changes never alter existing bookings or orders.</p>
-    @if ($canManage)<a href="{{ route('dashboard.catalog.create') }}" class="btn btn-primary">+ Add item</a>@endif
+    @if ($canManage)<span class="flex flex-wrap gap-2"><a href="{{ route('dashboard.catalog.import') }}" class="btn btn-secondary">Import CSV</a><a href="{{ route('dashboard.catalog.create') }}" class="btn btn-primary">+ Add item</a></span>@endif
 </div>
 <div class="card mt-4 overflow-x-auto p-0">
     <table class="table">

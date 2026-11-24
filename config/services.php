@@ -20,6 +20,14 @@ return [
         'secret_key' => env('TURNSTILE_SECRET_KEY'),
     ],
 
+    // Facebook Messenger: one Meta app for the platform (App secret signs every webhook; the verify token
+    // is what you type in Meta's webhook setup). Each business connects its own Page in Settings → Messenger.
+    'messenger' => [
+        'app_secret' => env('FB_APP_SECRET'),
+        'verify_token' => env('FB_VERIFY_TOKEN'),
+        'graph_version' => env('FB_GRAPH_VERSION', 'v21.0'),
+    ],
+
     // Dashboard alerts on phones/computers (Web Push with VAPID keys). Generate with: php artisan vendra:vapid
     'webpush' => [
         'public_key' => env('VAPID_PUBLIC_KEY'),

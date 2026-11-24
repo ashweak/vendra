@@ -45,6 +45,37 @@ class CatalogController extends DashboardController
         return redirect()->route('dashboard.catalog.index')->with('status', 'Item added.');
     }
 
+    public function importForm()
+    {
+        $this->authorizeAbility('catalog.manage');
+
+        return view('dashboard.catalog.import');
+    }
+
+    public function import(Request $request, \App\Services\CatalogImport $importer)
+    {
+        $this->authorizeAbility('catalog.manage');
+        $request->validate(['file' => 'required|file|max:1024|mimes:csv,txt']);
+        $result = $importer->import($this->business(), $request->file('file')->getRealPath());
+        if ($result['errors']) {
+            return back()->withErrors(['file' => 'Nothing was imported. Fix these rows and upload the file again.'])->with('import', $result);
+        }
+        AuditLogger::log($this->business()->id, 'catalog.imported', null, ['created' => $result['created'], 'skipped' => count($result['skipped'])]);
+
+        return redirect()->route('dashboard.catalog.index')
+            ->with('status', "Imported {$result['created']} ".str('item')->plural($result['created']).'.'.($result['skipped'] ? ' Skipped '.count($result['skipped']).' already in your catalog.' : ''));
+    }
+
+    public function template()
+    {
+        $this->authorizeAbility('catalog.manage');
+
+        return response(\App\Services\CatalogImport::template(), 200, [
+            'Content-Type' => 'text/csv; charset=utf-8',
+            'Content-Disposition' => 'attachment; filename="vendra-catalog-template.csv"',
+        ]);
+    }
+
     public function edit(int $id)
     {
         $this->authorizeAbility('catalog.manage');

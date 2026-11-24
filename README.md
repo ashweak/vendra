@@ -55,6 +55,13 @@ from the real app in GitHub Actions on every change to the script.
 - **Installable app**: add the dashboard to a phone's home screen (offline page included) and turn on **device
   alerts** for new bookings, orders and chats (*Your account*). Alerts are data-less Web Push (VAPID): the push
   service never sees customer details; the phone fetches them from Vendra after sign-in.
+- **Facebook Messenger**: connect a Page (*Settings → Messenger*) and its chats arrive in the same inbox, with the
+  same auto-assistant, drafts (sent as a *Review & confirm* button), handoff and staff replies sent back to
+  Messenger. Webhooks are verified with the app secret; Page tokens are stored encrypted.
+- **Morning summary** for owners at 7:00 AM: today's bookings, approvals, orders to prepare, low stock and
+  unanswered questions (skipped on quiet days; can be turned off).
+- **Catalog import** from a CSV (Excel / Google Sheets): every row is checked first and nothing is imported until all
+  rows are valid; existing items are skipped, never overwritten.
 - **Unanswered questions → FAQ**: questions the auto-assistant couldn't answer are listed by how often they're
   asked (contact details masked). Write the answer once (*Settings → Unanswered questions*) and it becomes a
   published FAQ that the assistant uses from then on. The assistant now answers from published FAQ/policies.
@@ -116,8 +123,12 @@ Run the image yourself: `docker build -t vendra . && docker run -p 8080:10000 -e
 |---|---|---|
 | **Keep uploads across restarts** (Render's disk is wiped on every deploy/restart) | Create two [Cloudflare R2](https://developers.cloudflare.com/r2/) buckets (free tier: 10 GB): one with *Public access* on (pictures), one private (customer attachments). Create an R2 API token with read/write on both. | `VENDRA_MEDIA_DISK=r2`, `VENDRA_FILES_DISK=r2_private`, `R2_ENDPOINT` (`https://<account-id>.r2.cloudflarestorage.com`), `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`, `R2_BUCKET`, `R2_PRIVATE_BUCKET`, `R2_PUBLIC_URL` (the bucket's `https://pub-….r2.dev` or custom domain) |
 | **Spam check on forms** | Add a Turnstile widget in Cloudflare for your Render domain. | `TURNSTILE_SITE_KEY`, `TURNSTILE_SECRET_KEY` |
+| **Facebook Messenger** | Create a Meta app (Messenger product). Set the webhook callback to `https://<your-site>/webhooks/messenger` with your verify token and subscribe to `messages`. Each business then pastes its Page ID and Page access token in *Settings → Messenger*. | `FB_APP_SECRET`, `FB_VERIFY_TOKEN` |
 | **Device alerts** | Run `php artisan vendra:vapid` once and copy the three lines. | `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`, `VAPID_SUBJECT` |
 | **Real emails** (reminders, tracking links) | Any SMTP service with a free tier. Without it, emails are only written to the log. | `MAIL_MAILER=smtp`, `MAIL_HOST`, `MAIL_PORT`, `MAIL_USERNAME`, `MAIL_PASSWORD`, `MAIL_FROM_ADDRESS` |
+
+A **Keep demo awake** GitHub Action opens the demo every 10 minutes so it doesn't sleep (set the repository
+variable `DEMO_URL` if your Render address differs; delete the workflow to let it sleep).
 
 The database is SQLite inside the container, so a real (non-demo) deployment also needs a hosted MySQL database
 (`DB_CONNECTION=mysql` and the `DB_*` variables).
@@ -167,7 +178,7 @@ can set `VENDRA_ENFORCE_MFA=false`.
 ### Tests and assistant evaluation
 
 ```bash
-php artisan test                                   # 108 feature + unit tests
+php artisan test                                   # 115 feature + unit tests
 php artisan migrate:fresh --seed
 php artisan vendra:ai-eval          # 60 fictional EN/TL/Taglish cases (add --show to print replies)
 ```

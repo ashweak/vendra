@@ -11,6 +11,8 @@ use App\Http\Controllers\PublicController;
 use App\Models\Business;
 use Illuminate\Support\Facades\Route;
 
+Route::get('webhooks/messenger', [\App\Http\Controllers\MessengerWebhookController::class, 'verify'])->name('webhooks.messenger')->middleware('throttle:60,1');
+Route::post('webhooks/messenger', [\App\Http\Controllers\MessengerWebhookController::class, 'receive'])->middleware('throttle:600,1');
 Route::get('robots.txt', [\App\Http\Controllers\SeoController::class, 'robots'])->name('robots');
 Route::get('sitemap.xml', [\App\Http\Controllers\SeoController::class, 'sitemap'])->name('sitemap');
 Route::get('/', fn () => view('landing', [
@@ -108,6 +110,9 @@ Route::prefix('app')->name('dashboard.')->middleware(['auth', 'mfa', 'business']
     Route::controller(Dashboard\CatalogController::class)->prefix('catalog')->name('catalog.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('new', 'create')->name('create');
+        Route::get('import', 'importForm')->name('import');
+        Route::post('import', 'import')->name('import.store')->middleware(['demo.lock', 'throttle:10,1']);
+        Route::get('import/template.csv', 'template')->name('import.template');
         Route::post('/', 'store')->name('store')->middleware('demo.lock');
         Route::get('{id}/edit', 'edit')->name('edit');
         Route::put('{id}', 'update')->name('update')->middleware('demo.lock');
@@ -178,6 +183,9 @@ Route::prefix('app')->name('dashboard.')->middleware(['auth', 'mfa', 'business']
         Route::post('{kind}', 'upload')->name('.upload')->whereIn('kind', ['logo', 'cover'])->middleware(['demo.lock', 'throttle:20,1']);
         Route::delete('{kind}', 'remove')->name('.remove')->whereIn('kind', ['logo', 'cover'])->middleware('demo.lock');
     });
+    Route::get('settings/messenger', [Dashboard\MessengerSettingsController::class, 'show'])->name('settings.messenger');
+    Route::post('settings/messenger', [Dashboard\MessengerSettingsController::class, 'connect'])->middleware(['demo.lock', 'throttle:10,1']);
+    Route::post('settings/messenger/disconnect', [Dashboard\MessengerSettingsController::class, 'disconnect'])->name('settings.messenger.disconnect')->middleware('demo.lock');
     // Questions the auto-assistant couldn't answer → FAQ.
     Route::get('settings/unanswered', [Dashboard\AssistantGapController::class, 'index'])->name('settings.unanswered');
     Route::post('settings/unanswered/{id}/answer', [Dashboard\AssistantGapController::class, 'answer'])->name('settings.unanswered.answer')->middleware('demo.lock');

@@ -9,7 +9,7 @@
         <div class="mt-3 space-y-1">
             @foreach ($conversations as $o)
                 <a href="{{ route('dashboard.conversations.show', $o->id) }}" @class(['block rounded-lg px-3 py-2 text-sm', 'bg-ink-50 font-medium' => (int) $o->id === (int) $c->id, 'hover:bg-ink-100' => (int) $o->id !== (int) $c->id])>
-                    {{ $o->customer?->name ?? 'Visitor #'.$o->id }} <span class="block text-[11px] text-ink-500">{{ \App\Models\Conversation::STATES[$o->state] }}</span>
+                    {{ $o->customer?->name ?? 'Visitor #'.$o->id }}@if ($o->channel === 'messenger') · Messenger @endif <span class="block text-[11px] text-ink-500">{{ \App\Models\Conversation::STATES[$o->state] }}</span>
                 </a>
             @endforeach
         </div>
@@ -17,7 +17,7 @@
 
     <section class="card flex min-h-[32rem] flex-col p-0">
         <header class="flex flex-wrap items-center gap-2 border-b border-line p-4">
-            <h1 class="flex-1 font-semibold">{{ $c->customer?->name ?? 'Website visitor #'.$c->id }}</h1>
+            <h1 class="flex-1 font-semibold">{{ $c->customer?->name ?? ($c->channel === 'messenger' ? 'Messenger visitor #' : 'Website visitor #').$c->id }}@if ($c->channel === 'messenger') <span class="badge badge-indigo ml-1 align-middle">Messenger</span>@endif</h1>
             <x-status :value="$c->state" :label="\App\Models\Conversation::STATES[$c->state]" />
         </header>
         @if ($c->state === 'ai_active')
