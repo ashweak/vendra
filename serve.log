@@ -1,0 +1,752 @@
+
+   INFO  Server running on [http://127.0.0.1:8000].  
+
+  Press Ctrl+C to stop the server
+
+  2026-11-25 10:48:08 / .......................................... ~ 500.32ms
+  2026-11-25 10:48:09 /css/vendra.css?v=1795603650 ................. ~ 0.05ms
+  2026-11-25 10:48:09 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.14ms
+  2026-11-25 10:48:09 /storage/businesses/2/ghrjE5U6ebEhfeFRlKzFnuwUZP5cOA3f-512w-480.webp  ~ 0.17ms
+  2026-11-25 10:48:09 /storage/businesses/3/A4FHkLmYz9fl4cLjeegqBoigKBtJ48aP-512w-480.webp  ~ 0.19ms
+  2026-11-25 10:48:09 /js/shrink-images.js?v=1795603650 ............ ~ 0.20ms
+  2026-11-25 10:48:09 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-25 10:48:09 /storage/businesses/2/IFd8CJOxUoYoFirboWYvH6t9NJIWtqjj-1600w-480.webp  ~ 0.02ms
+  2026-11-25 10:48:09 /storage/businesses/3/a7awsbjMTY9WiL9SpxcsJCIo6xPUdR3n-1600w-480.webp  ~ 0.05ms
+  2026-11-25 10:48:09 /storage/businesses/1/USfYhUg5MPaj14MwLGp2aEGjfkW1EsK6-1600w-480.webp  ~ 0.07ms
+  2026-11-25 10:48:09 / ............................................ ~ 0.07ms
+  2026-11-25 10:48:09 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.02ms
+  2026-11-25 10:48:09 /css/vendra.css?v=1795603650 ................. ~ 0.05ms
+  2026-11-25 10:48:09 /storage/businesses/2/ghrjE5U6ebEhfeFRlKzFnuwUZP5cOA3f-512w-480.webp  ~ 0.03ms
+  2026-11-25 10:48:09 /storage/businesses/3/A4FHkLmYz9fl4cLjeegqBoigKBtJ48aP-512w-480.webp  ~ 0.05ms
+  2026-11-25 10:48:09 /js/shrink-images.js?v=1795603650 ............ ~ 0.07ms
+  2026-11-25 10:48:09 /storage/businesses/2/IFd8CJOxUoYoFirboWYvH6t9NJIWtqjj-1600w-480.webp  ~ 0.03ms
+  2026-11-25 10:48:09 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.05ms
+  2026-11-25 10:48:09 /storage/businesses/3/a7awsbjMTY9WiL9SpxcsJCIo6xPUdR3n-1600w-480.webp  ~ 0.11ms
+  2026-11-25 10:48:09 /storage/businesses/1/USfYhUg5MPaj14MwLGp2aEGjfkW1EsK6-1600w-480.webp  ~ 0.13ms
+  2026-11-25 10:48:10 /b/lumina-studio ............................. ~ 0.08ms
+  2026-11-25 10:48:10 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.03ms
+  2026-11-25 10:48:10 /css/vendra.css?v=1795603650 ................. ~ 0.06ms
+  2026-11-25 10:48:10 /storage/businesses/1/USfYhUg5MPaj14MwLGp2aEGjfkW1EsK6-1600w-960.webp  ~ 0.14ms
+  2026-11-25 10:48:10 /js/shrink-images.js?v=1795603650 ............ ~ 0.01ms
+  2026-11-25 10:48:10 /storage/businesses/1/gallery/kqanwXhLGAgaduKZSk3W8MHeL4Gk5K0b-1200w-480.webp  ~ 0.02ms
+  2026-11-25 10:48:10 /storage/businesses/1/gallery/LJp4NQNUw4oGpvFNXOyRKGmRIlV2kPOD-1200w-480.webp  ~ 0.04ms
+  2026-11-25 10:48:10 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.02ms
+  2026-11-25 10:48:10 /storage/businesses/1/gallery/9wkYVxbYgTUXtDRPIVoyAVZtsCx21ef7-1200w-480.webp  ~ 0.08ms
+  2026-11-25 10:48:10 /storage/businesses/1/gallery/6PXkum4bucIWRo6CUOc7ClstqipbSybV-1200w-480.webp  ~ 0.10ms
+  2026-11-25 10:48:10 / ............................................ ~ 0.08ms
+  2026-11-25 10:48:10 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.04ms
+  2026-11-25 10:48:10 /css/vendra.css?v=1795603650 ................. ~ 0.06ms
+  2026-11-25 10:48:10 /storage/businesses/2/ghrjE5U6ebEhfeFRlKzFnuwUZP5cOA3f-512w-480.webp  ~ 0.15ms
+  2026-11-25 10:48:10 /storage/businesses/3/A4FHkLmYz9fl4cLjeegqBoigKBtJ48aP-512w-480.webp  ~ 0.17ms
+  2026-11-25 10:48:10 /js/shrink-images.js?v=1795603650 ............ ~ 0.01ms
+  2026-11-25 10:48:10 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-25 10:48:10 /storage/businesses/2/IFd8CJOxUoYoFirboWYvH6t9NJIWtqjj-1600w-480.webp  ~ 0.02ms
+  2026-11-25 10:48:10 /storage/businesses/3/a7awsbjMTY9WiL9SpxcsJCIo6xPUdR3n-1600w-480.webp  ~ 0.05ms
+  2026-11-25 10:48:10 /storage/businesses/1/USfYhUg5MPaj14MwLGp2aEGjfkW1EsK6-1600w-480.webp  ~ 0.07ms
+  2026-11-25 10:48:11 /register .................................... ~ 0.08ms
+  2026-11-25 10:48:11 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.03ms
+  2026-11-25 10:48:11 /css/vendra.css?v=1795603650 ................. ~ 0.05ms
+  2026-11-25 10:48:11 /js/shrink-images.js?v=1795603650 ............ ~ 0.14ms
+  2026-11-25 10:48:11 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-25 10:48:11 /login ....................................... ~ 0.08ms
+  2026-11-25 10:48:11 /css/vendra.css?v=1795603650 ................. ~ 0.02ms
+  2026-11-25 10:48:11 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.11ms
+  2026-11-25 10:48:11 /js/shrink-images.js?v=1795603650 ............ ~ 0.01ms
+  2026-11-25 10:48:11 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-25 10:48:12 /b/lumina-studio ............................. ~ 0.10ms
+  2026-11-25 10:48:12 /css/vendra.css?v=1795603650 ................. ~ 0.03ms
+  2026-11-25 10:48:12 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.13ms
+  2026-11-25 10:48:12 /storage/businesses/1/USfYhUg5MPaj14MwLGp2aEGjfkW1EsK6-1600w-960.webp  ~ 0.16ms
+  2026-11-25 10:48:12 /js/shrink-images.js?v=1795603650 ............ ~ 0.02ms
+  2026-11-25 10:48:12 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.02ms
+  2026-11-25 10:48:12 /storage/businesses/1/gallery/kqanwXhLGAgaduKZSk3W8MHeL4Gk5K0b-1200w-480.webp  ~ 0.03ms
+  2026-11-25 10:48:12 /storage/businesses/1/gallery/LJp4NQNUw4oGpvFNXOyRKGmRIlV2kPOD-1200w-480.webp  ~ 0.07ms
+  2026-11-25 10:48:12 /storage/businesses/1/gallery/9wkYVxbYgTUXtDRPIVoyAVZtsCx21ef7-1200w-480.webp  ~ 0.02ms
+  2026-11-25 10:48:12 /storage/businesses/1/gallery/6PXkum4bucIWRo6CUOc7ClstqipbSybV-1200w-480.webp  ~ 0.06ms
+  2026-11-25 10:48:13 /b/lumina-studio/book ........................ ~ 0.08ms
+  2026-11-25 10:48:13 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.03ms
+  2026-11-25 10:48:13 /css/vendra.css?v=1795603650 ................. ~ 0.05ms
+  2026-11-25 10:48:13 /js/shrink-images.js?v=1795603650 ............ ~ 0.01ms
+  2026-11-25 10:48:13 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.02ms
+  2026-11-25 10:48:13 /b/lumina-studio/slots ....................... ~ 0.01ms
+  2026-11-25 10:48:13 /b/lumina-studio/slots ....................... ~ 0.01ms
+  2026-11-25 10:48:14 /b/lumina-studio/book/review ................. ~ 0.08ms
+  2026-11-25 10:48:14 /css/vendra.css?v=1795603650 ................. ~ 0.02ms
+  2026-11-25 10:48:14 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.14ms
+  2026-11-25 10:48:14 /js/shrink-images.js?v=1795603650 ............ ~ 0.01ms
+  2026-11-25 10:48:14 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-25 10:48:14 /b/lumina-studio/book ...................... ~ 500.33ms
+  2026-11-25 10:48:15 /b/lumina-studio/r/APT-AI874A ................ ~ 0.02ms
+  2026-11-25 10:48:15 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.02ms
+  2026-11-25 10:48:15 /css/vendra.css?v=1795603650 ................. ~ 0.05ms
+  2026-11-25 10:48:15 /js/shrink-images.js?v=1795603650 ............ ~ 0.01ms
+  2026-11-25 10:48:15 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-25 10:48:15 /b/lumina-studio/my .......................... ~ 0.08ms
+  2026-11-25 10:48:15 /css/vendra.css?v=1795603650 ................. ~ 0.02ms
+  2026-11-25 10:48:15 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.14ms
+  2026-11-25 10:48:15 /js/shrink-images.js?v=1795603650 ............ ~ 0.01ms
+  2026-11-25 10:48:15 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-25 10:48:16 /b/lumina-studio/privacy ..................... ~ 0.08ms
+  2026-11-25 10:48:16 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.02ms
+  2026-11-25 10:48:16 /css/vendra.css?v=1795603650 ................. ~ 0.02ms
+  2026-11-25 10:48:16 /js/shrink-images.js?v=1795603650 ............ ~ 0.11ms
+  2026-11-25 10:48:16 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-25 10:48:16 /forgot-password ............................. ~ 0.08ms
+  2026-11-25 10:48:17 /css/vendra.css?v=1795603650 ................. ~ 0.09ms
+  2026-11-25 10:48:17 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.26ms
+  2026-11-25 10:48:17 /js/shrink-images.js?v=1795603650 ............ ~ 0.02ms
+  2026-11-25 10:48:17 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-25 10:48:17 /b/does-not-exist ............................ ~ 0.08ms
+  2026-11-25 10:48:17 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.02ms
+  2026-11-25 10:48:17 /css/vendra.css?v=1795603650 ................. ~ 0.07ms
+  2026-11-25 10:48:17 /js/shrink-images.js?v=1795603650 ............ ~ 0.02ms
+  2026-11-25 10:48:17 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-25 10:48:18 /b/lumina-studio ............................. ~ 0.09ms
+  2026-11-25 10:48:18 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.03ms
+  2026-11-25 10:48:18 /css/vendra.css?v=1795603650 ................. ~ 0.06ms
+  2026-11-25 10:48:18 /storage/businesses/1/USfYhUg5MPaj14MwLGp2aEGjfkW1EsK6-1600w-960.webp  ~ 0.14ms
+  2026-11-25 10:48:18 /js/shrink-images.js?v=1795603650 ............ ~ 0.01ms
+  2026-11-25 10:48:18 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-25 10:48:18 /storage/businesses/1/gallery/kqanwXhLGAgaduKZSk3W8MHeL4Gk5K0b-1200w-480.webp  ~ 0.03ms
+  2026-11-25 10:48:18 /storage/businesses/1/gallery/LJp4NQNUw4oGpvFNXOyRKGmRIlV2kPOD-1200w-480.webp  ~ 0.05ms
+  2026-11-25 10:48:18 /storage/businesses/1/gallery/9wkYVxbYgTUXtDRPIVoyAVZtsCx21ef7-1200w-480.webp  ~ 0.08ms
+  2026-11-25 10:48:18 /storage/businesses/1/gallery/6PXkum4bucIWRo6CUOc7ClstqipbSybV-1200w-480.webp  ~ 0.10ms
+  2026-11-25 10:48:18 /b/lumina-studio/chat ........................ ~ 0.01ms
+  2026-11-25 10:48:18 /b/lumina-studio/chat ........................ ~ 0.01ms
+  2026-11-25 10:48:19 /b/lumina-studio/chat ........................ ~ 0.11ms
+  2026-11-25 10:48:21 /b/lumina-studio ............................. ~ 0.09ms
+  2026-11-25 10:48:21 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.03ms
+  2026-11-25 10:48:21 /css/vendra.css?v=1795603650 ................. ~ 0.07ms
+  2026-11-25 10:48:21 /storage/businesses/1/USfYhUg5MPaj14MwLGp2aEGjfkW1EsK6-1600w-960.webp  ~ 0.16ms
+  2026-11-25 10:48:21 /js/shrink-images.js?v=1795603650 ............ ~ 0.01ms
+  2026-11-25 10:48:21 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-25 10:48:21 /storage/businesses/1/gallery/kqanwXhLGAgaduKZSk3W8MHeL4Gk5K0b-1200w-480.webp  ~ 0.03ms
+  2026-11-25 10:48:21 /storage/businesses/1/gallery/LJp4NQNUw4oGpvFNXOyRKGmRIlV2kPOD-1200w-480.webp  ~ 0.06ms
+  2026-11-25 10:48:21 /storage/businesses/1/gallery/9wkYVxbYgTUXtDRPIVoyAVZtsCx21ef7-1200w-480.webp  ~ 0.08ms
+  2026-11-25 10:48:21 /storage/businesses/1/gallery/6PXkum4bucIWRo6CUOc7ClstqipbSybV-1200w-480.webp  ~ 0.11ms
+  2026-11-25 10:48:22 /b/lumina-studio ............................. ~ 0.08ms
+  2026-11-25 10:48:22 /css/vendra.css?v=1795603650 ................. ~ 0.03ms
+  2026-11-25 10:48:22 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.12ms
+  2026-11-25 10:48:22 /storage/businesses/1/USfYhUg5MPaj14MwLGp2aEGjfkW1EsK6-1600w.webp  ~ 0.15ms
+  2026-11-25 10:48:22 /js/shrink-images.js?v=1795603650 ............ ~ 0.01ms
+  2026-11-25 10:48:22 /fonts/fraunces-latin-wght-normal.woff2 ...... ~ 0.02ms
+  2026-11-25 10:48:22 /fonts/fraunces-latin-wght-italic.woff2 ...... ~ 0.07ms
+  2026-11-25 10:48:22 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.12ms
+  2026-11-25 10:48:22 /storage/businesses/1/gallery/kqanwXhLGAgaduKZSk3W8MHeL4Gk5K0b-1200w-480.webp  ~ 0.02ms
+  2026-11-25 10:48:22 /storage/businesses/1/gallery/LJp4NQNUw4oGpvFNXOyRKGmRIlV2kPOD-1200w-480.webp  ~ 0.05ms
+  2026-11-25 10:48:22 /storage/businesses/1/gallery/9wkYVxbYgTUXtDRPIVoyAVZtsCx21ef7-1200w-480.webp  ~ 0.08ms
+  2026-11-25 10:48:22 /storage/businesses/1/gallery/6PXkum4bucIWRo6CUOc7ClstqipbSybV-1200w-480.webp  ~ 0.01ms
+  2026-11-25 10:48:22 /b/lumina-studio ........................... ~ 500.30ms
+  2026-11-25 10:48:23 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.03ms
+  2026-11-25 10:48:23 /css/vendra.css?v=1795603650 ................. ~ 0.07ms
+  2026-11-25 10:48:23 /storage/businesses/1/USfYhUg5MPaj14MwLGp2aEGjfkW1EsK6-1600w-960.webp  ~ 0.16ms
+  2026-11-25 10:48:23 /js/shrink-images.js?v=1795603650 ............ ~ 0.02ms
+  2026-11-25 10:48:23 /storage/businesses/1/USfYhUg5MPaj14MwLGp2aEGjfkW1EsK6-1600w.webp  ~ 0.09ms
+  2026-11-25 10:48:23 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-25 10:48:23 /storage/businesses/1/gallery/kqanwXhLGAgaduKZSk3W8MHeL4Gk5K0b-1200w-480.webp  ~ 0.03ms
+  2026-11-25 10:48:23 /storage/businesses/1/gallery/LJp4NQNUw4oGpvFNXOyRKGmRIlV2kPOD-1200w-480.webp  ~ 0.10ms
+  2026-11-25 10:48:23 /storage/businesses/1/gallery/9wkYVxbYgTUXtDRPIVoyAVZtsCx21ef7-1200w-480.webp  ~ 0.12ms
+  2026-11-25 10:48:23 /storage/businesses/1/gallery/6PXkum4bucIWRo6CUOc7ClstqipbSybV-1200w-480.webp  ~ 0.14ms
+  2026-11-25 10:48:23 /b/lumina-studio ............................. ~ 0.08ms
+  2026-11-25 10:48:23 /css/vendra.css?v=1795603650 ................. ~ 0.02ms
+  2026-11-25 10:48:23 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.11ms
+  2026-11-25 10:48:23 /storage/businesses/1/USfYhUg5MPaj14MwLGp2aEGjfkW1EsK6-1600w-960.webp  ~ 0.02ms
+  2026-11-25 10:48:23 /js/shrink-images.js?v=1795603650 ............ ~ 0.05ms
+  2026-11-25 10:48:23 /storage/businesses/1/USfYhUg5MPaj14MwLGp2aEGjfkW1EsK6-1600w.webp  ~ 0.09ms
+  2026-11-25 10:48:23 /storage/businesses/1/gallery/kqanwXhLGAgaduKZSk3W8MHeL4Gk5K0b-1200w-480.webp  ~ 0.03ms
+  2026-11-25 10:48:23 /storage/businesses/1/gallery/LJp4NQNUw4oGpvFNXOyRKGmRIlV2kPOD-1200w-480.webp  ~ 0.08ms
+  2026-11-25 10:48:23 /storage/businesses/1/gallery/9wkYVxbYgTUXtDRPIVoyAVZtsCx21ef7-1200w-480.webp  ~ 0.11ms
+  2026-11-25 10:48:23 /storage/businesses/1/gallery/6PXkum4bucIWRo6CUOc7ClstqipbSybV-1200w-480.webp  ~ 0.13ms
+  2026-11-25 10:48:23 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.15ms
+  2026-11-25 10:48:23 /fonts/fraunces-latin-wght-normal.woff2 ...... ~ 0.18ms
+  2026-11-25 10:48:23 /fonts/fraunces-latin-wght-italic.woff2 ...... ~ 0.01ms
+  2026-11-25 10:48:24 /b/lumina-studio ............................. ~ 0.08ms
+  2026-11-25 10:48:24 /css/vendra.css?v=1795603650 ................. ~ 0.03ms
+  2026-11-25 10:48:24 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.14ms
+  2026-11-25 10:48:24 /storage/businesses/1/USfYhUg5MPaj14MwLGp2aEGjfkW1EsK6-1600w-480.webp  ~ 0.17ms
+  2026-11-25 10:48:24 /js/shrink-images.js?v=1795603650 ............ ~ 0.02ms
+  2026-11-25 10:48:24 /storage/businesses/1/USfYhUg5MPaj14MwLGp2aEGjfkW1EsK6-1600w.webp  ~ 0.09ms
+  2026-11-25 10:48:24 /storage/businesses/1/USfYhUg5MPaj14MwLGp2aEGjfkW1EsK6-1600w-960.webp  ~ 0.11ms
+  2026-11-25 10:48:24 /storage/businesses/1/gallery/kqanwXhLGAgaduKZSk3W8MHeL4Gk5K0b-1200w-480.webp  ~ 0.03ms
+  2026-11-25 10:48:24 /storage/businesses/1/gallery/LJp4NQNUw4oGpvFNXOyRKGmRIlV2kPOD-1200w-480.webp  ~ 0.05ms
+  2026-11-25 10:48:24 /storage/businesses/1/gallery/9wkYVxbYgTUXtDRPIVoyAVZtsCx21ef7-1200w-480.webp  ~ 0.08ms
+  2026-11-25 10:48:24 /storage/businesses/1/gallery/6PXkum4bucIWRo6CUOc7ClstqipbSybV-1200w-480.webp  ~ 0.10ms
+  2026-11-25 10:48:24 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.12ms
+  2026-11-25 10:48:25 /b/lumina-studio ............................. ~ 0.08ms
+  2026-11-25 10:48:25 /css/vendra.css?v=1795603650 ................. ~ 0.03ms
+  2026-11-25 10:48:25 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.12ms
+  2026-11-25 10:48:25 /storage/businesses/1/USfYhUg5MPaj14MwLGp2aEGjfkW1EsK6-1600w-960.webp  ~ 0.14ms
+  2026-11-25 10:48:25 /js/shrink-images.js?v=1795603650 ............ ~ 0.01ms
+  2026-11-25 10:48:25 /storage/businesses/1/gallery/kqanwXhLGAgaduKZSk3W8MHeL4Gk5K0b-1200w-480.webp  ~ 0.02ms
+  2026-11-25 10:48:25 /storage/businesses/1/gallery/LJp4NQNUw4oGpvFNXOyRKGmRIlV2kPOD-1200w-480.webp  ~ 0.05ms
+  2026-11-25 10:48:25 /storage/businesses/1/gallery/9wkYVxbYgTUXtDRPIVoyAVZtsCx21ef7-1200w-480.webp  ~ 0.07ms
+  2026-11-25 10:48:25 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.02ms
+  2026-11-25 10:48:25 /storage/businesses/1/gallery/6PXkum4bucIWRo6CUOc7ClstqipbSybV-1200w-480.webp  ~ 0.07ms
+  2026-11-25 10:48:26 /b/lumina-studio ............................. ~ 0.08ms
+  2026-11-25 10:48:26 /css/vendra.css?v=1795603650 ................. ~ 0.03ms
+  2026-11-25 10:48:26 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.12ms
+  2026-11-25 10:48:26 /storage/businesses/1/USfYhUg5MPaj14MwLGp2aEGjfkW1EsK6-1600w.webp  ~ 0.14ms
+  2026-11-25 10:48:26 /js/shrink-images.js?v=1795603650 ............ ~ 0.01ms
+  2026-11-25 10:48:26 /storage/businesses/1/gallery/kqanwXhLGAgaduKZSk3W8MHeL4Gk5K0b-1200w-480.webp  ~ 0.05ms
+  2026-11-25 10:48:26 /storage/businesses/1/gallery/LJp4NQNUw4oGpvFNXOyRKGmRIlV2kPOD-1200w-480.webp  ~ 0.07ms
+  2026-11-25 10:48:26 /storage/businesses/1/gallery/9wkYVxbYgTUXtDRPIVoyAVZtsCx21ef7-1200w-480.webp  ~ 0.10ms
+  2026-11-25 10:48:26 /storage/businesses/1/gallery/6PXkum4bucIWRo6CUOc7ClstqipbSybV-1200w-480.webp  ~ 0.12ms
+  2026-11-25 10:48:26 /fonts/fraunces-latin-wght-normal.woff2 ...... ~ 0.14ms
+  2026-11-25 10:48:26 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.19ms
+  2026-11-25 10:48:26 /fonts/fraunces-latin-wght-italic.woff2 ...... ~ 0.24ms
+  2026-11-25 10:48:26 /b/lumina-studio ............................. ~ 0.08ms
+  2026-11-25 10:48:26 /css/vendra.css?v=1795603650 ................. ~ 0.03ms
+  2026-11-25 10:48:26 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.13ms
+  2026-11-25 10:48:26 /storage/businesses/1/USfYhUg5MPaj14MwLGp2aEGjfkW1EsK6-1600w.webp  ~ 0.17ms
+  2026-11-25 10:48:26 /js/shrink-images.js?v=1795603650 ............ ~ 0.05ms
+  2026-11-25 10:48:26 /storage/businesses/1/gallery/kqanwXhLGAgaduKZSk3W8MHeL4Gk5K0b-1200w-480.webp  ~ 0.05ms
+  2026-11-25 10:48:26 /storage/businesses/1/gallery/LJp4NQNUw4oGpvFNXOyRKGmRIlV2kPOD-1200w-480.webp  ~ 0.07ms
+  2026-11-25 10:48:26 /storage/businesses/1/gallery/9wkYVxbYgTUXtDRPIVoyAVZtsCx21ef7-1200w-480.webp  ~ 0.10ms
+  2026-11-25 10:48:26 /storage/businesses/1/gallery/6PXkum4bucIWRo6CUOc7ClstqipbSybV-1200w-480.webp  ~ 0.12ms
+  2026-11-25 10:48:26 /fonts/fraunces-latin-wght-normal.woff2 ...... ~ 0.14ms
+  2026-11-25 10:48:26 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.18ms
+  2026-11-25 10:48:26 /fonts/fraunces-latin-wght-italic.woff2 ...... ~ 0.23ms
+  2026-11-25 10:48:27 /b/lumina-studio ............................. ~ 0.08ms
+  2026-11-25 10:48:27 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.03ms
+  2026-11-25 10:48:27 /css/vendra.css?v=1795603650 ................. ~ 0.06ms
+  2026-11-25 10:48:27 /storage/businesses/1/USfYhUg5MPaj14MwLGp2aEGjfkW1EsK6-1600w.webp  ~ 0.15ms
+  2026-11-25 10:48:27 /js/shrink-images.js?v=1795603650 ............ ~ 0.01ms
+  2026-11-25 10:48:27 /storage/businesses/1/gallery/kqanwXhLGAgaduKZSk3W8MHeL4Gk5K0b-1200w-480.webp  ~ 0.03ms
+  2026-11-25 10:48:27 /fonts/fraunces-latin-wght-normal.woff2 ...... ~ 0.06ms
+  2026-11-25 10:48:27 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.11ms
+  2026-11-25 10:48:27 /storage/businesses/1/gallery/LJp4NQNUw4oGpvFNXOyRKGmRIlV2kPOD-1200w-480.webp  ~ 0.16ms
+  2026-11-25 10:48:27 /storage/businesses/1/gallery/9wkYVxbYgTUXtDRPIVoyAVZtsCx21ef7-1200w-480.webp  ~ 0.18ms
+  2026-11-25 10:48:27 /storage/businesses/1/gallery/6PXkum4bucIWRo6CUOc7ClstqipbSybV-1200w-480.webp  ~ 0.17ms
+  2026-11-25 10:48:27 /fonts/fraunces-latin-wght-italic.woff2 ...... ~ 0.01ms
+  2026-11-25 10:48:28 /b/lumina-studio ............................. ~ 0.08ms
+  2026-11-25 10:48:28 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.03ms
+  2026-11-25 10:48:28 /css/vendra.css?v=1795603650 ................. ~ 0.06ms
+  2026-11-25 10:48:28 /storage/businesses/1/USfYhUg5MPaj14MwLGp2aEGjfkW1EsK6-1600w.webp  ~ 0.14ms
+  2026-11-25 10:48:28 /js/shrink-images.js?v=1795603650 ............ ~ 0.01ms
+  2026-11-25 10:48:28 /storage/businesses/1/gallery/kqanwXhLGAgaduKZSk3W8MHeL4Gk5K0b-1200w-480.webp  ~ 0.03ms
+  2026-11-25 10:48:28 /storage/businesses/1/gallery/LJp4NQNUw4oGpvFNXOyRKGmRIlV2kPOD-1200w-480.webp  ~ 0.05ms
+  2026-11-25 10:48:28 /storage/businesses/1/gallery/9wkYVxbYgTUXtDRPIVoyAVZtsCx21ef7-1200w-480.webp  ~ 0.07ms
+  2026-11-25 10:48:28 /storage/businesses/1/gallery/6PXkum4bucIWRo6CUOc7ClstqipbSybV-1200w-480.webp  ~ 0.09ms
+  2026-11-25 10:48:28 /fonts/fraunces-latin-wght-normal.woff2 ...... ~ 0.02ms
+  2026-11-25 10:48:28 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.07ms
+  2026-11-25 10:48:28 /fonts/fraunces-latin-wght-italic.woff2 ...... ~ 0.13ms
+  2026-11-25 10:48:28 /b/lumina-studio ............................. ~ 0.08ms
+  2026-11-25 10:48:28 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.03ms
+  2026-11-25 10:48:28 /css/vendra.css?v=1795603650 ................. ~ 0.07ms
+  2026-11-25 10:48:28 /storage/businesses/1/USfYhUg5MPaj14MwLGp2aEGjfkW1EsK6-1600w.webp  ~ 0.16ms
+  2026-11-25 10:48:28 /js/shrink-images.js?v=1795603650 ............ ~ 0.01ms
+  2026-11-25 10:48:28 /storage/businesses/1/gallery/kqanwXhLGAgaduKZSk3W8MHeL4Gk5K0b-1200w-480.webp  ~ 0.03ms
+  2026-11-25 10:48:28 /storage/businesses/1/gallery/LJp4NQNUw4oGpvFNXOyRKGmRIlV2kPOD-1200w-480.webp  ~ 0.06ms
+  2026-11-25 10:48:28 /storage/businesses/1/gallery/9wkYVxbYgTUXtDRPIVoyAVZtsCx21ef7-1200w-480.webp  ~ 0.09ms
+  2026-11-25 10:48:28 /fonts/fraunces-latin-wght-normal.woff2 ...... ~ 0.11ms
+  2026-11-25 10:48:28 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.15ms
+  2026-11-25 10:48:28 /fonts/fraunces-latin-wght-italic.woff2 ...... ~ 0.18ms
+  2026-11-25 10:48:28 /storage/businesses/1/gallery/6PXkum4bucIWRo6CUOc7ClstqipbSybV-1200w-480.webp  ~ 0.01ms
+  2026-11-25 10:48:29 /b/lumina-studio ............................. ~ 0.08ms
+  2026-11-25 10:48:29 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.03ms
+  2026-11-25 10:48:29 /css/vendra.css?v=1795603650 ................. ~ 0.06ms
+  2026-11-25 10:48:29 /storage/businesses/1/USfYhUg5MPaj14MwLGp2aEGjfkW1EsK6-1600w.webp  ~ 0.17ms
+  2026-11-25 10:48:29 /js/shrink-images.js?v=1795603650 ............ ~ 0.01ms
+  2026-11-25 10:48:29 /storage/businesses/1/gallery/kqanwXhLGAgaduKZSk3W8MHeL4Gk5K0b-1200w-480.webp  ~ 0.03ms
+  2026-11-25 10:48:29 /storage/businesses/1/gallery/LJp4NQNUw4oGpvFNXOyRKGmRIlV2kPOD-1200w-480.webp  ~ 0.06ms
+  2026-11-25 10:48:29 /storage/businesses/1/gallery/9wkYVxbYgTUXtDRPIVoyAVZtsCx21ef7-1200w-480.webp  ~ 0.08ms
+  2026-11-25 10:48:29 /storage/businesses/1/gallery/6PXkum4bucIWRo6CUOc7ClstqipbSybV-1200w-480.webp  ~ 0.10ms
+  2026-11-25 10:48:29 /fonts/fraunces-latin-wght-normal.woff2 ...... ~ 0.13ms
+  2026-11-25 10:48:29 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.14ms
+  2026-11-25 10:48:29 /fonts/fraunces-latin-wght-italic.woff2 ...... ~ 0.01ms
+  2026-11-25 10:48:29 /b/lumina-studio ............................. ~ 0.09ms
+  2026-11-25 10:48:29 /css/vendra.css?v=1795603650 ................. ~ 0.03ms
+  2026-11-25 10:48:29 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.12ms
+  2026-11-25 10:48:29 /storage/businesses/1/USfYhUg5MPaj14MwLGp2aEGjfkW1EsK6-1600w.webp  ~ 0.15ms
+  2026-11-25 10:48:29 /js/shrink-images.js?v=1795603650 ............ ~ 0.01ms
+  2026-11-25 10:48:29 /fonts/fraunces-latin-wght-normal.woff2 ...... ~ 0.01ms
+  2026-11-25 10:48:29 /storage/businesses/1/gallery/kqanwXhLGAgaduKZSk3W8MHeL4Gk5K0b-1200w-480.webp  ~ 0.02ms
+  2026-11-25 10:48:29 /storage/businesses/1/gallery/LJp4NQNUw4oGpvFNXOyRKGmRIlV2kPOD-1200w-480.webp  ~ 0.04ms
+  2026-11-25 10:48:29 /storage/businesses/1/gallery/9wkYVxbYgTUXtDRPIVoyAVZtsCx21ef7-1200w-480.webp  ~ 0.02ms
+  2026-11-25 10:48:29 /storage/businesses/1/gallery/6PXkum4bucIWRo6CUOc7ClstqipbSybV-1200w-480.webp  ~ 0.04ms
+  2026-11-25 10:48:29 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.02ms
+  2026-11-25 10:48:29 /fonts/fraunces-latin-wght-italic.woff2 ...... ~ 0.07ms
+  2026-11-25 10:48:30 /b/lumina-studio ............................. ~ 0.07ms
+  2026-11-25 10:48:30 /css/vendra.css?v=1795603650 ................. ~ 0.10ms
+  2026-11-25 10:48:30 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.22ms
+  2026-11-25 10:48:30 /storage/businesses/1/USfYhUg5MPaj14MwLGp2aEGjfkW1EsK6-1600w.webp  ~ 0.25ms
+  2026-11-25 10:48:30 /js/shrink-images.js?v=1795603650 ............ ~ 0.01ms
+  2026-11-25 10:48:30 /storage/businesses/1/gallery/kqanwXhLGAgaduKZSk3W8MHeL4Gk5K0b-1200w-480.webp  ~ 0.03ms
+  2026-11-25 10:48:30 /fonts/fraunces-latin-wght-normal.woff2 ...... ~ 0.06ms
+  2026-11-25 10:48:30 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.11ms
+  2026-11-25 10:48:30 /storage/businesses/1/gallery/LJp4NQNUw4oGpvFNXOyRKGmRIlV2kPOD-1200w-480.webp  ~ 0.16ms
+  2026-11-25 10:48:30 /storage/businesses/1/gallery/9wkYVxbYgTUXtDRPIVoyAVZtsCx21ef7-1200w-480.webp  ~ 0.19ms
+  2026-11-25 10:48:30 /storage/businesses/1/gallery/6PXkum4bucIWRo6CUOc7ClstqipbSybV-1200w-480.webp  ~ 0.18ms
+  2026-11-25 10:48:30 /fonts/fraunces-latin-wght-italic.woff2 ...... ~ 0.01ms
+  2026-11-25 10:48:31 /b/lumina-studio ............................. ~ 0.08ms
+  2026-11-25 10:48:31 /css/vendra.css?v=1795603650 ................. ~ 0.03ms
+  2026-11-25 10:48:31 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.11ms
+  2026-11-25 10:48:31 /storage/businesses/1/USfYhUg5MPaj14MwLGp2aEGjfkW1EsK6-1600w-480.webp  ~ 0.14ms
+  2026-11-25 10:48:31 /js/shrink-images.js?v=1795603650 ............ ~ 0.02ms
+  2026-11-25 10:48:31 /storage/businesses/1/USfYhUg5MPaj14MwLGp2aEGjfkW1EsK6-1600w.webp  ~ 0.09ms
+  2026-11-25 10:48:31 /storage/businesses/1/gallery/kqanwXhLGAgaduKZSk3W8MHeL4Gk5K0b-1200w-480.webp  ~ 0.03ms
+  2026-11-25 10:48:31 /storage/businesses/1/gallery/LJp4NQNUw4oGpvFNXOyRKGmRIlV2kPOD-1200w-480.webp  ~ 0.08ms
+  2026-11-25 10:48:31 /storage/businesses/1/gallery/9wkYVxbYgTUXtDRPIVoyAVZtsCx21ef7-1200w-480.webp  ~ 0.11ms
+  2026-11-25 10:48:31 /storage/businesses/1/gallery/6PXkum4bucIWRo6CUOc7ClstqipbSybV-1200w-480.webp  ~ 0.13ms
+  2026-11-25 10:48:31 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.15ms
+  2026-11-25 10:48:31 /b/lumina-studio/book ........................ ~ 0.01ms
+  2026-11-25 10:48:31 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.02ms
+  2026-11-25 10:48:31 /css/vendra.css?v=1795603650 ................. ~ 0.04ms
+  2026-11-25 10:48:31 /js/shrink-images.js?v=1795603650 ............ ~ 0.01ms
+  2026-11-25 10:48:31 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-25 10:48:31 /b/lumina-studio ............................. ~ 0.08ms
+  2026-11-25 10:48:31 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.03ms
+  2026-11-25 10:48:31 /css/vendra.css?v=1795603650 ................. ~ 0.06ms
+  2026-11-25 10:48:31 /storage/businesses/1/USfYhUg5MPaj14MwLGp2aEGjfkW1EsK6-1600w-960.webp  ~ 0.14ms
+  2026-11-25 10:48:31 /js/shrink-images.js?v=1795603650 ............ ~ 0.01ms
+  2026-11-25 10:48:31 /storage/businesses/1/gallery/kqanwXhLGAgaduKZSk3W8MHeL4Gk5K0b-1200w-480.webp  ~ 0.03ms
+  2026-11-25 10:48:31 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.06ms
+  2026-11-25 10:48:31 /storage/businesses/1/gallery/LJp4NQNUw4oGpvFNXOyRKGmRIlV2kPOD-1200w-480.webp  ~ 0.11ms
+  2026-11-25 10:48:31 /storage/businesses/1/gallery/9wkYVxbYgTUXtDRPIVoyAVZtsCx21ef7-1200w-480.webp  ~ 0.13ms
+  2026-11-25 10:48:31 /storage/businesses/1/gallery/6PXkum4bucIWRo6CUOc7ClstqipbSybV-1200w-480.webp  ~ 0.16ms
+  2026-11-25 10:48:31 /b/kislap-cleaning ........................... ~ 0.01ms
+  2026-11-25 10:48:31 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.01ms
+  2026-11-25 10:48:31 /css/vendra.css?v=1795603650 ................. ~ 0.02ms
+  2026-11-25 10:48:31 /storage/businesses/3/a7awsbjMTY9WiL9SpxcsJCIo6xPUdR3n-1600w-960.webp  ~ 0.11ms
+  2026-11-25 10:48:31 /storage/businesses/3/A4FHkLmYz9fl4cLjeegqBoigKBtJ48aP-512w-480.webp  ~ 0.13ms
+  2026-11-25 10:48:31 /js/shrink-images.js?v=1795603650 ............ ~ 0.15ms
+  2026-11-25 10:48:31 /storage/businesses/3/gallery/mAInf3Rk3GUPM8TYrHf66nvXe0gUBjNN-1200w-480.webp  ~ 0.04ms
+  2026-11-25 10:48:31 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.06ms
+  2026-11-25 10:48:31 /storage/businesses/3/gallery/GTwmLdBw7c1ReG4j1l26dRE7J2fHQoMI-1200w-480.webp  ~ 0.11ms
+  2026-11-25 10:48:31 /storage/businesses/3/gallery/p9c5Sedy7XLh9xQ9ppVmbKB3ytkss2K4-1200w-480.webp  ~ 0.14ms
+  2026-11-25 10:48:32 /b/ganda-beauty .............................. ~ 0.08ms
+  2026-11-25 10:48:32 /css/vendra.css?v=1795603650 ................. ~ 0.04ms
+  2026-11-25 10:48:32 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.13ms
+  2026-11-25 10:48:32 /storage/businesses/2/IFd8CJOxUoYoFirboWYvH6t9NJIWtqjj-1600w-960.webp  ~ 0.17ms
+  2026-11-25 10:48:32 /storage/businesses/2/ghrjE5U6ebEhfeFRlKzFnuwUZP5cOA3f-512w-480.webp  ~ 0.19ms
+  2026-11-25 10:48:32 /js/shrink-images.js?v=1795603650 ............ ~ 0.22ms
+  2026-11-25 10:48:32 /storage/businesses/2/items/FnXJwqPzXEUWcD7Srn7ZMgGBcDl1l7Gx-800w-480.webp  ~ 0.04ms
+  2026-11-25 10:48:32 /storage/businesses/2/items/dSpJgLFhnJAQQGv7rfTVG8JqkRmUNOtP-800w-480.webp  ~ 0.06ms
+  2026-11-25 10:48:32 /storage/businesses/2/items/qdWEKlUibTolI4sDPkh2fMNJy7wwnBaF-800w-480.webp  ~ 0.10ms
+  2026-11-25 10:48:32 /storage/businesses/2/items/iUaCX3XMBlnDLtVByRzDaQBihWonl8gL-800w-480.webp  ~ 0.12ms
+  2026-11-25 10:48:32 /storage/businesses/2/items/b0M2R4DxMGpaAY4avi3O9Edq4dMQOaD8-800w-480.webp  ~ 0.15ms
+  2026-11-25 10:48:32 /storage/businesses/2/gallery/kUsRntazdQNNnIX3dDXrBonWVPNthWOi-1200w-480.webp  ~ 0.16ms
+  2026-11-25 10:48:32 /storage/businesses/2/gallery/zhQFyRhOSKfE65jfoTGUybhb9I30foyY-1200w-480.webp  ~ 0.18ms
+  2026-11-25 10:48:32 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.06ms
+  2026-11-25 10:48:32 /fonts/fraunces-latin-wght-normal.woff2 ...... ~ 0.11ms
+  2026-11-25 10:48:32 /fonts/fraunces-latin-wght-italic.woff2 ...... ~ 0.16ms
+  2026-11-25 10:48:32 /storage/businesses/2/gallery/hNlKs7ziKeJxvVEDkwAX359GMOx91uxF-1200w-480.webp  ~ 0.20ms
+  2026-11-25 10:48:32 /storage/businesses/2/gallery/DUZVTAtd4pL1UaI4FpxAnG3srHu4ppSV-1200w-480.webp  ~ 0.20ms
+  2026-11-25 10:48:33 /b/ganda-beauty .............................. ~ 0.11ms
+  2026-11-25 10:48:33 /css/vendra.css?v=1795603650 ................. ~ 0.08ms
+  2026-11-25 10:48:33 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.25ms
+  2026-11-25 10:48:33 /storage/businesses/2/ghrjE5U6ebEhfeFRlKzFnuwUZP5cOA3f-512w-480.webp  ~ 0.29ms
+  2026-11-25 10:48:33 /storage/businesses/2/IFd8CJOxUoYoFirboWYvH6t9NJIWtqjj-1600w-960.webp  ~ 0.33ms
+  2026-11-25 10:48:33 /js/shrink-images.js?v=1795603650 ............ ~ 0.02ms
+  2026-11-25 10:48:33 /storage/businesses/2/items/FnXJwqPzXEUWcD7Srn7ZMgGBcDl1l7Gx-800w-480.webp  ~ 0.05ms
+  2026-11-25 10:48:33 /storage/businesses/2/items/dSpJgLFhnJAQQGv7rfTVG8JqkRmUNOtP-800w-480.webp  ~ 0.08ms
+  2026-11-25 10:48:33 /storage/businesses/2/items/qdWEKlUibTolI4sDPkh2fMNJy7wwnBaF-800w-480.webp  ~ 0.10ms
+  2026-11-25 10:48:33 /storage/businesses/2/items/iUaCX3XMBlnDLtVByRzDaQBihWonl8gL-800w-480.webp  ~ 0.13ms
+  2026-11-25 10:48:33 /storage/businesses/2/items/b0M2R4DxMGpaAY4avi3O9Edq4dMQOaD8-800w-480.webp  ~ 0.17ms
+  2026-11-25 10:48:33 /storage/businesses/2/gallery/kUsRntazdQNNnIX3dDXrBonWVPNthWOi-1200w-480.webp  ~ 0.19ms
+  2026-11-25 10:48:33 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.22ms
+  2026-11-25 10:48:33 /storage/businesses/2/gallery/zhQFyRhOSKfE65jfoTGUybhb9I30foyY-1200w-480.webp  ~ 0.10ms
+  2026-11-25 10:48:33 /storage/businesses/2/gallery/hNlKs7ziKeJxvVEDkwAX359GMOx91uxF-1200w-480.webp  ~ 0.12ms
+  2026-11-25 10:48:33 /storage/businesses/2/gallery/DUZVTAtd4pL1UaI4FpxAnG3srHu4ppSV-1200w-480.webp  ~ 0.07ms
+  2026-11-25 10:48:33 /b/ganda-beauty .............................. ~ 0.01ms
+  2026-11-25 10:48:33 /css/vendra.css?v=1795603650 ................. ~ 0.05ms
+  2026-11-25 10:48:33 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.20ms
+  2026-11-25 10:48:33 /storage/businesses/2/ghrjE5U6ebEhfeFRlKzFnuwUZP5cOA3f-512w-480.webp  ~ 0.23ms
+  2026-11-25 10:48:33 /storage/businesses/2/IFd8CJOxUoYoFirboWYvH6t9NJIWtqjj-1600w-960.webp  ~ 0.25ms
+  2026-11-25 10:48:33 /js/shrink-images.js?v=1795603650 ............ ~ 0.27ms
+  2026-11-25 10:48:33 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.09ms
+  2026-11-25 10:48:33 /storage/businesses/2/items/FnXJwqPzXEUWcD7Srn7ZMgGBcDl1l7Gx-800w-480.webp  ~ 0.02ms
+  2026-11-25 10:48:33 /storage/businesses/2/items/dSpJgLFhnJAQQGv7rfTVG8JqkRmUNOtP-800w-480.webp  ~ 0.05ms
+  2026-11-25 10:48:33 /storage/businesses/2/items/qdWEKlUibTolI4sDPkh2fMNJy7wwnBaF-800w-480.webp  ~ 0.06ms
+  2026-11-25 10:48:33 /storage/businesses/2/items/iUaCX3XMBlnDLtVByRzDaQBihWonl8gL-800w-480.webp  ~ 0.09ms
+  2026-11-25 10:48:33 /storage/businesses/2/items/b0M2R4DxMGpaAY4avi3O9Edq4dMQOaD8-800w-480.webp  ~ 0.11ms
+  2026-11-25 10:48:33 /storage/businesses/2/gallery/kUsRntazdQNNnIX3dDXrBonWVPNthWOi-1200w-480.webp  ~ 0.13ms
+  2026-11-25 10:48:33 /storage/businesses/2/gallery/zhQFyRhOSKfE65jfoTGUybhb9I30foyY-1200w-480.webp  ~ 0.15ms
+  2026-11-25 10:48:33 /storage/businesses/2/gallery/hNlKs7ziKeJxvVEDkwAX359GMOx91uxF-1200w-480.webp  ~ 0.18ms
+  2026-11-25 10:48:33 /storage/businesses/2/gallery/DUZVTAtd4pL1UaI4FpxAnG3srHu4ppSV-1200w-480.webp  ~ 0.01ms
+  2026-11-25 10:48:34 /b/lumina-studio/book ........................ ~ 0.08ms
+  2026-11-25 10:48:34 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.02ms
+  2026-11-25 10:48:34 /css/vendra.css?v=1795603650 ................. ~ 0.05ms
+  2026-11-25 10:48:34 /js/shrink-images.js?v=1795603650 ............ ~ 0.01ms
+  2026-11-25 10:48:34 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-25 10:48:34 /b/lumina-studio ............................. ~ 0.11ms
+  2026-11-25 10:48:34 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.05ms
+  2026-11-25 10:48:34 /css/vendra.css?v=1795603650 ................. ~ 0.10ms
+  2026-11-25 10:48:34 /storage/businesses/1/USfYhUg5MPaj14MwLGp2aEGjfkW1EsK6-1600w-960.webp  ~ 0.25ms
+  2026-11-25 10:48:34 /js/shrink-images.js?v=1795603650 ............ ~ 0.02ms
+  2026-11-25 10:48:34 /storage/businesses/1/gallery/kqanwXhLGAgaduKZSk3W8MHeL4Gk5K0b-1200w-480.webp  ~ 0.04ms
+  2026-11-25 10:48:34 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.07ms
+  2026-11-25 10:48:34 /storage/businesses/1/gallery/LJp4NQNUw4oGpvFNXOyRKGmRIlV2kPOD-1200w-480.webp  ~ 0.17ms
+  2026-11-25 10:48:34 /storage/businesses/1/gallery/9wkYVxbYgTUXtDRPIVoyAVZtsCx21ef7-1200w-480.webp  ~ 0.21ms
+  2026-11-25 10:48:34 /storage/businesses/1/gallery/6PXkum4bucIWRo6CUOc7ClstqipbSybV-1200w-480.webp  ~ 0.24ms
+  2026-11-25 10:48:34 /b/ganda-beauty/track ........................ ~ 0.02ms
+  2026-11-25 10:48:35 /css/vendra.css?v=1795603650 ................. ~ 0.04ms
+  2026-11-25 10:48:35 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.15ms
+  2026-11-25 10:48:35 /storage/businesses/2/ghrjE5U6ebEhfeFRlKzFnuwUZP5cOA3f-512w-480.webp  ~ 0.18ms
+  2026-11-25 10:48:35 /js/shrink-images.js?v=1795603650 ............ ~ 0.01ms
+  2026-11-25 10:48:35 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.03ms
+  2026-11-25 10:48:35 /b/ganda-beauty .............................. ~ 0.08ms
+  2026-11-25 10:48:35 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.04ms
+  2026-11-25 10:48:35 /css/vendra.css?v=1795603650 ................. ~ 0.07ms
+  2026-11-25 10:48:35 /storage/businesses/2/IFd8CJOxUoYoFirboWYvH6t9NJIWtqjj-1600w-960.webp  ~ 0.15ms
+  2026-11-25 10:48:35 /storage/businesses/2/ghrjE5U6ebEhfeFRlKzFnuwUZP5cOA3f-512w-480.webp  ~ 0.17ms
+  2026-11-25 10:48:35 /js/shrink-images.js?v=1795603650 ............ ~ 0.19ms
+  2026-11-25 10:48:35 /storage/businesses/2/items/FnXJwqPzXEUWcD7Srn7ZMgGBcDl1l7Gx-800w.webp  ~ 0.02ms
+  2026-11-25 10:48:35 /storage/businesses/2/items/dSpJgLFhnJAQQGv7rfTVG8JqkRmUNOtP-800w.webp  ~ 0.04ms
+  2026-11-25 10:48:35 /storage/businesses/2/items/qdWEKlUibTolI4sDPkh2fMNJy7wwnBaF-800w.webp  ~ 0.03ms
+  2026-11-25 10:48:35 /storage/businesses/2/items/iUaCX3XMBlnDLtVByRzDaQBihWonl8gL-800w.webp  ~ 0.06ms
+  2026-11-25 10:48:35 /storage/businesses/2/items/b0M2R4DxMGpaAY4avi3O9Edq4dMQOaD8-800w.webp  ~ 0.09ms
+  2026-11-25 10:48:35 /storage/businesses/2/gallery/kUsRntazdQNNnIX3dDXrBonWVPNthWOi-1200w-480.webp  ~ 0.11ms
+  2026-11-25 10:48:35 /storage/businesses/2/gallery/zhQFyRhOSKfE65jfoTGUybhb9I30foyY-1200w-480.webp  ~ 0.13ms
+  2026-11-25 10:48:35 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.16ms
+  2026-11-25 10:48:35 /storage/businesses/2/gallery/hNlKs7ziKeJxvVEDkwAX359GMOx91uxF-1200w-480.webp  ~ 0.18ms
+  2026-11-25 10:48:35 /storage/businesses/2/gallery/DUZVTAtd4pL1UaI4FpxAnG3srHu4ppSV-1200w-480.webp  ~ 0.04ms
+  2026-11-25 10:48:36 /b/ganda-beauty .............................. ~ 0.07ms
+  2026-11-25 10:48:36 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.12ms
+  2026-11-25 10:48:36 /css/vendra.css?v=1795603650 ................. ~ 0.17ms
+  2026-11-25 10:48:36 /storage/businesses/2/ghrjE5U6ebEhfeFRlKzFnuwUZP5cOA3f-512w-480.webp  ~ 0.27ms
+  2026-11-25 10:48:36 /storage/businesses/2/IFd8CJOxUoYoFirboWYvH6t9NJIWtqjj-1600w-960.webp  ~ 0.29ms
+  2026-11-25 10:48:36 /js/shrink-images.js?v=1795603650 ............ ~ 0.31ms
+  2026-11-25 10:48:36 /storage/businesses/2/items/FnXJwqPzXEUWcD7Srn7ZMgGBcDl1l7Gx-800w-480.webp  ~ 0.04ms
+  2026-11-25 10:48:36 /storage/businesses/2/items/dSpJgLFhnJAQQGv7rfTVG8JqkRmUNOtP-800w-480.webp  ~ 0.08ms
+  2026-11-25 10:48:36 /storage/businesses/2/items/qdWEKlUibTolI4sDPkh2fMNJy7wwnBaF-800w-480.webp  ~ 0.10ms
+  2026-11-25 10:48:36 /storage/businesses/2/items/iUaCX3XMBlnDLtVByRzDaQBihWonl8gL-800w-480.webp  ~ 0.12ms
+  2026-11-25 10:48:36 /storage/businesses/2/items/b0M2R4DxMGpaAY4avi3O9Edq4dMQOaD8-800w-480.webp  ~ 0.03ms
+  2026-11-25 10:48:36 /storage/businesses/2/gallery/kUsRntazdQNNnIX3dDXrBonWVPNthWOi-1200w-480.webp  ~ 0.06ms
+  2026-11-25 10:48:36 /storage/businesses/2/gallery/zhQFyRhOSKfE65jfoTGUybhb9I30foyY-1200w-480.webp  ~ 0.08ms
+  2026-11-25 10:48:36 /storage/businesses/2/gallery/DUZVTAtd4pL1UaI4FpxAnG3srHu4ppSV-1200w-480.webp  ~ 0.07ms
+  2026-11-25 10:48:36 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.13ms
+  2026-11-25 10:48:36 /storage/businesses/2/gallery/hNlKs7ziKeJxvVEDkwAX359GMOx91uxF-1200w-480.webp  ~ 0.18ms
+  2026-11-25 10:48:37 /b/ganda-beauty .............................. ~ 0.08ms
+  2026-11-25 10:48:37 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.04ms
+  2026-11-25 10:48:37 /css/vendra.css?v=1795603650 ................. ~ 0.07ms
+  2026-11-25 10:48:37 /storage/businesses/2/ghrjE5U6ebEhfeFRlKzFnuwUZP5cOA3f-512w-480.webp  ~ 0.16ms
+  2026-11-25 10:48:37 /storage/businesses/2/IFd8CJOxUoYoFirboWYvH6t9NJIWtqjj-1600w-960.webp  ~ 0.19ms
+  2026-11-25 10:48:37 /js/shrink-images.js?v=1795603650 ............ ~ 0.21ms
+  2026-11-25 10:48:37 /storage/businesses/2/items/FnXJwqPzXEUWcD7Srn7ZMgGBcDl1l7Gx-800w.webp  ~ 0.03ms
+  2026-11-25 10:48:37 /fonts/fraunces-latin-wght-normal.woff2 ...... ~ 0.06ms
+  2026-11-25 10:48:37 /fonts/fraunces-latin-wght-italic.woff2 ...... ~ 0.11ms
+  2026-11-25 10:48:37 /storage/businesses/2/items/dSpJgLFhnJAQQGv7rfTVG8JqkRmUNOtP-800w.webp  ~ 0.16ms
+  2026-11-25 10:48:37 /storage/businesses/2/items/qdWEKlUibTolI4sDPkh2fMNJy7wwnBaF-800w.webp  ~ 0.19ms
+  2026-11-25 10:48:37 /storage/businesses/2/items/iUaCX3XMBlnDLtVByRzDaQBihWonl8gL-800w.webp  ~ 0.18ms
+  2026-11-25 10:48:37 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.17ms
+  2026-11-25 10:48:37 /storage/businesses/2/items/b0M2R4DxMGpaAY4avi3O9Edq4dMQOaD8-800w.webp  ~ 0.15ms
+  2026-11-25 10:48:38 /b/ganda-beauty ............................ ~ 500.32ms
+  2026-11-25 10:48:38 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.07ms
+  2026-11-25 10:48:38 /css/vendra.css?v=1795603650 ................. ~ 0.09ms
+  2026-11-25 10:48:38 /storage/businesses/2/ghrjE5U6ebEhfeFRlKzFnuwUZP5cOA3f-512w-480.webp  ~ 0.18ms
+  2026-11-25 10:48:38 /storage/businesses/2/IFd8CJOxUoYoFirboWYvH6t9NJIWtqjj-1600w-960.webp  ~ 0.21ms
+  2026-11-25 10:48:38 /js/shrink-images.js?v=1795603650 ............ ~ 0.23ms
+  2026-11-25 10:48:38 /storage/businesses/2/items/FnXJwqPzXEUWcD7Srn7ZMgGBcDl1l7Gx-800w.webp  ~ 0.03ms
+  2026-11-25 10:48:38 /storage/businesses/2/gallery/kUsRntazdQNNnIX3dDXrBonWVPNthWOi-1200w-960.webp  ~ 0.06ms
+  2026-11-25 10:48:38 /storage/businesses/2/items/dSpJgLFhnJAQQGv7rfTVG8JqkRmUNOtP-800w.webp  ~ 0.08ms
+  2026-11-25 10:48:38 /storage/businesses/2/items/qdWEKlUibTolI4sDPkh2fMNJy7wwnBaF-800w.webp  ~ 0.11ms
+  2026-11-25 10:48:38 /storage/businesses/2/items/iUaCX3XMBlnDLtVByRzDaQBihWonl8gL-800w.webp  ~ 0.13ms
+  2026-11-25 10:48:38 /storage/businesses/2/items/b0M2R4DxMGpaAY4avi3O9Edq4dMQOaD8-800w.webp  ~ 0.12ms
+  2026-11-25 10:48:38 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.09ms
+  2026-11-25 10:48:38 /storage/businesses/2/gallery/zhQFyRhOSKfE65jfoTGUybhb9I30foyY-1200w-960.webp  ~ 0.08ms
+  2026-11-25 10:48:38 /storage/businesses/2/gallery/hNlKs7ziKeJxvVEDkwAX359GMOx91uxF-1200w-960.webp  ~ 0.04ms
+  2026-11-25 10:48:38 /storage/businesses/2/gallery/DUZVTAtd4pL1UaI4FpxAnG3srHu4ppSV-1200w-960.webp  ~ 0.06ms
+  2026-11-25 10:48:39 /b/ganda-beauty ............................. ~ 58.24ms
+  2026-11-25 10:48:39 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.05ms
+  2026-11-25 10:48:39 /css/vendra.css?v=1795603650 ................. ~ 0.08ms
+  2026-11-25 10:48:39 /storage/businesses/2/ghrjE5U6ebEhfeFRlKzFnuwUZP5cOA3f-512w-480.webp  ~ 0.16ms
+  2026-11-25 10:48:39 /storage/businesses/2/IFd8CJOxUoYoFirboWYvH6t9NJIWtqjj-1600w-960.webp  ~ 0.20ms
+  2026-11-25 10:48:39 /js/shrink-images.js?v=1795603650 ............ ~ 0.01ms
+  2026-11-25 10:48:39 /storage/businesses/2/items/FnXJwqPzXEUWcD7Srn7ZMgGBcDl1l7Gx-800w-480.webp  ~ 0.03ms
+  2026-11-25 10:48:39 /storage/businesses/2/items/FnXJwqPzXEUWcD7Srn7ZMgGBcDl1l7Gx-800w.webp  ~ 0.06ms
+  2026-11-25 10:48:39 /storage/businesses/2/items/dSpJgLFhnJAQQGv7rfTVG8JqkRmUNOtP-800w.webp  ~ 0.08ms
+  2026-11-25 10:48:39 /storage/businesses/2/items/qdWEKlUibTolI4sDPkh2fMNJy7wwnBaF-800w.webp  ~ 0.11ms
+  2026-11-25 10:48:39 /storage/businesses/2/items/iUaCX3XMBlnDLtVByRzDaQBihWonl8gL-800w.webp  ~ 0.13ms
+  2026-11-25 10:48:39 /storage/businesses/2/items/b0M2R4DxMGpaAY4avi3O9Edq4dMQOaD8-800w.webp  ~ 0.12ms
+  2026-11-25 10:48:39 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.02ms
+  2026-11-25 10:48:39 /fonts/fraunces-latin-wght-normal.woff2 ...... ~ 0.08ms
+  2026-11-25 10:48:39 /fonts/fraunces-latin-wght-italic.woff2 ...... ~ 0.12ms
+  2026-11-25 10:48:39 /storage/businesses/2/gallery/kUsRntazdQNNnIX3dDXrBonWVPNthWOi-1200w-480.webp  ~ 0.03ms
+  2026-11-25 10:48:39 /storage/businesses/2/gallery/zhQFyRhOSKfE65jfoTGUybhb9I30foyY-1200w-480.webp  ~ 0.05ms
+  2026-11-25 10:48:39 /storage/businesses/2/gallery/hNlKs7ziKeJxvVEDkwAX359GMOx91uxF-1200w-480.webp  ~ 0.07ms
+  2026-11-25 10:48:39 /storage/businesses/2/gallery/DUZVTAtd4pL1UaI4FpxAnG3srHu4ppSV-1200w-480.webp  ~ 0.10ms
+  2026-11-25 10:48:40 /b/ganda-beauty ............................ ~ 500.33ms
+  2026-11-25 10:48:41 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.05ms
+  2026-11-25 10:48:41 /css/vendra.css?v=1795603650 ................. ~ 0.07ms
+  2026-11-25 10:48:41 /storage/businesses/2/ghrjE5U6ebEhfeFRlKzFnuwUZP5cOA3f-512w-480.webp  ~ 0.16ms
+  2026-11-25 10:48:41 /storage/businesses/2/IFd8CJOxUoYoFirboWYvH6t9NJIWtqjj-1600w-960.webp  ~ 0.19ms
+  2026-11-25 10:48:41 /js/shrink-images.js?v=1795603650 ............ ~ 0.21ms
+  2026-11-25 10:48:41 /storage/businesses/2/items/FnXJwqPzXEUWcD7Srn7ZMgGBcDl1l7Gx-800w-480.webp  ~ 0.01ms
+  2026-11-25 10:48:41 /storage/businesses/2/items/dSpJgLFhnJAQQGv7rfTVG8JqkRmUNOtP-800w-480.webp  ~ 0.03ms
+  2026-11-25 10:48:41 /storage/businesses/2/items/qdWEKlUibTolI4sDPkh2fMNJy7wwnBaF-800w-480.webp  ~ 0.06ms
+  2026-11-25 10:48:41 /storage/businesses/2/items/iUaCX3XMBlnDLtVByRzDaQBihWonl8gL-800w-480.webp  ~ 0.08ms
+  2026-11-25 10:48:41 /storage/businesses/2/items/b0M2R4DxMGpaAY4avi3O9Edq4dMQOaD8-800w-480.webp  ~ 0.11ms
+  2026-11-25 10:48:41 /storage/businesses/2/gallery/kUsRntazdQNNnIX3dDXrBonWVPNthWOi-1200w-480.webp  ~ 0.13ms
+  2026-11-25 10:48:41 /storage/businesses/2/gallery/zhQFyRhOSKfE65jfoTGUybhb9I30foyY-1200w-480.webp  ~ 0.12ms
+  2026-11-25 10:48:41 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.02ms
+  2026-11-25 10:48:41 /storage/businesses/2/gallery/hNlKs7ziKeJxvVEDkwAX359GMOx91uxF-1200w-480.webp  ~ 0.08ms
+  2026-11-25 10:48:41 /storage/businesses/2/gallery/DUZVTAtd4pL1UaI4FpxAnG3srHu4ppSV-1200w-480.webp  ~ 0.10ms
+  2026-11-25 10:48:41 /b/ganda-beauty .............................. ~ 0.08ms
+  2026-11-25 10:48:41 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.04ms
+  2026-11-25 10:48:41 /css/vendra.css?v=1795603650 ................. ~ 0.07ms
+  2026-11-25 10:48:41 /storage/businesses/2/ghrjE5U6ebEhfeFRlKzFnuwUZP5cOA3f-512w-480.webp  ~ 0.16ms
+  2026-11-25 10:48:41 /storage/businesses/2/IFd8CJOxUoYoFirboWYvH6t9NJIWtqjj-1600w-960.webp  ~ 0.19ms
+  2026-11-25 10:48:41 /js/shrink-images.js?v=1795603650 ............ ~ 0.21ms
+  2026-11-25 10:48:41 /storage/businesses/2/items/FnXJwqPzXEUWcD7Srn7ZMgGBcDl1l7Gx-800w.webp  ~ 0.02ms
+  2026-11-25 10:48:41 /storage/businesses/2/items/dSpJgLFhnJAQQGv7rfTVG8JqkRmUNOtP-800w.webp  ~ 0.05ms
+  2026-11-25 10:48:41 /storage/businesses/2/items/qdWEKlUibTolI4sDPkh2fMNJy7wwnBaF-800w.webp  ~ 0.07ms
+  2026-11-25 10:48:41 /storage/businesses/2/items/iUaCX3XMBlnDLtVByRzDaQBihWonl8gL-800w.webp  ~ 0.04ms
+  2026-11-25 10:48:41 /storage/businesses/2/items/b0M2R4DxMGpaAY4avi3O9Edq4dMQOaD8-800w.webp  ~ 0.06ms
+  2026-11-25 10:48:41 /storage/businesses/2/gallery/kUsRntazdQNNnIX3dDXrBonWVPNthWOi-1200w-480.webp  ~ 0.09ms
+  2026-11-25 10:48:41 /storage/businesses/2/gallery/zhQFyRhOSKfE65jfoTGUybhb9I30foyY-1200w-480.webp  ~ 0.11ms
+  2026-11-25 10:48:41 /storage/businesses/2/gallery/hNlKs7ziKeJxvVEDkwAX359GMOx91uxF-1200w-480.webp  ~ 0.15ms
+  2026-11-25 10:48:41 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.18ms
+  2026-11-25 10:48:41 /storage/businesses/2/gallery/DUZVTAtd4pL1UaI4FpxAnG3srHu4ppSV-1200w-480.webp  ~ 0.01ms
+  2026-11-25 10:48:42 /b/ganda-beauty .............................. ~ 0.08ms
+  2026-11-25 10:48:42 /css/vendra.css?v=1795603650 ................. ~ 0.09ms
+  2026-11-25 10:48:42 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.26ms
+  2026-11-25 10:48:42 /storage/businesses/2/ghrjE5U6ebEhfeFRlKzFnuwUZP5cOA3f-512w-480.webp  ~ 0.31ms
+  2026-11-25 10:48:42 /storage/businesses/2/IFd8CJOxUoYoFirboWYvH6t9NJIWtqjj-1600w-960.webp  ~ 0.35ms
+  2026-11-25 10:48:42 /js/shrink-images.js?v=1795603650 ............ ~ 0.38ms
+  2026-11-25 10:48:42 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.02ms
+  2026-11-25 10:48:42 /storage/businesses/2/items/FnXJwqPzXEUWcD7Srn7ZMgGBcDl1l7Gx-800w.webp  ~ 0.03ms
+  2026-11-25 10:48:42 /storage/businesses/2/items/dSpJgLFhnJAQQGv7rfTVG8JqkRmUNOtP-800w.webp  ~ 0.07ms
+  2026-11-25 10:48:42 /storage/businesses/2/items/qdWEKlUibTolI4sDPkh2fMNJy7wwnBaF-800w.webp  ~ 0.10ms
+  2026-11-25 10:48:42 /storage/businesses/2/items/iUaCX3XMBlnDLtVByRzDaQBihWonl8gL-800w.webp  ~ 0.05ms
+  2026-11-25 10:48:42 /storage/businesses/2/items/b0M2R4DxMGpaAY4avi3O9Edq4dMQOaD8-800w.webp  ~ 0.08ms
+  2026-11-25 10:48:42 /storage/businesses/2/gallery/kUsRntazdQNNnIX3dDXrBonWVPNthWOi-1200w-480.webp  ~ 0.12ms
+  2026-11-25 10:48:42 /storage/businesses/2/gallery/zhQFyRhOSKfE65jfoTGUybhb9I30foyY-1200w-480.webp  ~ 0.15ms
+  2026-11-25 10:48:42 /storage/businesses/2/gallery/hNlKs7ziKeJxvVEDkwAX359GMOx91uxF-1200w-480.webp  ~ 0.18ms
+  2026-11-25 10:48:42 /storage/businesses/2/gallery/DUZVTAtd4pL1UaI4FpxAnG3srHu4ppSV-1200w-480.webp  ~ 0.22ms
+  2026-11-25 10:48:42 /b/kislap-cleaning ........................... ~ 0.04ms
+  2026-11-25 10:48:43 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.05ms
+  2026-11-25 10:48:43 /css/vendra.css?v=1795603650 ................. ~ 0.08ms
+  2026-11-25 10:48:43 /storage/businesses/3/A4FHkLmYz9fl4cLjeegqBoigKBtJ48aP-512w-480.webp  ~ 0.22ms
+  2026-11-25 10:48:43 /storage/businesses/3/a7awsbjMTY9WiL9SpxcsJCIo6xPUdR3n-1600w-960.webp  ~ 0.26ms
+  2026-11-25 10:48:43 /js/shrink-images.js?v=1795603650 ............ ~ 0.29ms
+  2026-11-25 10:48:43 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.05ms
+  2026-11-25 10:48:43 /storage/businesses/3/gallery/mAInf3Rk3GUPM8TYrHf66nvXe0gUBjNN-1200w-480.webp  ~ 0.16ms
+  2026-11-25 10:48:43 /storage/businesses/3/gallery/GTwmLdBw7c1ReG4j1l26dRE7J2fHQoMI-1200w-480.webp  ~ 0.20ms
+  2026-11-25 10:48:43 /storage/businesses/3/gallery/p9c5Sedy7XLh9xQ9ppVmbKB3ytkss2K4-1200w-480.webp  ~ 0.22ms
+  2026-11-25 10:48:43 /fonts/fraunces-latin-wght-normal.woff2 ...... ~ 0.24ms
+  2026-11-25 10:48:43 /fonts/fraunces-latin-wght-italic.woff2 ...... ~ 0.17ms
+  2026-11-25 10:48:43 /b/kislap-cleaning ........................... ~ 0.02ms
+  2026-11-25 10:48:43 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.07ms
+  2026-11-25 10:48:43 /css/vendra.css?v=1795603650 ................. ~ 0.10ms
+  2026-11-25 10:48:43 /storage/businesses/3/A4FHkLmYz9fl4cLjeegqBoigKBtJ48aP-512w-480.webp  ~ 0.20ms
+  2026-11-25 10:48:43 /storage/businesses/3/a7awsbjMTY9WiL9SpxcsJCIo6xPUdR3n-1600w-960.webp  ~ 0.23ms
+  2026-11-25 10:48:43 /js/shrink-images.js?v=1795603650 ............ ~ 0.25ms
+  2026-11-25 10:48:43 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-25 10:48:43 /b/ganda-beauty .............................. ~ 0.01ms
+  2026-11-25 10:48:43 /storage/businesses/3/gallery/mAInf3Rk3GUPM8TYrHf66nvXe0gUBjNN-1200w-960.webp  ~ 0.03ms
+  2026-11-25 10:48:43 /storage/businesses/3/gallery/GTwmLdBw7c1ReG4j1l26dRE7J2fHQoMI-1200w-960.webp  ~ 0.06ms
+  2026-11-25 10:48:43 /storage/businesses/3/gallery/p9c5Sedy7XLh9xQ9ppVmbKB3ytkss2K4-1200w-960.webp  ~ 0.09ms
+  2026-11-25 10:48:43 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.11ms
+  2026-11-25 10:48:43 /css/vendra.css?v=1795603650 ................. ~ 0.16ms
+  2026-11-25 10:48:43 /storage/businesses/2/ghrjE5U6ebEhfeFRlKzFnuwUZP5cOA3f-512w-480.webp  ~ 0.26ms
+  2026-11-25 10:48:43 /storage/businesses/2/IFd8CJOxUoYoFirboWYvH6t9NJIWtqjj-1600w-960.webp  ~ 0.28ms
+  2026-11-25 10:48:43 /js/shrink-images.js?v=1795603650 ............ ~ 0.31ms
+  2026-11-25 10:48:43 /storage/businesses/2/items/FnXJwqPzXEUWcD7Srn7ZMgGBcDl1l7Gx-800w.webp  ~ 0.04ms
+  2026-11-25 10:48:43 /storage/businesses/2/items/dSpJgLFhnJAQQGv7rfTVG8JqkRmUNOtP-800w.webp  ~ 0.06ms
+  2026-11-25 10:48:43 /storage/businesses/2/items/qdWEKlUibTolI4sDPkh2fMNJy7wwnBaF-800w.webp  ~ 0.08ms
+  2026-11-25 10:48:43 /storage/businesses/2/items/iUaCX3XMBlnDLtVByRzDaQBihWonl8gL-800w.webp  ~ 0.10ms
+  2026-11-25 10:48:43 /storage/businesses/2/items/b0M2R4DxMGpaAY4avi3O9Edq4dMQOaD8-800w.webp  ~ 0.13ms
+  2026-11-25 10:48:43 /storage/businesses/2/gallery/kUsRntazdQNNnIX3dDXrBonWVPNthWOi-1200w-480.webp  ~ 0.15ms
+  2026-11-25 10:48:43 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.03ms
+  2026-11-25 10:48:43 /storage/businesses/2/gallery/zhQFyRhOSKfE65jfoTGUybhb9I30foyY-1200w-480.webp  ~ 0.08ms
+  2026-11-25 10:48:43 /storage/businesses/2/gallery/hNlKs7ziKeJxvVEDkwAX359GMOx91uxF-1200w-480.webp  ~ 0.11ms
+  2026-11-25 10:48:43 /storage/businesses/2/gallery/DUZVTAtd4pL1UaI4FpxAnG3srHu4ppSV-1200w-480.webp  ~ 0.13ms
+  2026-11-25 10:48:43 /b/ganda-beauty/chat ......................... ~ 0.01ms
+  2026-11-25 10:48:43 /b/ganda-beauty/chat ......................... ~ 0.01ms
+  2026-11-25 10:48:44 /login ....................................... ~ 0.10ms
+  2026-11-25 10:48:44 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.04ms
+  2026-11-25 10:48:44 /css/vendra.css?v=1795603650 ................. ~ 0.07ms
+  2026-11-25 10:48:44 /js/shrink-images.js?v=1795603650 ............ ~ 0.19ms
+  2026-11-25 10:48:44 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.02ms
+  2026-11-25 10:48:44 /login ..................................... ~ 500.33ms
+  2026-11-25 10:48:45 /app ......................................... ~ 0.02ms
+  2026-11-25 10:48:45 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.02ms
+  2026-11-25 10:48:45 /css/vendra.css?v=1795603650 ................. ~ 0.05ms
+  2026-11-25 10:48:45 /js/shrink-images.js?v=1795603650 ............ ~ 0.01ms
+  2026-11-25 10:48:45 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-25 10:48:45 /sw.js ....................................... ~ 0.01ms
+  2026-11-25 10:48:45 /offline.html ................................ ~ 0.02ms
+  2026-11-25 10:48:45 /icons/icon-192.png .......................... ~ 0.15ms
+  2026-11-25 10:48:45 /app ......................................... ~ 0.08ms
+  2026-11-25 10:48:45 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.02ms
+  2026-11-25 10:48:45 /css/vendra.css?v=1795603650 ................. ~ 0.01ms
+  2026-11-25 10:48:45 /js/shrink-images.js?v=1795603650 ............ ~ 0.01ms
+  2026-11-25 10:48:45 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-25 10:48:46 /login ....................................... ~ 0.09ms
+  2026-11-25 10:48:46 /css/vendra.css?v=1795603650 ................. ~ 0.03ms
+  2026-11-25 10:48:46 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.15ms
+  2026-11-25 10:48:46 /js/shrink-images.js?v=1795603650 ............ ~ 0.02ms
+  2026-11-25 10:48:46 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.02ms
+  2026-11-25 10:48:46 /login ..................................... ~ 500.33ms
+  2026-11-25 10:48:46 /app ......................................... ~ 0.02ms
+  2026-11-25 10:48:46 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.02ms
+  2026-11-25 10:48:46 /css/vendra.css?v=1795603650 ................. ~ 0.05ms
+  2026-11-25 10:48:46 /js/shrink-images.js?v=1795603650 ............ ~ 0.01ms
+  2026-11-25 10:48:46 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-25 10:48:46 /sw.js ....................................... ~ 0.01ms
+  2026-11-25 10:48:46 /offline.html ................................ ~ 0.02ms
+  2026-11-25 10:48:46 /icons/icon-192.png .......................... ~ 0.16ms
+  2026-11-25 10:48:47 /app ......................................... ~ 0.08ms
+  2026-11-25 10:48:47 /css/vendra.css?v=1795603650 ................. ~ 0.03ms
+  2026-11-25 10:48:47 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.11ms
+  2026-11-25 10:48:47 /js/shrink-images.js?v=1795603650 ............ ~ 0.01ms
+  2026-11-25 10:48:47 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-25 10:48:47 /app/settings/appearance ..................... ~ 0.08ms
+  2026-11-25 10:48:47 /css/vendra.css?v=1795603650 ................. ~ 0.02ms
+  2026-11-25 10:48:47 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.11ms
+  2026-11-25 10:48:47 /js/shrink-images.js?v=1795603650 ............ ~ 0.01ms
+  2026-11-25 10:48:47 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.02ms
+  2026-11-25 10:48:48 /app/settings/photos ......................... ~ 0.10ms
+  2026-11-25 10:48:48 /css/vendra.css?v=1795603650 ................. ~ 0.04ms
+  2026-11-25 10:48:48 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.18ms
+  2026-11-25 10:48:48 /storage/businesses/1/USfYhUg5MPaj14MwLGp2aEGjfkW1EsK6-1600w-960.webp  ~ 0.22ms
+  2026-11-25 10:48:48 /js/shrink-images.js?v=1795603650 ............ ~ 0.02ms
+  2026-11-25 10:48:48 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.02ms
+  2026-11-25 10:48:48 /storage/businesses/1/gallery/kqanwXhLGAgaduKZSk3W8MHeL4Gk5K0b-1200w-480.webp  ~ 0.04ms
+  2026-11-25 10:48:48 /storage/businesses/1/gallery/LJp4NQNUw4oGpvFNXOyRKGmRIlV2kPOD-1200w-480.webp  ~ 0.08ms
+  2026-11-25 10:48:48 /storage/businesses/1/gallery/9wkYVxbYgTUXtDRPIVoyAVZtsCx21ef7-1200w-480.webp  ~ 0.12ms
+  2026-11-25 10:48:48 /storage/businesses/1/gallery/6PXkum4bucIWRo6CUOc7ClstqipbSybV-1200w-480.webp  ~ 0.15ms
+  2026-11-25 10:48:49 /app/account ................................. ~ 0.08ms
+  2026-11-25 10:48:49 /css/vendra.css?v=1795603650 ................. ~ 0.02ms
+  2026-11-25 10:48:49 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.11ms
+  2026-11-25 10:48:49 /js/shrink-images.js?v=1795603650 ............ ~ 0.01ms
+  2026-11-25 10:48:49 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-25 10:48:49 /app/conversations ........................... ~ 0.08ms
+  2026-11-25 10:48:49 /css/vendra.css?v=1795603650 ................. ~ 0.03ms
+  2026-11-25 10:48:49 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.12ms
+  2026-11-25 10:48:49 /js/shrink-images.js?v=1795603650 ............ ~ 0.01ms
+  2026-11-25 10:48:49 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-25 10:48:49 /app/conversations/2 ......................... ~ 0.01ms
+  2026-11-25 10:48:49 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.02ms
+  2026-11-25 10:48:49 /css/vendra.css?v=1795603650 ................. ~ 0.04ms
+  2026-11-25 10:48:49 /js/shrink-images.js?v=1795603650 ............ ~ 0.01ms
+  2026-11-25 10:48:49 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-25 10:48:50 /app/appointments ............................ ~ 0.10ms
+  2026-11-25 10:48:50 /css/vendra.css?v=1795603650 ................. ~ 0.03ms
+  2026-11-25 10:48:50 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.16ms
+  2026-11-25 10:48:50 /js/shrink-images.js?v=1795603650 ............ ~ 0.02ms
+  2026-11-25 10:48:50 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.02ms
+  2026-11-25 10:48:51 /app/appointments/1 .......................... ~ 0.08ms
+  2026-11-25 10:48:51 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.03ms
+  2026-11-25 10:48:51 /css/vendra.css?v=1795603650 ................. ~ 0.06ms
+  2026-11-25 10:48:51 /js/shrink-images.js?v=1795603650 ............ ~ 0.01ms
+  2026-11-25 10:48:51 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-25 10:48:51 /app/quotations .............................. ~ 0.09ms
+  2026-11-25 10:48:51 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.02ms
+  2026-11-25 10:48:51 /css/vendra.css?v=1795603650 ................. ~ 0.06ms
+  2026-11-25 10:48:51 /js/shrink-images.js?v=1795603650 ............ ~ 0.01ms
+  2026-11-25 10:48:51 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-25 10:48:51 /app/quotations/1 ............................ ~ 0.01ms
+  2026-11-25 10:48:51 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.02ms
+  2026-11-25 10:48:51 /css/vendra.css?v=1795603650 ................. ~ 0.05ms
+  2026-11-25 10:48:51 /js/shrink-images.js?v=1795603650 ............ ~ 0.01ms
+  2026-11-25 10:48:51 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-25 10:48:52 /app/settings/assistant ...................... ~ 0.09ms
+  2026-11-25 10:48:52 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.02ms
+  2026-11-25 10:48:52 /css/vendra.css?v=1795603650 ................. ~ 0.05ms
+  2026-11-25 10:48:52 /js/shrink-images.js?v=1795603650 ............ ~ 0.01ms
+  2026-11-25 10:48:52 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-25 10:48:52 /app/settings/assistant/test ................. ~ 0.08ms
+  2026-11-25 10:48:52 /app/settings/assistant ...................... ~ 0.01ms
+  2026-11-25 10:48:52 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.02ms
+  2026-11-25 10:48:52 /css/vendra.css?v=1795603650 ................. ~ 0.05ms
+  2026-11-25 10:48:52 /js/shrink-images.js?v=1795603650 ............ ~ 0.01ms
+  2026-11-25 10:48:52 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-25 10:48:53 /app/reports ................................. ~ 0.08ms
+  2026-11-25 10:48:53 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.02ms
+  2026-11-25 10:48:53 /css/vendra.css?v=1795603650 ................. ~ 0.05ms
+  2026-11-25 10:48:53 /js/shrink-images.js?v=1795603650 ............ ~ 0.01ms
+  2026-11-25 10:48:53 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-25 10:48:53 /app/catalog ................................. ~ 0.08ms
+  2026-11-25 10:48:53 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.02ms
+  2026-11-25 10:48:53 /css/vendra.css?v=1795603650 ................. ~ 0.05ms
+  2026-11-25 10:48:53 /js/shrink-images.js?v=1795603650 ............ ~ 0.01ms
+  2026-11-25 10:48:53 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-25 10:48:54 /app/team .................................... ~ 0.08ms
+  2026-11-25 10:48:54 /css/vendra.css?v=1795603650 ................. ~ 0.03ms
+  2026-11-25 10:48:54 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.12ms
+  2026-11-25 10:48:54 /js/shrink-images.js?v=1795603650 ............ ~ 0.01ms
+  2026-11-25 10:48:54 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-25 10:48:55 /logout ...................................... ~ 0.08ms
+  2026-11-25 10:48:55 /login ....................................... ~ 0.02ms
+  2026-11-25 10:48:55 /css/vendra.css?v=1795603650 ................. ~ 0.02ms
+  2026-11-25 10:48:55 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.11ms
+  2026-11-25 10:48:55 /login ....................................... ~ 0.02ms
+  2026-11-25 10:48:55 /js/shrink-images.js?v=1795603650 ............ ~ 0.19ms
+  2026-11-25 10:48:55 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.08ms
+  2026-11-25 10:48:55 /css/vendra.css?v=1795603650 ................. ~ 0.02ms
+  2026-11-25 10:48:55 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.10ms
+  2026-11-25 10:48:55 /js/shrink-images.js?v=1795603650 ............ ~ 0.01ms
+  2026-11-25 10:48:55 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-25 10:48:55 /login ....................................... ~ 0.01ms
+  2026-11-25 10:48:55 /app ......................................... ~ 0.01ms
+  2026-11-25 10:48:55 /css/vendra.css?v=1795603650 ................. ~ 0.02ms
+  2026-11-25 10:48:55 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.11ms
+  2026-11-25 10:48:55 /storage/businesses/2/ghrjE5U6ebEhfeFRlKzFnuwUZP5cOA3f-512w-480.webp  ~ 0.13ms
+  2026-11-25 10:48:55 /js/shrink-images.js?v=1795603650 ............ ~ 0.01ms
+  2026-11-25 10:48:55 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-25 10:48:56 /app/orders .................................. ~ 0.11ms
+  2026-11-25 10:48:56 /sw.js ....................................... ~ 0.03ms
+  2026-11-25 10:48:56 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.04ms
+  2026-11-25 10:48:56 /css/vendra.css?v=1795603650 ................. ~ 0.08ms
+  2026-11-25 10:48:56 /storage/businesses/2/ghrjE5U6ebEhfeFRlKzFnuwUZP5cOA3f-512w-480.webp  ~ 0.24ms
+  2026-11-25 10:48:56 /js/shrink-images.js?v=1795603650 ............ ~ 0.02ms
+  2026-11-25 10:48:56 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.09ms
+  2026-11-25 10:48:56 /app/orders/1 ................................ ~ 0.08ms
+  2026-11-25 10:48:56 /css/vendra.css?v=1795603650 ................. ~ 0.02ms
+  2026-11-25 10:48:56 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.11ms
+  2026-11-25 10:48:56 /storage/businesses/2/ghrjE5U6ebEhfeFRlKzFnuwUZP5cOA3f-512w-480.webp  ~ 0.01ms
+  2026-11-25 10:48:56 /js/shrink-images.js?v=1795603650 ............ ~ 0.01ms
+  2026-11-25 10:48:56 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-25 10:48:57 /app/account ................................. ~ 0.08ms
+  2026-11-25 10:48:57 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.03ms
+  2026-11-25 10:48:57 /css/vendra.css?v=1795603650 ................. ~ 0.06ms
+  2026-11-25 10:48:57 /storage/businesses/2/ghrjE5U6ebEhfeFRlKzFnuwUZP5cOA3f-512w-480.webp  ~ 0.17ms
+  2026-11-25 10:48:57 /js/shrink-images.js?v=1795603650 ............ ~ 0.01ms
+  2026-11-25 10:48:57 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-25 10:48:57 /app/setup ................................... ~ 0.08ms
+  2026-11-25 10:48:58 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.02ms
+  2026-11-25 10:48:58 /css/vendra.css?v=1795603650 ................. ~ 0.02ms
+  2026-11-25 10:48:58 /storage/businesses/2/ghrjE5U6ebEhfeFRlKzFnuwUZP5cOA3f-512w-480.webp  ~ 0.14ms
+  2026-11-25 10:48:58 /js/shrink-images.js?v=1795603650 ............ ~ 0.01ms
+  2026-11-25 10:48:58 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-25 10:48:58 /logout ...................................... ~ 0.09ms
+  2026-11-25 10:48:58 /login ....................................... ~ 0.01ms
+  2026-11-25 10:48:58 /login ....................................... ~ 0.01ms
+  2026-11-25 10:48:58 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.20ms
+  2026-11-25 10:48:58 /css/vendra.css?v=1795603650 ................. ~ 0.22ms
+  2026-11-25 10:48:58 /js/shrink-images.js?v=1795603650 ............ ~ 0.13ms
+  2026-11-25 10:48:58 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.02ms
+  2026-11-25 10:48:58 /css/vendra.css?v=1795603650 ................. ~ 0.04ms
+  2026-11-25 10:48:58 /js/shrink-images.js?v=1795603650 ............ ~ 0.01ms
+  2026-11-25 10:48:58 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-25 10:48:58 /login ....................................... ~ 0.01ms
+  2026-11-25 10:48:59 /app ......................................... ~ 0.02ms
+  2026-11-25 10:48:59 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.01ms
+  2026-11-25 10:48:59 /css/vendra.css?v=1795603650 ................. ~ 0.01ms
+  2026-11-25 10:48:59 /js/shrink-images.js?v=1795603650 ............ ~ 0.01ms
+  2026-11-25 10:48:59 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-25 10:48:59 /sw.js ....................................... ~ 0.08ms
+  2026-11-25 10:48:59 /app/settings/profile ........................ ~ 0.02ms
+  2026-11-25 10:48:59 /css/vendra.css?v=1795603650 ................. ~ 0.02ms
+  2026-11-25 10:48:59 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.11ms
+  2026-11-25 10:48:59 /js/shrink-images.js?v=1795603650 ............ ~ 0.01ms
+  2026-11-25 10:48:59 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-25 10:49:00 /login ....................................... ~ 0.08ms
+  2026-11-25 10:49:00 /css/vendra.css?v=1795603650 ................. ~ 0.02ms
+  2026-11-25 10:49:00 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.11ms
+  2026-11-25 10:49:00 /js/shrink-images.js?v=1795603650 ............ ~ 0.01ms
+  2026-11-25 10:49:00 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.03ms
+  2026-11-25 10:49:00 /login ....................................... ~ 0.01ms
+  2026-11-25 10:49:00 /admin ....................................... ~ 0.01ms
+  2026-11-25 10:49:00 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.02ms
+  2026-11-25 10:49:00 /css/vendra.css?v=1795603650 ................. ~ 0.04ms
+  2026-11-25 10:49:00 /js/shrink-images.js?v=1795603650 ............ ~ 0.01ms
+  2026-11-25 10:49:00 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-25 10:49:01 /admin ....................................... ~ 0.08ms
+  2026-11-25 10:49:01 /fonts/bricolage-grotesque-latin-wght-normal.woff2  ~ 0.02ms
+  2026-11-25 10:49:01 /css/vendra.css?v=1795603650 ................. ~ 0.01ms
+  2026-11-25 10:49:01 /js/shrink-images.js?v=1795603650 ............ ~ 0.01ms
+  2026-11-25 10:49:01 /fonts/inter-latin-wght-normal.woff2 ......... ~ 0.01ms
+  2026-11-25 10:49:01 /sw.js ....................................... ~ 0.01ms
