@@ -17,7 +17,9 @@ class EnsureMfa
 
             return redirect()->route('login')->withErrors(['email' => 'This account has been disabled.']);
         }
-        if ($user && config('vendra.enforce_mfa') && $user->requiresMfa()) {
+        // Anyone who turned two-step on is always asked for a code; owners (and staff, when their
+        // business requires it) must turn it on first.
+        if ($user && ($user->hasMfa() || (config('vendra.enforce_mfa') && $user->requiresMfa()))) {
             if (! $user->hasMfa()) {
                 return redirect()->route('mfa.setup');
             }

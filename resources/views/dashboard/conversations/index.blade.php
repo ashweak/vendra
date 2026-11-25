@@ -11,7 +11,7 @@
     @forelse ($conversations as $c)
         <a href="{{ route('dashboard.conversations.show', $c->id) }}" class="card flex flex-wrap items-center gap-3 p-4 hover:border-ink-300">
             <span class="min-w-0 flex-1">
-                <span class="block font-medium">{{ $c->customer?->name ?? ($c->channel === 'messenger' ? 'Messenger visitor #' : 'Website visitor #').$c->id }}@if ($c->channel === 'messenger') <span class="badge badge-indigo ml-1 align-middle">Messenger</span>@endif</span>
+                <span class="block font-medium">{{ $c->customer?->name ?? ($c->channel === 'messenger' ? 'Messenger visitor #' : 'Website visitor #').$c->id }}@if ($c->channel === 'messenger') <span class="badge badge-indigo ml-1 align-middle">Messenger</span>@endif <x-returning :customer="$c->customer" /></span>
                 <span class="block truncate text-xs text-ink-500">{{ $c->handoff_summary ?? optional($c->messages()->where('is_internal', false)->latest('id')->first())->body }}</span>
             </span>
             <span class="text-xs text-ink-500">{{ $c->assignee?->name ?? 'Unassigned' }}</span>

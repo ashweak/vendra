@@ -17,7 +17,7 @@
     @forelse ($appointments as $a)
         <a href="{{ route('dashboard.appointments.show', $a->id) }}" class="card flex flex-wrap items-center gap-3 p-4 hover:border-ink-300">
             <span class="w-28 shrink-0"><span class="block font-mono font-semibold">{{ local_time($a->starts_at, $tz, 'g:i A') }}</span><span class="block text-xs text-ink-500">{{ $status ? local_time($a->starts_at, $tz, 'D M j') : 'to '.local_time($a->ends_at, $tz, 'g:i A') }}</span></span>
-            <span class="min-w-0 flex-1"><span class="block font-medium">{{ $a->service_name }}</span><span class="block text-xs text-ink-500">{{ $a->customer?->name }} · {{ $a->staff?->name ?? 'Any staff' }} · {{ str_replace('_', '-', $a->source) }}</span></span>
+            <span class="min-w-0 flex-1"><span class="block font-medium">{{ $a->service_name }}</span><span class="block text-xs text-ink-500">{{ $a->customer?->name }} <x-returning :customer="$a->customer" :current="$a" /> · {{ $a->staff?->name ?? 'Any staff' }} · {{ str_replace('_', '-', $a->source) }}</span></span>
             <x-status :value="$a->status" :label="$a->statusLabel()" />
         </a>
     @empty

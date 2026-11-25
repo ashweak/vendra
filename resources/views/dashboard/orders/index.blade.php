@@ -14,7 +14,7 @@
         @forelse ($orders as $o)
             <tr>
                 <td><a class="link font-mono" href="{{ route('dashboard.orders.show', $o->id) }}">{{ $o->reference }}</a></td>
-                <td>{{ $o->customer?->name }}</td>
+                <td>{{ $o->customer?->name }} <x-returning :customer="$o->customer" :current="$o" /></td>
                 <td>{{ peso($o->total_cents) }}@if($o->delivery_fee_cents === null)<span class="block text-[11px] text-amber-700">+ fee TBC</span>@endif</td>
                 <td>{{ ucfirst($o->fulfillment_method) }}</td>
                 <td><x-status :value="$o->payment_status" :label="$o->payment_status === 'verified' ? 'Verified' : 'Unpaid'" /></td>

@@ -17,7 +17,7 @@
 
     <section class="card flex min-h-[32rem] flex-col p-0">
         <header class="flex flex-wrap items-center gap-2 border-b border-line p-4">
-            <h1 class="flex-1 font-semibold">{{ $c->customer?->name ?? ($c->channel === 'messenger' ? 'Messenger visitor #' : 'Website visitor #').$c->id }}@if ($c->channel === 'messenger') <span class="badge badge-indigo ml-1 align-middle">Messenger</span>@endif</h1>
+            <h1 class="flex-1 font-semibold">{{ $c->customer?->name ?? ($c->channel === 'messenger' ? 'Messenger visitor #' : 'Website visitor #').$c->id }}@if ($c->channel === 'messenger') <span class="badge badge-indigo ml-1 align-middle">Messenger</span>@endif <x-returning :customer="$c->customer" class="align-middle" /></h1>
             <x-status :value="$c->state" :label="\App\Models\Conversation::STATES[$c->state]" />
         </header>
         @if ($c->state === 'ai_active')

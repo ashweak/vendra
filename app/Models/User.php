@@ -51,8 +51,13 @@ class User extends Authenticatable implements MustVerifyEmail
     /** Owners and platform admins must use MFA (P7). */
     public function requiresMfa(): bool
     {
-        return $this->is_platform_admin
-            || $this->memberships()->where('role', 'owner')->where('is_active', true)->exists();
+        if ($this->is_platform_admin || $this->memberships()->where('role', 'owner')->where('is_active', true)->exists()) {
+            return true;
+        }
+
+        // Managers and staff, when one of their businesses requires two-step sign-in for the whole team.
+        return $this->memberships()->where('is_active', true)->with('business')->get()
+            ->contains(fn ($m) => (bool) $m->business?->setting('require_staff_mfa', false));
     }
 
     public function hasMfa(): bool

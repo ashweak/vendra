@@ -11,6 +11,13 @@ return [
 
     // Where uploads live. 'public'/'local' keep files on the server; on hosts whose disk is wiped on
     // restart (Render free plan), use Cloudflare R2: VENDRA_MEDIA_DISK=r2 and VENDRA_FILES_DISK=r2_private.
+    // Encrypted daily backups (database + files on this server). For real use, store them off the server:
+    // VENDRA_BACKUP_DISK=r2_private. The key defaults to one derived from APP_KEY.
+    'backups_enabled' => env('VENDRA_BACKUPS', true),
+    'backup_disk' => env('VENDRA_BACKUP_DISK', 'local'),
+    'backup_key' => env('VENDRA_BACKUP_KEY'),
+    'backups_keep' => (int) env('VENDRA_BACKUPS_KEEP', 14),
+
     'media_disk' => env('VENDRA_MEDIA_DISK', 'public'),   // business photos, product photos, profile pictures
     'files_disk' => env('VENDRA_FILES_DISK', 'local'),    // private customer attachments (quotation files)
 
@@ -37,7 +44,8 @@ return [
         'booking_horizon_days' => 30,
         'cancellation_hours' => 6,             // self-service cancellation window
         'booking_reminders' => true,
-        'daily_summary' => true,               // 7 AM email to owners: today's bookings and what needs attention
+        'daily_summary' => true,
+        'require_staff_mfa' => false,          // managers and staff must also use two-step sign-in               // 7 AM email to owners: today's bookings and what needs attention
         'language' => 'en',                    // default customer page language: en | fil (visitors can switch)           // email customers the day before (with a calendar file)
         'order_approval' => 'manual',          // auto | manual
         'order_reservation_hours' => 24,       // reservation expiry for submitted orders

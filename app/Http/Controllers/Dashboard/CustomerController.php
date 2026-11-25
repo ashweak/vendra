@@ -13,10 +13,14 @@ class CustomerController extends DashboardController
         $q = trim((string) $request->query('q'));
         $customers = $this->business()->customers()
             ->when($q, fn ($w) => $w->where(fn ($x) => $x->where('name', 'like', "%$q%")->orWhere('email', 'like', "%$q%")->orWhere('phone', 'like', "%$q%")))
-            ->withCount(['appointments', 'orders', 'quotations', 'serviceRequests'])
+            ->when($request->boolean('returning'), fn ($w) => $w->where(fn ($x) => $x
+                ->whereHas('appointments', fn ($a) => $a->where('status', 'completed'))
+                ->orWhereHas('orders', fn ($o) => $o->where('status', 'completed'))))
+            ->withCount(['appointments', 'orders', 'quotations', 'serviceRequests'])->withVisits()
             ->latest('last_activity_at')->paginate(30)->withQueryString();
+        $returning = $request->boolean('returning');
 
-        return view('dashboard.customers.index', compact('customers', 'q'));
+        return view('dashboard.customers.index', compact('customers', 'q', 'returning'));
     }
 
     public function show(int $id)

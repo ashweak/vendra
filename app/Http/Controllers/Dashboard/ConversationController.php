@@ -14,7 +14,7 @@ class ConversationController extends DashboardController
     {
         $b = $this->business();
         $state = $request->query('state');
-        $q = $b->conversations()->with('customer', 'assignee')
+        $q = $b->conversations()->with(['customer' => fn ($q) => $q->withVisits(), 'assignee'])
             ->when($state, fn ($q) => $q->where('state', $state))
             ->whereIn('channel', ['web', 'messenger'])
             ->latest('last_activity_at');

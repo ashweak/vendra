@@ -22,6 +22,29 @@ class Customer extends Model
     }
 
     public function appointments(): HasMany { return $this->hasMany(Appointment::class); }
+
+    /** Adds completed_visits (finished bookings + completed orders) for "returning customer" badges, in one query. */
+    public function scopeWithVisits($q)
+    {
+        return $q->withCount([
+            'appointments as completed_bookings' => fn ($a) => $a->where('status', 'completed'),
+            'orders as completed_orders' => fn ($o) => $o->where('status', 'completed'),
+        ]);
+    }
+
+    /** Finished bookings and completed orders, not counting $current (the record being viewed). */
+    public function pastVisits(?\Illuminate\Database\Eloquent\Model $current = null): int
+    {
+        $count = isset($this->completed_bookings)
+            ? (int) $this->completed_bookings + (int) $this->completed_orders
+            : $this->appointments()->where('status', 'completed')->count() + $this->orders()->where('status', 'completed')->count();
+        if ($current && ($current->status ?? null) === 'completed'
+            && ($current instanceof Appointment || $current instanceof Order) && $current->customer_id === $this->id) {
+            $count--;
+        }
+
+        return max(0, $count);
+    }
     public function orders(): HasMany { return $this->hasMany(Order::class); }
     public function quotations(): HasMany { return $this->hasMany(Quotation::class); }
     public function serviceRequests(): HasMany { return $this->hasMany(ServiceRequest::class); }

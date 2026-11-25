@@ -21,6 +21,8 @@ class TeamController extends DashboardController
             'members' => $b->memberships()->with('user')->orderByRaw("case role when 'owner' then 0 when 'manager' then 1 else 2 end")->get(),
             'schedules' => $b->staffSchedules()->get()->groupBy('user_id'),
             'canManageTeam' => $this->membership()->can('team.manage'),
+            'isOwner' => $this->membership()->isOwner(),
+            'requireMfa' => (bool) $b->setting('require_staff_mfa', false),
             'staffLimit' => $b->subscription?->staff_limit ?? 3,
         ]);
     }
@@ -91,5 +93,36 @@ class TeamController extends DashboardController
         AuditLogger::log($b->id, 'schedule.updated', null, ['user_id' => $userId]);
 
         return back()->with('status', 'Schedule saved.');
+    }
+
+    /** Owner: require two-step sign-in for managers and staff of this business. */
+    public function security(Request $request)
+    {
+        $this->authorizeAbility('team.manage');
+        abort_unless($this->membership()->isOwner(), 403);
+        $on = $request->boolean('require_staff_mfa');
+        $b = $this->business();
+        $b->update(['settings' => array_merge($b->settings ?? [], ['require_staff_mfa' => $on])]);
+        AuditLogger::log($b->id, 'team.mfa_policy', $b, ['require_staff_mfa' => $on]);
+
+        return back()->with('status', $on
+            ? 'Two-step sign-in is now required for your whole team. Each person sets it up at their next sign-in.'
+            : 'Two-step sign-in is optional again for managers and staff.');
+    }
+
+    /** Owner: clear a team member's two-step setup (lost phone). They set it up again at next sign-in. */
+    public function resetMfa(int $id)
+    {
+        $this->authorizeAbility('team.manage');
+        abort_unless($this->membership()->isOwner(), 403);
+        $m = $this->business()->memberships()->with('user')->findOrFail($id);
+        abort_if($m->role === 'owner' || $m->user_id === auth()->id(), 403, 'Owners reset their own two-step sign-in from their account.');
+        // Only for people who work for this business alone; otherwise another business's owner could weaken their sign-in.
+        abort_if($m->user->memberships()->where('business_id', '!=', $m->business_id)->where('is_active', true)->exists(), 403,
+            'This person also works for another business, so only Vendra support can reset their two-step sign-in.');
+        $m->user->forceFill(['mfa_secret' => null, 'mfa_enabled_at' => null])->save();
+        AuditLogger::log($m->business_id, 'team.mfa_reset', $m->user, ['user_id' => $m->user_id]);
+
+        return back()->with('status', 'Two-step sign-in reset for '.$m->user->name.'.');
     }
 }

@@ -11,7 +11,7 @@
             <p class="font-mono text-sm text-ink-500">{{ $a->reference }}</p>
             <dl class="mt-4 grid gap-3 text-sm sm:grid-cols-2">
                 <div><dt class="text-ink-500">When</dt><dd class="font-medium">{{ local_time($a->starts_at, $tz, 'l, F j, Y') }}<br>{{ local_time($a->starts_at, $tz, 'g:i A') }} – {{ local_time($a->ends_at, $tz, 'g:i A') }}</dd></div>
-                <div><dt class="text-ink-500">Customer</dt><dd class="font-medium">{{ $a->customer?->name }}<br><span class="font-normal text-ink-600">{{ $a->customer?->phone }} {{ $a->customer?->email }}</span></dd></div>
+                <div><dt class="text-ink-500">Customer</dt><dd class="font-medium">{{ $a->customer?->name }} <x-returning :customer="$a->customer" :current="$a" />@if ($a->customer) <a href="{{ route('dashboard.customers.show', $a->customer->id) }}" class="link text-xs font-normal">History</a>@endif<br><span class="font-normal text-ink-600">{{ $a->customer?->phone }} {{ $a->customer?->email }}</span></dd></div>
                 <div><dt class="text-ink-500">Staff</dt><dd>{{ $a->staff?->name ?? 'Any' }}</dd></div>
                 <div><dt class="text-ink-500">Agreed price</dt><dd>{{ peso($a->price_cents) }}</dd></div>
                 <div><dt class="text-ink-500">Source</dt><dd>{{ ucfirst(str_replace('_', '-', $a->source)) }} @if($a->creator) · by {{ $a->creator->name }} @endif</dd></div>

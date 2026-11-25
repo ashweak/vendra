@@ -27,7 +27,7 @@ class AppointmentController extends DashboardController
         $date = CarbonImmutable::parse($request->query('date', CarbonImmutable::now($b->timezone)->toDateString()), $b->timezone)->startOfDay();
         $status = $request->query('status');
 
-        $q = $this->scopeVisible($b->appointments()->with('customer', 'staff'));
+        $q = $this->scopeVisible($b->appointments()->with(['customer' => fn ($q) => $q->withVisits(), 'staff']));
         if ($status) {
             $q->where('status', $status)->orderBy('starts_at');
         } else {

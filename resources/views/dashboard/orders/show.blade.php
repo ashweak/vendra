@@ -8,7 +8,7 @@
     <div class="space-y-4">
         <div class="card">
             <div class="flex flex-wrap items-center gap-3"><h1 class="h1 flex-1 font-mono">{{ $o->reference }}</h1><x-status :value="$o->status" :label="$o->statusLabel()" /></div>
-            <p class="text-sm text-ink-600">{{ $o->customer?->name }} · {{ $o->customer?->phone }} · {{ ucfirst($o->fulfillment_method) }} @if($o->delivery_address) to {{ $o->delivery_address }} @endif</p>
+            <p class="text-sm text-ink-600">{{ $o->customer?->name }} <x-returning :customer="$o->customer" :current="$o" /> · {{ $o->customer?->phone }} · {{ ucfirst($o->fulfillment_method) }} @if($o->delivery_address) to {{ $o->delivery_address }} @endif</p>
             <table class="table mt-4">
                 <thead><tr><th>Item</th><th class="text-right">Qty</th><th class="text-right">Price</th><th class="text-right">Total</th></tr></thead>
                 <tbody>

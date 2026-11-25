@@ -62,6 +62,13 @@ from the real app in GitHub Actions on every change to the script.
   unanswered questions (skipped on quiet days; can be turned off).
 - **Catalog import** from a CSV (Excel / Google Sheets): every row is checked first and nothing is imported until all
   rows are valid; existing items are skipped, never overwritten.
+- **Returning customers**: bookings, orders, the inbox and the customer list show "Returning · N visits"
+  (finished bookings and completed orders), with a *Returning only* filter on *Customers*.
+- **Team sign-in security**: owners can require two-step sign-in for managers and staff, see who has it on, and
+  reset it for someone who lost their phone. Anyone who turns two-step on is always asked for a code.
+- **Encrypted backups**: `php artisan vendra:backup` (nightly at 2:15 AM Manila) saves the database and uploaded files
+  in one encrypted file (XChaCha20-Poly1305, streamed; tampering is detected), keeping the newest 14.
+  `php artisan vendra:restore` puts everything back. See *Backups* below.
 - **Unanswered questions → FAQ**: questions the auto-assistant couldn't answer are listed by how often they're
   asked (contact details masked). Write the answer once (*Settings → Unanswered questions*) and it becomes a
   published FAQ that the assistant uses from then on. The assistant now answers from published FAQ/policies.
@@ -130,6 +137,18 @@ Run the image yourself: `docker build -t vendra . && docker run -p 8080:10000 -e
 A **Keep demo awake** GitHub Action opens the demo every 10 minutes so it doesn't sleep (set the repository
 variable `DEMO_URL` if your Render address differs; delete the workflow to let it sleep).
 
+### Backups
+
+| Command | What it does |
+|---|---|
+| `php artisan vendra:backup` | Encrypted backup of every table and the files on this server (runs nightly; not in the public demo) |
+| `php artisan vendra:backup --list` | Lists backups, newest first |
+| `php artisan vendra:backup --key` | Prints a random `VENDRA_BACKUP_KEY` (otherwise a key derived from `APP_KEY` is used) |
+| `php artisan vendra:restore [file]` | Checks the whole file first, then replaces all data and files (asks to confirm) |
+
+Keep backups off the server with `VENDRA_BACKUP_DISK=r2_private`, and keep the key (or `APP_KEY`) in a password
+manager: without it a backup can't be opened. `VENDRA_BACKUPS_KEEP` (default 14) sets how many are kept.
+
 The database is SQLite inside the container, so a real (non-demo) deployment also needs a hosted MySQL database
 (`DB_CONNECTION=mysql` and the `DB_*` variables).
 
@@ -178,7 +197,7 @@ can set `VENDRA_ENFORCE_MFA=false`.
 ### Tests and assistant evaluation
 
 ```bash
-php artisan test                                   # 115 feature + unit tests
+php artisan test                                   # 122 feature + unit tests
 php artisan migrate:fresh --seed
 php artisan vendra:ai-eval          # 60 fictional EN/TL/Taglish cases (add --show to print replies)
 ```

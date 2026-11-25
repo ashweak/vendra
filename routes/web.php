@@ -172,6 +172,8 @@ Route::prefix('app')->name('dashboard.')->middleware(['auth', 'mfa', 'business']
     Route::get('team', [Dashboard\TeamController::class, 'index'])->name('team.index');
     Route::post('team', [Dashboard\TeamController::class, 'store'])->name('team.store')->middleware('demo.lock');
     Route::put('team/{id}', [Dashboard\TeamController::class, 'update'])->name('team.update')->middleware('demo.lock');
+    Route::post('team/security', [Dashboard\TeamController::class, 'security'])->name('team.security')->middleware('demo.lock');
+    Route::post('team/{id}/reset-mfa', [Dashboard\TeamController::class, 'resetMfa'])->name('team.reset_mfa')->middleware('demo.lock');
     Route::post('team/{userId}/schedule', [Dashboard\TeamController::class, 'schedule'])->name('team.schedule')->middleware('demo.lock');
 
     // Photos (logo, cover, gallery). Uploads are turned off in the public demo so visitors can't post pictures for everyone.

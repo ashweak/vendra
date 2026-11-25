@@ -9,6 +9,9 @@ Schedule::command('vendra:retention')->dailyAt('02:30');
 Schedule::command('vendra:remind')->hourly()->withoutOverlapping();
 // Owners' morning summary (7 AM in each business's timezone; the command checks the hour).
 Schedule::command('vendra:daily-summary')->hourlyAt(2)->withoutOverlapping();
+// Encrypted nightly backup (not in the public demo, which resets itself).
+Schedule::command('vendra:backup')->dailyAt('18:15')->withoutOverlapping() // 02:15 Manila
+    ->when(fn () => config('vendra.backups_enabled') && ! config('vendra.public_demo'));
 
 // Public demo only (the command does nothing otherwise): fresh fictional data every 6 hours.
 Schedule::command('vendra:demo-reset')->everySixHours();

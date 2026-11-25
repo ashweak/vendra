@@ -23,7 +23,7 @@ class OrderController extends DashboardController
     {
         $this->requireModule('orders');
         $status = $request->query('status');
-        $orders = $this->scopeVisible($this->business()->orders()->with('customer'))
+        $orders = $this->scopeVisible($this->business()->orders()->with(['customer' => fn ($q) => $q->withVisits()]))
             ->when($status, fn ($q) => $q->where('status', $status))
             ->latest()->paginate(25)->withQueryString();
 
