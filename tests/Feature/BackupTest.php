@@ -44,7 +44,7 @@ class BackupTest extends TestCase
         $this->assertSame('PICTURE-BYTES', Storage::disk('public')->get('businesses/'.$b->id.'/cover.webp'));
         $this->assertSame('PDF-BYTES', Storage::disk('local')->get('attachments/'.$b->id.'/plan'));
         Storage::disk('public')->assertMissing('stray.txt');
-        Storage::disk('local')->assertExists($name, 'restoring never deletes the backups themselves');
+        Storage::disk('local')->assertExists($name); // restoring never deletes the backups themselves
     }
 
     public function test_tampered_or_wrong_key_backups_are_refused_without_changing_anything(): void
